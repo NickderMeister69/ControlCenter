@@ -11,11 +11,20 @@ public sealed class AppSettings
     public bool Autostart { get; set; } = true;
     public bool FirstRunDone { get; set; }
     public bool ShortcutsCreated { get; set; }
+    /// <summary>Wo die exe beim letzten Start lag – ändert sich das, werden Verknüpfungen und Autostart nachgezogen.</summary>
+    public string? LastExePath { get; set; }
     public bool TrayHintShown { get; set; }
     public bool Fahrenheit { get; set; }
     public SourcePreference SensorSource { get; set; } = SourcePreference.Auto;
     public int SensorIntervalMs { get; set; } = 1000;
+    /// <summary>HWiNFO beim Start der App unsichtbar mitstarten.</summary>
+    public bool HwinfoAutostart { get; set; } = true;
+    public string? HwinfoPath { get; set; }
     public string LastPage { get; set; } = "Dashboard";
+    // Dashboard: sichtbare Teile in Reihenfolge (null = Standard)
+    public List<string>? DashSections { get; set; }
+    public List<string>? DashCards { get; set; }
+    public List<string>? DashKpis { get; set; }
     /// <summary>Vom Nutzer ausgeblendete Hinweise im Problemlöser (Id).</summary>
     public List<string> IgnoredFindings { get; set; } = new();
     /// <summary>Vom Problemlöser deaktivierte Dienste (zum Wieder-Aktivieren): Name → alter Starttyp.</summary>

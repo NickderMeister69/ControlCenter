@@ -54,11 +54,16 @@ public sealed class TilesService : ObservableObject, IDisposable
 {
     public TilesSettings Settings { get; } = JsonStore.Load<TilesSettings>("kacheln.json");
     private readonly Dictionary<string, TileWindow> _windows = new();
-    private readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromSeconds(1) };
+    private readonly DispatcherTimer _timer = new() { Interval = TimeSpan.FromMilliseconds(100) };
+    private int _sub;
     public ObservableCollection<TileConfig> Tiles { get; } = new();
     public string SecuritySummary { get; private set; } = "Wird geprüft …";
     public Brush SecurityBrush { get; private set; } = Palette.Muted;
-    private DateTime _lastSecurity = DateTime.MinValue;
+    /// <summary>Zeilen für die Sicherheits-Kachel: (Text, Farbe).</summary>
+    public (string Av, Brush AvBrush, string Sig, Brush SigBrush, string Upd, Brush UpdBrush, DateTime Checked) Security { get; private set; } =
+        ("Virenschutz wird geprüft …", Palette.Muted, "", Palette.Muted, "Updates werden geprüft …", Palette.Muted, DateTime.MinValue);
+    private DateTime _lastSecurity = DateTime.MinValue, _lastOnline = DateTime.MinValue;
+    private int _securityBusy;
 
     public static readonly TileKind[] Catalog =
     {
@@ -114,8 +119,19 @@ public sealed class TilesService : ObservableObject, IDisposable
         if (Settings.Visible) ShowAll();
     }
 
+    private bool _gamePause;
+    /// <summary>Während eines Spiels ausblenden (ohne die Einstellung zu ändern).</summary>
+    public void SetGamePause(bool pause)
+    {
+        if (_gamePause == pause) return;
+        _gamePause = pause;
+        if (pause) HideAll(); else if (Settings.Visible) ShowAll();
+        Log.Info(LogModule.App, pause ? "Desktop-Kacheln während des Spiels pausiert" : "Desktop-Kacheln wieder eingeblendet");
+    }
+
     private void ShowAll()
     {
+        if (_gamePause) return;
         foreach (var t in Settings.Tiles) Open(t);
     }
 
@@ -195,54 +211,100 @@ public sealed class TilesService : ObservableObject, IDisposable
     private void Tick()
     {
         if (!Settings.Visible || _windows.Count == 0) return;
-        if ((DateTime.Now - _lastSecurity).TotalMinutes > 30 && Settings.Tiles.Any(t => t.Type == TileType.Security))
-        {
-            _lastSecurity = DateTime.Now;
-            _ = Task.Run(CheckSecurity);
-        }
-        foreach (var w in _windows.Values) w.Tick();
+        // alle 5 Minuten lokal prüfen, jede Stunde zusätzlich online bei Windows Update nachfragen
+        if ((DateTime.Now - _lastSecurity).TotalMinutes >= 5 && Settings.Tiles.Any(t => t.Type == TileType.Security)) RefreshSecurity(false);
+        // Werte-Kacheln 10× pro Sekunde (weich laufende Zahlen), alles andere einmal pro Sekunde
+        bool full = ++_sub % 10 == 0;
+        foreach (var w in _windows.Values) if (full || w.IsLive) w.Tick();
     }
 
-    private void CheckSecurity()
+    /// <summary>Sicherheits-Status neu prüfen (im Hintergrund). online = auch bei Microsoft nachfragen (dauert länger).</summary>
+    public void RefreshSecurity(bool online)
     {
-        string av = "Virenschutz unbekannt";
-        bool avOk = false;
+        _lastSecurity = DateTime.Now;
+        if ((DateTime.Now - _lastOnline).TotalMinutes >= 60) online = true;
+        if (Interlocked.Exchange(ref _securityBusy, 1) == 1) return;
+        _ = Task.Run(() => { try { CheckSecurity(online); } finally { _securityBusy = 0; } });
+    }
+
+    private void CheckSecurity(bool online)
+    {
+        string av = "Virenschutz unbekannt", sig = "";
+        Brush avB = Palette.Warn, sigB = Palette.Muted;
+        // Microsoft Defender direkt fragen (genauer als das Sicherheitscenter)
         try
         {
-            using var s = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT displayName, productState FROM AntiVirusProduct");
-            foreach (ManagementObject o in s.Get())
+            using var d = new ManagementObjectSearcher(@"root\Microsoft\Windows\Defender", "SELECT AntivirusEnabled, RealTimeProtectionEnabled, AntivirusSignatureAge, AntivirusSignatureLastUpdated FROM MSFT_MpComputerStatus");
+            foreach (ManagementObject o in d.Get())
                 using (o)
                 {
-                    uint state = Convert.ToUInt32(o["productState"]);
-                    bool on = ((state >> 12) & 0xF) == 1;
-                    bool upToDate = ((state >> 4) & 0xF) == 0;
-                    av = $"{o["displayName"]}: {(on ? "aktiv" : "AUS")}{(upToDate ? "" : ", Signaturen veraltet")}";
-                    avOk = on && upToDate;
-                    if (on) break;
+                    bool on = o["AntivirusEnabled"] is true && o["RealTimeProtectionEnabled"] is true;
+                    int age = Convert.ToInt32(o["AntivirusSignatureAge"] ?? 0);
+                    av = on ? "Defender aktiv" : "Defender-Echtzeitschutz AUS";
+                    avB = on ? Palette.Good : Palette.Bad;
+                    sig = age <= 0 ? "Virendefinitionen von heute" : age == 1 ? "Virendefinitionen von gestern" : $"Virendefinitionen {age} Tage alt";
+                    sigB = age <= 2 ? Palette.Good : Palette.Warn;
                 }
         }
         catch { }
+        // anderer Virenschutz (Avast, Kaspersky …) über das Sicherheitscenter
+        if (av == "Virenschutz unbekannt" || avB == Palette.Bad)
+            try
+            {
+                using var s = new ManagementObjectSearcher(@"root\SecurityCenter2", "SELECT displayName, productState FROM AntiVirusProduct");
+                foreach (ManagementObject o in s.Get())
+                    using (o)
+                    {
+                        uint state = Convert.ToUInt32(o["productState"]);
+                        bool on = ((state >> 12) & 0xF) == 1;
+                        if (!on) continue;
+                        bool upToDate = ((state >> 4) & 0xF) == 0;
+                        av = $"{o["displayName"]} aktiv";
+                        avB = Palette.Good;
+                        sig = upToDate ? "Virendefinitionen aktuell" : "Virendefinitionen veraltet";
+                        sigB = upToDate ? Palette.Good : Palette.Warn;
+                        break;
+                    }
+            }
+            catch { }
+
         string upd = "Updates: unbekannt";
-        int pending = -1;
+        Brush updB = Palette.Muted;
         try
         {
+            bool reboot = false;
+            try { var si = Type.GetTypeFromProgID("Microsoft.Update.SystemInfo"); if (si != null) { dynamic sys = Activator.CreateInstance(si)!; reboot = sys.RebootRequired; } } catch { }
             var type = Type.GetTypeFromProgID("Microsoft.Update.Session");
             if (type != null)
             {
                 dynamic session = Activator.CreateInstance(type)!;
                 dynamic searcher = session.CreateUpdateSearcher();
-                searcher.Online = false; // nur bereits bekannte Updates – schnell und ohne Download
-                dynamic result = searcher.Search("IsInstalled=0 and IsHidden=0");
-                pending = (int)result.Updates.Count;
-                upd = pending == 0 ? "Keine Updates offen" : $"{pending} Update(s) bereit";
+                searcher.Online = online;
+                dynamic result = searcher.Search("IsInstalled=0 and IsHidden=0 and Type='Software'");
+                int pending = 0;
+                foreach (dynamic u in result.Updates)
+                {
+                    string title = u.Title ?? "";
+                    // Virendefinitionen kommen fast täglich und installieren sich selbst → nicht als "Update bereit" zählen
+                    bool definition = title.Contains("KB2267602") || title.Contains("Security Intelligence", StringComparison.OrdinalIgnoreCase) ||
+                                      title.Contains("Sicherheitsinformationsupdate", StringComparison.OrdinalIgnoreCase) || title.Contains("Definition", StringComparison.OrdinalIgnoreCase);
+                    if (!definition) pending++;
+                }
+                if (online) _lastOnline = DateTime.Now;
+                if (reboot) { upd = "Neustart für Updates nötig"; updB = Palette.Warn; }
+                else if (pending == 0) { upd = "Windows ist aktuell"; updB = Palette.Good; }
+                else { upd = pending == 1 ? "1 Update bereit" : $"{pending} Updates bereit"; updB = Palette.Warn; }
+                Log.Info(LogModule.App, $"Sicherheit: {av}, {sig}, {upd} ({(online ? "online" : "lokal")} geprüft)");
             }
         }
-        catch { }
+        catch (Exception ex) { Log.Warn(LogModule.App, "Update-Prüfung: " + ex.Message); }
+
         App.Current?.Dispatcher.BeginInvoke(() =>
         {
-            SecuritySummary = av + "\n" + upd;
-            SecurityBrush = avOk && pending == 0 ? Palette.Good : !avOk ? Palette.Bad : Palette.Warn;
-            RaiseAll(nameof(SecuritySummary), nameof(SecurityBrush));
+            Security = (av, avB, sig, sigB, upd, updB, DateTime.Now);
+            SecuritySummary = av + "\n" + sig + "\n" + upd;
+            SecurityBrush = avB == Palette.Bad ? Palette.Bad : updB == Palette.Warn || sigB == Palette.Warn ? Palette.Warn : Palette.Good;
+            RaiseAll(nameof(SecuritySummary), nameof(SecurityBrush), nameof(Security));
         });
     }
 
@@ -407,6 +469,8 @@ public sealed class TileWindow : Window
     }
 
     public void Tick() => _update?.Invoke();
+    /// <summary>Zeigt Messwerte → öfter auffrischen, damit die Zahlen weich laufen.</summary>
+    public bool IsLive => _t.Type is TileType.System or TileType.Graph or TileType.Network;
 
     private UIElement BuildClock()
     {
@@ -555,15 +619,40 @@ public sealed class TileWindow : Window
     private UIElement BuildSecurity()
     {
         var sp = new StackPanel();
-        sp.Children.Add(Header("", "Sicherheit"));
-        var t = Text("", 12.5);
-        t.TextWrapping = TextWrapping.Wrap; t.TextTrimming = TextTrimming.None;
-        sp.Children.Add(t);
-        var dot = new Ellipse { Width = 10, Height = 10, Margin = new Thickness(0, 8, 0, 0), HorizontalAlignment = HorizontalAlignment.Left };
-        sp.Children.Add(dot);
-        _update = () => { t.Text = _svc.SecuritySummary; dot.Fill = _svc.SecurityBrush; };
+        sp.Children.Add(Header("", "Sicherheit"));
+        bool small = _t.Size == TileSize.Small;
+        double fs = small ? 11.5 : 13;
+        (Border Row, TextBlock Text, Ellipse Dot) Line(string glyph)
+        {
+            var g = new Grid { Margin = new Thickness(0, small ? 3 : 5, 0, 0) };
+            g.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            g.ColumnDefinitions.Add(new ColumnDefinition());
+            var dot = new Ellipse { Width = 8, Height = 8, Margin = new Thickness(0, 0, 8, 0), VerticalAlignment = VerticalAlignment.Center };
+            var t = Text("", fs, false, Fg);
+            t.TextWrapping = TextWrapping.Wrap; t.TextTrimming = TextTrimming.None;
+            Grid.SetColumn(t, 1);
+            g.Children.Add(dot); g.Children.Add(t);
+            var b = new Border { Child = g };
+            sp.Children.Add(b);
+            return (b, t, dot);
+        }
+        var av = Line(""); var sig = Line(""); var upd = Line("");
+        var when = Text("", 10.5, false, Sub);
+        when.Margin = new Thickness(0, small ? 4 : 8, 0, 0);
+        sp.Children.Add(when);
+        _update = () =>
+        {
+            var s = _svc.Security;
+            av.Text.Text = s.Av; av.Dot.Fill = s.AvBrush;
+            sig.Text.Text = s.Sig; sig.Dot.Fill = s.SigBrush; sig.Row.Visibility = s.Sig.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+            upd.Text.Text = s.Upd; upd.Dot.Fill = s.UpdBrush;
+            when.Text = s.Checked == DateTime.MinValue ? "wird geprüft …" : small ? $"geprüft {s.Checked:HH:mm}" : $"geprüft {s.Checked:HH:mm} · Klick = Windows Update";
+        };
         _update();
-        return sp;
+        if (!small) return sp;
+        // kleine Kachel: Inhalt passend verkleinern statt abschneiden
+        sp.Width = 128;
+        return new Viewbox { Stretch = Stretch.Uniform, StretchDirection = StretchDirection.DownOnly, Child = sp, VerticalAlignment = VerticalAlignment.Top };
     }
 
     private UIElement BuildLauncher()
@@ -780,7 +869,7 @@ public sealed class TileWindow : Window
         {
             case TileType.Launcher when !string.IsNullOrEmpty(_t.Target): Env.OpenAsUser(_t.Target); break;
             case TileType.Action: _svc.RunAction(_t.Target); break;
-            case TileType.Security: Env.OpenAsUser("windowsdefender:"); break;
+            case TileType.Security: Env.OpenAsUser("ms-settings:windowsupdate"); _svc.RefreshSecurity(true); break;
             case TileType.System or TileType.Graph or TileType.Network: App.Instance.ShowWindow(); Ui.Go("Monitor"); break;
             case TileType.Drives: Env.OpenAsUser("shell:MyComputerFolder"); break;
             case TileType.Calendar: Env.OpenAsUser("outlookcal:"); break;
@@ -796,6 +885,11 @@ public sealed class TileWindow : Window
         foreach (var (s, n) in new[] { (TileSize.Small, "Klein"), (TileSize.Wide, "Breit"), (TileSize.Tall, "Hoch"), (TileSize.Large, "Groß") })
             size.Items.Add(I(n + (_t.Size == s ? "  ✓" : ""), () => { _t.Size = s; _svc.Update(_t); }));
         m.Items.Add(size);
+        if (_t.Type == TileType.Security)
+        {
+            m.Items.Add(I("Jetzt neu prüfen", () => _svc.RefreshSecurity(true)));
+            m.Items.Add(I("Windows-Sicherheit öffnen", () => Env.OpenAsUser("windowsdefender:")));
+        }
         m.Items.Add(I(_svc.Settings.Locked ? "Positionen entsperren" : "Positionen sperren", () => { _svc.Settings.Locked = !_svc.Settings.Locked; _svc.Save(); }));
         m.Items.Add(I("Alle Kacheln ausblenden", () => _svc.Visible = false));
         m.Items.Add(new Separator());

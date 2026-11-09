@@ -300,10 +300,41 @@ public sealed class StressService : ObservableObject
     {
         _timer.Tick += (_, _) => Tick();
         Adapters = GpuLoad.ListAdapters();
+        BuildCompare();
         Log.Info(LogModule.Stress, "Grafikkarten: " + (Adapters.Count == 0 ? "keine gefunden" : string.Join(", ", Adapters.Select(a => $"{a.Name} ({a.Vendor}, {a.VramGb:0.#} GB)"))));
     }
 
     public void Save() => JsonStore.Save("stresstest.json", Settings);
+
+    // ---------------------------------------------------------------- Vergleich
+    public ObservableCollection<BenchResult> History { get; } = new(JsonStore.Load<List<BenchResult>>("stresstest-ergebnisse.json").OrderByDescending(r => r.Date));
+    public List<BenchCompare> CpuCompare { get; private set; } = new();
+    public List<BenchCompare> GpuCompare { get; private set; } = new();
+    public string CompareText { get; private set; } = "Mach einen Test (mind. 30 Sekunden mit CPU und/oder Grafikkarte) – dann siehst du hier, wo dein PC im Vergleich steht.";
+    public bool HasCompare => CpuCompare.Count > 0 || GpuCompare.Count > 0;
+
+    /// <summary>Vergleich aus dem besten eigenen Ergebnis (oder dem letzten) berechnen.</summary>
+    public void BuildCompare()
+    {
+        var cpuBest = History.Where(h => h.CpuScore > 0).OrderByDescending(h => h.CpuScore).FirstOrDefault();
+        var gpuBest = History.Where(h => h.GpuScore > 0).OrderByDescending(h => h.GpuScore).FirstOrDefault();
+        CpuCompare = cpuBest != null ? BenchCatalog.Compare(BenchCatalog.Cpus, cpuBest.Cpu, cpuBest.CpuScore) : new();
+        GpuCompare = gpuBest != null ? BenchCatalog.Compare(BenchCatalog.Gpus, gpuBest.Gpu, gpuBest.GpuScore) : new();
+        var parts = new List<string>();
+        if (cpuBest != null && CpuCompare.Count == 0) parts.Add($"Deine CPU „{cpuBest.Cpu}“ ist nicht in der Vergleichsliste.");
+        if (gpuBest != null && GpuCompare.Count == 0) parts.Add($"Deine Grafikkarte „{gpuBest.Gpu}“ ist nicht in der Vergleichsliste.");
+        CompareText = parts.Count > 0 ? string.Join(" ", parts) :
+            HasCompare ? "Dein bestes Ergebnis, umgerechnet auf andere Hardware. Die anderen Werte sind geschätzt (über Cinebench-R23- bzw. 3DMark-Time-Spy-Richtwerte) – sie zeigen die Größenordnung, nicht exakte Messungen."
+                       : CompareText;
+        RaiseAll(nameof(CpuCompare), nameof(GpuCompare), nameof(CompareText), nameof(HasCompare));
+    }
+
+    public void ClearHistory()
+    {
+        History.Clear();
+        JsonStore.Save("stresstest-ergebnisse.json", new List<BenchResult>());
+        BuildCompare();
+    }
 
     public string CpuName => HardwareHub.Instance.Latest.CpuName is { Length: > 0 } n ? n : Environment.GetEnvironmentVariable("PROCESSOR_IDENTIFIER") ?? "CPU";
     public int LogicalCores => Environment.ProcessorCount;
@@ -449,12 +480,31 @@ public sealed class StressService : ObservableObject
         if (Settings.Ram) sb.AppendLine($"RAM: {Interlocked.Read(ref _memPasses)} Durchläufe · Fehler {Interlocked.Read(ref _memErrors)}");
         if (_throttleTicks >= 5) sb.AppendLine("Hinweis: Die CPU hat wegen Temperatur gedrosselt – Kühlung/Lüfterkurve prüfen.");
         if (!ok && errs > 0) sb.AppendLine("Tipp: Übertaktung/Undervolt im Tweaker zurücknehmen (Werkseinstellung) und erneut testen.");
+        // Ergebnis für Vergleiche merken (nur bei ausreichend langem Test)
+        double cpuAvg = Settings.Cpu && _cpuScores.Count > 0 ? _cpuScores.Average() * 10 : 0;
+        double gpuAvg = Settings.Gpu && _gpuScores.Count > 0 ? _gpuScores.Average() / 100 : 0;
+        if (el.TotalSeconds >= 30 && (cpuAvg > 0 || gpuAvg > 0) && Settings.GpuIntensity >= 100 && (Settings.Threads == 0 || Settings.Threads >= LogicalCores))
+        {
+            var r = new BenchResult
+            {
+                Date = DateTime.Now, Cpu = cpuAvg > 0 ? CpuName : "", Gpu = gpuAvg > 0 ? _gpu.AdapterName : "", Mode = Settings.CpuMode.ToString(),
+                CpuScore = Math.Round(cpuAvg), GpuScore = Math.Round(gpuAvg), MaxCpuTemp = _maxCpuT, MaxGpuTemp = _maxGpuT, Seconds = (int)el.TotalSeconds
+            };
+            History.Insert(0, r);
+            while (History.Count > 50) History.RemoveAt(History.Count - 1);
+            JsonStore.Save("stresstest-ergebnisse.json", History.ToList());
+            BuildCompare();
+            var cpuMe = CpuCompare.FindIndex(c => c.Mine); var gpuMe = GpuCompare.FindIndex(c => c.Mine);
+            if (cpuMe >= 0) sb.AppendLine($"Vergleich CPU: Platz {cpuMe + 1} von {CpuCompare.Count} in der Liste.");
+            if (gpuMe >= 0) sb.AppendLine($"Vergleich Grafikkarte: Platz {gpuMe + 1} von {GpuCompare.Count} in der Liste.");
+        }
+        else if (el.TotalSeconds < 30) sb.AppendLine("Für den Vergleich mit anderen Systemen mindestens 30 Sekunden laufen lassen (alle Threads, GPU-Intensität 100 %).");
         Summary = sb.ToString().Trim();
         Event("Ergebnis: " + Summary.Replace(Environment.NewLine, " | "), ok ? LogLevel.Ok : LogLevel.Warn);
         try
         {
             var file = Path.Combine(Log.Folder, $"Stresstest-Bericht_{DateTime.Now:yyyy-MM-dd_HH-mm}.txt");
-            File.WriteAllText(file, $"Nick Control Center – Stresstest vom {DateTime.Now:dd.MM.yyyy HH:mm}\r\n\r\n{Summary}\r\n\r\nVerlauf:\r\n{string.Join("\r\n", Events.Reverse())}\r\n");
+            File.WriteAllText(file, $"Control Center – Stresstest vom {DateTime.Now:dd.MM.yyyy HH:mm}\r\n\r\n{Summary}\r\n\r\nVerlauf:\r\n{string.Join("\r\n", Events.Reverse())}\r\n");
         }
         catch { }
         App.Instance.Balloon("Stresstest " + (ok ? "bestanden" : "beendet"), Summary.Split('\n')[0], !ok);

@@ -617,7 +617,7 @@ public static class RgbScanner
     public static string HardwareReport(List<HidInfo> all, List<DetectedHardware> report)
     {
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"Nick Fan Control – Hardware-Liste vom {DateTime.Now:dd.MM.yyyy HH:mm}");
+        sb.AppendLine($"Control Center – Hardware-Liste vom {DateTime.Now:dd.MM.yyyy HH:mm}");
         sb.AppendLine();
         sb.AppendLine("RGB-Geräte:");
         foreach (var r in report) sb.AppendLine($"  [{(r.Supported ? "OK" : "--")}] {r.Vendor}: {r.Name} – {r.Status}");

@@ -34,6 +34,7 @@ internal static class Nvml
     [DllImport(Dll)] public static extern int nvmlDeviceGetTemperature(IntPtr dev, int sensor, out uint t);
     [DllImport(Dll)] public static extern int nvmlDeviceGetTemperatureThreshold(IntPtr dev, int type, out uint t);
     [DllImport(Dll)] public static extern int nvmlDeviceGetPowerUsage(IntPtr dev, out uint mw);
+    [DllImport(Dll)] public static extern int nvmlDeviceGetTotalEnergyConsumption(IntPtr dev, out ulong mj);
     [DllImport(Dll)] public static extern int nvmlDeviceGetPowerManagementLimitConstraints(IntPtr dev, out uint min, out uint max);
     [DllImport(Dll)] public static extern int nvmlDeviceGetPowerManagementDefaultLimit(IntPtr dev, out uint mw);
     [DllImport(Dll)] public static extern int nvmlDeviceGetPowerManagementLimit(IntPtr dev, out uint mw);

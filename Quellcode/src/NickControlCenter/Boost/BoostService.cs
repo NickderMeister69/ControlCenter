@@ -16,27 +16,19 @@ public sealed class BoostSettings
     public bool CleanOnBoost { get; set; } = true;
     public bool RamOnBoost { get; set; } = true;
     public bool RestorePoint { get; set; } = true;
-    // ARK
-    public bool ArkGraphics { get; set; } = true;
-    public int ArkPreset { get; set; } = 1;
-    public int ArkFps { get; set; }
-    public int ArkRes { get; set; }
-    public bool ArkVsyncOff { get; set; } = true;
-    public bool ArkPostFxOff { get; set; } = true;
-    public bool ArkSkipIntros { get; set; } = true;
-    public bool AsaVolumetricsOff { get; set; }
-    public bool GameExeTweaks { get; set; } = true;
     public List<string> ManualGamePaths { get; set; } = new();
     // Auto-Boost
     public bool AutoBoost { get; set; } = true;
-    public List<string> AutoBoostProcesses { get; set; } = new() { "ShooterGame", "ArkAscended" };
-    public bool AutoCloseApps { get; set; }
+    /// <summary>Alt (vor den Spielprofilen) – nur noch zum Übernehmen.</summary>
+    public List<string>? AutoBoostProcesses { get; set; }
+    /// <summary>Bekannte Spiele automatisch erkennen, sobald sie laufen.</summary>
+    public bool DetectRunning { get; set; } = true;
     public bool Applied { get; set; }
     public DateTime? LastBoost { get; set; }
     /// <summary>Steam verbunden (Bibliothek wird gelesen).</summary>
     public bool SteamConnected { get; set; }
-    /// <summary>Profil je Spiel (AppId oder Ordner): 0 = aus, 1 = Max-FPS, 2 = Ausgewogen.</summary>
-    public Dictionary<string, int> GameProfiles { get; set; } = new();
+    /// <summary>Ein Profil pro Spiel.</summary>
+    public List<GameProfile> Games { get; set; } = new();
 }
 
 /// <summary>Ein gesicherter Registry-Originalwert (zum exakten Zurücksetzen).</summary>
@@ -49,12 +41,14 @@ public sealed class RegBackupEntry
     public string? Value { get; set; }
 }
 
+public sealed class RenamedFile { public string From { get; set; } = ""; public string To { get; set; } = ""; }
+
 public sealed class BoostState
 {
     public List<RegBackupEntry> Registry { get; set; } = new();
     public string? PowerOriginal { get; set; }
     public string? PowerCreated { get; set; }
-    public List<(string From, string To)> Renamed { get; set; } = new();
+    public List<RenamedFile> Renamed { get; set; } = new();
     public Dictionary<string, string?> IniBackups { get; set; } = new(); // Quelle → Sicherungsdatei (null = existierte nicht)
 }
 
@@ -82,10 +76,12 @@ public sealed class BgAppVM : ObservableObject
 {
     private readonly BoostService _svc;
     public BackgroundApp App { get; }
-    public BgAppVM(BoostService svc, BackgroundApp a, double mb) { _svc = svc; App = a; Mb = mb; }
+    public BgAppVM(BoostService svc, BackgroundApp a, double mb, bool known, bool window) { _svc = svc; App = a; Mb = mb; Known = known; HasWindow = window; }
     public string Name => App.Name;
     public double Mb { get; }
-    public string MbText => $"{Mb:0} MB RAM";
+    public bool Known { get; }
+    public bool HasWindow { get; }
+    public string MbText => $"{Mb:0} MB RAM" + (HasWindow ? " · Fenster offen" : " · im Hintergrund");
     public bool Selected
     {
         get => _svc.Settings.SelectedApps.Contains(App.Process, StringComparer.OrdinalIgnoreCase);
@@ -98,35 +94,11 @@ public sealed class BgAppVM : ObservableObject
     }
 }
 
-public sealed class GameVM : ObservableObject
-{
-    public required string Name { get; init; }
-    public required string Root { get; init; }
-    public string? Exe { get; init; }
-    public string? ConfigDir { get; init; }
-    public string Process { get; init; } = "";
-    public int AppId { get; init; }
-    public GameDef? Ark { get; init; }
-    public bool IsArk => Ark != null;
-    public string Info => IsArk ? $"{Ark!.Short} · {Root}" : Root;
-    private bool _auto;
-    public bool AutoBoost { get => _auto; set { if (Set(ref _auto, value)) AutoChanged?.Invoke(this); } }
-    public Action<GameVM>? AutoChanged;
-    public string Key => AppId > 0 ? AppId.ToString() : Root;
-    public static string[] ProfileNames { get; } = { "Aus", "Max-FPS", "Ausgewogen" };
-    private int _profile;
-    /// <summary>Profil: 0 aus, 1 Max-FPS (hohe Priorität, Timer, Apps schließen), 2 Ausgewogen (über normal).</summary>
-    public int Profile { get => _profile; set { if (Set(ref _profile, value)) { Raise(nameof(ProfileText)); ProfileChanged?.Invoke(this); } } }
-    public Action<GameVM>? ProfileChanged;
-    public string ProfileText => ProfileNames[Math.Clamp(_profile, 0, 2)];
-    public string ExeName => Exe != null ? System.IO.Path.GetFileName(Exe) : "exe nicht gefunden";
-}
-
 /// <summary>
 /// FPS-Boost: beide alten Booster (allgemein + ARK) zusammengeführt, in C# statt PowerShell.
 /// Alles läuft im Hintergrund (kein Einfrieren mehr), jede Änderung wird vorher gesichert.
 /// </summary>
-public sealed class BoostService : ObservableObject
+public sealed partial class BoostService : ObservableObject
 {
     public BoostSettings Settings { get; } = JsonStore.Load<BoostSettings>("boost.json");
     private BoostState _state = JsonStore.Load<BoostState>("boost-sicherung.json");
@@ -165,6 +137,7 @@ public sealed class BoostService : ObservableObject
     {
         RefreshActive();
         RefreshApps();
+        LoadProfiles();
         _ = Task.Run(FindGames);
         _watch.Tick += (_, _) => WatchGames();
         _watch.Start();
@@ -270,16 +243,12 @@ public sealed class BoostService : ObservableObject
                     }
                     catch (Exception ex) { Say($"{t.Title}: fehlgeschlagen – {ex.Message}", LogLevel.Warn); }
                 }
-                foreach (var g in Games.ToList())
+                // Spielprofile: exe-Optimierungen und Grafik-Configs vorbereiten
+                foreach (var g in Games.Where(g => g.P.Active && !g.P.Hidden).ToList())
                 {
-                    if (Settings.GameExeTweaks && g.Exe != null && g.Profile > 0) GameExeTweaks(g);
-                    if (g.IsArk)
-                    {
-                        if (Settings.ArkGraphics) ArkGraphics(g);
-                        if (Settings.ArkSkipIntros) SkipIntros(g);
-                    }
+                    if (g.P.ExeTweaks || g.P.Priority > 0) GameExeTweaks(g);
+                    if (g.P.Graphics || g.P.SkipIntros) ApplyGameFiles(g, fromBoost: true);
                 }
-                if (!Games.Any(g => g.IsArk)) Say("Kein ARK gefunden – ARK-Optimierungen übersprungen (unter „Spiele“ den Ordner wählen).", LogLevel.Info);
             });
             if (IsOn("timer")) SetTimerResolution(true);
             Native.BroadcastSettingChange("Policy");
@@ -333,8 +302,8 @@ public sealed class BoostService : ObservableObject
                     Say("Ursprünglicher Energieplan aktiv", LogLevel.Ok);
                     _state.PowerOriginal = null; _state.PowerCreated = null;
                 }
-                foreach (var (from, to) in _state.Renamed.ToList())
-                    try { if (File.Exists(to)) File.Move(to, from, true); } catch { }
+                foreach (var r in _state.Renamed.ToList())
+                    try { if (File.Exists(r.To)) File.Move(r.To, r.From, true); } catch { }
                 if (_state.Renamed.Count > 0) Say("Intro-Videos wiederhergestellt", LogLevel.Ok);
                 _state.Renamed.Clear();
                 foreach (var (src, bk) in _state.IniBackups.ToList())
@@ -358,6 +327,7 @@ public sealed class BoostService : ObservableObject
             RefreshActive();
             Status = "Alles zurückgesetzt";
             Ui.Toast("Alle Änderungen des FPS-Boosts wurden zurückgesetzt.");
+            foreach (var g in Games) g.RefreshConfig();
         }
         finally { Busy = false; }
     }
@@ -367,7 +337,7 @@ public sealed class BoostService : ObservableObject
     private void CreateRestorePoint()
     {
         Say("Erstelle Wiederherstellungspunkt (kann etwas dauern) …");
-        var r = Env.Run("powershell.exe", "-NoProfile -ExecutionPolicy Bypass -Command \"Checkpoint-Computer -Description 'Nick Control Center Boost' -RestorePointType MODIFY_SETTINGS -WarningAction SilentlyContinue\"", 120000);
+        var r = Env.Run("powershell.exe", "-NoProfile -ExecutionPolicy Bypass -Command \"Checkpoint-Computer -Description 'Control Center Boost' -RestorePointType MODIFY_SETTINGS -WarningAction SilentlyContinue\"", 120000);
         Say(r.Code == 0 ? "Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)" : "Wiederherstellungspunkt nicht möglich (Systemschutz aus?) – eigene Sicherung ist trotzdem aktiv", r.Code == 0 ? LogLevel.Ok : LogLevel.Warn);
     }
 
@@ -388,7 +358,7 @@ public sealed class BoostService : ObservableObject
                                 @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
             if (!m.Success) throw new InvalidOperationException("Energieplan konnte nicht angelegt werden (vom Hersteller gesperrt?)");
             target = m.Value.ToLowerInvariant();
-            Env.Run("powercfg.exe", $"/changename {target} \"Nick Gaming\" \"Höchstleistung, erstellt vom Nick Control Center\"");
+            Env.Run("powercfg.exe", $"/changename {target} \"Control Center Gaming\" \"Höchstleistung, erstellt vom Control Center\"");
             _state.PowerCreated = target;
         }
         SaveState();
@@ -443,97 +413,6 @@ public sealed class BoostService : ObservableObject
         RefreshActive();
     }
 
-    private void GameExeTweaks(GameVM g)
-    {
-        try
-        {
-            var exe = g.Exe!;
-            const string layers = @"HKCU\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers";
-            var cur = Read(layers, exe) as string ?? "";
-            if (!cur.Contains("DISABLEDXMAXIMIZEDWINDOWEDMODE"))
-                SetTracked(new RegValue(layers, exe, string.IsNullOrWhiteSpace(cur) ? "~ DISABLEDXMAXIMIZEDWINDOWEDMODE" : cur.TrimEnd() + " DISABLEDXMAXIMIZEDWINDOWEDMODE", RegKind.String));
-            const string gpu = @"HKCU\Software\Microsoft\DirectX\UserGpuPreferences";
-            var gp = Read(gpu, exe) as string ?? "";
-            var ngp = Regex.IsMatch(gp, @"GpuPreference=\d+;") ? Regex.Replace(gp, @"GpuPreference=\d+;", "GpuPreference=2;") : "GpuPreference=2;" + gp;
-            if (ngp != gp) SetTracked(new RegValue(gpu, exe, ngp, RegKind.String));
-            var name = Path.GetFileName(exe);
-            SetTracked(new RegValue($@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\{name}\PerfOptions", "CpuPriorityClass", 3));
-            Say($"{g.Name}: Vollbildoptimierung aus, starke Grafikkarte, hohe CPU-Priorität", LogLevel.Ok);
-        }
-        catch (Exception ex) { Say($"{g.Name}: {ex.Message}", LogLevel.Warn); }
-    }
-
-    private void BackupIni(string path, string tag)
-    {
-        if (_state.IniBackups.ContainsKey(path)) return;
-        string? bk = null;
-        if (File.Exists(path))
-        {
-            var dir = Path.Combine(JsonStore.Folder, "Boost-Sicherung");
-            Directory.CreateDirectory(dir);
-            bk = Path.Combine(dir, $"{tag}_{Path.GetFileName(path)}");
-            File.Copy(path, bk, true);
-        }
-        _state.IniBackups[path] = bk;
-        SaveState();
-    }
-
-    private void ArkGraphics(GameVM g)
-    {
-        var ark = g.Ark!;
-        if (System.Diagnostics.Process.GetProcessesByName(ark.Process).Length > 0) { Say($"{ark.Short} läuft gerade – Grafik-Config übersprungen. Spiel schließen und nochmal boosten.", LogLevel.Warn); return; }
-        var gus = Path.Combine(g.ConfigDir!, "GameUserSettings.ini");
-        var eng = Path.Combine(g.ConfigDir!, "Engine.ini");
-        if (!File.Exists(gus)) { Say($"{ark.Short}: keine Config – ARK einmal starten und beenden, dann nochmal boosten.", LogLevel.Warn); return; }
-        BackupIni(gus, ark.Short);
-        BackupIni(eng, ark.Short);
-        bool asa = ark.Short == "ASA";
-        var ini = IniFile.Load(gus);
-        const string us = "/Script/ShooterGame.ShooterGameUserSettings";
-        var parts = new List<string>();
-        if (Settings.ArkVsyncOff) { ini.Set(us, "bUseVSync", "False"); parts.Add("V-Sync aus"); }
-        int fps = BoostCatalog.FpsLimits[Math.Clamp(Settings.ArkFps, 0, BoostCatalog.FpsLimits.Length - 1)];
-        if (fps >= 0) { ini.Set(us, "FrameRateLimit", $"{fps}.000000"); parts.Add(fps == 0 ? "FPS unbegrenzt" : $"FPS-Limit {fps}"); }
-        foreach (var (k, v) in BoostCatalog.ArkScalability(Settings.ArkPreset, asa)) ini.Set("ScalabilityGroups", k, v);
-        if (Settings.ArkPreset == 1 && !asa) { ini.Set(us, "bDisableBloom", "True"); ini.Set(us, "bDisableLightShafts", "True"); }
-        if (Settings.ArkPreset > 0) parts.Add(Settings.ArkPreset == 1 ? "Preset Max-FPS" : "Preset Ausgewogen");
-        int res = BoostCatalog.ResolutionScales[Math.Clamp(Settings.ArkRes, 0, BoostCatalog.ResolutionScales.Length - 1)];
-        if (res > 0) { ini.Set("ScalabilityGroups", "sg.ResolutionQuality", res.ToString()); parts.Add($"Auflösung {res} %"); }
-        ini.Save(gus);
-
-        var e = IniFile.Load(eng);
-        if (Settings.ArkPostFxOff)
-        {
-            e.Set("SystemSettings", "r.MotionBlurQuality", "0"); e.Set("SystemSettings", "r.DepthOfFieldQuality", "0");
-            e.Set("SystemSettings", "r.LensFlareQuality", "0"); e.Set("SystemSettings", "r.SceneColorFringeQuality", "0");
-            parts.Add("Bewegungsunschärfe/Tiefenschärfe aus");
-        }
-        if (asa && Settings.AsaVolumetricsOff)
-        {
-            e.Set("SystemSettings", "r.VolumetricCloud", "0"); e.Set("SystemSettings", "r.VolumetricFog", "0");
-            parts.Add("Volumetrische Wolken/Nebel aus");
-        }
-        if (!asa && fps >= 0) e.Set("/Script/Engine.Engine", "bSmoothFrameRate", "False");
-        e.Save(eng);
-        Say($"{ark.Short}: Grafik angepasst ({(parts.Count == 0 ? "nichts geändert" : string.Join(", ", parts))})", LogLevel.Ok);
-    }
-
-    private void SkipIntros(GameVM g)
-    {
-        if (g.Ark!.Short != "ASE") return;
-        var dir = Path.Combine(g.Root, @"ShooterGame\Content\Movies");
-        if (!Directory.Exists(dir)) return;
-        int n = 0;
-        foreach (var f in Directory.GetFiles(dir))
-        {
-            if (!new[] { ".mp4", ".bik", ".webm", ".wmv" }.Contains(Path.GetExtension(f).ToLowerInvariant())) continue;
-            var to = f + ".nccboost";
-            try { File.Move(f, to); _state.Renamed.Add((f, to)); n++; } catch { }
-        }
-        SaveState();
-        Say(n > 0 ? $"ASE: {n} Intro-Videos übersprungen" : "ASE: Intro-Videos waren schon aus", LogLevel.Ok);
-    }
-
     // ================================================================ Werkzeuge
 
     public static string[] TempFolders => new[] { Path.GetTempPath(), Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Windows), "Temp") };
@@ -585,11 +464,14 @@ public sealed class BoostService : ObservableObject
     public async Task CleanRamAsync()
     {
         var before = Native.Memory();
+        var skip = new HashSet<string>(BoostCatalog.NeverTouch, StringComparer.OrdinalIgnoreCase);
+        foreach (var g in Games) if (g.P.Process.Length > 0) skip.Add(g.P.Process);
+        foreach (var k in GameCatalog.Games) foreach (var pr in k.Processes) skip.Add(pr);
         await Task.Run(() =>
         {
             foreach (var p in System.Diagnostics.Process.GetProcesses())
             {
-                try { if (!BoostCatalog.NeverTouch.Contains(p.ProcessName, StringComparer.OrdinalIgnoreCase)) Native.EmptyWorkingSet(p.Handle); }
+                try { if (!skip.Contains(p.ProcessName)) Native.EmptyWorkingSet(p.Handle); }
                 catch { }
                 finally { p.Dispose(); }
             }
@@ -642,20 +524,65 @@ public sealed class BoostService : ObservableObject
         return txt;
     }
 
+    /// <summary>Prozesse, die nie in der Liste auftauchen (Windows selbst, Treiber, diese App, Spiele-Schutz).</summary>
+    private static readonly HashSet<string> SystemProcs = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "explorer", "ShellExperienceHost", "StartMenuExperienceHost", "SearchHost", "SearchApp", "TextInputHost", "RuntimeBroker", "sihost",
+        "ctfmon", "taskhostw", "dllhost", "conhost", "smartscreen", "SecurityHealthSystray", "SecurityHealthService", "ApplicationFrameHost",
+        "LockApp", "fontdrvhost", "svchost", "WmiPrvSE", "spoolsv", "SystemSettings", "SystemSettingsBroker", "UserOOBEBroker", "Widgets",
+        "WidgetService", "PhoneExperienceHost", "CrossDeviceResume", "backgroundTaskHost", "WindowsTerminal", "OpenConsole", "cmd", "powershell",
+        "NVDisplay.Container", "nvcontainer", "NVIDIA Overlay", "NVIDIA Share", "NVIDIA app", "nvsphelper64", "RtkAudUService64", "igfxEM",
+        "AMDRSServ", "RadeonSoftware", "atieclxx", "HWiNFO64", "HWiNFO32", "NickControlCenter", "ControlCenter", "MsMpEng", "NisSrv", "SgrmBroker",
+        "msedgewebview2", "Taskmgr", "mmc", "dasHost", "WUDFHost", "CompPkgSrv", "MoUsoCoreWorker", "TiWorker", "TrustedInstaller", "audiodg",
+        "Claude", "claude", "GameBar", "GameBarFTServer", "XboxPcAppFT", "LsaIso", "Secure System", "unsecapp", "wlanext", "AggregatorHost",
+    };
+
+    /// <summary>
+    /// Alle laufenden Programme des Benutzers (nicht nur bekannte), sortiert nach RAM.
+    /// Bekannte Programme (Browser, Launcher …) haben schöne Namen; unbekannte zeigen die Programmbeschreibung.
+    /// </summary>
     public void RefreshApps()
     {
         var list = new List<BgAppVM>();
-        foreach (var a in BoostCatalog.BackgroundApps)
+        try
         {
-            var ps = System.Diagnostics.Process.GetProcessesByName(a.Process);
-            if (ps.Length == 0) continue;
-            double mb = 0;
-            foreach (var p in ps) { try { mb += p.WorkingSet64 / 1048576.0; } catch { } p.Dispose(); }
-            list.Add(new BgAppVM(this, a, mb));
+            int session = Process.GetCurrentProcess().SessionId;
+            var skip = new HashSet<string>(SystemProcs, StringComparer.OrdinalIgnoreCase);
+            foreach (var n in BoostCatalog.NeverTouch) skip.Add(n);
+            foreach (var g in Games) skip.Add(g.P.Process);
+            foreach (var k in GameCatalog.Games) foreach (var pr in k.Processes) skip.Add(pr);
+
+            foreach (var grp in Process.GetProcesses().GroupBy(p => p.ProcessName, StringComparer.OrdinalIgnoreCase))
+            {
+                var ps = grp.ToList();
+                try
+                {
+                    if (skip.Contains(grp.Key) || ps.All(p => { try { return p.SessionId != session; } catch { return true; } })) continue;
+                    double mb = 0; bool window = false; string? desc = null;
+                    foreach (var p in ps)
+                    {
+                        try { mb += p.WorkingSet64 / 1048576.0; } catch { }
+                        try { if (p.MainWindowHandle != IntPtr.Zero && !string.IsNullOrEmpty(p.MainWindowTitle)) window = true; } catch { }
+                        if (desc == null) try { desc = p.MainModule?.FileVersionInfo.FileDescription; } catch { }
+                    }
+                    var known = BoostCatalog.BackgroundApps.FirstOrDefault(a => a.Process.Equals(grp.Key, StringComparison.OrdinalIgnoreCase));
+                    // unbekannte Kleinigkeiten ausblenden (Helfer-Prozesse unter 40 MB ohne Fenster)
+                    if (known == null && !window && mb < 40) continue;
+                    var name = known?.Name ?? (string.IsNullOrWhiteSpace(desc) ? grp.Key : $"{desc.Trim()} ({grp.Key})");
+                    // unbekannte Programme mit Fenster nur sanft schließen (ungespeicherte Daten!), Hintergrund-Programme dürfen beendet werden
+                    var app = known ?? new BackgroundApp(grp.Key, name, !window);
+                    list.Add(new BgAppVM(this, app, mb, known != null, window));
+                }
+                finally { foreach (var p in ps) p.Dispose(); }
+            }
         }
+        catch (Exception ex) { Log.Warn(LogModule.Boost, "Programmliste: " + ex.Message); }
         BackgroundApps.Clear();
-        foreach (var x in list.OrderByDescending(x => x.Mb)) BackgroundApps.Add(x);
+        foreach (var x in list.OrderByDescending(x => x.Known && x.Selected).ThenByDescending(x => x.Mb)) BackgroundApps.Add(x);
+        _lastApps = list.Select(x => x.App).ToList();
     }
+
+    private List<BackgroundApp> _lastApps = new();
 
     public async Task CloseSelectedAppsAsync()
     {
@@ -665,7 +592,8 @@ public sealed class BoostService : ObservableObject
         {
             foreach (var name in sel)
             {
-                var def = BoostCatalog.BackgroundApps.FirstOrDefault(a => a.Process.Equals(name, StringComparison.OrdinalIgnoreCase));
+                var def = BoostCatalog.BackgroundApps.FirstOrDefault(a => a.Process.Equals(name, StringComparison.OrdinalIgnoreCase))
+                          ?? _lastApps.FirstOrDefault(a => a.Process.Equals(name, StringComparison.OrdinalIgnoreCase));
                 foreach (var p in System.Diagnostics.Process.GetProcessesByName(name))
                 {
                     try { if (p.MainWindowHandle != IntPtr.Zero) p.CloseMainWindow(); } catch { }
@@ -678,193 +606,6 @@ public sealed class BoostService : ObservableObject
             }
         });
         RefreshApps();
-    }
-
-    // ================================================================ Spiele
-
-    private void FindGames()
-    {
-        var found = new List<GameVM>();
-        try
-        {
-            var roots = new List<string>();
-            try { if (Registry.CurrentUser.OpenSubKey(@"Software\Valve\Steam")?.GetValue("SteamPath") is string sp) roots.Add(sp); } catch { }
-            try { if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\WOW6432Node\Valve\Steam")?.GetValue("InstallPath") is string ip) roots.Add(ip); } catch { }
-            roots.Add(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Steam"));
-            var libs = SteamLibrary.FindLibraries(roots);
-            foreach (var g in SteamLibrary.FindGames(libs).Where(x => Settings.SteamConnected || BoostCatalog.ArkGames.Any(a => a.AppId == x.AppId)))
-            {
-                var ark = BoostCatalog.ArkGames.FirstOrDefault(a => a.AppId == g.AppId);
-                string? exe = ark != null ? Path.Combine(g.InstallDir, ark.ExeRel) : GuessExe(g.InstallDir);
-                if (exe != null && !File.Exists(exe)) exe = null;
-                found.Add(new GameVM
-                {
-                    Name = g.Name, Root = g.InstallDir, AppId = g.AppId, Ark = ark, Exe = exe,
-                    ConfigDir = ark != null ? Path.Combine(g.InstallDir, ark.ConfigRel) : null,
-                    Process = ark?.Process ?? (exe != null ? Path.GetFileNameWithoutExtension(exe) : "")
-                });
-            }
-            foreach (var mp in Settings.ManualGamePaths)
-                foreach (var a in BoostCatalog.ArkGames)
-                    if (File.Exists(Path.Combine(mp, a.ExeRel)) && found.All(f => f.Ark?.Short != a.Short))
-                        found.Add(new GameVM { Name = a.Name, Root = mp, Ark = a, Exe = Path.Combine(mp, a.ExeRel), ConfigDir = Path.Combine(mp, a.ConfigRel), Process = a.Process, AppId = a.AppId });
-            SteamAccount = ReadSteamAccount(roots);
-            Log.Info(LogModule.Boost, $"{found.Count} Spiele gefunden ({libs.Count} Steam-Bibliotheken), ARK: {string.Join(", ", found.Where(f => f.IsArk).Select(f => f.Ark!.Short))}");
-        }
-        catch (Exception ex) { Log.Warn(LogModule.Boost, "Spielesuche: " + ex.Message); }
-        App.Current?.Dispatcher.BeginInvoke(() =>
-        {
-            Games.Clear();
-            foreach (var g in found.OrderByDescending(g => g.IsArk).ThenBy(g => g.Name))
-            {
-                if (g.Process.Length > 0) g.AutoBoost = Settings.AutoBoostProcesses.Contains(g.Process, StringComparer.OrdinalIgnoreCase);
-                g.Profile = Settings.GameProfiles.TryGetValue(g.Key, out var pr) ? pr : g.IsArk ? 1 : 0;
-                g.AutoChanged = OnGameAutoChanged;
-                g.ProfileChanged = OnGameProfileChanged;
-                Games.Add(g);
-            }
-            Raise(nameof(ArkFound));
-            RaiseAll(nameof(SteamText), nameof(SteamConnected));
-        });
-    }
-
-    // ================================================================ Steam
-    public bool SteamConnected => Settings.SteamConnected;
-    public string SteamAccount { get; private set; } = "";
-    public string SteamText => !Settings.SteamConnected ? "Nicht verbunden – nur ARK wird gesucht"
-        : $"Verbunden{(SteamAccount.Length > 0 ? $" mit „{SteamAccount}“" : "")} · {Games.Count} Spiele erkannt";
-
-    /// <summary>„Mit Steam verbinden“: liest die lokale Steam-Bibliothek (kein Passwort nötig, nichts verlässt den PC).</summary>
-    public void ConnectSteam(bool on)
-    {
-        Settings.SteamConnected = on;
-        Save();
-        Log.Info(LogModule.Boost, on ? "Mit Steam verbunden – Spiele werden erkannt" : "Steam-Verbindung getrennt");
-        Task.Run(FindGames);
-        RaiseAll(nameof(SteamText), nameof(SteamConnected));
-    }
-
-    private static string ReadSteamAccount(List<string> roots)
-    {
-        foreach (var r in roots)
-        {
-            try
-            {
-                var f = Path.Combine(r.Replace('/', '\\'), "config", "loginusers.vdf");
-                if (!File.Exists(f)) continue;
-                var txt = File.ReadAllText(f);
-                // Block mit "MostRecent" "1" bevorzugen
-                var blocks = Regex.Matches(txt, "\"(\\d{17})\"\\s*\\{([^}]*)\\}");
-                foreach (Match b in blocks)
-                    if (Regex.IsMatch(b.Groups[2].Value, "\"MostRecent\"\\s*\"1\"", RegexOptions.IgnoreCase))
-                        return SteamLibrary.ParseValue(b.Groups[2].Value, "PersonaName") ?? "";
-                if (blocks.Count > 0) return SteamLibrary.ParseValue(blocks[0].Groups[2].Value, "PersonaName") ?? "";
-            }
-            catch { }
-        }
-        return "";
-    }
-
-    /// <summary>Haupt-exe eines Spiels raten: größte exe (ohne Installer/Crash-Reporter/Launcher-Helfer).</summary>
-    public static string? GuessExe(string dir)
-    {
-        try
-        {
-            string[] bad = { "unins", "crash", "report", "setup", "install", "redist", "vc_", "dxsetup", "dotnet", "ue4prereq", "uninstall", "helper", "update", "cefprocess", "easyanticheat", "be_service", "battleye" };
-            var exes = Directory.EnumerateFiles(dir, "*.exe", new EnumerationOptions { RecurseSubdirectories = true, MaxRecursionDepth = 5, IgnoreInaccessible = true })
-                                .Where(f => !bad.Any(b => Path.GetFileName(f).Contains(b, StringComparison.OrdinalIgnoreCase)) &&
-                                            !f.Contains(@"\_CommonRedist\", StringComparison.OrdinalIgnoreCase) && !f.Contains(@"\Engine\Binaries\ThirdParty", StringComparison.OrdinalIgnoreCase))
-                                .Select(f => new FileInfo(f)).OrderByDescending(f => f.Length).ToList();
-            // Unreal-Spiele: die echte exe liegt unter Binaries\Win64 (Shipping)
-            var shipping = exes.FirstOrDefault(f => f.FullName.Contains(@"\Binaries\Win64\", StringComparison.OrdinalIgnoreCase));
-            return (shipping ?? exes.FirstOrDefault())?.FullName;
-        }
-        catch { return null; }
-    }
-
-    private void OnGameProfileChanged(GameVM g)
-    {
-        Settings.GameProfiles[g.Key] = g.Profile;
-        if (g.Process.Length > 0)
-        {
-            Settings.AutoBoostProcesses.RemoveAll(x => x.Equals(g.Process, StringComparison.OrdinalIgnoreCase));
-            if (g.Profile > 0) Settings.AutoBoostProcesses.Add(g.Process);
-            g.AutoBoost = g.Profile > 0;
-        }
-        Save();
-        Raise(nameof(AutoBoostList));
-        Log.Info(LogModule.Boost, $"{g.Name}: Profil „{g.ProfileText}“");
-        // exe-Optimierungen sofort anwenden, wenn ein Profil gewählt ist
-        if (g.Profile > 0 && g.Exe != null && Settings.GameExeTweaks) Task.Run(() => GameExeTweaks(g));
-    }
-
-    public bool ArkFound => Games.Any(g => g.IsArk);
-
-    public void AddGameFolder(string folder)
-    {
-        if (!Settings.ManualGamePaths.Contains(folder, StringComparer.OrdinalIgnoreCase)) Settings.ManualGamePaths.Add(folder);
-        Save();
-        Task.Run(FindGames);
-    }
-
-    public void AddAutoBoostExe(string exePath)
-    {
-        var name = Path.GetFileNameWithoutExtension(exePath);
-        if (!Settings.AutoBoostProcesses.Contains(name, StringComparer.OrdinalIgnoreCase)) Settings.AutoBoostProcesses.Add(name);
-        Save();
-        Raise(nameof(AutoBoostList));
-        Log.Info(LogModule.Boost, $"Auto-Boost für {name}.exe aktiviert");
-    }
-
-    public void RemoveAutoBoost(string name)
-    {
-        Settings.AutoBoostProcesses.RemoveAll(x => x.Equals(name, StringComparison.OrdinalIgnoreCase));
-        Save();
-        Raise(nameof(AutoBoostList));
-    }
-
-    public IEnumerable<string> AutoBoostList => Settings.AutoBoostProcesses.ToList();
-
-    private void OnGameAutoChanged(GameVM g)
-    {
-        if (g.Process.Length == 0) return;
-        if (g.AutoBoost) { if (!Settings.AutoBoostProcesses.Contains(g.Process, StringComparer.OrdinalIgnoreCase)) Settings.AutoBoostProcesses.Add(g.Process); }
-        else Settings.AutoBoostProcesses.RemoveAll(x => x.Equals(g.Process, StringComparison.OrdinalIgnoreCase));
-        Save();
-        Raise(nameof(AutoBoostList));
-    }
-
-    public static void Launch(GameVM g)
-    {
-        if (g.AppId > 0) Env.Open($"steam://rungameid/{g.AppId}");
-        else if (g.Exe != null) Env.Open(g.Exe);
-    }
-
-    /// <summary>Auto-Boost: startet ein Spiel aus der Liste, bekommt es hohe Priorität (+ Timer, Apps schließen).</summary>
-    private void WatchGames()
-    {
-        if (!Settings.AutoBoost || Settings.AutoBoostProcesses.Count == 0) { AutoStatus = Settings.AutoBoost ? "Keine Spiele für Auto-Boost gewählt" : "Auto-Boost aus"; return; }
-        var running = new List<string>();
-        foreach (var name in Settings.AutoBoostProcesses)
-        {
-            foreach (var p in System.Diagnostics.Process.GetProcessesByName(name))
-            {
-                running.Add(name);
-                if (_boostedPids.Add(p.Id))
-                {
-                    var game = Games.FirstOrDefault(g => g.Process.Equals(name, StringComparison.OrdinalIgnoreCase));
-                    bool max = game == null || game.Profile != 2;
-                    try { p.PriorityClass = max ? ProcessPriorityClass.High : ProcessPriorityClass.AboveNormal; } catch { }
-                    Say($"Auto-Boost: {game?.Name ?? name} gestartet → Profil {(max ? "Max-FPS: hohe Priorität" : "Ausgewogen: erhöhte Priorität")}" + (max && IsOn("timer") ? ", Timer 0,5 ms" : ""), LogLevel.Ok);
-                    if (max && IsOn("timer")) SetTimerResolution(true);
-                    if (max && Settings.AutoCloseApps) _ = CloseSelectedAppsAsync();
-                }
-                p.Dispose();
-            }
-        }
-        // beendete Spiele aus der Liste nehmen
-        _boostedPids.RemoveWhere(pid => { try { using var p = System.Diagnostics.Process.GetProcessById(pid); return p.HasExited; } catch { return true; } });
-        AutoStatus = running.Count > 0 ? $"Aktiv für: {string.Join(", ", running.Distinct())}" : "Wartet auf Spielstart …";
     }
 
     public void OnExit()

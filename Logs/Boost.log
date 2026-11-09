@@ -1,0 +1,61 @@
+﻿2026-11-09 11:58:08  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 11:58:08  INFO     [Boost] Spielesuche: 0 Spiele gefunden (Steam nicht verbunden, Epic, Riot)
+2026-11-09 12:02:46  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-09 12:02:46  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-09 12:02:58  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-09 12:02:58  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-09 12:02:58  OK       [Boost] Windows-Spielmodus an: an
+2026-11-09 12:02:58  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-09 12:02:58  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-09 12:02:58  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-09 12:02:58  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-09 12:02:58  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-09 12:02:58  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-09 12:02:58  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-09 12:02:58  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-09 12:02:58  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-09 12:02:58  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-09 12:02:58  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-09 12:03:00  OK       [Boost] Temp-Dateien: Fertig – 64 MB frei, 5 Dateien gelöscht, 52 übersprungen (0,0 s)
+2026-11-09 12:03:02  INFO     [Boost] Mit Steam verbunden – Spiele werden erkannt
+2026-11-09 12:03:02  OK       [Boost] Arbeitsspeicher aufgeräumt – 1685 MB frei geworden (jetzt 8,1 von 15,8 GB belegt)
+2026-11-09 12:03:02  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-09 12:03:03  INFO     [Boost] Spielesuche: 3 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:03:09  OK       [Boost] ARK: Survival Ascended: Profil „Max-FPS“ – Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Maximale, FPS Unbegrenzt
+2026-11-09 12:03:09  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 12:03:09  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Maximale, Bewegungs-/Tiefenunschärfe aus)
+2026-11-09 12:03:10  OK       [Boost] ARK: Survival Ascended: Profil „Ausgewogen“ – Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 12:03:10  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-09 12:03:11  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-09 12:05:01  OK       [Boost] Find The Needle Demo: Profil „Max-FPS“ – Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU
+2026-11-09 12:05:01  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 12:21:34  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:21:34  INFO     [Boost] Spielesuche: 3 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:37:01  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:37:01  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:41:59  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:41:59  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:47:51  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:47:51  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:48:57  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-09 12:48:57  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-09 12:49:09  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-09 12:49:10  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-09 12:49:10  OK       [Boost] Windows-Spielmodus an: an
+2026-11-09 12:49:10  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-09 12:49:10  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-09 12:49:10  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-09 12:49:10  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-09 12:49:10  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-09 12:49:10  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-09 12:49:10  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-09 12:49:10  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-09 12:49:10  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-09 12:49:10  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-09 12:49:10  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-09 12:49:10  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-09 12:49:10  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-09 12:49:10  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 12:49:12  OK       [Boost] Temp-Dateien: Fertig – 14 MB frei, 11 Dateien gelöscht, 87 übersprungen (0,0 s)
+2026-11-09 12:49:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 1648 MB frei geworden (jetzt 10,5 von 15,8 GB belegt)
+2026-11-09 12:49:15  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart

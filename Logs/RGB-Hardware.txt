@@ -1,0 +1,46 @@
+Control Center – Hardware-Liste vom 09.11.2026 12:47
+
+RGB-Geräte:
+  [OK] Gigabyte: Gigabyte B760 DS3H AX DDR4 – Wird gesteuert
+
+Alle HID-Schnittstellen:
+  045E:0000  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  045E:0000  if=-1  usage=0001/0006  in=  2 out=  0 feat=  0   
+  045E:0000  if=-1  usage=0001/0080  in=  2 out=  0 feat=  0   
+  048D:5702  if=-1  usage=FF89/0010  in=  0 out=  0 feat= 17  ITE Tech. Inc. ITE Device
+  048D:5702  if=-1  usage=FF89/00CC  in=  0 out=  0 feat= 64  ITE Tech. Inc. ITE Device
+  054C:0D5E  if= 3  usage=000C/0001  in=  5 out=  0 feat=  0  Sony Interactive Entertainment Hid Interface
+  054C:0D5E  if= 3  usage=FF00/0001  in= 64 out=  0 feat= 64  Sony Interactive Entertainment Hid Interface
+  054C:0D5E  if= 3  usage=FF03/0020  in=  0 out=  0 feat= 35  Sony Interactive Entertainment Hid Interface
+  054C:0D5E  if= 3  usage=FF01/0020  in=  8 out=  2 feat=  0  Sony Interactive Entertainment Hid Interface
+  1BCF:08A0  if=-1  usage=FF00/0001  in=  0 out=  0 feat=  8   
+  1BCF:08A0  if=-1  usage=FF01/0001  in=  6 out=  0 feat=  0   
+  1BCF:08A0  if=-1  usage=0001/0006  in=  8 out=  2 feat=  0   
+  1BCF:08A0  if=-1  usage=0001/0002  in=  7 out=  0 feat=  0   
+  1BCF:08A0  if=-1  usage=000C/0001  in=  3 out=  0 feat=  0   
+  258A:022D  if= 0  usage=0001/0006  in=  9 out=  2 feat=  0  BY Tech M65
+  258A:022D  if= 1  usage=0001/0080  in=  2 out=  0 feat=  0  BY Tech M65
+  258A:022D  if= 1  usage=000C/0001  in=  3 out=  0 feat=  0  BY Tech M65
+  258A:022D  if= 1  usage=FF00/0001  in=  4 out=  0 feat=  0  BY Tech M65
+  258A:022D  if= 1  usage=FF00/0001  in=  0 out=  0 feat=  6  BY Tech M65
+  258A:022D  if= 1  usage=FF00/0001  in=  0 out=  0 feat=520  BY Tech M65
+  258A:022D  if= 1  usage=0001/0002  in=  8 out=  0 feat=  0  BY Tech M65
+  258A:022D  if= 1  usage=0001/0006  in= 16 out=  0 feat=  0  BY Tech M65
+  8087:0A1E  if=-1  usage=0001/000C  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=0001/0080  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=0001/0080  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=0001/0080  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=FFB3/0010  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=FFB3/0010  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=0001/000D  in=  5 out=  0 feat=  5   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=0001/0006  in=  9 out=  2 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=000C/0001  in=  2 out=  0 feat=  0   
+  8087:0A1E  if=-1  usage=FFB3/0010  in=  2 out=  0 feat=  0   

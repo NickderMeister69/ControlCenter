@@ -119,11 +119,9 @@
                             <ComboBox Grid.Column="1" x:Name="EAction" ItemsSource="{x:Static local:TilesService.Actions}"/>
                         </Grid>
                         <StackPanel x:Name="MetricRow" Margin="0,6,0,0">
-                            <TextBlock Text="Angezeigte Werte" Style="{StaticResource Muted}" Margin="0,0,0,4"/>
-                            <ItemsControl x:Name="EMetrics">
-                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate><DataTemplate><CheckBox Content="{Binding Label}" IsChecked="{Binding On}" Margin="0,2"/></DataTemplate></ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            <TextBlock Text="Angezeigte Werte" Style="{StaticResource Muted}" Margin="0,0,0,2"/>
+                            <TextBlock Style="{StaticResource Caption}" Margin="0,0,0,4" Text="Häkchen = wird angezeigt. Mit ▲▼ die Reihenfolge ändern – oben steht zuerst."/>
+                            <ScrollViewer MaxHeight="300" VerticalScrollBarVisibility="Auto"><local:OrderList x:Name="EMetrics"/></ScrollViewer>
                         </StackPanel>
                         <Grid Margin="0,6,0,0">
                             <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>

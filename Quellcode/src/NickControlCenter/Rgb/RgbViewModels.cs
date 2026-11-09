@@ -309,6 +309,9 @@ public sealed class LightZoneVM : ObservableObject
     public string ModeText => Cfg.OwnEffect ? "Eigener Effekt" : "Wie alle Geräte";
 
     public bool FlickerGuard { get => Cfg.FlickerGuard; set { Cfg.FlickerGuard = value; Raise(); _ctl.Changed(); } }
+    public static string[] ColorOrderNames => LightZoneConfig.ColorOrderNames;
+    public int ColorOrder { get => Cfg.ColorOrder; set { Cfg.ColorOrder = Math.Clamp(value, 0, 6); Raise(); _ctl.Changed(); } }
+    public bool ShowColorOrder => Desc.PerLed;
 
     public static string[] ScreenRegionChoices { get; } = { "Wie oben eingestellt", "Ganzer Bildschirm", "Linke Seite", "Rechte Seite", "Oben", "Unten", "Mitte" };
     public int ScreenRegionIndex
@@ -499,6 +502,7 @@ public sealed class RgbController : ObservableObject, IDisposable
     }
 
     public void SetLedCount(LightZoneVM z, int count) => _engine.SetLedCount(z.Desc.Zone, count);
+    public void ColorTest() { _engine.ColorTest(); Log.Info(LogModule.Rgb, "Farbtest: rot → grün → blau → weiß"); }
     public void Identify(LightZoneVM z) { _engine.Identify(z.Desc.Zone); Log.Info(LogModule.Rgb, $"Anschluss „{z.DisplayName}“ blinkt zum Erkennen"); }
     public void Rescan() { Log.Info(LogModule.Rgb, "Geräte werden neu gesucht"); _engine.Rescan(); }
 
@@ -530,12 +534,19 @@ public sealed class RgbController : ObservableObject, IDisposable
                 zc.Effect = zc.Fans[0].Effect.Clone();
             }
             zc.Fans.Clear();
+            // Früher standen ARGB-Anschlüsse oft auf 24 LEDs → bei mehreren Lüftern blieben die hinteren LEDs weiß bzw. in der alten Farbe
+            if (!_cfg.Rgb.LedFixDone && d.Adjustable && d.LedsPerFan <= 0 && zc.LedCount > 0 && zc.LedCount < d.MaxLeds)
+            {
+                Log.Info(LogModule.Rgb, $"{d.ZoneName}: LED-Anzahl {zc.LedCount} → {d.MaxLeds} (alle LEDs ansteuern)");
+                zc.LedCount = d.MaxLeds;
+            }
             if (d.LedsPerFan > 0) zc.FanCount = Math.Clamp(zc.FanCount <= 1 ? Math.Max(1, d.DefaultFans) : zc.FanCount, 1, Math.Max(1, d.MaxLeds / d.LedsPerFan));
-            else if (d.Adjustable && zc.LedCount <= 0) zc.LedCount = Math.Min(d.MaxLeds, 60); // reicht für 3–4 Lüfter am Daisy-Chain
+            else if (d.Adjustable && zc.LedCount <= 0) zc.LedCount = d.MaxLeds; // alle LEDs – sonst bleiben hintere Lüfter weiß/alt
             var vm = new LightZoneVM(this, d, zc);
             if ((d.Adjustable || vm.IsHub) && vm.LedCount != d.LedCount) _engine.SetLedCount(d.Zone, vm.LedCount);
             Zones.Add(vm);
         }
+        if (!_cfg.Rgb.LedFixDone && zones.Count > 0) { _cfg.Rgb.LedFixDone = true; }
         Hardware.Clear();
         foreach (var h in report) Hardware.Add(h);
         RaiseAll(nameof(HasZones), nameof(NoZones));
@@ -558,7 +569,7 @@ public sealed class RgbController : ObservableObject, IDisposable
                 snap = EffectSnap.From(c);
             }
             else snap = globalSnap;
-            var ez = new EngineZone { Target = z.Desc.Zone, Enabled = z.Enabled, LedCount = Math.Max(1, z.LedCount), Effect = snap, FlickerGuard = z.Cfg.FlickerGuard };
+            var ez = new EngineZone { Target = z.Desc.Zone, Enabled = z.Enabled, LedCount = Math.Max(1, z.LedCount), Effect = snap, FlickerGuard = z.Cfg.FlickerGuard, ColorOrder = z.Cfg.ColorOrder };
             if (z.Engine != null) { ez.Current = z.Engine.Current; ez.LastSent = z.Engine.LastSent; ez.LastSendTime = z.Engine.LastSendTime; }
             z.Engine = ez;
             zones.Add(ez);

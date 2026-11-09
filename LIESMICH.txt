@@ -1,4 +1,4 @@
-NICK CONTROL CENTER
+CONTROL CENTER
 ===================
 
 Alles in einer App: Lüfter, RGB-Beleuchtung, FPS-Booster (mit Spielprofilen + Steam),
@@ -7,7 +7,7 @@ Desktop-Kacheln, Treiber-Updates und ein Problemlöser.
 
 START
 -----
-1. NickControlCenter.exe doppelklicken (fragt nach Admin-Rechten – nötig für Lüfter,
+1. ControlCenter.exe doppelklicken (fragt nach Admin-Rechten – nötig für Lüfter,
    Sensoren und Tweaks).
 2. Beim ersten Start legt die App Verknüpfungen auf dem Desktop und im Startmenü an.
    An die Taskleiste anheften: App läuft -> Rechtsklick aufs Symbol in der Taskleiste

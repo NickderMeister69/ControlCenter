@@ -1,0 +1,10 @@
+Nick Control Center – Stresstest vom 09.11.2026 12:12
+
+■ Gestoppt.
+Dauer: 0 min 9 s
+CPU: Intel Core i5-13400F · Ø 25.989 Punkte/s · max. 49 °C · max. 49 W · Fehler 0
+Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 340 Punkte/s · max. 49 °C · max. 0 W · Fehler 0
+
+Verlauf:
+12:12:40  Stresstest gestartet: CPU (Gemischt, 16 Threads), Grafikkarte · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+12:12:50  Ergebnis: ■ Gestoppt. | Dauer: 0 min 9 s | CPU: Intel Core i5-13400F · Ø 25.989 Punkte/s · max. 49 °C · max. 49 W · Fehler 0 | Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 340 Punkte/s · max. 49 °C · max. 0 W · Fehler 0

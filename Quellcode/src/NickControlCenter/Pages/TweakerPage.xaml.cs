@@ -90,7 +90,29 @@ public partial class TweakerPage : UserControl
     private void Revert_Click(object sender, RoutedEventArgs e) => _vm.Svc.Revert("Auf vorherige Werte zurückgesetzt.");
     private async void Reset_Click(object sender, RoutedEventArgs e) { await _vm.Svc.ResetAllAsync(); _vm.Load(new CpuSettings(), new GpuSettings()); }
     private void Test_Click(object sender, RoutedEventArgs e) { Ui.Go("Stresstest"); Services.Stress.QuickTest(); }
-    private async void Probe_Click(object sender, RoutedEventArgs e) { Ui.Toast("Messe Turbo-Takt (3 s) …"); await _vm.Svc.ProbeTurboAsync(); _vm.RaiseAllValues(); }
+    private async void Probe_Click(object sender, RoutedEventArgs e)
+    {
+        var b = (Button)sender;
+        b.IsEnabled = false;
+        var old = b.Content;
+        b.Content = "Messe … (5 s, ein Kern unter Last)";
+        try
+        {
+            int mhz = await _vm.Svc.ProbeTurboAsync();
+            _vm.RaiseAllValues();
+            UpdateMeta();
+            if (mhz > 0) Dialogs.Info("Turbo-Takt gemessen", $"Höchster Takt unter Last: {mhz} MHz ({mhz / 1000.0:0.00} GHz).\n\nBasistakt: {_vm.Svc.BaseClock} MHz. " +
+                (mhz > _vm.Svc.BaseClock + 200 ? "Der Turbo arbeitet – passt." : "Der Turbo greift kaum. Prüfe den Turbo-Modus oben (nicht „Turbo aus“) und den Energieplan."));
+            else Ui.Toast("Keine Taktwerte von den Sensoren – läuft die App mit Admin-Rechten?", true);
+        }
+        finally { b.Content = old; b.IsEnabled = true; }
+    }
+
+    private void UpdateMeta()
+    {
+        var s = _vm.Svc;
+        CpuMeta.Text = $"{s.Cores} Kerne · {s.Threads} Threads · Basis {s.BaseClock} MHz · gemessen bis {Math.Max(s.MaxSeen, s.TurboClock)} MHz · Sicherheitsgrenze {s.SafetyTemp} °C";
+    }
 
     private void SaveProf_Click(object sender, RoutedEventArgs e)
     {

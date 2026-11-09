@@ -161,13 +161,14 @@
                     <Border Style="{StaticResource Card}" Margin="0,0,10,10">
                         <StackPanel>
                             <TextBlock Text="IN-GAME-OVERLAY" Style="{StaticResource Kicker}"/>
-                            <TextBlock Style="{StaticResource Caption}" Text="Kleine Anzeige immer im Vordergrund, klick-durchlässig. Strg+Umschalt+O blendet sie ein/aus. Funktioniert in Spielen mit „Randloses Fenster“."/>
+                            <TextBlock Style="{StaticResource Caption}" Text="Kleine Anzeige immer im Vordergrund, klick-durchlässig. Strg+Umschalt+O blendet sie ein/aus. Funktioniert in Spielen mit „Randloses Fenster“. FPS werden über Windows gemessen (nichts wird ins Spiel eingeschleust – Anti-Cheat-sicher), bei DirectX-Spielen."/>
                             <CheckBox Style="{StaticResource ToggleSwitch}" Content="Overlay anzeigen" x:Name="OverlayOn" Click="Overlay_Click" Margin="0,12,0,0"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Nebeneinander (von links nach rechts)" IsChecked="{Binding Settings.OverlayHorizontal}" Click="OverlayLayout_Click" Margin="0,8,0,0"/>
                             <Grid Margin="0,12,0,0">
                                 <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
                                 <TextBlock Text="Position" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
                                 <ComboBox Grid.Column="1" SelectedIndex="{Binding Settings.OverlayCorner}" SelectionChanged="OverlayChanged">
-                                    <ComboBoxItem Content="Oben links"/><ComboBoxItem Content="Oben rechts"/><ComboBoxItem Content="Unten links"/><ComboBoxItem Content="Unten rechts"/>
+                                    <ComboBoxItem Content="Oben links"/><ComboBoxItem Content="Oben rechts"/><ComboBoxItem Content="Unten links"/><ComboBoxItem Content="Unten rechts"/><ComboBoxItem Content="Oben Mitte"/>
                                 </ComboBox>
                             </Grid>
                             <Grid Margin="0,8,0,0">
@@ -178,17 +179,45 @@
                             <Grid Margin="0,8,0,0">
                                 <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
                                 <TextBlock Text="Schriftgröße" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
-                                <Slider Grid.Column="1" Minimum="10" Maximum="24" Value="{Binding Settings.OverlayFontSize}" ValueChanged="OverlaySlider"/>
+                                <Slider Grid.Column="1" Minimum="10" Maximum="40" Value="{Binding Settings.OverlayFontSize}" ValueChanged="OverlaySlider" ToolTip="Größe des ganzen Overlays"/>
                             </Grid>
-                            <TextBlock Text="Angezeigte Werte" Style="{StaticResource Muted}" Margin="0,12,0,6"/>
-                            <ItemsControl x:Name="OverlayItems">
-                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Schriftart" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" x:Name="FontBox" SelectionChanged="OverlayFont_Changed"/>
+                            </Grid>
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Hintergrund" Style="{StaticResource Muted}" VerticalAlignment="Center" ToolTip="Deckkraft des Hintergrunds (0 = komplett durchsichtig, nur Schrift)"/>
+                                <Slider Grid.Column="1" Minimum="0" Maximum="1" Value="{Binding Settings.OverlayBgOpacity}" ValueChanged="OverlaySlider"/>
+                            </Grid>
+                            <TextBlock Text="Farben" Style="{StaticResource Muted}" Margin="0,12,0,4"/>
+                            <ItemsControl x:Name="OverlayColors">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <CheckBox Content="{Binding Label}" IsChecked="{Binding On}" Margin="0,3" Click="OverlayItem_Click"/>
+                                        <Grid Margin="0,0,0,6">
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Label}" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                            <ItemsControl Grid.Column="1" ItemsSource="{Binding Swatches}">
+                                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Button Width="20" Height="20" Margin="0,0,4,0" Tag="{Binding}" Click="OverlaySwatch_Click" Cursor="Hand">
+                                                            <Button.Template><ControlTemplate TargetType="Button"><Border CornerRadius="3" Background="{Binding}" BorderBrush="#40FFFFFF" BorderThickness="1"/></ControlTemplate></Button.Template>
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                            <TextBox Grid.Column="2" Text="{Binding Hex, UpdateSourceTrigger=LostFocus}" FontFamily="{StaticResource MonoFont}" FontSize="12"/>
+                                        </Grid>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Warnfarben (gelb/rot bei hohen Temperaturen)" IsChecked="{Binding Settings.OverlayAlertColors}" Click="OverlayLayout_Click" Margin="0,4,0,0"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Rahmen" IsChecked="{Binding Settings.OverlayBorder}" Click="OverlayLayout_Click" Margin="0,8,0,0"/>
+                            <TextBlock Text="Angezeigte Werte" Style="{StaticResource Muted}" Margin="0,12,0,6"/>
+<TextBlock Style="{StaticResource Caption}" Margin="0,0,0,4" Text="Häkchen = wird angezeigt. ▲▼ = Reihenfolge (oben = ganz links bzw. ganz oben im Overlay)."/>
+                            <local:OrderList x:Name="OverlayItems"/>
                         </StackPanel>
                     </Border>
                     <StackPanel>

@@ -13,6 +13,7 @@ public sealed class EngineZone
     /// <summary>Effekt dieses Anschlusses (eigener oder der gemeinsame).</summary>
     public required EffectSnap Effect { get; init; }
     public bool FlickerGuard { get; init; }
+    public int ColorOrder { get; init; }
     /// <summary>Zuletzt berechnete Farben (für die Live-Vorschau).</summary>
     public volatile RgbF[] Current = Array.Empty<RgbF>();
     public RgbF[]? Smoothed;
@@ -100,6 +101,11 @@ public sealed class RgbEngine : IDisposable
     public void Rescan() => _actions.Enqueue(DoScan);
 
     /// <summary>Lässt einen Anschluss 3 s weiß blinken (zum Finden, welcher Lüfter welcher ist).</summary>
+    private DateTime? _testUntil;
+    /// <summary>Farbtest: alle Anschlüsse 2 s rot, grün, blau, weiß – zum Prüfen, ob die Farben stimmen.</summary>
+    public void ColorTest() => _actions.Enqueue(() => { _testStart = DateTime.Now; _testUntil = DateTime.Now.AddSeconds(8); });
+    private DateTime _testStart;
+
     public void Identify(RgbZone zone) => _actions.Enqueue(() => _identify = (zone, DateTime.Now.AddSeconds(3)));
 
     public void SetLedCount(RgbZone zone, int count) => _actions.Enqueue(() =>
@@ -175,7 +181,13 @@ public sealed class RgbEngine : IDisposable
             {
                 int n = Math.Max(1, z.LedCount);
                 var arr = new RgbF[n];
-                if (ident != null && ident.Value.zone == z.Target)
+                if (_testUntil is { } tu && DateTime.Now < tu)
+                {
+                    int step = (int)((DateTime.Now - _testStart).TotalSeconds / 2);
+                    var tc = step switch { 0 => new RgbF(1, 0, 0), 1 => new RgbF(0, 1, 0), 2 => new RgbF(0, 0, 1), _ => RgbF.White };
+                    for (int i = 0; i < n; i++) arr[i] = tc;
+                }
+                else if (ident != null && ident.Value.zone == z.Target)
                 {
                     bool on = ((int)(t * 4)) % 2 == 0;
                     for (int i = 0; i < n; i++) arr[i] = on ? RgbF.White : RgbF.Black;
@@ -188,7 +200,7 @@ public sealed class RgbEngine : IDisposable
                 z.Current = arr;
             }
 
-            if (st.Enabled || NightActive) SendToDevices(st, ident?.zone);
+            if (st.Enabled || NightActive || (_testUntil is { } tt && DateTime.Now < tt)) SendToDevices(st, ident?.zone);
             var elapsed = (sw.Elapsed - frameStart).TotalMilliseconds;
             Thread.Sleep((int)Math.Max(5, 33 - elapsed));
         }
@@ -218,11 +230,20 @@ public sealed class RgbEngine : IDisposable
                     int leds = Math.Max(1, z.Target.LedCount);
                     var cur = z.Current;
                     var buf = new byte[leds * 3];
+                    var map = LightZoneConfig.OrderMap(z.ColorOrder);
+                    bool testing = _testUntil is { } tu2 && now < tu2;
                     for (int i = 0; i < leds && cur.Length > 0; i++)
                     {
-                        var c = cur[Math.Min(i, cur.Length - 1)].Scale(z.Target == identZone ? 1 : bright);
+                        var c = cur[Math.Min(i, cur.Length - 1)].Scale(z.Target == identZone || testing ? 1 : bright);
                         int o = i * 3;
-                        buf[o] = Gamma[c.R8]; buf[o + 1] = Gamma[c.G8]; buf[o + 2] = Gamma[c.B8];
+                        byte r = Gamma[c.R8], g = Gamma[c.G8], b = Gamma[c.B8];
+                        if (map == null) { buf[o] = r; buf[o + 1] = g; buf[o + 2] = b; }
+                        else
+                        {
+                            // Treiber erwartet RGB und sortiert selbst um → hier so vertauschen, dass am Ende die gewählte Reihenfolge rauskommt
+                            byte Pick(int ch) => ch == 0 ? r : ch == 1 ? g : b;
+                            buf[o] = Pick(map[0]); buf[o + 1] = Pick(map[1]); buf[o + 2] = Pick(map[2]);
+                        }
                     }
 
                     bool changed = z.LastSent == null || !buf.AsSpan().SequenceEqual(z.LastSent);

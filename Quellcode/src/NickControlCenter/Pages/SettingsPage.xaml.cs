@@ -12,7 +12,7 @@ public partial class SettingsPage : UserControl, IPage
         AccentHex.Text = AppSettings.Current.Accent;
         LogPath.Text = Log.Folder;
         CfgPath.Text = JsonStore.Folder;
-        About.Text = $"Nick Control Center {typeof(App).Assembly.GetName().Version?.ToString(3)} · Windows-Build {Env.WindowsBuild} · {(Env.IsAdmin ? "mit Admin-Rechten" : "OHNE Admin-Rechte")}\n{Env.ExePath}";
+        About.Text = $"Control Center {typeof(App).Assembly.GetName().Version?.ToString(3)} · Windows-Build {Env.WindowsBuild} · {(Env.IsAdmin ? "mit Admin-Rechten" : "OHNE Admin-Rechte")}\n{Env.ExePath}";
     }
 
     public void OnVisibleChanged(bool visible)
@@ -22,6 +22,10 @@ public partial class SettingsPage : UserControl, IPage
         ToTray.IsChecked = s.CloseToTray;
         Fahr.IsChecked = s.Fahrenheit;
         AutoStart.IsChecked = Autostart.IsEnabled();
+        HwAuto.IsChecked = s.HwinfoAutostart;
+        var hw = HwinfoLauncher.FindExe();
+        HwState.Text = hw == null ? "HWiNFO ist nicht installiert (kostenlos auf hwinfo.com) – oder wähle die exe aus." :
+            $"{(HwinfoLauncher.IsRunning ? "✔ läuft" : "läuft gerade nicht")} · {HardwareHub.HwinfoText(HwinfoSource.LastStatus)}\n{hw}";
         LinkState.Text = Shortcuts.Exists ? "✔ Verknüpfungen auf dem Desktop und im Startmenü sind vorhanden." : "Verknüpfungen fehlen.";
     }
 
@@ -55,6 +59,32 @@ public partial class SettingsPage : UserControl, IPage
         else Ui.Toast("Fehler: " + err, true);
         OnVisibleChanged(true);
     }
+    private void HwAuto_Click(object s, RoutedEventArgs e)
+    {
+        AppSettings.Current.HwinfoAutostart = HwAuto.IsChecked == true;
+        AppSettings.Current.Save();
+        if (AppSettings.Current.HwinfoAutostart) Task.Run(HwinfoLauncher.StartIfWanted);
+    }
+
+    private async void HwStart_Click(object s, RoutedEventArgs e)
+    {
+        var exe = HwinfoLauncher.FindExe();
+        if (exe == null) { Ui.Toast("HWiNFO nicht gefunden – bitte die exe wählen", true); return; }
+        if (HwinfoLauncher.IsRunning) { Ui.Toast("HWiNFO läuft schon"); return; }
+        await Task.Run(() => HwinfoLauncher.Start(exe));
+        await Task.Delay(4000);
+        OnVisibleChanged(true);
+    }
+
+    private void HwPick_Click(object s, RoutedEventArgs e)
+    {
+        var dlg = new Microsoft.Win32.OpenFileDialog { Filter = "HWiNFO (HWiNFO64.exe)|HWiNFO*.exe|Programme (*.exe)|*.exe", Title = "HWiNFO64.exe wählen" };
+        if (dlg.ShowDialog() != true) return;
+        AppSettings.Current.HwinfoPath = dlg.FileName;
+        AppSettings.Current.Save();
+        OnVisibleChanged(true);
+    }
+
     private void Monitor_Click(object s, RoutedEventArgs e) => Ui.Go("Monitor");
     private void Diag_Click(object s, RoutedEventArgs e) => Ui.Go("Problemlöser");
     private void Logs_Click(object s, RoutedEventArgs e) => Env.Open(Log.Folder);

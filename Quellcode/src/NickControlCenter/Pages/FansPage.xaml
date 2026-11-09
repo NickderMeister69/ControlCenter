@@ -39,18 +39,22 @@
                 <Border Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <TextBlock Text="CPU" Style="{StaticResource Kicker}"/>
-                        <local:Ring Height="96" Value="{Binding CpuTemp}" Stroke="{DynamicResource AccentBrush}" Margin="0,4,0,-50"/>
-                        <TextBlock x:Name="CpuBig" Style="{StaticResource BigNum}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                        <TextBlock Text="{Binding TempSource}" Style="{StaticResource Muted}" HorizontalAlignment="Center" Margin="0,30,0,6"/>
+                        <Grid Width="120" Height="120" HorizontalAlignment="Center" Margin="0,6,0,0">
+                            <local:Ring Value="{Binding CpuTemp}" Stroke="{DynamicResource AccentBrush}"/>
+                            <TextBlock x:Name="CpuBig" Style="{StaticResource BigNum}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </Grid>
+                        <TextBlock Text="{Binding TempSource}" Style="{StaticResource Muted}" HorizontalAlignment="Center" Margin="0,4,0,8"/>
                         <ComboBox ItemsSource="{Binding CpuSources}" SelectedItem="{Binding CpuSource}" ToolTip="Welcher Sensor für Anzeige, Kurve und Sicherheitsgrenze genutzt wird"/>
                     </StackPanel>
                 </Border>
                 <Border Grid.Column="1" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <TextBlock Text="GRAFIKKARTE" Style="{StaticResource Kicker}"/>
-                        <local:Ring Height="96" Value="{Binding GpuTemp}" Stroke="{DynamicResource AccentBrush}" Margin="0,4,0,-50"/>
-                        <TextBlock x:Name="GpuBig" Style="{StaticResource BigNum}" HorizontalAlignment="Center" Margin="0,6,0,0"/>
-                        <TextBlock Text=" " Style="{StaticResource Muted}" Margin="0,30,0,6"/>
+                        <Grid Width="120" Height="120" HorizontalAlignment="Center" Margin="0,6,0,0">
+                            <local:Ring Value="{Binding GpuTemp}" Stroke="{DynamicResource AccentBrush}"/>
+                            <TextBlock x:Name="GpuBig" Style="{StaticResource BigNum}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </Grid>
+                        <TextBlock x:Name="GpuSrc" Style="{StaticResource Muted}" HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,4,0,8"/>
                         <ComboBox ItemsSource="{Binding GpuSources}" SelectedItem="{Binding GpuSource}"/>
                     </StackPanel>
                 </Border>
@@ -191,7 +195,7 @@
                                             <TextBlock Grid.Column="2" Text="{Binding CurveHighText}" FontWeight="SemiBold" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                         </Grid>
                                     </StackPanel>
-                                    <ProgressBar Margin="0,10,0,0" Maximum="1" Value="{Binding Progress}" Foreground="{StaticResource WarnBrush}" Visibility="{Binding ShowProgress, Converter={StaticResource BoolToVis}}"/>
+                                    <ProgressBar Margin="0,10,0,0" Maximum="1" Value="{Binding Progress, Mode=OneWay}" Foreground="{StaticResource WarnBrush}" Visibility="{Binding ShowProgress, Converter={StaticResource BoolToVis}}"/>
                                     <Grid Margin="0,10,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition/>

@@ -21,7 +21,7 @@ public partial class MainWindow : Window
         {
             ["Dashboard"] = new("Dashboard", "Alles auf einen Blick – Temperaturen, Lüfter, Beleuchtung, Warnungen und Schnellaktionen.", () => new DashboardPage()),
             ["Monitor"] = new("Monitor", "Live-Werte aller Sensoren mit Verlauf, frei wählbaren Kacheln, Overlay und Aufzeichnung.", () => new MonitorPage()),
-            ["FPS-Boost"] = new("FPS-Boost", "Windows für Spiele optimieren – mit Spielprofilen (ARK), Werkzeugen und Auto-Boost. Alles rückgängig machbar.", () => new BoostPage()),
+            ["FPS-Boost"] = new("FPS-Boost", "Windows für Spiele optimieren – mit eigenem Profil pro Spiel (Steam, Epic, Riot oder jede exe), Werkzeugen und Auto-Boost. Alles rückgängig machbar.", () => new BoostPage()),
             ["Lüfter"] = new("Lüfter", "Jeder Lüfter einzeln: Minimum, Temperaturkurve, fest oder BIOS. Mit Sicherheitsmodus.", () => new FansPage()),
             ["Beleuchtung"] = new("Beleuchtung", "RGB für Mainboard, Lüfter-Hubs und Razer – ohne Zusatzprogramm.", () => new RgbPage()),
             ["Tweaker"] = new("Tweaker", "CPU und Grafikkarte feinjustieren – Intel, AMD und NVIDIA, mit Sicherheitsrückfrage.", () => new TweakerPage()),
@@ -53,8 +53,8 @@ public partial class MainWindow : Window
         if (!IsVisible) return;
         var snap = Services.Hub.Latest;
         bool f = AppSettings.Current.Fahrenheit;
-        MiniCpu.Text = Fmt.Temp(snap.CpuTemp, f);
-        MiniGpu.Text = Fmt.Temp(snap.GpuTemp, f);
+        Smooth.Text(MiniCpu, snap.CpuTemp, v => Fmt.Temp(v, f));
+        Smooth.Text(MiniGpu, snap.GpuTemp, v => Fmt.Temp(v, f));
         MiniCpu.Foreground = Palette.ForTemp(snap.CpuTemp, 80, 92);
         MiniGpu.Foreground = Palette.ForTemp(snap.GpuTemp, 78, 88);
         MiniSource.Text = "Quelle: " + (string.IsNullOrEmpty(snap.TempSourceText) ? "–" : snap.TempSourceText);
@@ -68,6 +68,8 @@ public partial class MainWindow : Window
         if (nav != null && nav.IsChecked != true) { nav.IsChecked = true; return; } // löst Nav_Checked aus
         Show(key, def);
     }
+
+    private System.Windows.Threading.DispatcherTimer? _infoTimer;
 
     private void Show(string key, PageDef def)
     {
@@ -84,9 +86,17 @@ public partial class MainWindow : Window
         _current = key;
         PageTitle.Text = def.Title;
         PageSub.Text = def.Sub;
-        Crumb.Text = "NICK CONTROL CENTER  /  " + def.Title.ToUpperInvariant();
+        Crumb.Text = "CONTROL CENTER  /  " + def.Title.ToUpperInvariant();
         PageHost.Content = page;
         AppSettings.Current.LastPage = key;
+        // „i“-Erklärungen an die Überschriften hängen (nach dem Aufbau der Seite, und regelmäßig für später erscheinende Teile)
+        Dispatcher.BeginInvoke(() => InfoTips.Attach(page), System.Windows.Threading.DispatcherPriority.Loaded);
+        if (_infoTimer == null)
+        {
+            _infoTimer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+            _infoTimer.Tick += (_, _) => { if (IsVisible && PageHost.Content is DependencyObject d) InfoTips.Attach(d); };
+            _infoTimer.Start();
+        }
         NotifyVisibility();
     }
 

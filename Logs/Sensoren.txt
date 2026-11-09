@@ -1,0 +1,91 @@
+Control Center – Sensorliste vom 09.11.2026 12:48:00
+Angezeigt: CPU 49,3 °C, GPU 41,6 °C
+
+[Motherboard] Gigabyte B760 DS3H AX DDR4
+
+[SuperIO] ITE IT8689E
+   Temperature  Temperature #1                       30,0    /lpc/it8689e/0/temperature/0
+   Temperature  Temperature #2                       34,0    /lpc/it8689e/0/temperature/1
+   Temperature  Temperature #3                       51,0    /lpc/it8689e/0/temperature/2
+   Temperature  Temperature #4                       30,0    /lpc/it8689e/0/temperature/3
+   Temperature  Temperature #5                       61,0    /lpc/it8689e/0/temperature/4
+   Temperature  Temperature #6                       31,0    /lpc/it8689e/0/temperature/5
+   Fan          Fan #1                             1046,5    /lpc/it8689e/0/fan/0
+   Fan          Fan #2                              457,9    /lpc/it8689e/0/fan/1
+   Fan          Fan #3                              536,1    /lpc/it8689e/0/fan/2
+   Fan          Fan #4                              471,4    /lpc/it8689e/0/fan/3
+   Fan          Fan #5                             1503,3    /lpc/it8689e/0/fan/4
+   Control      Fan #1                               44,0    /lpc/it8689e/0/control/0
+   Control      Fan #2                               20,0    /lpc/it8689e/0/control/1
+   Control      Fan #3                               10,0    /lpc/it8689e/0/control/2
+   Control      Fan #4                               20,0    /lpc/it8689e/0/control/3
+   Control      Fan #5                               30,0    /lpc/it8689e/0/control/4
+   Control      Fan #6                                  –    /lpc/it8689e/0/control/5
+
+[Cpu] 13th Gen Intel Core i5-13400F
+   Temperature  Core Max                             53,0    /intelcpu/0/temperature/0
+   Temperature  Core Average                         48,1    /intelcpu/0/temperature/1
+   Temperature  P-Core #1                            49,0    /intelcpu/0/temperature/2
+   Temperature  P-Core #2                            48,0    /intelcpu/0/temperature/3
+   Temperature  P-Core #3                            50,0    /intelcpu/0/temperature/4
+   Temperature  P-Core #4                            53,0    /intelcpu/0/temperature/5
+   Temperature  P-Core #5                            46,0    /intelcpu/0/temperature/6
+   Temperature  P-Core #6                            47,0    /intelcpu/0/temperature/7
+   Temperature  E-Core #1                            47,0    /intelcpu/0/temperature/8
+   Temperature  E-Core #2                            47,0    /intelcpu/0/temperature/9
+   Temperature  E-Core #3                            47,0    /intelcpu/0/temperature/10
+   Temperature  E-Core #4                            47,0    /intelcpu/0/temperature/11
+   Temperature  CPU Package                          53,0    /intelcpu/0/temperature/12
+   Temperature  P-Core #1 Distance to TjMax          51,0    /intelcpu/0/temperature/13
+   Temperature  P-Core #2 Distance to TjMax          52,0    /intelcpu/0/temperature/14
+   Temperature  P-Core #3 Distance to TjMax          50,0    /intelcpu/0/temperature/15
+   Temperature  P-Core #4 Distance to TjMax          47,0    /intelcpu/0/temperature/16
+   Temperature  P-Core #5 Distance to TjMax          54,0    /intelcpu/0/temperature/17
+   Temperature  P-Core #6 Distance to TjMax          53,0    /intelcpu/0/temperature/18
+   Temperature  E-Core #1 Distance to TjMax          53,0    /intelcpu/0/temperature/19
+   Temperature  E-Core #2 Distance to TjMax          53,0    /intelcpu/0/temperature/20
+   Temperature  E-Core #3 Distance to TjMax          53,0    /intelcpu/0/temperature/21
+   Temperature  E-Core #4 Distance to TjMax          53,0    /intelcpu/0/temperature/22
+
+[Memory] Virtual Memory
+
+[Memory] Total Memory
+
+[Memory] Team Group Inc - TEAMGROUP-UD4-3200 (#1)
+
+[Memory] Team Group Inc - TEAMGROUP-UD4-3200 (#3)
+
+[GpuNvidia] NVIDIA GeForce RTX 4060
+   Temperature  GPU Core                             34,0    /gpu-nvidia/0/temperature/0
+   Temperature  GPU Hot Spot                         41,6    /gpu-nvidia/0/temperature/2
+   Fan          GPU Fan                            1313,0    /gpu-nvidia/0/fan/1
+   Control      GPU Fan                              36,0    /gpu-nvidia/0/control/1
+
+[Storage] Intenso SSD SATAIII 
+   Temperature  Temperature                          40,0    /ssd/2/temperature/0
+
+[Storage] Intenso SSD Sata III
+   Temperature  Temperature                          47,0    /ssd/3/temperature/0
+
+[Storage] SOLIDIGM SSDPFKNU010TZ
+   Temperature  Composite Temperature                41,0    /nvme/1/temperature/0
+   Temperature  Warning Temperature                  76,0    /nvme/1/temperature/10
+   Temperature  Critical Temperature                 79,0    /nvme/1/temperature/11
+
+[Storage] HGST HTS545050A7E380
+   Temperature  Temperature                          30,0    /hdd/0/temperature/0
+
+[Network] Bluetooth-Netzwerkverbindung 2
+
+[Network] Ethernet
+
+[Network] Ethernet 2
+
+[Network] LAN-Verbindung* 10
+
+[Network] LAN-Verbindung* 9
+
+[Network] Tailscale
+
+[Network] WLAN
+

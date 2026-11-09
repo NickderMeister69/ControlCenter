@@ -1,0 +1,71 @@
+﻿2026-11-09 11:58:05  INFO     [Allgemein] Start Nick Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 11:58:09  INFO     [Allgemein] exe wurde verschoben:  → C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\NickControlCenter.exe – Verknüpfungen und Autostart werden angepasst
+2026-11-09 11:58:09  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-09 11:58:09  OK       [Allgemein] Autostart eingerichtet (Aufgabenplanung, startet im Tray).
+2026-11-09 11:58:10  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 11:58:19  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-09 12:02:15  FEHLER   [Allgemein] Fehler in der Oberfläche: InvalidOperationException: TwoWay- oder OneWayToSource-Bindungen funktionieren nicht mit der schreibgeschützten Eigenschaft "CleanProgress" vom Typ "NickControlCenter.BoostService".
+   at MS.Internal.Data.PropertyPathWorker.CheckReadOnly(Object item, Object info)
+   at MS.Internal.Data.PropertyPathWorker.ReplaceItem(Int32 k, Object newO, Object parent)
+   at MS.Internal.Data.PropertyPathWorker.UpdateSourceValueState(Int32 k, ICollectionView collectionView, Object newValue, Boolean isASubPropertyChange)
+   at System.Windows.Data.BindingExpression.Activate(Object item)
+   at System.Windows.Data.BindingExpression.AttachToContext(AttachAttempt attempt)
+   at MS.Internal.Data.DataBindEngine.Task.Run(Boolean lastChance)
+   at MS.Internal.Data.DataBindEngine.Run(Object arg)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2026-11-09 12:03:15  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:06:48  FEHLER   [Allgemein] Fehler in der Oberfläche: InvalidOperationException: TwoWay- oder OneWayToSource-Bindungen funktionieren nicht mit der schreibgeschützten Eigenschaft "Progress" vom Typ "NickControlCenter.StressService".
+   at MS.Internal.Data.PropertyPathWorker.CheckReadOnly(Object item, Object info)
+   at MS.Internal.Data.PropertyPathWorker.ReplaceItem(Int32 k, Object newO, Object parent)
+   at MS.Internal.Data.PropertyPathWorker.UpdateSourceValueState(Int32 k, ICollectionView collectionView, Object newValue, Boolean isASubPropertyChange)
+   at System.Windows.Data.BindingExpression.Activate(Object item)
+   at System.Windows.Data.BindingExpression.AttachToContext(AttachAttempt attempt)
+   at MS.Internal.Data.DataBindEngine.Task.Run(Boolean lastChance)
+   at MS.Internal.Data.DataBindEngine.Run(Object arg)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2026-11-09 12:08:13  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:13:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:17:40  INFO     [Allgemein] Beenden …
+2026-11-09 12:17:41  INFO     [Allgemein] Beendet.
+2026-11-09 12:21:31  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:21:34  INFO     [Allgemein] exe wurde verschoben: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\NickControlCenter.exe → C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\ControlCenter.exe – Verknüpfungen und Autostart werden angepasst
+2026-11-09 12:21:34  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-09 12:21:34  OK       [Allgemein] Autostart eingerichtet (Aufgabenplanung, startet im Tray).
+2026-11-09 12:21:35  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 12:21:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-09 12:22:16  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Mono_Black_0000000A0A0A18181B.png
+2026-11-09 12:22:27  OK       [Allgemein] Design: Akzentfarbe #A1A1AA gesetzt (über Theme-Datei)
+2026-11-09 12:22:34  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Sunset_Drive_1A0B2E7A1F5CF2643A.png
+2026-11-09 12:22:42  OK       [Allgemein] Design: Akzentfarbe #F97316 gesetzt (über Theme-Datei)
+2026-11-09 12:22:57  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Lava_0A05033B0D027C2D12.png
+2026-11-09 12:23:24  OK       [Allgemein] Design: Akzentfarbe #FB923C gesetzt (über Theme-Datei)
+2026-11-09 12:23:27  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Mono_Black_0000000A0A0A18181B.png
+2026-11-09 12:23:38  OK       [Allgemein] Design: Akzentfarbe #A1A1AA gesetzt (über Theme-Datei)
+2026-11-09 12:23:46  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Mono_Black_0000000A0A0A18181B.png
+2026-11-09 12:23:55  OK       [Allgemein] Design: Akzentfarbe #A1A1AA gesetzt (über Theme-Datei)
+2026-11-09 12:25:09  FEHLER   [Allgemein] Seite Dashboard konnte nicht geladen werden: InvalidOperationException: Bei dem angegebenen Element handelt es sich bereits um das logische untergeordnete Element eines anderen Elements. Führen Sie zuerst eine Trennung durch.
+   at System.Windows.FrameworkElement.ChangeLogicalParent(DependencyObject newParent)
+   at System.Windows.FrameworkElement.AddLogicalChild(Object child)
+   at System.Windows.Controls.UIElementCollection.AddInternal(UIElement element)
+   at NickControlCenter.DashboardPage.ApplyLayout()
+   at NickControlCenter.DashboardPage.SetupEditor()
+   at NickControlCenter.DashboardPage..ctor()
+   at NickControlCenter.MainWindow.<>c.<.ctor>b__6_6()
+   at NickControlCenter.MainWindow.Show(String key, PageDef def)
+2026-11-09 12:26:37  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:36:58  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:37:01  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-09 12:37:03  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 12:39:43  INFO     [Allgemein] Kachel hinzugefügt: System
+2026-11-09 12:41:52  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-09 12:41:52  INFO     [Allgemein] Beenden …
+2026-11-09 12:41:53  INFO     [Allgemein] Beendet.
+2026-11-09 12:41:56  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:42:00  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 12:44:29  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-09 12:44:29  INFO     [Allgemein] Beenden …
+2026-11-09 12:44:34  INFO     [Allgemein] Beendet.
+2026-11-09 12:47:44  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:47:53  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)

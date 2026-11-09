@@ -52,4 +52,8 @@ public partial class StressPage : UserControl
     private void Start_Click(object s, RoutedEventArgs e) => _s.Start();
     private void Stop_Click(object s, RoutedEventArgs e) => _s.StopAll("Gestoppt");
     private void Reports_Click(object s, RoutedEventArgs e) => Env.Open(Log.Folder);
+    private void ClearHistory_Click(object s, RoutedEventArgs e)
+    {
+        if (Dialogs.Confirm("Ergebnisse löschen?", "Alle gespeicherten Stresstest-Ergebnisse werden gelöscht.", "Löschen", "Abbrechen")) Services.Stress.ClearHistory();
+    }
 }

@@ -71,6 +71,7 @@ public sealed class HardwareHub : IDisposable
             var t0 = sw.ElapsedMilliseconds;
             try
             {
+                CheckGpu();
                 UpdateNow(force: true);
                 var snap = Build();
                 Latest = snap;
@@ -78,6 +79,7 @@ public sealed class HardwareHub : IDisposable
                 {
                     Log.Info(LogModule.Monitor, "HWiNFO-Status: " + HwinfoText(HwinfoSource.LastStatus));
                     lastHw = HwinfoSource.LastStatus;
+                    if (lastHw == HwinfoSource.Status.Stale) _ = Task.Run(HwinfoLauncher.OnStale);
                 }
                 Updated?.Invoke(snap);
             }
@@ -85,6 +87,66 @@ public sealed class HardwareHub : IDisposable
             int wait = (int)Math.Max(100, IntervalMs - (sw.ElapsedMilliseconds - t0));
             Thread.Sleep(wait);
         }
+    }
+
+    private DateTime _nextDiag = DateTime.Now.AddSeconds(20);
+    private int _diagCount;
+    private int _gpuTries;
+    private DateTime _gpuNext = DateTime.Now.AddSeconds(15);
+    private bool _gpuReported;
+
+    /// <summary>
+    /// Keine Grafikkarte erkannt? Passiert z. B. beim Autostart direkt nach der Anmeldung (NVIDIA-/AMD-Treiber noch nicht bereit)
+    /// oder nach einer Treiber-Installation. Dann die Grafikkarten-Erkennung nach ein paar Sekunden wiederholen.
+    /// </summary>
+    private void CheckGpu()
+    {
+        if (!Opened || _gpuTries >= 8 || DateTime.Now < _gpuNext) return;
+        bool has;
+        lock (Lock) has = _pc.Hardware.Any(h => h.HardwareType is HardwareType.GpuNvidia or HardwareType.GpuAmd);
+        if (has) { if (_gpuTries > 0) { Log.Ok(LogModule.Monitor, "Grafikkarte jetzt erkannt."); DiagnosticsService.Instance.Clear("gpu:missing"); } _gpuTries = 99; return; }
+        _gpuTries++;
+        _gpuNext = DateTime.Now.AddSeconds(_gpuTries < 4 ? 15 : 60);
+        var wmi = GpuFromWmi();
+        Log.Warn(LogModule.Monitor, $"Keine NVIDIA-/AMD-Grafikkarte in den Sensoren (Versuch {_gpuTries}). Windows meldet: {string.Join("; ", wmi.Select(w => $"{w.Name} (Status {w.Status}, Fehlercode {w.Code})"))}");
+        if (wmi.Any(w => DriverCheck.VendorFromName(w.Name) is GpuVendor.Nvidia or GpuVendor.Amd))
+        {
+            try
+            {
+                lock (Lock) { _pc.IsGpuEnabled = false; _pc.IsGpuEnabled = true; }
+                Log.Info(LogModule.Monitor, "Grafikkarten-Erkennung wiederholt: " + string.Join(", ", _pc.Hardware.Where(h => h.HardwareType.ToString().StartsWith("Gpu")).Select(h => h.Name)));
+            }
+            catch (Exception ex) { Log.Warn(LogModule.Monitor, "GPU neu erkennen: " + ex.Message); }
+        }
+        if (_gpuTries >= 3 && !_gpuReported)
+        {
+            _gpuReported = true;
+            var broken = wmi.FirstOrDefault(w => w.Code != 0 || w.Name.Contains("Basic Display", StringComparison.OrdinalIgnoreCase) || w.Name.Contains("Standard-VGA", StringComparison.OrdinalIgnoreCase));
+            var f = new Finding
+            {
+                Id = "gpu:missing", Severity = Severity.Problem, Areas = Area.Fans | Area.Monitor | Area.System,
+                Title = broken != default ? "Grafiktreiber funktioniert nicht richtig" : "Grafikkarte liefert keine Sensorwerte",
+                Detail = broken != default
+                    ? $"Windows meldet „{broken.Name}“ mit Fehlercode {broken.Code}. Meist ist der Grafiktreiber nur halb installiert (z. B. nach einer abgebrochenen Installation) – dann gibt es keine Temperatur und weniger FPS."
+                    : "Die Grafikkarte wird von Windows erkannt, liefert aber keine Temperatur. Häufigste Ursache: Treiber beschädigt oder gerade aktualisiert.",
+                Advice = "PC neu starten. Hilft das nicht: Treiber auf der Seite „Treiber“ neu installieren (im Installer „Benutzerdefiniert → Neuinstallation“)."
+            };
+            f.Actions.Add(new FixAction { Label = "Zur Treiber-Seite", Primary = true, Run = () => { Ui.Go("Treiber"); return Task.FromResult("Geöffnet."); } });
+            System.Windows.Application.Current?.Dispatcher.BeginInvoke(() => DiagnosticsService.Instance.Report(f));
+        }
+    }
+
+    private static List<(string Name, string Status, int Code)> GpuFromWmi()
+    {
+        var l = new List<(string, string, int)>();
+        try
+        {
+            using var s = new System.Management.ManagementObjectSearcher("SELECT Name, Status, ConfigManagerErrorCode FROM Win32_VideoController");
+            foreach (System.Management.ManagementObject o in s.Get())
+                using (o) l.Add((o["Name"]?.ToString() ?? "?", o["Status"]?.ToString() ?? "?", Convert.ToInt32(o["ConfigManagerErrorCode"] ?? 0)));
+        }
+        catch { }
+        return l;
     }
 
     public static string HwinfoText(HwinfoSource.Status s) => s switch
@@ -190,6 +252,7 @@ public sealed class HardwareHub : IDisposable
             }
         }
 
+        double lhmGpu = s.GpuTemp; string lhmName = s.GpuName;
         var mem = Native.Memory();
         s.RamLoad = mem.LoadPct; s.RamTotalGb = mem.TotalGb; s.RamUsedGb = mem.UsedGb;
 
@@ -206,6 +269,24 @@ public sealed class HardwareHub : IDisposable
                 s.All.AddRange(hw);
                 HwinfoActive = true;
             }
+        }
+        double hwGpu = HwinfoActive ? s.GpuTemp : double.NaN;
+        // Reserve: GPU-Temperatur direkt vom NVIDIA-Treiber, falls LHM/HWiNFO keine liefern
+        if (!SensorSnapshot.Plausible(s.GpuTemp) || double.IsNaN(s.GpuLoad) || double.IsNaN(s.GpuPower) || s.GpuPower <= 0.5) NvmlSensor.Fill(s);
+        // Diagnose ins Log: nach dem Start und dann alle 10 Minuten
+        if (DateTime.Now >= _nextDiag)
+        {
+            _nextDiag = DateTime.Now.AddMinutes(_diagCount++ == 0 ? 0.3 : 10);
+            if (_diagCount == 2)
+            {
+                // einmalig: welche Leistungs-Sensoren gibt es für die Grafikkarte?
+                var pw = s.All.Where(r => r.GroupKind == "Gpu" || r.OriginalGroup.StartsWith("GPU", StringComparison.OrdinalIgnoreCase))
+                              .Where(r => r.Kind == SensorKind.Power).Select(r => $"{r.Source}:{r.OriginalName}={r.Value:0.0}{r.Unit}").Take(20);
+                Log.Info(LogModule.Monitor, "GPU-Leistungssensoren: " + string.Join(", ", pw));
+            }
+            if (_diagCount > 1)
+                Log.Info(LogModule.Monitor, $"Messwerte: CPU {s.CpuTemp:0.0} °C ({s.CpuTempLabel}) · GPU \"{s.GpuName}\" {s.GpuTemp:0.0} °C, Last {s.GpuLoad:0} %, {s.GpuPower:0.0} W · " +
+                    $"LHM-GPU \"{lhmName}\" {lhmGpu:0.0} °C · HWiNFO {(HwinfoActive ? $"aktiv, GPU {hwGpu:0.0} °C" : "aus")} · Quelle {s.TempSourceText}");
         }
         return s;
     }

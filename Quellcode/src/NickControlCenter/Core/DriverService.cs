@@ -15,14 +15,18 @@ public sealed class DriverRow : ObservableObject
     public DriverOffer? Offer { get; set; }
     public bool UpdateAvailable { get; set; }
     public bool IsCurrent { get; set; }
+    /// <summary>Installieren nur, wenn es wirklich etwas Neueres gibt (oder die installierte Version unbekannt ist).</summary>
+    public bool CanInstall => Offer != null && (UpdateAvailable || VersionUnknown) && !Downloading;
+    public bool VersionUnknown { get; set; }
+    public string InstallText => Offer == null ? "Erst prüfen" : CanInstall ? "Herunterladen & installieren" : UpdateAvailable ? "Lädt …" : "Bereits aktuell";
     public string StateText => Offer == null ? "Nicht geprüft" : UpdateAvailable ? "Update verfügbar" : "Aktuell";
     public System.Windows.Media.Brush StateBrush => Offer == null ? Palette.Muted : UpdateAvailable ? Palette.Warn : Palette.Good;
     private double _progress;
-    public double Progress { get => _progress; set { Set(ref _progress, value); Raise(nameof(Downloading)); } }
+    public double Progress { get => _progress; set { Set(ref _progress, value); RaiseAll(nameof(Downloading), nameof(CanInstall), nameof(InstallText)); } }
     public bool Downloading => _progress > 0 && _progress < 100;
     private string _status = "";
     public string Status { get => _status; set => Set(ref _status, value); }
-    public void Refresh() => RaiseAll(nameof(Installed), nameof(Latest), nameof(Date), nameof(UpdateAvailable), nameof(StateText), nameof(StateBrush), nameof(IsCurrent));
+    public void Refresh() => RaiseAll(nameof(Installed), nameof(Latest), nameof(Date), nameof(UpdateAvailable), nameof(StateText), nameof(StateBrush), nameof(IsCurrent), nameof(CanInstall), nameof(InstallText));
 }
 
 /// <summary>
@@ -121,6 +125,7 @@ public sealed class DriverService : ObservableObject
                 var row = new DriverRow { Title = "AMD Software: Adrenalin Edition", Installed = InstalledVersion, Offer = offer, Latest = offer?.Version ?? "–", IsCurrent = true };
                 // Adrenalin-Versionen (26.10.2) mit Registry-Wert vergleichen; ist nur die Windows-Treiberversion bekannt, kein Vergleich möglich
                 row.UpdateAvailable = offer != null && InstalledVersion.Count(c => c == '.') == 2 && DriverCheck.Compare(offer.Version, InstalledVersion) > 0;
+                row.VersionUnknown = InstalledVersion.Count(c => c == '.') != 2;
                 if (offer != null && InstalledVersion.Count(c => c == '.') != 2) row.Status = "Installierte Adrenalin-Version unbekannt – der AMD-Installer erkennt selbst, ob ein Update nötig ist.";
                 rows.Add(row);
                 Status = $"{GpuName} · installiert {InstalledVersion}";
@@ -160,6 +165,22 @@ public sealed class DriverService : ObservableObject
         finally { Checking = false; }
     }
 
+    /// <summary>
+    /// Startet den Installer über eine eigene (Admin-)Konsole, beendet die App (gibt Grafikkarte/NVML frei)
+    /// und startet sie nach dem Installer automatisch wieder.
+    /// </summary>
+    public static void InstallAndRestart(string installer)
+    {
+        Log.Info(LogModule.App, $"Treiber-Installation: App beendet sich, Installer {Path.GetFileName(installer)} startet.");
+        var cmd = $"/s /c \"ping -n 3 127.0.0.1 >nul & start \"\" /wait \"{installer}\" & start \"\" \"{Env.ExePath}\" --restart\"";
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd.exe", cmd)
+        {
+            UseShellExecute = false, CreateNoWindow = true, WorkingDirectory = Path.GetDirectoryName(installer)!
+        });
+        NvmlSensor.Release();
+        App.Instance.ExitApp(ask: false);
+    }
+
     /// <summary>Installer in den Download-Ordner laden und starten.</summary>
     public async Task DownloadAndInstallAsync(DriverRow row)
     {
@@ -194,10 +215,15 @@ public sealed class DriverService : ObservableObject
                 }
             }
             row.Progress = 100;
-            row.Status = "Heruntergeladen – Installer wird gestartet …";
             Log.Ok(LogModule.App, $"Treiber geladen: {file}");
-            Env.Open(file);
-            row.Status = $"Installer gestartet ({Path.GetFileName(file)} im Download-Ordner).";
+            row.Status = $"Heruntergeladen: {Path.GetFileName(file)} (Download-Ordner).";
+            if (!Dialogs.Confirm("Treiber jetzt installieren?",
+                    "Das Control Center liest ständig Werte von der Grafikkarte. Läuft es während der Installation, kann der NVIDIA-/AMD-Installer beim Grafiktreiber mit „Fehler“ abbrechen.\n\n" +
+                    "Deshalb beendet sich die App jetzt kurz, der Installer startet, und danach startet die App von selbst wieder.\n\n" +
+                    "Tipp: Ist die Installation schon einmal fehlgeschlagen, im Installer „Benutzerdefiniert“ → „Neuinstallation durchführen“ wählen.",
+                    "Installieren", "Später"))
+                return;
+            InstallAndRestart(file);
         }
         catch (Exception ex)
         {

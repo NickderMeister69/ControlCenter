@@ -66,6 +66,7 @@ public partial class RgbPage : UserControl, IPage
     private void Rescan_Click(object s, RoutedEventArgs e) => _c.Rescan();
     private void Hardware_Click(object s, RoutedEventArgs e) => _c.OpenHardwareList();
     private void Log_Click(object s, RoutedEventArgs e) => Env.Open(System.IO.Path.Combine(Log.Folder, "Beleuchtung.log"));
+    private void ColorTest_Click(object s, RoutedEventArgs e) { Services.Fans.Rgb.ColorTest(); Ui.Toast("Farbtest: Rot → Grün → Blau → Weiß (je 2 s)"); }
     private void Identify_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.DataContext is LightZoneVM z) z.Identify(); }
     private void FanMinus_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.DataContext is LightZoneVM z) z.ChangeFanCount(-1); }
     private void FanPlus_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.DataContext is LightZoneVM z) z.ChangeFanCount(1); }

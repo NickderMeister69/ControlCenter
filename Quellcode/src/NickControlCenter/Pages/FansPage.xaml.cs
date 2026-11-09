@@ -23,10 +23,13 @@ public partial class FansPage : UserControl, IPage
     private void Temps()
     {
         bool f = AppSettings.Current.Fahrenheit;
-        CpuBig.Text = Fmt.Temp(_c.CpuTemp, f);
-        GpuBig.Text = Fmt.Temp(_c.GpuTemp, f);
+        Smooth.Text(CpuBig, _c.CpuTemp, v => Fmt.Temp(v, f));
+        Smooth.Text(GpuBig, _c.GpuTemp, v => Fmt.Temp(v, f));
         CpuBig.Foreground = Palette.ForTemp(_c.CpuTemp, 80, 92);
         GpuBig.Foreground = Palette.ForTemp(_c.GpuTemp, 78, 88);
+        var gn = Services.Hub.Latest.GpuName;
+        GpuSrc.Text = double.IsNaN(_c.GpuTemp) ? "nicht erkannt – Grafiktreiber prüfen" : string.IsNullOrEmpty(gn) ? " " : gn;
+        GpuSrc.ToolTip = GpuSrc.Text;
     }
 
     private void SelectProfile()

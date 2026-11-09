@@ -361,6 +361,12 @@
                                     <Slider Grid.Column="1" Minimum="1" Maximum="{Binding MaxLeds}" Value="{Binding LedCountValue}" IsSnapToTickEnabled="True" TickFrequency="1"/>
                                     <TextBlock Grid.Column="2" Text="{Binding LedText}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 </Grid>
+                                <Grid Margin="0,10,0,0" Visibility="{Binding ShowColorOrder, Converter={StaticResource BoolToVis}}">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition Width="160"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Farbreihenfolge" Style="{StaticResource Muted}" VerticalAlignment="Center"
+                                               ToolTip="Stimmen die Farben im Farbtest nicht (z. B. Rot leuchtet grün), hier umstellen"/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{x:Static local:LightZoneVM.ColorOrderNames}" SelectedIndex="{Binding ColorOrder}"/>
+                                </Grid>
                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding IsHub, Converter={StaticResource BoolToVis}}">
                                     <TextBlock Text="Lüfter am Hub" Style="{StaticResource Muted}" VerticalAlignment="Center" Width="100"/>
                                     <Button Content="−" Width="30" Padding="0,4" Click="FanMinus_Click"/>
@@ -377,6 +383,7 @@
                                               ToolTip="Dieser Anschluss bekommt einen eigenen Effekt / eigene Farben"/>
                                     <CheckBox Style="{StaticResource ToggleSwitch}" Content="Flacker-Schutz" IsChecked="{Binding FlickerGuard}" Margin="0,0,22,6"
                                               ToolTip="Sendet seltener und nur bei sichtbarer Änderung. Einschalten, wenn dieser Lüfter flackert."/>
+                                    <Button Content="Farbtest" Padding="10,4" FontSize="12" Click="ColorTest_Click" Margin="0,0,6,0" ToolTip="Alle Anschlüsse 2 s rot, grün, blau, weiß – zeigt, ob die Farben stimmen"/>
                                     <Button Content="Blinken lassen" Padding="10,4" FontSize="12" Click="Identify_Click" ToolTip="Lässt diesen Anschluss 3 s weiß blinken – so siehst du, welcher es ist"/>
                                 </WrapPanel>
                                 <Border Style="{StaticResource SubCard}" Margin="0,10,0,0" Visibility="{Binding OwnEffect, Converter={StaticResource BoolToVis}}">

@@ -349,7 +349,7 @@ public sealed class CustomizeService : ObservableObject
             wallpaper ??= CurrentWallpaper();
             var sb = new StringBuilder();
             sb.AppendLine("[Theme]");
-            sb.AppendLine("DisplayName=Nick Control Center");
+            sb.AppendLine("DisplayName=Control Center");
             sb.AppendLine();
             sb.AppendLine(@"[Control Panel\Desktop]");
             if (!string.IsNullOrEmpty(wallpaper) && File.Exists(wallpaper)) sb.AppendLine("Wallpaper=" + wallpaper);

@@ -239,11 +239,46 @@ public class CatalogTests
     }
 
     [Fact]
-    public void ArkPresets()
+    public void GameCatalog_finds_games_and_presets()
     {
-        Assert.Empty(BoostCatalog.ArkScalability(0, false));
-        Assert.Equal("0", BoostCatalog.ArkScalability(1, true)["sg.GlobalIlluminationQuality"]);
-        Assert.False(BoostCatalog.ArkScalability(1, false).ContainsKey("sg.GlobalIlluminationQuality"));
+        Assert.Equal("valorant", GameCatalog.Find("VALORANT-Win64-Shipping.exe")?.Id);
+        Assert.Equal("asa", GameCatalog.Find(null, 2399830)?.Id);
+        Assert.Equal("fortnite", GameCatalog.Find(null, 0, "Fortnite")?.Id);
+        Assert.Null(GameCatalog.Find("notepad"));
+        Assert.Equal(GameCatalog.Games.Length, GameCatalog.Games.Select(g => g.Id).Distinct().Count());
+        Assert.Equal("Palworld", GameCatalog.UnrealProjectName("Palworld-Win64-Shipping.exe"));
+
+        var v = GameCatalog.Find("VALORANT-Win64-Shipping")!;
+        Assert.Null(v.ConfigPath); // Anti-Cheat/Cloud → keine Datei-Änderungen
+        var p = new GameProfile();
+        GameCatalog.ApplyPreset(p, GameCatalog.Recommended(v), v, configAvailable: false, engineIniOk: false);
+        Assert.Equal(GamePreset.MaxFps, p.Preset);
+        Assert.Equal(2, p.Priority);
+        Assert.False(p.Graphics);
+        Assert.False(p.PostFxOff);
+
+        var cp = GameCatalog.Games.First(g => g.Id == "cyberpunk");
+        Assert.Equal(GamePreset.Balanced, GameCatalog.Recommended(cp));
+        Assert.Empty(GameCatalog.Scalability(0));
+        Assert.Equal("0", GameCatalog.Scalability(1)["sg.ShadowQuality"]);
+        Assert.Equal(GameCatalog.FpsLimits.Length, GameCatalog.FpsLimitNames.Length);
+        Assert.Equal(GameCatalog.ResolutionScales.Length, GameCatalog.ResolutionNames.Length);
+    }
+
+    [Fact]
+    public void UserSettingsSection_detects_game_specific_section()
+    {
+        var ini = IniFile.Parse("[ScalabilityGroups]\nsg.ShadowQuality=3\n\n[/Script/ShooterGame.ShooterGameUserSettings]\nbUseVSync=True\nFrameRateLimit=60.000000\n");
+        Assert.Equal("/Script/ShooterGame.ShooterGameUserSettings", GameCatalog.UserSettingsSection(ini));
+        Assert.Equal("/Script/Engine.GameUserSettings", GameCatalog.UserSettingsSection(IniFile.Parse("[ScalabilityGroups]\n")));
+    }
+
+    [Fact]
+    public void ColorOrder_maps_are_permutations()
+    {
+        for (int i = 1; i < LightZoneConfig.ColorOrderNames.Length; i++)
+            Assert.Equal(new[] { 0, 1, 2 }, LightZoneConfig.OrderMap(i)!.OrderBy(x => x));
+        Assert.Null(LightZoneConfig.OrderMap(0));
     }
 }
 
@@ -380,5 +415,79 @@ public class DriverTests
         Assert.Equal(GpuVendor.Nvidia, DriverCheck.VendorFromName("NVIDIA GeForce RTX 4060"));
         Assert.Equal(GpuVendor.Amd, DriverCheck.VendorFromName("AMD Radeon RX 7800 XT"));
         Assert.Equal(GpuVendor.Intel, DriverCheck.VendorFromName("Intel(R) Arc(TM) A770"));
+    }
+
+    [Fact]
+    public void Hwinfo_picks_dedicated_gpu_over_igpu()
+    {
+        SensorReading R(string g, string n) => new() { Id = g + n, Group = g, Name = n, Kind = SensorKind.Temperature, Unit = "°C", Value = 50, OriginalGroup = g, OriginalName = n };
+        var all = new List<SensorReading>
+        {
+            R("GPU [#0]: Intel UHD Graphics 770: ", "GPU Temperature"),
+            R("GPU [#1]: NVIDIA GeForce RTX 4070: ", "GPU Temperature"),
+        };
+        Assert.Equal("GPU [#1]", HwinfoSource.PickGpuPrefix(all));
+        Assert.Equal("GPU [#0]", HwinfoSource.PickGpuPrefix(new List<SensorReading>()));
+    }
+}
+
+public class AdvisorTests
+{
+    [Fact]
+    public void Tiers_and_recommendations()
+    {
+        Assert.Equal(1, HardwareAdvisor.GpuTier("NVIDIA GeForce RTX 4060", 8));
+        Assert.Equal(3, HardwareAdvisor.GpuTier("NVIDIA GeForce RTX 4090", 24));
+        Assert.Equal(2, HardwareAdvisor.GpuTier("AMD Radeon RX 7800 XT", 16));
+        var pc = new PcInfo("NVIDIA GeForce RTX 4060", 8, "i5-13400F", 10, 16, 16, 1920, 1080, 144);
+        var val = GameCatalog.Find("VALORANT-Win64-Shipping");
+        var r = HardwareAdvisor.Recommend(pc, val, false);
+        Assert.Equal(GamePreset.MaxFps, r.Preset);
+        Assert.Equal(1, r.GfxQuality);
+        Assert.True(r.CloseApps); // 16 GB RAM
+        var cp = GameCatalog.Games.First(g => g.Id == "cyberpunk");
+        var r2 = HardwareAdvisor.Recommend(pc with { Width = 2560, Height = 1440 }, cp, true);
+        Assert.Equal(144, GameCatalog.FpsLimits[r2.FpsLimit]);
+        Assert.Equal(0, HardwareAdvisor.NearestLimit(0));
+        Assert.Equal(1, HardwareAdvisor.NearestLimit(100)); // kein passendes Limit → unbegrenzt
+    }
+}
+
+public class BenchTests
+{
+    [Fact]
+    public void Finds_hardware_and_compares()
+    {
+        Assert.Equal("Intel Core i5-13400F", BenchCatalog.Find(BenchCatalog.Cpus, "13th Gen Intel(R) Core(TM) i5-13400F")?.Name);
+        Assert.Equal("NVIDIA GeForce RTX 4060", BenchCatalog.Find(BenchCatalog.Gpus, "NVIDIA GeForce RTX 4060")?.Name);
+        Assert.Equal("NVIDIA GeForce RTX 4060 Ti", BenchCatalog.Find(BenchCatalog.Gpus, "NVIDIA GeForce RTX 4060 Ti")?.Name);
+        Assert.Equal("AMD Ryzen 7 7800X3D", BenchCatalog.Find(BenchCatalog.Cpus, "AMD Ryzen 7 7800X3D 8-Core Processor")?.Name);
+        var c = BenchCatalog.Compare(BenchCatalog.Gpus, "NVIDIA GeForce RTX 4060", 318);
+        var me = c.Single(x => x.Mine);
+        Assert.Equal(318, me.Score);
+        Assert.True(c.First(x => x.Name.Contains("4090")).Score > 1000);
+        Assert.Equal(1.0, c.Max(x => x.Fraction), 3);
+        Assert.Empty(BenchCatalog.Compare(BenchCatalog.Gpus, "Unbekannte Karte", 100));
+    }
+}
+
+public class HwinfoClockTests
+{
+    [Fact]
+    public void CpuClock_is_highest_real_core_clock()
+    {
+        var now = DateTime.UtcNow;
+        var block = HwinfoSource.BuildTestBlock(now, new List<(string, uint, string, string, double)>
+        {
+            ("CPU [#0]: Intel Core i5-13400F", 1, "P-core 0", "°C", 40),
+            ("CPU [#0]: Intel Core i5-13400F", 6, "P-core 0 Clock (perf #1/2)", "MHz", 4600),
+            ("CPU [#0]: Intel Core i5-13400F", 6, "P-core 1 Clock (perf #1/2)", "MHz", 800),
+            ("CPU [#0]: Intel Core i5-13400F", 6, "E-core 6 Clock (perf #6)", "MHz", 800),
+            ("CPU [#0]: Intel Core i5-13400F", 6, "Average Effective Clock", "MHz", 1007),
+            ("CPU [#0]: Intel Core i5-13400F", 6, "P-core 0 T0 Effective Clock", "MHz", 4590),
+        });
+        var s = new SensorSnapshot();
+        HwinfoSource.Fill(s, HwinfoSource.Parse(block, now)!);
+        Assert.Equal(4600, s.CpuClock);
     }
 }

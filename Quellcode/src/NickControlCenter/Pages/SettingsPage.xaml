@@ -46,7 +46,7 @@
                         <TextBlock x:Name="LinkState" Style="{StaticResource Caption}"/>
                         <Button Content="Verknüpfungen auf Desktop und im Startmenü erstellen" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Links_Click"/>
                         <TextBlock Style="{StaticResource Muted}" Margin="0,10,0,0" TextWrapping="Wrap"
-                                   Text="An die Taskleiste anheften: Windows erlaubt das Programmen nicht selbst. Einfach: App läuft → Rechtsklick auf das Symbol in der Taskleiste → „An Taskleiste anheften“. Oder im Startmenü Rechtsklick auf „Nick Control Center“ → „An Taskleiste anheften“."/>
+                                   Text="An die Taskleiste anheften: Windows erlaubt das Programmen nicht selbst. Einfach: App läuft → Rechtsklick auf das Symbol in der Taskleiste → „An Taskleiste anheften“. Oder im Startmenü Rechtsklick auf „Control Center“ → „An Taskleiste anheften“."/>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -56,6 +56,19 @@
                         <TextBlock Text="ANZEIGE" Style="{StaticResource Kicker}"/>
                         <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="Fahr" Content="Temperaturen in °F" Click="Fahr_Click"/>
                         <Button Content="Messquelle (HWiNFO) einstellen …" HorizontalAlignment="Left" Margin="0,12,0,0" Click="Monitor_Click"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="HWINFO" Style="{StaticResource Kicker}"/>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="HwAuto" Content="HWiNFO beim Start unsichtbar mitstarten" Click="HwAuto_Click"/>
+                        <TextBlock Style="{StaticResource Muted}" Margin="52,2,0,8" TextWrapping="Wrap"
+                                   Text="Startet HWiNFO nur mit Sensoren, minimiert und mit Shared Memory – du siehst nur das Symbol neben der Uhr. Nach 12 Stunden (Grenze der Gratis-Version) startet die App HWiNFO selbst neu."/>
+                        <TextBlock x:Name="HwState" Style="{StaticResource Caption}" TextWrapping="Wrap"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Button Content="Jetzt starten" Click="HwStart_Click"/>
+                            <Button Content="HWiNFO-exe wählen …" Margin="8,0,0,0" Click="HwPick_Click"/>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Card}">

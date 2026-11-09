@@ -17,6 +17,13 @@ public partial class TilesPage : UserControl
         DataContext = _t;
         Catalog.ItemsSource = TilesService.Catalog;
         foreach (RadioButton r in StyleBox.Children) if ((string)r.Content == _t.Settings.Style) r.IsChecked = true;
+        // Werte live übernehmen (an/aus und Reihenfolge)
+        EMetrics.Changed += () =>
+        {
+            if (_sel is not { Type: TileType.System or TileType.Graph }) return;
+            _sel.Metrics = EMetrics.Selected.Take(_sel.Type == TileType.Graph ? 1 : 8).ToList();
+            _t.Update(_sel);
+        };
         _init = false;
     }
 
@@ -59,8 +66,7 @@ public partial class TilesPage : UserControl
         ActionRow.Visibility = _sel.Type == TileType.Action ? Visibility.Visible : Visibility.Collapsed;
         EAction.SelectedItem = _sel.Target;
         MetricRow.Visibility = _sel.Type is TileType.System or TileType.Graph ? Visibility.Visible : Visibility.Collapsed;
-        EMetrics.ItemsSource = Services.Monitor.Metrics.Values.Where(m => !m.Key.StartsWith("sensor:"))
-            .Select(m => new OverlayItem { Key = m.Key, Label = m.Label, On = _sel.Metrics.Contains(m.Key) }).ToList();
+        EMetrics.Load(Services.Monitor.Metrics.Values.Where(m => !m.Key.StartsWith("sensor:")).Select(m => (m.Key, m.Label)), _sel.Metrics);
     }
 
     private void Browse_Click(object s, RoutedEventArgs e)
@@ -85,7 +91,7 @@ public partial class TilesPage : UserControl
         _sel.Target = _sel.Type == TileType.Action ? EAction.SelectedItem as string ?? "Sperren" : ETarget.Text.Trim();
         _sel.Color = RgbF.TryParseHex(EColor.Text, out var c) ? c.Hex : null;
         if (_sel.Type is TileType.System or TileType.Graph)
-            _sel.Metrics = ((IEnumerable<OverlayItem>)EMetrics.ItemsSource).Where(i => i.On).Select(i => i.Key).Take(_sel.Type == TileType.Graph ? 1 : 8).ToList();
+            _sel.Metrics = EMetrics.Selected.Take(_sel.Type == TileType.Graph ? 1 : 8).ToList();
         _t.Update(_sel);
         TileList.Items.Refresh();
         Ui.Toast("Kachel gespeichert");

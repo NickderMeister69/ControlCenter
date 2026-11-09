@@ -37,10 +37,17 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
+        Env.UnblockSelf();
+        SelfUpdate.Cleanup();
         bool startInTray = e.Args.Any(a => a.Equals("--tray", StringComparison.OrdinalIgnoreCase) || a.Equals("/tray", StringComparison.OrdinalIgnoreCase));
 
         // Nur eine Instanz: ein zweiter Start holt das Fenster nach vorne
         _mutex = new Mutex(true, "Global\\NickControlCenter_SingleInstance", out bool isFirst);
+        // nach einem Update (oder Treiber-Installation) auf das Ende der alten Instanz warten statt aufzugeben
+        if (!isFirst && e.Args.Any(a => a.Equals("--restart", StringComparison.OrdinalIgnoreCase)))
+        {
+            try { isFirst = _mutex.WaitOne(TimeSpan.FromSeconds(30)); } catch (AbandonedMutexException) { isFirst = true; }
+        }
         if (!isFirst)
         {
             if (!startInTray) { try { using var ev = EventWaitHandle.OpenExisting(ShowEventName); ev.Set(); } catch { } }
@@ -56,12 +63,13 @@ public partial class App : Application
         AppSettings.Load();
         var s = AppSettings.Current;
         AppSettings.ApplyAccent(s.Accent);
-        Log.Info(LogModule.App, $"Start Nick Control Center {typeof(App).Assembly.GetName().Version} – Windows-Build {Env.WindowsBuild}, Admin: {Env.IsAdmin}, Tray-Start: {startInTray}, Ordner: {Env.ExeDir}");
+        Log.Info(LogModule.App, $"Start Control Center {typeof(App).Assembly.GetName().Version} – Windows-Build {Env.WindowsBuild}, Admin: {Env.IsAdmin}, Tray-Start: {startInTray}, Ordner: {Env.ExeDir}");
 
         // Sensoren zuerst (Lüfter, Monitor, Kacheln, Stresstest hängen daran)
         Services.Hub.Preference = s.SensorSource;
         Services.Hub.IntervalMs = s.SensorIntervalMs;
         Services.Hub.Start();
+        _ = Task.Run(HwinfoLauncher.StartIfWanted);
 
         Services.Fans = new FanController();
         Services.Boost = new BoostService();
@@ -102,6 +110,15 @@ public partial class App : Application
         _ = Services.Drivers.CheckAsync(silent: true);
 
         FirstRun();
+        var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
+        upd.Tick += (_, _) =>
+        {
+            if (!SelfUpdate.Pending || _exiting) return;
+            upd.Stop();
+            bool tray = _win == null || !_win.IsVisible;
+            if (SelfUpdate.Apply(tray)) { _tray?.ShowBalloonTip(3000, "Control Center", "Neue Version wird gestartet …", WF.ToolTipIcon.Info); ExitApp(ask: false); }
+        };
+        upd.Start();
         if (!startInTray) ShowWindow();
     }
 
@@ -120,6 +137,15 @@ public partial class App : Application
     private void FirstRun()
     {
         var s = AppSettings.Current;
+        // exe verschoben (z. B. in einen anderen Ordner)? → Verknüpfungen und Autostart auf den neuen Ort umstellen
+        if (s.FirstRunDone && !string.Equals(s.LastExePath, Env.ExePath, StringComparison.OrdinalIgnoreCase))
+        {
+            Log.Info(LogModule.App, $"exe wurde verschoben: {s.LastExePath} → {Env.ExePath} – Verknüpfungen und Autostart werden angepasst");
+            if (Shortcuts.CreateAll(out _)) s.ShortcutsCreated = true;
+            if (s.Autostart && s.FirstRunDone) Autostart.Enable(out _);
+        }
+        s.LastExePath = Env.ExePath;
+        s.Save();
         if (!s.ShortcutsCreated || !Shortcuts.Exists)
         {
             if (Shortcuts.CreateAll(out _)) { s.ShortcutsCreated = true; s.Save(); }
@@ -141,7 +167,7 @@ public partial class App : Application
 
     private void OnPowerModeChanged(object? sender, PowerModeChangedEventArgs e)
     {
-        if (e.Mode == PowerModes.Resume) Dispatcher.BeginInvoke(() => Services.Fans?.OnResume());
+        if (e.Mode == PowerModes.Resume) Dispatcher.BeginInvoke(() => { Services.Fans?.OnResume(); Services.Tiles?.RefreshSecurity(false); });
     }
 
     // ------------------------------------------------------------------ Tray
@@ -152,7 +178,7 @@ public partial class App : Application
         try { icon = System.Drawing.Icon.ExtractAssociatedIcon(Env.ExePath) ?? System.Drawing.SystemIcons.Application; }
         catch { icon = System.Drawing.SystemIcons.Application; }
 
-        _tray = new WF.NotifyIcon { Icon = icon, Text = "Nick Control Center", Visible = true };
+        _tray = new WF.NotifyIcon { Icon = icon, Text = "Control Center", Visible = true };
         var menu = new WF.ContextMenuStrip();
         menu.Items.Add("Öffnen", null, (_, _) => ShowWindow());
         menu.Items.Add("Gaming-Boost starten", null, async (_, _) => await Services.Boost.BoostAsync());
@@ -182,7 +208,7 @@ public partial class App : Application
         {
             if (_tray == null || e.PropertyName is not (nameof(FanController.CpuTemp) or nameof(FanController.StateText))) return;
             var snap = Services.Hub.Latest;
-            var text = "Nick Control Center";
+            var text = "Control Center";
             if (SensorSnapshot.Plausible(snap.CpuTemp)) text += $"\nCPU {snap.CpuTemp:0} °C";
             if (SensorSnapshot.Plausible(snap.GpuTemp)) text += $" · GPU {snap.GpuTemp:0} °C";
             text += $"\nLüfter: {Services.Fans.StateText}";
@@ -223,7 +249,7 @@ public partial class App : Application
     public void ExitApp(bool ask)
     {
         if (_exiting) return;
-        if (ask && !Dialogs.Confirm("Nick Control Center beenden?",
+        if (ask && !Dialogs.Confirm("Control Center beenden?",
                 "Die App wird komplett geschlossen. Die Lüfter gehen zurück an das BIOS, die Beleuchtung behält die letzte Farbe, Desktop-Kacheln werden ausgeblendet.",
                 "Beenden", "Abbrechen")) return;
         _exiting = true;

@@ -56,6 +56,15 @@ public sealed class LightZoneConfig
     public EffectConfig Effect { get; set; } = new();
     /// <summary>Flacker-Schutz: Anschluss wird seltener und nur bei sichtbarer Änderung aktualisiert.</summary>
     public bool FlickerGuard { get; set; }
+    /// <summary>Farbreihenfolge der LEDs: 0 = automatisch, sonst Index in <see cref="ColorOrders"/>.</summary>
+    public int ColorOrder { get; set; }
+    public static readonly string[] ColorOrderNames = { "Automatisch", "RGB", "RBG", "GRB", "GBR", "BRG", "BGR" };
+    /// <summary>Position von R, G, B im gesendeten Tripel je Reihenfolge.</summary>
+    public static int[]? OrderMap(int order) => order switch
+    {
+        // Ausgabe[0..2] = Eingabe-Kanal
+        1 => new[] { 0, 1, 2 }, 2 => new[] { 0, 2, 1 }, 3 => new[] { 1, 0, 2 }, 4 => new[] { 1, 2, 0 }, 5 => new[] { 2, 0, 1 }, 6 => new[] { 2, 1, 0 }, _ => null
+    };
     /// <summary>Alte Daten (vor v4) – wird nur noch gelesen.</summary>
     public List<LightFanConfig> Fans { get; set; } = new();
 }
@@ -91,6 +100,8 @@ public sealed class RgbConfig
     public int NightTo { get; set; } = 7;
     /// <summary>Wiederholtes Senden (gegen Programme, die die Farben "zurückholen") – in Sekunden, 0 = aus.</summary>
     public int KeepAliveSeconds { get; set; }
+    /// <summary>Einmalige Korrektur: ARGB-Anschlüsse auf alle LEDs stellen (sonst bleiben hintere LEDs weiß/alt).</summary>
+    public bool LedFixDone { get; set; }
 
     public static bool IsNight(int from, int to, int hour) =>
         from == to ? false : from < to ? hour >= from && hour < to : hour >= from || hour < to;

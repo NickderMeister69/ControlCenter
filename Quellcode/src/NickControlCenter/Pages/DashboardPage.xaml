@@ -21,9 +21,40 @@
     </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
-        <StackPanel>
+        <StackPanel x:Name="Root">
+            <!-- Dashboard anpassen -->
+            <Grid x:Name="EditBar" Margin="0,0,12,8">
+                <Button HorizontalAlignment="Right" Click="Edit_Click" x:Name="EditBtn" Padding="12,5" FontSize="12">
+                    <StackPanel Orientation="Horizontal"><TextBlock Text="&#xE70F;" Style="{StaticResource Icon}" FontSize="12" Margin="0,0,8,0"/><TextBlock Text="Dashboard anpassen"/></StackPanel>
+                </Button>
+            </Grid>
+            <Border x:Name="EditPanel" Style="{StaticResource AccentCard}" Margin="0,0,12,12" Visibility="Collapsed">
+                <StackPanel>
+                    <TextBlock Text="DASHBOARD ANPASSEN" Style="{StaticResource Kicker}"/>
+                    <TextBlock Style="{StaticResource Caption}" Text="Häkchen = wird angezeigt. Mit ▲▼ sortierst du: was oben steht, kommt zuerst. Änderungen gelten sofort."/>
+                    <Grid Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                        <StackPanel Margin="0,0,16,0">
+                            <TextBlock Text="Bereiche" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <local:OrderList x:Name="SecList"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Margin="0,0,16,0">
+                            <TextBlock Text="Karten" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <local:OrderList x:Name="CardList"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="Kennzahlen (große Werte)" FontWeight="SemiBold" Margin="0,0,0,4"/>
+                            <ScrollViewer MaxHeight="340" VerticalScrollBarVisibility="Auto"><local:OrderList x:Name="KpiList"/></ScrollViewer>
+                        </StackPanel>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Style="{StaticResource AccentButton}" Content="Fertig" Click="Edit_Click"/>
+                        <Button Content="Standard wiederherstellen" Margin="8,0,0,0" Click="EditReset_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
             <!-- Systemzeile -->
-            <Border Style="{StaticResource SubCard}" Margin="0,0,12,14" Padding="14,10">
+            <Border x:Name="SecSystem" Style="{StaticResource SubCard}" Margin="0,0,12,14" Padding="14,10">
                 <WrapPanel>
                     <TextBlock Text="&#xE950;" Style="{StaticResource Icon}" FontSize="13" Foreground="{DynamicResource AccentBrush}" Margin="0,0,8,0"/>
                     <TextBlock x:Name="CpuText" Margin="0,0,22,0"/>
@@ -43,9 +74,9 @@
             </ItemsControl>
 
             <!-- Module -->
-            <UniformGrid Columns="3" Margin="0,4,0,0">
+            <UniformGrid x:Name="Cards" Columns="3" Margin="0,4,0,0">
                 <!-- Lüfter -->
-                <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <Border x:Name="CardFans" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <Grid>
                             <TextBlock Text="LÜFTER" Style="{StaticResource Kicker}"/>
@@ -65,7 +96,7 @@
                 </Border>
 
                 <!-- Beleuchtung -->
-                <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <Border x:Name="CardRgb" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <Grid>
                             <TextBlock Text="BELEUCHTUNG" Style="{StaticResource Kicker}"/>
@@ -89,7 +120,7 @@
                 </Border>
 
                 <!-- Boost -->
-                <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <Border x:Name="CardBoost" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <TextBlock Text="FPS-BOOST" Style="{StaticResource Kicker}"/>
                         <TextBlock Text="{Binding Boost.Status}" Style="{StaticResource H2}" FontSize="14" TextWrapping="Wrap"/>
@@ -107,11 +138,9 @@
                         <Button Content="Zum FPS-Boost" HorizontalAlignment="Left" Margin="0,12,0,0" Click="Go_Click" Tag="FPS-Boost"/>
                     </StackPanel>
                 </Border>
-            </UniformGrid>
 
-            <UniformGrid Columns="3">
                 <!-- Treiber -->
-                <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <Border x:Name="CardDrivers" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <TextBlock Text="GRAFIKTREIBER" Style="{StaticResource Kicker}"/>
                         <TextBlock Text="{Binding Drivers.Status}" Style="{StaticResource Caption}"/>
@@ -129,7 +158,7 @@
                     </StackPanel>
                 </Border>
                 <!-- Tweaker -->
-                <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <Border x:Name="CardTweaker" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <TextBlock Text="TWEAKER" Style="{StaticResource Kicker}"/>
                         <TextBlock x:Name="TweakCpu" Style="{StaticResource Caption}"/>
@@ -138,7 +167,7 @@
                     </StackPanel>
                 </Border>
                 <!-- Kacheln / Stresstest -->
-                <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                <Border x:Name="CardExtras" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>
                         <TextBlock Text="SCHNELLZUGRIFF" Style="{StaticResource Kicker}"/>
                         <CheckBox Style="{StaticResource ToggleSwitch}" Content="Desktop-Kacheln anzeigen" IsChecked="{Binding Tiles.Visible}" Margin="0,4,0,8"/>
@@ -152,8 +181,10 @@
                 </Border>
             </UniformGrid>
 
-            <TextBlock Text="WICHTIGE HINWEISE" Style="{StaticResource Kicker}" Margin="0,6,0,8" x:Name="HintsHead"/>
-            <local:FindingsPanel x:Name="Hints" Area="All" MaxItems="4" Margin="0,0,12,0"/>
+            <StackPanel x:Name="SecHints">
+                <TextBlock Text="WICHTIGE HINWEISE" Style="{StaticResource Kicker}" Margin="0,6,0,8" x:Name="HintsHead"/>
+                <local:FindingsPanel x:Name="Hints" Area="All" MaxItems="4" Margin="0,0,12,0"/>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

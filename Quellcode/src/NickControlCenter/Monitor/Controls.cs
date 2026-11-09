@@ -112,7 +112,15 @@ public sealed class Sparkline : FrameworkElement
 public sealed class Ring : FrameworkElement
 {
     public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(nameof(Value), typeof(double), typeof(Ring),
-        new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
+        new FrameworkPropertyMetadata(0.0, (d, e) => ((Ring)d).OnValue((double)e.NewValue)));
+    private readonly SmoothNumber _n = new();
+    private bool _hooked;
+    private void OnValue(double v)
+    {
+        _n.Set(double.IsNaN(v) ? 0 : v);
+        if (!_hooked) { _hooked = true; Smooth.Frame += () => { if (_n.Step()) InvalidateVisual(); }; }
+        InvalidateVisual();
+    }
     public static readonly DependencyProperty StrokeProperty = DependencyProperty.Register(nameof(Stroke), typeof(Brush), typeof(Ring),
         new FrameworkPropertyMetadata(Brushes.DeepSkyBlue, FrameworkPropertyMetadataOptions.AffectsRender));
     public double Value { get => (double)GetValue(ValueProperty); set => SetValue(ValueProperty, value); }
@@ -129,7 +137,7 @@ public sealed class Ring : FrameworkElement
         var c = new Point(ActualWidth / 2, ActualHeight / 2);
         // 270°-Bogen (unten offen)
         DrawArc(dc, Track, c, r, 135, 270);
-        double v = double.IsNaN(Value) ? 0 : Math.Clamp(Value, 0, 100);
+        double v = double.IsNaN(_n.Current) ? 0 : Math.Clamp(_n.Current, 0, 100);
         if (v > 0.5)
         {
             var pen = new Pen(Stroke, 6) { StartLineCap = PenLineCap.Round, EndLineCap = PenLineCap.Round };
@@ -163,6 +171,10 @@ public sealed class OverlayWindow : Window
 {
     private readonly MonitorService _svc;
     private readonly StackPanel _panel = new();
+    private readonly Border _box;
+    private Brush _textBrush = Brushes.White;
+
+    private static Color Col(string hex, Color fallback) => RgbF.TryParseHex(hex, out var c) ? Color.FromRgb(c.R8, c.G8, c.B8) : fallback;
     private readonly System.Windows.Threading.DispatcherTimer _timer = new() { Interval = TimeSpan.FromSeconds(1) };
     private HwndSource? _src;
     private const int HotkeyId = 0x4E43;
@@ -178,15 +190,16 @@ public sealed class OverlayWindow : Window
         ShowActivated = false;
         SizeToContent = SizeToContent.WidthAndHeight;
         ResizeMode = ResizeMode.NoResize;
-        Content = new Border
+        Content = _box = new Border
         {
-            Background = new SolidColorBrush(Color.FromArgb(200, 8, 11, 15)),
             BorderBrush = new SolidColorBrush(Color.FromArgb(90, 255, 255, 255)),
             BorderThickness = new Thickness(1), CornerRadius = new CornerRadius(4), Padding = new Thickness(10, 6, 10, 6),
             Child = _panel
         };
         Rebuild();
-        _timer.Tick += (_, _) => { Refresh(); Place(); };
+        _timer.Interval = TimeSpan.FromMilliseconds(80);
+        int placeTick = 0;
+        _timer.Tick += (_, _) => { Refresh(); if (++placeTick % 12 == 0) Place(); };
         Loaded += (_, _) => { Place(); _timer.Start(); };
         SourceInitialized += (_, _) =>
         {
@@ -218,37 +231,66 @@ public sealed class OverlayWindow : Window
     public void Rebuild()
     {
         _panel.Children.Clear();
+        var st = _svc.Settings;
+        bool horiz = st.OverlayHorizontal;
+        var bg = Col(st.OverlayBgColor, Color.FromRgb(8, 11, 15));
+        _box.Background = new SolidColorBrush(Color.FromArgb((byte)Math.Round(Math.Clamp(st.OverlayBgOpacity, 0, 1) * 255), bg.R, bg.G, bg.B));
+        _box.BorderThickness = new Thickness(st.OverlayBorder ? 1 : 0);
+        _box.Padding = new Thickness(st.OverlayFontSize * 0.7, st.OverlayFontSize * 0.4, st.OverlayFontSize * 0.7, st.OverlayFontSize * 0.4);
+        _textBrush = new SolidColorBrush(Col(st.OverlayTextColor, Colors.White));
+        var labelBrush = new SolidColorBrush(Col(st.OverlayLabelColor, Color.FromRgb(150, 160, 175)));
+        var font = new FontFamily(string.IsNullOrWhiteSpace(st.OverlayFont) ? "Bahnschrift" : st.OverlayFont);
+        _panel.Orientation = horiz ? Orientation.Horizontal : Orientation.Vertical;
         Opacity = Math.Clamp(_svc.Settings.OverlayOpacity, 0.2, 1);
+        double fs = _svc.Settings.OverlayFontSize;
+        bool first = true;
         foreach (var k in _svc.Settings.OverlayItems)
         {
             if (!_svc.Metrics.TryGetValue(k, out var m)) continue;
-            var row = new Grid { Margin = new Thickness(0, 1, 0, 1) };
-            row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
-            row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(14) });
-            row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
-            var lbl = new TextBlock { Text = Short(m), Foreground = new SolidColorBrush(Color.FromRgb(150, 160, 175)), FontSize = _svc.Settings.OverlayFontSize, FontFamily = new FontFamily("Bahnschrift") };
-            var val = new TextBlock { Tag = m, FontSize = _svc.Settings.OverlayFontSize, FontWeight = FontWeights.SemiBold, FontFamily = new FontFamily("Bahnschrift"), MinWidth = 60 };
-            Grid.SetColumn(val, 2);
-            row.Children.Add(lbl); row.Children.Add(val);
-            _panel.Children.Add(row);
+            var lbl = new TextBlock { Text = Short(m), Foreground = labelBrush, FontSize = fs * (horiz ? 0.8 : 1), FontFamily = font, VerticalAlignment = VerticalAlignment.Center };
+            var val = new TextBlock { Tag = m, FontSize = fs, FontWeight = FontWeights.SemiBold, FontFamily = font, VerticalAlignment = VerticalAlignment.Center, Foreground = _textBrush };
+            if (horiz)
+            {
+                // nebeneinander: "FPS 144 | CPU 54 °C | GPU 61 °C …"
+                if (!first) _panel.Children.Add(new Border { Width = 1, Margin = new Thickness(10, 3, 10, 3), Background = new SolidColorBrush(Color.FromArgb(70, 255, 255, 255)) });
+                var cell = new StackPanel { Orientation = Orientation.Horizontal };
+                lbl.Margin = new Thickness(0, 0, 6, 0);
+                val.MinWidth = k == "fps" ? fs * 2.2 : 0;
+                if (k == "fps") { val.FontSize = fs * 1.25; val.FontWeight = FontWeights.Bold; }
+                cell.Children.Add(lbl); cell.Children.Add(val);
+                _panel.Children.Add(cell);
+            }
+            else
+            {
+                var row = new Grid { Margin = new Thickness(0, 1, 0, 1) };
+                row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+                row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(14) });
+                row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+                val.MinWidth = 60;
+                Grid.SetColumn(val, 2);
+                row.Children.Add(lbl); row.Children.Add(val);
+                _panel.Children.Add(row);
+            }
+            first = false;
         }
         Refresh();
     }
 
     private static string Short(Metric m) => m.Key switch
     {
+        "fps" => "FPS", "fps.low" => "1% Low", "frametime" => "Frametime",
         "cpu.temp" => "CPU", "cpu.load" => "CPU %", "cpu.clock" => "CPU Takt", "cpu.power" => "CPU W", "gpu.temp" => "GPU", "gpu.load" => "GPU %",
         "gpu.clock" => "GPU Takt", "gpu.power" => "GPU W", "gpu.vram" => "VRAM", "ram.load" => "RAM", "net.down" => "↓", "net.up" => "↑", _ => m.Label
     };
 
     private void Refresh()
     {
-        foreach (var row in _panel.Children.OfType<Grid>())
+        foreach (var row in _panel.Children.OfType<Panel>())
             foreach (var tb in row.Children.OfType<TextBlock>().Where(t => t.Tag is Metric))
             {
                 var m = (Metric)tb.Tag;
-                tb.Text = m.Text;
-                tb.Foreground = m.Brush == Palette.Text ? Brushes.White : m.Brush;
+                tb.Text = m.Key is "fps" or "fps.low" ? (double.IsNaN(m.ShownValue) ? "–" : $"{m.ShownValue:0}") : m.Text;
+                tb.Foreground = !_svc.Settings.OverlayAlertColors || m.Brush == Palette.Text || m.Brush == Palette.Muted ? _textBrush : m.Brush;
             }
     }
 
@@ -261,6 +303,7 @@ public sealed class OverlayWindow : Window
             case 1: Left = wa.Right - ActualWidth - m; Top = wa.Top + m; break;
             case 2: Left = wa.Left + m; Top = wa.Bottom - ActualHeight - m; break;
             case 3: Left = wa.Right - ActualWidth - m; Top = wa.Bottom - ActualHeight - m; break;
+            case 4: Left = wa.Left + (wa.Width - ActualWidth) / 2; Top = wa.Top + m; break;
             default: Left = wa.Left + m; Top = wa.Top + m; break;
         }
     }
@@ -295,4 +338,12 @@ public sealed class StringNotEmptyToVis : IValueConverter
 {
     public object Convert(object v, Type t, object p, CultureInfo c) => string.IsNullOrWhiteSpace(v as string) ? Visibility.Collapsed : Visibility.Visible;
     public object ConvertBack(object v, Type t, object p, CultureInfo c) => throw new NotSupportedException();
+}
+
+/// <summary>Balkenbreite = Anteil (0…1) × verfügbare Breite.</summary>
+public sealed class FractionWidth : IMultiValueConverter
+{
+    public object Convert(object[] v, Type t, object p, CultureInfo c) =>
+        v.Length == 2 && v[0] is double f && v[1] is double w && !double.IsNaN(f) ? Math.Max(0, Math.Min(1, f) * w) : 0.0;
+    public object[] ConvertBack(object v, Type[] t, object p, CultureInfo c) => throw new NotSupportedException();
 }

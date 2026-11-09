@@ -406,7 +406,7 @@ public sealed class DiagnosticsService : ObservableObject
                 res.Add(new Finding
                 {
                     Id = "sys:xmp", Title = $"Arbeitsspeicher läuft mit {conf} statt {rated} MT/s", Severity = Severity.Hint, Areas = Area.Boost,
-                    Detail = "Das XMP-/EXPO-Profil ist im BIOS vermutlich aus. Mit vollem Takt gibt es oft spürbar mehr FPS (vor allem bei CPU-lastigen Spielen wie ARK).",
+                    Detail = "Das XMP-/EXPO-Profil ist im BIOS vermutlich aus. Mit vollem Takt gibt es oft spürbar mehr FPS (vor allem bei CPU-lastigen Spielen).",
                     Advice = "Im BIOS XMP (Intel) bzw. EXPO (AMD) aktivieren."
                 });
         }

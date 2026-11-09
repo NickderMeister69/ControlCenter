@@ -117,6 +117,9 @@ public static class JsonStore
 
 public static class Native
 {
+    [DllImport("user32.dll")] public static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint pid);
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)] public static extern bool DeleteFileW(string path);
     [DllImport("ntdll.dll")] public static extern int NtSetTimerResolution(uint desired, bool set, out uint current);
     [DllImport("ntdll.dll")] public static extern int NtQueryTimerResolution(out uint min, out uint max, out uint current);
     [DllImport("ntdll.dll")] public static extern int NtSetSystemInformation(int cls, ref int info, int len);
@@ -190,7 +193,21 @@ public static class Env
         }
     }
 
-    public static string ExePath => Environment.ProcessPath ?? Path.Combine(AppContext.BaseDirectory, "NickControlCenter.exe");
+    public static string ExePath => Environment.ProcessPath ?? Path.Combine(AppContext.BaseDirectory, "ControlCenter.exe");
+    /// <summary>
+    /// Entfernt die Windows-"Aus dem Internet"-Markierung (Zone.Identifier) von der exe,
+    /// damit SmartScreen nicht bei jedem Start "Trotzdem ausführen" verlangt.
+    /// </summary>
+    public static void UnblockSelf()
+    {
+        try
+        {
+            foreach (var f in new[] { ExePath }.Concat(Directory.EnumerateFiles(ExeDir, "*.exe")).Distinct(StringComparer.OrdinalIgnoreCase))
+                if (Native.DeleteFileW(f + ":Zone.Identifier")) Log.Info(LogModule.App, $"Download-Sperre entfernt: {Path.GetFileName(f)}");
+        }
+        catch { }
+    }
+
     public static string ExeDir => Path.GetDirectoryName(ExePath) ?? AppContext.BaseDirectory;
 
     public static int WindowsBuild
@@ -215,6 +232,21 @@ public static class Env
     }
 
     /// <summary>Öffnet etwas als normaler Nutzer (nicht mit den Admin-Rechten der App) – über den Explorer.</summary>
+    /// <summary>Programm mit Argumenten als normaler Benutzer (ohne Admin) starten – über eine kleine .cmd, die der Explorer ausführt.</summary>
+    public static void OpenAsUser(string file, string args)
+    {
+        if (string.IsNullOrWhiteSpace(args)) { OpenAsUser(file); return; }
+        try
+        {
+            var dir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "NickControlCenter");
+            Directory.CreateDirectory(dir);
+            var cmd = Path.Combine(dir, "starte-spiel.cmd");
+            File.WriteAllText(cmd, $"@echo off\r\nstart \"\" \"{file}\" {args}\r\n");
+            OpenAsUser(cmd);
+        }
+        catch { try { Process.Start(new ProcessStartInfo(file, args) { UseShellExecute = true }); } catch { } }
+    }
+
     public static void OpenAsUser(string target)
     {
         try { Process.Start(new ProcessStartInfo("explorer.exe", $"\"{target}\"") { UseShellExecute = false }); }
@@ -262,7 +294,7 @@ public static class Autostart
             var user = WindowsIdentity.GetCurrent().Name;
             var xml = $@"<?xml version=""1.0"" encoding=""UTF-16""?>
 <Task version=""1.2"" xmlns=""http://schemas.microsoft.com/windows/2004/02/mit/task"">
-  <RegistrationInfo><Description>Startet Nick Control Center beim Anmelden im Infobereich.</Description></RegistrationInfo>
+  <RegistrationInfo><Description>Startet Control Center beim Anmelden im Infobereich.</Description></RegistrationInfo>
   <Triggers><LogonTrigger><Enabled>true</Enabled><UserId>{SecurityElement.Escape(user)}</UserId><Delay>PT8S</Delay></LogonTrigger></Triggers>
   <Principals><Principal id=""Author""><UserId>{SecurityElement.Escape(user)}</UserId><LogonType>InteractiveToken</LogonType><RunLevel>HighestAvailable</RunLevel></Principal></Principals>
   <Settings>
@@ -299,14 +331,18 @@ public static class Autostart
 /// <summary>Verknüpfungen auf dem Desktop und im Startmenü.</summary>
 public static class Shortcuts
 {
-    public static string DesktopLink => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Nick Control Center.lnk");
-    public static string StartMenuLink => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), "Nick Control Center.lnk");
+    public static string DesktopLink => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Control Center.lnk");
+    public static string StartMenuLink => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), "Control Center.lnk");
 
     public static bool Exists => File.Exists(DesktopLink) && File.Exists(StartMenuLink);
 
     /// <summary>Legt (oder aktualisiert) beide Verknüpfungen an. Zeigt die alte Verknüpfung auf eine andere exe, wird sie korrigiert.</summary>
     public static bool CreateAll(out string error)
     {
+        // alte Verknüpfungen (früherer Name „Nick Control Center“) entfernen
+        foreach (var old in new[] { Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory), "Nick Control Center.lnk"),
+                                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), "Nick Control Center.lnk") })
+            try { if (File.Exists(old)) File.Delete(old); } catch { }
         error = "";
         bool ok = true;
         foreach (var link in new[] { DesktopLink, StartMenuLink })

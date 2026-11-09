@@ -1,0 +1,22 @@
+<UserControl x:Class="NickControlCenter.OrderList"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
+    <ItemsControl x:Name="List">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type local:OrderItem}">
+                <Border x:Name="row" CornerRadius="3" Padding="4,1" Margin="0,1" Background="Transparent">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                        <CheckBox Content="{Binding Label}" IsChecked="{Binding On}" VerticalAlignment="Center" Margin="0,2"/>
+                        <Button Grid.Column="1" Content="&#xE70E;" Style="{StaticResource IconButton}" Width="24" Height="24" FontSize="10" Click="Up_Click" ToolTip="Nach oben (wird weiter vorne angezeigt)"/>
+                        <Button Grid.Column="2" Content="&#xE70D;" Style="{StaticResource IconButton}" Width="24" Height="24" FontSize="10" Click="Down_Click" ToolTip="Nach unten"/>
+                    </Grid>
+                </Border>
+                <DataTemplate.Triggers>
+                    <Trigger SourceName="row" Property="IsMouseOver" Value="True"><Setter TargetName="row" Property="Background" Value="{StaticResource HoverBrush}"/></Trigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

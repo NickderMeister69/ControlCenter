@@ -13,7 +13,34 @@ public sealed class SensorRow : ObservableObject
     public string Source { get; init; } = "";
     private string _v = "", _mm = "";
     public string ValueText { get => _v; set => Set(ref _v, value); }
+    private readonly SmoothNumber _n = new();
+    private Func<double, string>? _fmt;
+    /// <summary>Wert setzen – die Anzeige gleitet weich hin.</summary>
+    public void SetValue(double v, Func<double, string> fmt)
+    {
+        _fmt = fmt;
+        bool snap = double.IsNaN(_n.Current) || double.IsNaN(v);
+        _n.Set(v);
+        if (snap) ValueText = fmt(v);
+        if (!_hooked) { _hooked = true; Smooth.Frame += () => { if (_n.Step() && _fmt != null) ValueText = _fmt(_n.Current); }; }
+    }
+    private bool _hooked;
     public string MinMax { get => _mm; set => Set(ref _mm, value); }
+}
+
+/// <summary>Eine einstellbare Overlay-Farbe (Text, Beschriftung, Hintergrund).</summary>
+public sealed class OverlayColor : ObservableObject
+{
+    private readonly Func<string> _get; private readonly Action<string> _set;
+    public OverlayColor(string label, Func<string> get, Action<string> set, params string[] swatches) { Label = label; _get = get; _set = set; Swatches = swatches; }
+    public string Label { get; }
+    public string[] Swatches { get; }
+    public string Hex
+    {
+        get => _get();
+        set { if (RgbF.TryParseHex(value, out var c)) { _set(c.Hex); Changed?.Invoke(); } Raise(); }
+    }
+    public Action? Changed;
 }
 
 public sealed class OverlayItem : ObservableObject
@@ -38,13 +65,14 @@ public partial class MonitorPage : UserControl, IPage
         DataContext = _m;
         SensorList.ItemsSource = _rows;
         AddList.ItemsSource = _m.Metrics.Values.Where(x => !x.Key.StartsWith("sensor:")).ToList();
-        OverlayItems.ItemsSource = _m.Metrics.Values.Where(x => !x.Key.StartsWith("sensor:"))
-            .Select(x => new OverlayItem { Key = x.Key, Label = x.Label, On = _m.Settings.OverlayItems.Contains(x.Key) }).ToList();
+        OverlayItems.Load(_m.Metrics.Values.Where(x => !x.Key.StartsWith("sensor:")).Select(x => (x.Key, x.Label)), _m.Settings.OverlayItems);
+        OverlayItems.Changed += () => { _m.Settings.OverlayItems = OverlayItems.Selected; _m.Save(); _m.RefreshOverlay(); };
         SourceBox.SelectedIndex = (int)AppSettings.Current.SensorSource;
         IntervalBox.SelectedIndex = AppSettings.Current.SensorIntervalMs switch { 500 => 0, 2000 => 2, 5000 => 3, _ => 1 };
         Fahr.IsChecked = AppSettings.Current.Fahrenheit;
         SetCharts(120);
         _m.Updated += OnUpdate;
+        InitOverlayStyle();
         _init = false;
     }
 
@@ -52,6 +80,7 @@ public partial class MonitorPage : UserControl, IPage
     {
         _visible = visible;
         OverlayOn.IsChecked = _m.OverlayOn;
+        _m.UseFps(visible || _m.OverlayOn);
         if (!visible) _m.Save();
         OnUpdate();
     }
@@ -96,7 +125,8 @@ public partial class MonitorPage : UserControl, IPage
                 _byId[r.Id] = row;
                 _rows.Add(row);
             }
-            row.ValueText = Format(r.Value, r, f);
+            var rr = r;
+            row.SetValue(r.Value, v => Format(v, rr, f));
             row.MinMax = double.IsNaN(r.Min) ? "" : $"{Format(r.Min, r, f)} … {Format(r.Max, r, f)}";
         }
     }
@@ -105,7 +135,7 @@ public partial class MonitorPage : UserControl, IPage
     {
         if (double.IsNaN(v)) return "–";
         if (r.Kind == SensorKind.Temperature) return Fmt.Temp(v, f);
-        if (r.Kind == SensorKind.Throughput) return v > 1e6 ? $"{v / 1e6:0.0} MB/s" : $"{v / 1e3:0} KB/s";
+        if (r.Kind == SensorKind.Throughput) return Fmt.Rate(v);
         return r.Kind switch { SensorKind.Voltage => $"{v:0.000} V", SensorKind.Clock => $"{v:0} MHz", _ => $"{v:0.#} {r.Unit}" };
     }
 
@@ -126,16 +156,45 @@ public partial class MonitorPage : UserControl, IPage
     private void Left_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.DataContext is Metric m) _m.MoveTile(m.Key, -1); }
     private void Right_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.DataContext is Metric m) _m.MoveTile(m.Key, 1); }
     private void PinSensor_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.Tag is string id) { _m.AddTile("sensor:" + id); Ui.Toast("Als Kachel hinzugefügt"); } }
+    private void OverlayLayout_Click(object s, RoutedEventArgs e) { _m.Save(); _m.RefreshOverlay(); }
     private void Overlay_Click(object s, RoutedEventArgs e) => _m.SetOverlay(OverlayOn.IsChecked == true);
-    private void OverlayChanged(object s, SelectionChangedEventArgs e) { if (!_init) { _m.Save(); _m.RefreshOverlay(); } }
-    private void OverlaySlider(object s, RoutedPropertyChangedEventArgs<double> e) { if (!_init) _m.RefreshOverlay(); }
-
-    private void OverlayItem_Click(object s, RoutedEventArgs e)
+    private void InitOverlayStyle()
     {
-        _m.Settings.OverlayItems = ((IEnumerable<OverlayItem>)OverlayItems.ItemsSource).Where(i => i.On).Select(i => i.Key).ToList();
-        _m.Save();
-        _m.RefreshOverlay();
+        var st = _m.Settings;
+        var fonts = new[] { "Bahnschrift", "Segoe UI", "Segoe UI Black", "Consolas", "Arial", "Arial Black", "Verdana", "Tahoma", "Trebuchet MS", "Impact", "Courier New", "Cascadia Mono" }
+            .Where(f => System.Windows.Media.Fonts.SystemFontFamilies.Any(x => x.Source == f)).ToList();
+        if (!fonts.Contains(st.OverlayFont)) fonts.Insert(0, st.OverlayFont);
+        FontBox.ItemsSource = fonts;
+        FontBox.SelectedItem = st.OverlayFont;
+        string[] bright = { "#FFFFFF", "#22D3EE", "#A3E635", "#FACC15", "#FB923C", "#F43F5E", "#F472B6", "#A78BFA" };
+        string[] dark = { "#080B0F", "#000000", "#1E293B", "#0F172A", "#1F1235", "#06281F", "#2A0A12", "#FFFFFF" };
+        var items = new[]
+        {
+            new OverlayColor("Werte", () => st.OverlayTextColor, v => st.OverlayTextColor = v, bright),
+            new OverlayColor("Beschriftung", () => st.OverlayLabelColor, v => st.OverlayLabelColor = v, new[] { "#96A0AF", "#FFFFFF", "#22D3EE", "#A3E635", "#FACC15", "#FB923C", "#F472B6", "#64748B" }),
+            new OverlayColor("Hintergrund", () => st.OverlayBgColor, v => st.OverlayBgColor = v, dark),
+        };
+        foreach (var i in items) i.Changed = () => { _m.Save(); _m.RefreshOverlay(); };
+        OverlayColors.ItemsSource = items;
     }
+
+    private void OverlaySwatch_Click(object s, RoutedEventArgs e)
+    {
+        if (s is not FrameworkElement { Tag: string hex } fe) return;
+        DependencyObject? d = fe;
+        while (d != null && (d as FrameworkElement)?.DataContext is not OverlayColor) d = System.Windows.Media.VisualTreeHelper.GetParent(d);
+        if ((d as FrameworkElement)?.DataContext is OverlayColor oc) oc.Hex = hex;
+    }
+
+    private void OverlayFont_Changed(object s, SelectionChangedEventArgs e)
+    {
+        if (_init || FontBox.SelectedItem is not string f) return;
+        _m.Settings.OverlayFont = f; _m.Save(); _m.RefreshOverlay();
+    }
+
+    private void OverlayChanged(object s, SelectionChangedEventArgs e) { if (!_init) { _m.Save(); _m.RefreshOverlay(); } }
+    private void OverlaySlider(object s, RoutedPropertyChangedEventArgs<double> e) { if (!_init) { _m.RefreshOverlay(); _m.Save(); } }
+
 
     private void Source_Changed(object s, SelectionChangedEventArgs e)
     {

@@ -231,11 +231,29 @@ public static class HwinfoSource
         return list;
     }
 
+    /// <summary>Welche HWiNFO-GPU-Gruppe ("GPU [#0]", "GPU [#1]" …) ist die eigentliche Grafikkarte?</summary>
+    public static string PickGpuPrefix(IEnumerable<SensorReading> all)
+    {
+        var groups = all.Where(r => r.OriginalGroup.StartsWith("GPU [#", StringComparison.OrdinalIgnoreCase))
+                        .GroupBy(r => r.OriginalGroup[..(r.OriginalGroup.IndexOf(']') + 1)])
+                        .Select(g => new
+                        {
+                            Prefix = g.Key,
+                            Dedicated = g.Any(r => DriverCheck.VendorFromName(r.OriginalGroup) is GpuVendor.Nvidia or GpuVendor.Amd),
+                            HasTemp = g.Any(r => r.Kind == SensorKind.Temperature && r.OriginalName.StartsWith("GPU Temperature", StringComparison.OrdinalIgnoreCase))
+                        })
+                        .OrderByDescending(x => x.Dedicated).ThenByDescending(x => x.HasTemp).ThenBy(x => x.Prefix)
+                        .ToList();
+        return groups.FirstOrDefault()?.Prefix ?? "GPU [#0]";
+    }
+
     /// <summary>Füllt die wichtigsten Werte des Snapshots aus den HWiNFO-Werten.</summary>
     public static void Fill(SensorSnapshot s, List<SensorReading> all)
     {
         static bool IsCpu(SensorReading r) => r.OriginalGroup.StartsWith("CPU [#0]", StringComparison.OrdinalIgnoreCase);
-        static bool IsGpu(SensorReading r) => r.OriginalGroup.StartsWith("GPU [#0]", StringComparison.OrdinalIgnoreCase);
+        // Mit iGPU ist "GPU [#0]" oft die Intel-Grafik – deshalb die dedizierte Karte mit Temperatursensor wählen
+        string gpuPrefix = PickGpuPrefix(all);
+        bool IsGpu(SensorReading r) => r.OriginalGroup.StartsWith(gpuPrefix, StringComparison.OrdinalIgnoreCase);
 
         double Pick(Func<SensorReading, bool> grp, SensorKind kind, params string[] labels)
         {
@@ -268,12 +286,13 @@ public static class HwinfoSource
         s.CpuTemp = ct; s.CpuTempLabel = lbl;
         s.CpuPackage = Pick(IsCpu, SensorKind.Temperature, "CPU Package", "CPU (Tctl/Tdie)", "CPU Die (average)");
         s.CpuLoad = Pick(IsCpu, SensorKind.Load, "Total CPU Usage", "Total CPU Utility");
-        s.CpuClock = Pick(IsCpu, SensorKind.Clock, "Core Clocks (avg)", "Average Effective Clock");
-        if (double.IsNaN(s.CpuClock))
-        {
-            var clocks = all.Where(r => r.Kind == SensorKind.Clock && IsCpu(r) && Regex.IsMatch(r.OriginalName, @"^(P-)?Core \d+ Clock")).Select(r => r.Value).ToList();
-            if (clocks.Count > 0) s.CpuClock = clocks.Average();
-        }
+        // CPU-Takt = höchster echter Kern-Takt (wie bei LibreHardwareMonitor). Früher: „Average Effective Clock“ – der Durchschnitt
+        // aller Kerne inkl. schlafender liegt bei Last auf einem Kern bei ~1 GHz und hat den Turbo-Test verfälscht.
+        var coreClocks = all.Where(r => r.Kind == SensorKind.Clock && IsCpu(r) && r.Value is > 300 and < 7000 &&
+                                        Regex.IsMatch(r.OriginalName, @"^(P-|E-)?Core \d+ Clock", RegexOptions.IgnoreCase) &&
+                                        !r.OriginalName.Contains("Effective", StringComparison.OrdinalIgnoreCase))
+                            .Select(r => r.Value).ToList();
+        s.CpuClock = coreClocks.Count > 0 ? coreClocks.Max() : Pick(IsCpu, SensorKind.Clock, "Core Clocks (avg)");
         s.CpuPower = Pick(IsCpu, SensorKind.Power, "CPU Package Power", "CPU PPT");
 
         s.GpuTemp = Pick(IsGpu, SensorKind.Temperature, "GPU Temperature", "GPU Edge Temperature");
@@ -281,9 +300,11 @@ public static class HwinfoSource
         s.GpuLoad = Pick(IsGpu, SensorKind.Load, "GPU Core Load", "GPU Utilization", "GPU D3D Usage");
         s.GpuClock = Pick(IsGpu, SensorKind.Clock, "GPU Clock", "GPU Core Clock", "GPU Shader Clock");
         s.GpuMemClock = Pick(IsGpu, SensorKind.Clock, "GPU Memory Clock");
-        var pw = all.FirstOrDefault(r => IsGpu(r) && r.Kind == SensorKind.Power && r.Unit == "W" &&
-                                         (r.OriginalName is "GPU Power" or "Total Board Power" or "GPU Power (Total)" or "Total Graphics Power"))
-              ?? all.FirstOrDefault(r => IsGpu(r) && r.Kind == SensorKind.Power && r.Unit == "W");
+        // Gesamtleistung der Karte; Werte von 0 W (nicht belegte Stecker/Schienen) überspringen
+        var gpuW = all.Where(r => IsGpu(r) && r.Kind == SensorKind.Power && r.Unit.Trim() == "W" && r.Value > 0.5).ToList();
+        var pw = gpuW.FirstOrDefault(r => r.OriginalName is "GPU Power" or "Total Board Power" or "GPU Power (Total)" or "Total Graphics Power" or "GPU ASIC Power")
+              ?? gpuW.FirstOrDefault(r => r.OriginalName.Contains("Board Power", StringComparison.OrdinalIgnoreCase) || r.OriginalName.StartsWith("GPU Power", StringComparison.OrdinalIgnoreCase))
+              ?? gpuW.OrderByDescending(r => r.Value).FirstOrDefault();
         if (pw != null) s.GpuPower = pw.Value;
         var alloc = all.FirstOrDefault(r => IsGpu(r) && (r.OriginalName.StartsWith("GPU Memory Allocated") || r.OriginalName.StartsWith("GPU D3D Memory Dedicated")));
         if (alloc != null) s.GpuVramUsedGb = alloc.Unit.Equals("MB", StringComparison.OrdinalIgnoreCase) ? alloc.Value / 1024 : alloc.Value;

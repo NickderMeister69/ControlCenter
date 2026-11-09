@@ -11,8 +11,12 @@ public partial class BoostPage : UserControl, IPage
     {
         InitializeComponent();
         DataContext = _b;
-        _b.PropertyChanged += (_, e) => { if (e.PropertyName is nameof(BoostService.ArkFound) or nameof(BoostService.SteamConnected)) Update(); };
-        _b.Games.CollectionChanged += (_, _) => Update();
+        // entfernte Spiele (Hidden) nicht anzeigen
+        var view = new System.Windows.Data.ListCollectionView(_b.Games) { Filter = o => o is GameVM { P.Hidden: false } };
+        GameList.ItemsSource = view;
+        _b.Games.CollectionChanged += (_, _) => view.Refresh();
+        _b.PropertyChanged += (_, e) => { if (e.PropertyName == nameof(BoostService.GamesText)) view.Refresh(); };
+        _b.PropertyChanged += (_, e) => { if (e.PropertyName is nameof(BoostService.SteamConnected) or nameof(BoostService.SelectedGame)) Update(); };
         _b.BackgroundApps.CollectionChanged += (_, _) => Update();
         Unloaded += (_, _) => _b.Save();
         Update();
@@ -23,21 +27,23 @@ public partial class BoostPage : UserControl, IPage
         if (!visible) { _b.Save(); return; }
         _b.RefreshActive();
         _b.RefreshApps();
+        if (_b.SelectedGame == null) _b.SelectedGame = _b.Games.FirstOrDefault(g => !g.P.Hidden);
     }
 
     private void Update()
     {
-        var ark = _b.Games.Where(g => g.IsArk).ToList();
-        ArkFound.Text = ark.Count == 0 ? "ARK nicht gefunden – unter „Spiele & Steam“ den Spielordner wählen." : "Gefunden: " + string.Join(", ", ark.Select(a => a.Ark!.Name));
         NoApps.Visibility = _b.BackgroundApps.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
-        SteamBtn.Content = _b.SteamConnected ? "Spiele neu suchen" : "Mit Steam verbinden";
+        SteamBtn.Content = _b.SteamConnected ? "Steam neu einlesen" : "Mit Steam verbinden";
         SteamOffBtn.Visibility = _b.SteamConnected ? Visibility.Visible : Visibility.Collapsed;
+        bool has = _b.SelectedGame != null;
+        GameDetail.Visibility = has ? Visibility.Visible : Visibility.Collapsed;
+        NoGame.Visibility = has ? Visibility.Collapsed : Visibility.Visible;
     }
 
     private void Tab_Checked(object sender, RoutedEventArgs e)
     {
         if (T1 == null || sender is not RadioButton { Tag: string t }) return;
-        foreach (var p in new FrameworkElement[] { T1, T2, T3, T4, T5, T6 }) p.Visibility = p.Name == t ? Visibility.Visible : Visibility.Collapsed;
+        foreach (var p in new FrameworkElement[] { T1, T2, T4, T5, T6 }) p.Visibility = p.Name == t ? Visibility.Visible : Visibility.Collapsed;
         _b.Save();
     }
 
@@ -49,25 +55,48 @@ public partial class BoostPage : UserControl, IPage
             await _b.UndoAsync();
     }
 
+    private GameVM? Sel => _b.SelectedGame;
+
     private void Steam_Click(object s, RoutedEventArgs e) => _b.ConnectSteam(true);
     private void SteamOff_Click(object s, RoutedEventArgs e) => _b.ConnectSteam(false);
-    private void Play_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.DataContext is GameVM g) { Log.Info(LogModule.Boost, "Starte " + g.Name); if (g.AppId > 0) Env.OpenAsUser($"steam://rungameid/{g.AppId}"); else if (g.Exe != null) Env.OpenAsUser(g.Exe); } }
-    private void RemoveAuto_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.Tag is string n) _b.RemoveAutoBoost(n); }
+    private void Rescan_Click(object s, RoutedEventArgs e) { _b.Rescan(); Ui.Toast("Suche Spiele (Steam, Epic, Riot) …"); }
 
     private void AddExe_Click(object s, RoutedEventArgs e)
     {
-        var dlg = new Microsoft.Win32.OpenFileDialog { Filter = "Programme (*.exe)|*.exe", Title = "Spiel-exe für Auto-Boost wählen" };
-        if (dlg.ShowDialog() == true) _b.AddAutoBoostExe(dlg.FileName);
+        var dlg = new Microsoft.Win32.OpenFileDialog { Filter = "Spiele / Programme (*.exe)|*.exe", Title = "Spiel-exe wählen (auch Launcher-exe geht)" };
+        if (dlg.ShowDialog() == true) _b.AddGameExe(dlg.FileName);
     }
 
-    private void AddFolder_Click(object s, RoutedEventArgs e)
+    private void AddKnown_Click(object s, RoutedEventArgs e)
     {
-        var dlg = new Microsoft.Win32.OpenFolderDialog { Title = "Spielordner wählen (z. B. ...\\ARK Survival Ascended)" };
-        if (dlg.ShowDialog() == true) _b.AddGameFolder(dlg.FolderName);
+        if (KnownBox.SelectedItem is string n) _b.AddKnownGame(n);
+        else Ui.Toast("Erst ein Spiel in der Liste daneben auswählen", true);
     }
 
-    private void CopyAsa_Click(object s, RoutedEventArgs e) { Clipboard.SetText(AsaArgs.Text); Ui.Toast("Startoptionen kopiert – in Steam einfügen"); }
-    private void CopyAse_Click(object s, RoutedEventArgs e) { Clipboard.SetText(AseArgs.Text); Ui.Toast("Startoptionen kopiert – in Steam einfügen"); }
+    private void Preset_Click(object s, RoutedEventArgs e)
+    {
+        if (Sel != null && (s as FrameworkElement)?.Tag is string t && int.TryParse(t, out var i)) Sel.PresetIndex = i;
+    }
+
+    private void Recommend_Click(object s, RoutedEventArgs e)
+    {
+        if (Sel is not { } g) return;
+        var (r, text) = _b.Recommend(g);
+        if (Dialogs.Confirm($"Empfehlung für {g.Name}", text, "Übernehmen", "Abbrechen")) _b.ApplyRecommendation(g, r);
+    }
+
+    private void Play_Click(object s, RoutedEventArgs e) { if (Sel != null) _b.Launch(Sel); }
+
+    private void Remove_Click(object s, RoutedEventArgs e)
+    {
+        if (Sel != null && Dialogs.Confirm($"{Sel.Name} entfernen?", "Das Spiel verschwindet aus der Liste und sein Profil wird ausgeschaltet. Über „Spiel hinzufügen“ kannst du es jederzeit wieder aufnehmen.", "Entfernen", "Abbrechen"))
+            _b.RemoveGame(Sel);
+    }
+
+    private async void ApplyGfx_Click(object s, RoutedEventArgs e) { if (Sel is { } g) await Task.Run(() => _b.ApplyGameFiles(g, false)); }
+    private async void RestoreGfx_Click(object s, RoutedEventArgs e) { if (Sel is { } g) await Task.Run(() => _b.RestoreGameFiles(g)); }
+    private void CopyLaunch_Click(object s, RoutedEventArgs e) { if (Sel?.LaunchOptions is { } o) { Clipboard.SetText(o); Ui.Toast("Startoptionen kopiert – in Steam einfügen"); } }
+
     private async void Clean_Click(object s, RoutedEventArgs e) => await _b.CleanAsync(includeShader: false);
     private void CleanCancel_Click(object s, RoutedEventArgs e) => _b.CancelClean();
     private async void Shader_Click(object s, RoutedEventArgs e) => await _b.CleanAsync(includeShader: true, shaderOnly: true);

@@ -165,14 +165,14 @@ public sealed class FanManager : IDisposable
                  ?? temps.FirstOrDefault();
             if (t?.Value != null) best = best == null ? t.Value : Math.Max(best.Value, t.Value.Value);
         }
-        return best;
+        return best ?? NvmlSensor.Temp();
     }
 
     /// <summary>Schreibt alle Sensoren mit aktuellen Werten in eine Textdatei (zur Kontrolle).</summary>
     public void DumpSensors(string path, float? cpuShown, float? gpuShown)
     {
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine($"Nick Fan Control – Sensorliste vom {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
+        sb.AppendLine($"Control Center – Sensorliste vom {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
         sb.AppendLine($"Angezeigt: CPU {cpuShown?.ToString("0.0") ?? "–"} °C, GPU {gpuShown?.ToString("0.0") ?? "–"} °C");
         sb.AppendLine();
         foreach (var hw in _computer.Hardware)

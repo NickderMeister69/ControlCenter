@@ -17,6 +17,18 @@ public sealed class MonitorSettings
     public double OverlayFontSize { get; set; } = 14;
     public List<string> OverlayItems { get; set; } = new() { "cpu.temp", "cpu.load", "gpu.temp", "gpu.load", "ram.load" };
     public bool OverlayHotkey { get; set; } = true;
+    /// <summary>Werte nebeneinander (von links nach rechts) statt untereinander.</summary>
+    public bool OverlayHorizontal { get; set; } = true;
+    public string OverlayFont { get; set; } = "Bahnschrift";
+    public string OverlayTextColor { get; set; } = "#FFFFFF";
+    public string OverlayLabelColor { get; set; } = "#96A0AF";
+    public string OverlayBgColor { get; set; } = "#080B0F";
+    public double OverlayBgOpacity { get; set; } = 0.8;
+    /// <summary>Werte bei Warnung/kritisch gelb/rot färben.</summary>
+    public bool OverlayAlertColors { get; set; } = true;
+    public bool OverlayBorder { get; set; } = true;
+    /// <summary>Einmalig: FPS vorne ins Overlay aufnehmen.</summary>
+    public bool OverlayFpsAdded { get; set; }
     public double CpuAlarm { get; set; } = 90;
     public double GpuAlarm { get; set; } = 85;
     public bool Alarms { get; set; } = true;
@@ -46,7 +58,7 @@ public sealed class Metric : ObservableObject
     public string Text { get; private set; } = "–";
     public string MinMaxText { get; private set; } = "";
     public Brush Brush { get; private set; } = Palette.Text;
-    public double Percent => double.IsNaN(_value) ? 0 : Math.Clamp(_value / Max * 100, 0, 100);
+    public double Percent { get { var v = double.IsNaN(_shown.Current) ? _value : _shown.Current; return double.IsNaN(v) ? 0 : Math.Clamp(v / Max * 100, 0, 100); } }
     public int Version;
 
     public void Push(double v, bool fahrenheit)
@@ -61,22 +73,42 @@ public sealed class Metric : ObservableObject
             Peak = double.IsNaN(Peak) ? v : Math.Max(Peak, v);
             Sum += v; Samples++;
         }
-        Text = Format(v, fahrenheit);
+        // angezeigte Zahl gleitet weich zum neuen Wert (siehe Smooth) – Diagramme/Alarme nutzen den echten Wert
+        _fahr = fahrenheit;
+        bool snap = double.IsNaN(_shown.Current) || double.IsNaN(v);
+        _shown.Set(v);
+        if (snap) Text = Format(v, fahrenheit);
         MinMaxText = double.IsNaN(Min) ? "" : $"min {Format(Min, fahrenheit)} · Ø {Format(Sum / Math.Max(1, Samples), fahrenheit)} · max {Format(Peak, fahrenheit)}";
         Brush = double.IsNaN(v) ? Palette.Muted : !double.IsNaN(Crit) && v >= Crit ? Palette.Bad : !double.IsNaN(Warn) && v >= Warn ? Palette.Warn : Palette.Text;
         Version++;
         RaiseAll(nameof(Value), nameof(Text), nameof(MinMaxText), nameof(Brush), nameof(Percent));
     }
 
+    private readonly SmoothNumber _shown = new();
+    private bool _fahr;
+    /// <summary>Der gerade angezeigte (weich laufende) Wert.</summary>
+    public double ShownValue => _shown.Current;
+
+    public Metric() { Smooth.Frame += OnFrame; }
+
+    private void OnFrame()
+    {
+        if (!_shown.Step()) return;
+        Text = Format(_shown.Current, _fahr);
+        Raise(nameof(Text));
+        Raise(nameof(ShownValue));
+        Raise(nameof(Percent));
+    }
+
     public string Format(double v, bool fahrenheit)
     {
         if (double.IsNaN(v)) return "–";
         if (IsTemp) return Fmt.Temp(v, fahrenheit);
-        if (IsRate) return v >= 1_000_000 ? $"{v / 1_000_000:0.0} MB/s" : $"{v / 1000:0} KB/s";
+        if (IsRate) return Fmt.Rate(v);
         return Unit switch
         {
             "%" => $"{v:0} %", "MHz" => v >= 1000 ? $"{v / 1000:0.00} GHz" : $"{v:0} MHz", "W" => $"{v:0} W",
-            "GB" => $"{v:0.0} GB", "U/min" => $"{v:0} U/min", _ => $"{v:0.#} {Unit}"
+            "GB" => $"{v:0.0} GB", "U/min" => $"{v:0} U/min", "FPS" => $"{v:0} FPS", "ms" => $"{v:0.0} ms", _ => $"{v:0.#} {Unit}"
         };
     }
 
@@ -109,6 +141,9 @@ public sealed class MonitorService : ObservableObject, IDisposable
     {
         void Add(string key, string label, string group, string unit, double max, double warn = double.NaN, double crit = double.NaN, bool temp = false, bool rate = false) =>
             Metrics[key] = new Metric { Key = key, Label = label, Group = group, Unit = unit, Max = max, Warn = warn, Crit = crit, IsTemp = temp, IsRate = rate };
+        Add("fps", "FPS (Spiel im Vordergrund)", "Spiel", "FPS", 360);
+        Add("fps.low", "1 % Low-FPS", "Spiel", "FPS", 360);
+        Add("frametime", "Frametime", "Spiel", "ms", 50, 25, 40);
         Add("cpu.temp", "CPU-Temperatur", "CPU", "°C", 100, 80, 92, temp: true);
         Add("cpu.package", "CPU-Package", "CPU", "°C", 100, 85, 95, temp: true);
         Add("cpu.load", "CPU-Auslastung", "CPU", "%", 100);
@@ -127,6 +162,12 @@ public sealed class MonitorService : ObservableObject, IDisposable
         Add("board.temp", "Mainboard", "Mainboard", "°C", 80, 60, 70, temp: true);
         Add("net.down", "Download", "Netzwerk", "B/s", 12_500_000, rate: true);
         Add("net.up", "Upload", "Netzwerk", "B/s", 12_500_000, rate: true);
+        if (!Settings.OverlayFpsAdded)
+        {
+            Settings.OverlayFpsAdded = true;
+            if (!Settings.OverlayItems.Contains("fps")) Settings.OverlayItems.Insert(0, "fps");
+            Save();
+        }
         RebuildTiles();
         HardwareHub.Instance.Updated += OnHub;
         if (Settings.Overlay) Application.Current.Dispatcher.BeginInvoke(() => SetOverlay(true));
@@ -192,6 +233,11 @@ public sealed class MonitorService : ObservableObject, IDisposable
         P("gpu.temp", s.GpuTemp); P("gpu.hotspot", s.GpuHotSpot); P("gpu.load", s.GpuLoad); P("gpu.clock", s.GpuClock); P("gpu.mem", s.GpuMemClock);
         P("gpu.power", s.GpuPower); P("gpu.fan", s.GpuFanRpm); P("gpu.vram", s.GpuVramUsedGb); P("ram.load", s.RamLoad); P("ram.used", s.RamUsedGb);
         P("board.temp", s.BoardTemp); P("net.down", s.NetDownBps); P("net.up", s.NetUpBps);
+        if (_fpsOn)
+        {
+            var fr = FpsCounter.Instance.Foreground();
+            P("fps", fr.Fps); P("fps.low", fr.Low1); P("frametime", fr.FrameMs);
+        }
         foreach (var m in Metrics.Values.Where(m => m.Key.StartsWith("sensor:")))
         {
             var id = m.Key["sensor:".Length..];
@@ -266,10 +312,19 @@ public sealed class MonitorService : ObservableObject, IDisposable
     // ---------------------------------------------------------------- Overlay
     public bool OverlayOn => _overlay != null;
 
+    private bool _fpsOn;
+    /// <summary>FPS-Messung nur, solange sie gebraucht wird (Overlay an oder Monitor-Seite offen).</summary>
+    public void UseFps(bool on)
+    {
+        if (on == _fpsOn) return;
+        _fpsOn = on;
+        if (on) FpsCounter.Instance.Acquire(); else FpsCounter.Instance.Release();
+    }
+
     public void SetOverlay(bool on)
     {
-        if (on && _overlay == null) { _overlay = new OverlayWindow(this); _overlay.Show(); }
-        else if (!on && _overlay != null) { _overlay.Close(); _overlay = null; }
+        if (on && _overlay == null) { _overlay = new OverlayWindow(this); _overlay.Show(); UseFps(true); }
+        else if (!on && _overlay != null) { _overlay.Close(); _overlay = null; UseFps(false); }
         Settings.Overlay = on;
         Save();
         Raise(nameof(OverlayOn));
@@ -282,5 +337,6 @@ public sealed class MonitorService : ObservableObject, IDisposable
         HardwareHub.Instance.Updated -= OnHub;
         _csv?.Dispose();
         _overlay?.Close();
+        try { FpsCounter.Instance.Dispose(); } catch { }
     }
 }

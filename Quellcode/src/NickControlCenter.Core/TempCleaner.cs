@@ -148,6 +148,14 @@ public static class Fmt
         bytes >= 1L << 20 ? $"{bytes / (1L << 20):0} MB" :
         $"{bytes / 1024:0} KB";
 
+    /// <summary>Datenrate (Bytes/s) in Mbit/s – wie bei Internet-Tarifen und Speedtests.</summary>
+    public static string Rate(double bytesPerSec)
+    {
+        if (double.IsNaN(bytesPerSec)) return "–";
+        double mbit = bytesPerSec * 8 / 1_000_000;
+        return mbit >= 100 ? $"{mbit:0} Mbit/s" : mbit >= 1 ? $"{mbit:0.0} Mbit/s" : $"{mbit:0.00} Mbit/s";
+    }
+
     public static string Temp(double c, bool fahrenheit) =>
         double.IsNaN(c) ? "–" : fahrenheit ? $"{c * 9 / 5 + 32:0} °F" : $"{c:0} °C";
 }

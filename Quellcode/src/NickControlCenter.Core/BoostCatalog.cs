@@ -19,8 +19,6 @@ public sealed record Tweak(
     /// <summary>Experten-Option (standardmäßig aus, mit Hinweis).</summary>
     bool Expert = false);
 
-public sealed record GameDef(string Short, string Name, string Folder, string ExeRel, string ConfigRel, string Process, int AppId);
-
 /// <summary>Programme, die man vor dem Zocken schließen kann.</summary>
 public sealed record BackgroundApp(string Process, string Name, bool Kill);
 
@@ -89,12 +87,6 @@ public static class BoostCatalog
             true, true, new[] { new RegValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "GlobalTimerResolutionRequests", 1) }),
     };
 
-    public static readonly GameDef[] ArkGames =
-    {
-        new("ASE", "ARK: Survival Evolved", "ARK", @"ShooterGame\Binaries\Win64\ShooterGame.exe", @"ShooterGame\Saved\Config\WindowsNoEditor", "ShooterGame", 346110),
-        new("ASA", "ARK: Survival Ascended", "ARK Survival Ascended", @"ShooterGame\Binaries\Win64\ArkAscended.exe", @"ShooterGame\Saved\Config\Windows", "ArkAscended", 2399830),
-    };
-
     public static readonly BackgroundApp[] BackgroundApps =
     {
         new("chrome", "Google Chrome", false), new("msedge", "Microsoft Edge", false), new("firefox", "Firefox", false),
@@ -112,29 +104,7 @@ public static class BoostCatalog
     public static readonly string[] NeverTouch =
     {
         "ShooterGame", "ShooterGame_BE", "ArkAscended", "ArkAscended_BE", "BEService", "BEService_x64", "EasyAntiCheat", "EasyAntiCheat_EOS",
-        "vgc", "vgtray", "FACEIT", "faceitservice", "Idle", "System", "Registry", "audiodg", "dwm", "csrss", "smss", "wininit", "winlogon",
+        "vgc", "vgtray", "FACEIT", "faceitservice", "EasyAntiCheat_EOS_Setup", "BattlEye", "Ricochet", "atvi-randgrid_sr", "steam", "steamwebhelper", "Idle", "System", "Registry", "audiodg", "dwm", "csrss", "smss", "wininit", "winlogon",
         "lsass", "services", "MsMpEng", "Memory Compression"
     };
-
-    /// <summary>ARK-Grafik: Werte je Preset (Index 1 = max. FPS, 2 = ausgewogen).</summary>
-    public static Dictionary<string, string> ArkScalability(int preset, bool asa)
-    {
-        var sg = new Dictionary<string, string>();
-        if (preset == 1)
-        {
-            sg["sg.ViewDistanceQuality"] = "1"; sg["sg.AntiAliasingQuality"] = "0"; sg["sg.ShadowQuality"] = "0";
-            sg["sg.PostProcessQuality"] = "0"; sg["sg.TextureQuality"] = "1"; sg["sg.EffectsQuality"] = "0"; sg["sg.FoliageQuality"] = "0";
-            if (asa) { sg["sg.ShadingQuality"] = "0"; sg["sg.GlobalIlluminationQuality"] = "0"; sg["sg.ReflectionQuality"] = "0"; }
-        }
-        else if (preset == 2)
-        {
-            sg["sg.ViewDistanceQuality"] = "2"; sg["sg.AntiAliasingQuality"] = "2"; sg["sg.ShadowQuality"] = "1";
-            sg["sg.PostProcessQuality"] = "1"; sg["sg.TextureQuality"] = "2"; sg["sg.EffectsQuality"] = "1"; sg["sg.FoliageQuality"] = "1";
-            if (asa) { sg["sg.ShadingQuality"] = "1"; sg["sg.GlobalIlluminationQuality"] = "1"; sg["sg.ReflectionQuality"] = "1"; }
-        }
-        return sg;
-    }
-
-    public static readonly int[] FpsLimits = { -1, 0, 60, 75, 120, 144, 165, 240 };
-    public static readonly int[] ResolutionScales = { -1, 100, 90, 80, 75, 70, 60 };
 }

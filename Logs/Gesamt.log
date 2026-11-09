@@ -1,0 +1,221 @@
+﻿2026-11-09 11:58:05  INFO     [Allgemein] Start Nick Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 11:58:06  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-09 11:58:06  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-09 11:58:06  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-09 11:58:06  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-09 11:58:08  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-09 11:58:08  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-09 11:58:08  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-09 11:58:08  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 11:58:08  INFO     [Boost] Spielesuche: 0 Spiele gefunden (Steam nicht verbunden, Epic, Riot)
+2026-11-09 11:58:09  INFO     [Allgemein] exe wurde verschoben:  → C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\NickControlCenter.exe – Verknüpfungen und Autostart werden angepasst
+2026-11-09 11:58:09  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-09 11:58:09  OK       [Allgemein] Autostart eingerichtet (Aufgabenplanung, startet im Tray).
+2026-11-09 11:58:09  INFO     [Beleuchtung] D_LED1 (ARGB): LED-Anzahl 60 → 120 (alle LEDs ansteuern)
+2026-11-09 11:58:09  INFO     [Beleuchtung] D_LED2 (ARGB): LED-Anzahl 60 → 120 (alle LEDs ansteuern)
+2026-11-09 11:58:09  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-09 11:58:09  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-09 11:58:10  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 11:58:13  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +100 MHz, Speicher +500 MHz
+2026-11-09 11:58:13  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-09 11:58:19  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-09 11:59:05  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-09 11:59:25  INFO     [Monitor] Messquelle: HWiNFO bevorzugen
+2026-11-09 12:02:15  FEHLER   [Allgemein] Fehler in der Oberfläche: InvalidOperationException: TwoWay- oder OneWayToSource-Bindungen funktionieren nicht mit der schreibgeschützten Eigenschaft "CleanProgress" vom Typ "NickControlCenter.BoostService".
+   at MS.Internal.Data.PropertyPathWorker.CheckReadOnly(Object item, Object info)
+   at MS.Internal.Data.PropertyPathWorker.ReplaceItem(Int32 k, Object newO, Object parent)
+   at MS.Internal.Data.PropertyPathWorker.UpdateSourceValueState(Int32 k, ICollectionView collectionView, Object newValue, Boolean isASubPropertyChange)
+   at System.Windows.Data.BindingExpression.Activate(Object item)
+   at System.Windows.Data.BindingExpression.AttachToContext(AttachAttempt attempt)
+   at MS.Internal.Data.DataBindEngine.Task.Run(Boolean lastChance)
+   at MS.Internal.Data.DataBindEngine.Run(Object arg)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2026-11-09 12:02:28  INFO     [Monitor] FPS-Messung beendet
+2026-11-09 12:02:46  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-09 12:02:46  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-09 12:02:58  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-09 12:02:58  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-09 12:02:58  OK       [Boost] Windows-Spielmodus an: an
+2026-11-09 12:02:58  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-09 12:02:58  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-09 12:02:58  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-09 12:02:58  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-09 12:02:58  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-09 12:02:58  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-09 12:02:58  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-09 12:02:58  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-09 12:02:58  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-09 12:02:58  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-09 12:02:58  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-09 12:03:00  OK       [Boost] Temp-Dateien: Fertig – 64 MB frei, 5 Dateien gelöscht, 52 übersprungen (0,0 s)
+2026-11-09 12:03:02  INFO     [Boost] Mit Steam verbunden – Spiele werden erkannt
+2026-11-09 12:03:02  OK       [Boost] Arbeitsspeicher aufgeräumt – 1685 MB frei geworden (jetzt 8,1 von 15,8 GB belegt)
+2026-11-09 12:03:02  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-09 12:03:03  INFO     [Boost] Spielesuche: 3 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:03:09  OK       [Boost] ARK: Survival Ascended: Profil „Max-FPS“ – Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Maximale, FPS Unbegrenzt
+2026-11-09 12:03:09  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 12:03:09  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Maximale, Bewegungs-/Tiefenunschärfe aus)
+2026-11-09 12:03:10  OK       [Boost] ARK: Survival Ascended: Profil „Ausgewogen“ – Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 12:03:10  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-09 12:03:11  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-09 12:03:15  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:05:01  OK       [Boost] Find The Needle Demo: Profil „Max-FPS“ – Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU
+2026-11-09 12:05:01  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 12:06:48  FEHLER   [Allgemein] Fehler in der Oberfläche: InvalidOperationException: TwoWay- oder OneWayToSource-Bindungen funktionieren nicht mit der schreibgeschützten Eigenschaft "Progress" vom Typ "NickControlCenter.StressService".
+   at MS.Internal.Data.PropertyPathWorker.CheckReadOnly(Object item, Object info)
+   at MS.Internal.Data.PropertyPathWorker.ReplaceItem(Int32 k, Object newO, Object parent)
+   at MS.Internal.Data.PropertyPathWorker.UpdateSourceValueState(Int32 k, ICollectionView collectionView, Object newValue, Boolean isASubPropertyChange)
+   at System.Windows.Data.BindingExpression.Activate(Object item)
+   at System.Windows.Data.BindingExpression.AttachToContext(AttachAttempt attempt)
+   at MS.Internal.Data.DataBindEngine.Task.Run(Boolean lastChance)
+   at MS.Internal.Data.DataBindEngine.Run(Object arg)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2026-11-09 12:07:14  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-09 12:07:18  INFO     [Monitor] FPS-Messung beendet
+2026-11-09 12:08:13  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:12:40  INFO     [Stresstest] Stresstest gestartet: CPU (Gemischt, 16 Threads), Grafikkarte · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-09 12:12:40  INFO     [Stresstest] GPU-Last läuft auf „NVIDIA GeForce RTX 4060“ (Intensität 100 %)
+2026-11-09 12:12:50  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 0 min 9 s | CPU: Intel Core i5-13400F · Ø 25.989 Punkte/s · max. 49 °C · max. 49 W · Fehler 0 | Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 340 Punkte/s · max. 49 °C · max. 0 W · Fehler 0
+2026-11-09 12:12:58  INFO     [Stresstest] Stresstest gestartet: CPU (AVX/Vektor, 16 Threads), Grafikkarte · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-09 12:12:58  INFO     [Stresstest] GPU-Last läuft auf „NVIDIA GeForce RTX 4060“ (Intensität 100 %)
+2026-11-09 12:13:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:13:56  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 0 min 57 s | CPU: Intel Core i5-13400F · Ø 96.199 Punkte/s · max. 70 °C · max. 100 W · Fehler 0 | Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 318 Punkte/s · max. 62 °C · max. 0 W · Fehler 0
+2026-11-09 12:17:40  INFO     [Allgemein] Beenden …
+2026-11-09 12:17:40  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-09 12:17:41  INFO     [Allgemein] Beendet.
+2026-11-09 12:21:31  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:21:31  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-09 12:21:32  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-09 12:21:32  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-09 12:21:32  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-09 12:21:33  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-09 12:21:34  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-09 12:21:34  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-09 12:21:34  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:21:34  INFO     [Boost] Spielesuche: 3 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:21:34  INFO     [Allgemein] exe wurde verschoben: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\NickControlCenter.exe → C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\ControlCenter.exe – Verknüpfungen und Autostart werden angepasst
+2026-11-09 12:21:34  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-09 12:21:34  OK       [Allgemein] Autostart eingerichtet (Aufgabenplanung, startet im Tray).
+2026-11-09 12:21:35  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-09 12:21:35  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-09 12:21:35  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 12:21:39  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +100 MHz, Speicher +500 MHz
+2026-11-09 12:21:39  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-09 12:21:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-09 12:22:10  INFO     [Monitor] Messwerte: CPU 46,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 35 % · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-09 12:22:16  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Mono_Black_0000000A0A0A18181B.png
+2026-11-09 12:22:27  OK       [Allgemein] Design: Akzentfarbe #A1A1AA gesetzt (über Theme-Datei)
+2026-11-09 12:22:34  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Sunset_Drive_1A0B2E7A1F5CF2643A.png
+2026-11-09 12:22:42  OK       [Allgemein] Design: Akzentfarbe #F97316 gesetzt (über Theme-Datei)
+2026-11-09 12:22:57  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Lava_0A05033B0D027C2D12.png
+2026-11-09 12:23:24  OK       [Allgemein] Design: Akzentfarbe #FB923C gesetzt (über Theme-Datei)
+2026-11-09 12:23:27  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Mono_Black_0000000A0A0A18181B.png
+2026-11-09 12:23:38  OK       [Allgemein] Design: Akzentfarbe #A1A1AA gesetzt (über Theme-Datei)
+2026-11-09 12:23:46  OK       [Allgemein] Hintergrundbild gesetzt: C:\Users\nickg\AppData\Roaming\NickControlCenter\Hintergruende\Mono_Black_0000000A0A0A18181B.png
+2026-11-09 12:23:55  OK       [Allgemein] Design: Akzentfarbe #A1A1AA gesetzt (über Theme-Datei)
+2026-11-09 12:25:06  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-09 12:25:09  FEHLER   [Allgemein] Seite Dashboard konnte nicht geladen werden: InvalidOperationException: Bei dem angegebenen Element handelt es sich bereits um das logische untergeordnete Element eines anderen Elements. Führen Sie zuerst eine Trennung durch.
+   at System.Windows.FrameworkElement.ChangeLogicalParent(DependencyObject newParent)
+   at System.Windows.FrameworkElement.AddLogicalChild(Object child)
+   at System.Windows.Controls.UIElementCollection.AddInternal(UIElement element)
+   at NickControlCenter.DashboardPage.ApplyLayout()
+   at NickControlCenter.DashboardPage.SetupEditor()
+   at NickControlCenter.DashboardPage..ctor()
+   at NickControlCenter.MainWindow.<>c.<.ctor>b__6_6()
+   at NickControlCenter.MainWindow.Show(String key, PageDef def)
+2026-11-09 12:25:09  INFO     [Monitor] FPS-Messung beendet
+2026-11-09 12:25:09  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-09 12:25:14  INFO     [Monitor] FPS-Messung beendet
+2026-11-09 12:25:59  INFO     [Tweaker] Gemessener Turbo-Takt: 1007 MHz (bisher höchster: 1007 MHz)
+2026-11-09 12:26:37  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-09 12:32:10  INFO     [Monitor] Messwerte: CPU 47,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 23 % · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-09 12:36:58  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:36:58  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-09 12:36:58  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-09 12:36:58  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-09 12:36:58  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-09 12:37:00  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-09 12:37:01  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-09 12:37:01  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-09 12:37:01  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:37:01  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:37:01  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-09 12:37:02  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-09 12:37:02  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-09 12:37:03  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 12:37:06  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +100 MHz, Speicher +500 MHz
+2026-11-09 12:37:06  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-09 12:37:37  INFO     [Monitor] Messwerte: CPU 48,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 36 % · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-09 12:39:25  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +100 MHz, Speicher +500 MHz
+2026-11-09 12:39:27  OK       [Tweaker] Werte bestätigt.
+2026-11-09 12:39:43  INFO     [Allgemein] Kachel hinzugefügt: System
+2026-11-09 12:41:52  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-09 12:41:52  INFO     [Allgemein] Beenden …
+2026-11-09 12:41:53  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-09 12:41:53  INFO     [Allgemein] Beendet.
+2026-11-09 12:41:56  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:41:57  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-09 12:41:57  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-09 12:41:57  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-09 12:41:57  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-09 12:41:58  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-09 12:41:58  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-09 12:41:58  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-09 12:41:58  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-09 12:41:59  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:41:59  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:41:59  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-09 12:41:59  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-09 12:42:00  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 12:42:03  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +100 MHz, Speicher +500 MHz
+2026-11-09 12:42:03  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-09 12:42:35  INFO     [Monitor] Messwerte: CPU 54,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 37 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-09 12:44:29  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-09 12:44:29  INFO     [Allgemein] Beenden …
+2026-11-09 12:44:33  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-09 12:44:34  INFO     [Allgemein] Beendet.
+2026-11-09 12:47:44  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-09 12:47:44  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-09 12:47:44  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-09 12:47:44  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-09 12:47:44  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-09 12:47:50  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-09 12:47:51  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-09 12:47:51  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-09 12:47:51  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-09 12:47:51  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-09 12:47:51  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-09 12:47:51  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-09 12:47:52  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-09 12:47:52  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-09 12:47:53  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 12:47:55  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +100 MHz, Speicher +500 MHz
+2026-11-09 12:47:55  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-09 12:48:22  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-09 12:48:22  INFO     [Monitor] Messwerte: CPU 49,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 39 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-09 12:48:52  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, max. 4600 MHz, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +100 MHz, Speicher +500 MHz
+2026-11-09 12:48:54  OK       [Tweaker] Werte bestätigt.
+2026-11-09 12:48:57  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-09 12:48:57  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-09 12:49:09  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-09 12:49:10  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-09 12:49:10  OK       [Boost] Windows-Spielmodus an: an
+2026-11-09 12:49:10  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-09 12:49:10  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-09 12:49:10  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-09 12:49:10  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-09 12:49:10  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-09 12:49:10  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-09 12:49:10  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-09 12:49:10  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-09 12:49:10  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-09 12:49:10  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-09 12:49:10  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-09 12:49:10  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-09 12:49:10  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-09 12:49:10  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 12:49:12  OK       [Boost] Temp-Dateien: Fertig – 14 MB frei, 11 Dateien gelöscht, 87 übersprungen (0,0 s)
+2026-11-09 12:49:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 1648 MB frei geworden (jetzt 10,5 von 15,8 GB belegt)
+2026-11-09 12:49:15  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart

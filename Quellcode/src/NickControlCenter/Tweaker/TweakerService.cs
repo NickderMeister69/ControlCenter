@@ -305,7 +305,7 @@ public sealed class TweakerService : ObservableObject
             var m = Regex.Match(Env.Run("powercfg.exe", "/duplicatescheme " + src).Output, @"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
             if (!m.Success) { msg.Add("Energieplan konnte nicht angelegt werden."); return msg; }
             Settings.TweakScheme = m.Value;
-            Env.Run("powercfg.exe", $"/changename {Settings.TweakScheme} \"Nick Tweaker\" \"Erstellt vom Nick Control Center\"");
+            Env.Run("powercfg.exe", $"/changename {Settings.TweakScheme} \"Control Center Tweaker\" \"Erstellt vom Control Center\"");
         }
         else if (active != null && !active.Equals(Settings.TweakScheme, StringComparison.OrdinalIgnoreCase)) Settings.OriginalScheme = active;
 
@@ -349,18 +349,25 @@ public sealed class TweakerService : ObservableObject
     private static bool SchemeExists(string guid) => Env.Run("powercfg.exe", "/list").Output.Contains(guid, StringComparison.OrdinalIgnoreCase);
 
     /// <summary>Kurz Last erzeugen, um den echten Turbo-Takt zu messen.</summary>
-    public async Task ProbeTurboAsync()
+    /// <summary>Belastet einen Kern 5 s und misst den höchsten Takt. Rückgabe: gemessener Höchsttakt (0 = keine Messwerte).</summary>
+    public async Task<int> ProbeTurboAsync()
     {
         var load = new CpuLoad();
         load.Start(CpuStressMode.Float, 1);
-        for (int i = 0; i < 8; i++)
+        int seen = 0;
+        try
         {
-            await Task.Delay(400);
-            var c = HardwareHub.Instance.Latest.CpuClock;
-            if (!double.IsNaN(c) && c < 7000) MaxSeen = Math.Max(MaxSeen, (int)c);
+            for (int i = 0; i < 12; i++)
+            {
+                await Task.Delay(450);
+                var c = HardwareHub.Instance.Latest.CpuClock;
+                if (!double.IsNaN(c) && c is > 300 and < 7000) seen = Math.Max(seen, (int)c);
+            }
         }
-        load.Stop();
+        finally { load.Stop(); }
+        if (seen > 0) MaxSeen = Math.Max(MaxSeen, seen);
         Raise(nameof(TurboClock)); Raise(nameof(CapMax));
-        Log.Info(LogModule.Tweaker, $"Gemessener Turbo-Takt: {MaxSeen} MHz");
+        Log.Info(LogModule.Tweaker, seen > 0 ? $"Gemessener Turbo-Takt: {seen} MHz (bisher höchster: {MaxSeen} MHz)" : "Turbo-Takt: keine Taktwerte von den Sensoren");
+        return seen;
     }
 }

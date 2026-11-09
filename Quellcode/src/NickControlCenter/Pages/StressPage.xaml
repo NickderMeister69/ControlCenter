@@ -2,6 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:NickControlCenter">
+    <UserControl.Resources>
+        <local:FractionWidth x:Key="PctWidth"/>
+        <DataTemplate x:Key="CompareRow">
+            <Grid Margin="0,2">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="2*"/><ColumnDefinition Width="3*"/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
+                <TextBlock x:Name="n" Text="{Binding Name}" TextTrimming="CharacterEllipsis" FontSize="12" VerticalAlignment="Center" ToolTip="{Binding Name}"/>
+                <Border x:Name="track" Grid.Column="1" Height="8" Margin="8,0" CornerRadius="4" Background="{StaticResource LineBrush}" VerticalAlignment="Center">
+                    <Border x:Name="bar" HorizontalAlignment="Left" CornerRadius="4" Background="{StaticResource SubTextBrush}">
+                        <Border.Width>
+                            <MultiBinding Converter="{StaticResource PctWidth}">
+                                <Binding Path="Fraction"/>
+                                <Binding Path="ActualWidth" ElementName="track"/>
+                            </MultiBinding>
+                        </Border.Width>
+                    </Border>
+                </Border>
+                <TextBlock Grid.Column="2" Text="{Binding Score, StringFormat={}{0:N0}}" HorizontalAlignment="Right" FontSize="12" FontFamily="{StaticResource NumFont}" VerticalAlignment="Center"/>
+            </Grid>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Mine}" Value="True">
+                    <Setter TargetName="bar" Property="Background" Value="{DynamicResource AccentBrush}"/>
+                    <Setter TargetName="n" Property="FontWeight" Value="Bold"/>
+                    <Setter TargetName="n" Property="Foreground" Value="{DynamicResource AccentBrush}"/>
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+    </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
         <StackPanel Margin="0,0,12,0">
             <local:FindingsPanel Area="Stress"/>
@@ -99,7 +126,7 @@
                                 </StackPanel>
                                 <TextBlock Text="{Binding Elapsed}" Style="{StaticResource BigNum}" FontSize="36" HorizontalAlignment="Right"/>
                             </Grid>
-                            <ProgressBar Value="{Binding Progress}" Maximum="100" Margin="0,10,0,12"/>
+                            <ProgressBar Value="{Binding Progress, Mode=OneWay}" Maximum="100" Margin="0,10,0,12"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource AccentButton}" Padding="28,10" FontSize="14" Click="Start_Click" IsEnabled="{Binding NotRunning}">
                                     <StackPanel Orientation="Horizontal"><TextBlock Text="&#xE768;" Style="{StaticResource Icon}" Margin="0,0,8,0"/><TextBlock Text="Test starten"/></StackPanel>
@@ -132,6 +159,47 @@
                             <TextBlock Text="ERGEBNIS" Style="{StaticResource Kicker}"/>
                             <TextBlock Text="{Binding Summary}" TextWrapping="Wrap" LineHeight="20"/>
                             <Button Content="Bericht-Ordner öffnen" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Reports_Click"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="VERGLEICH MIT ANDEREN SYSTEMEN" Style="{StaticResource Kicker}"/>
+                            <TextBlock Text="{Binding CompareText}" Style="{StaticResource Caption}" TextWrapping="Wrap"/>
+                            <Grid Margin="0,10,0,0" Visibility="{Binding HasCompare, Converter={StaticResource BoolToVis}}">
+                                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <StackPanel Margin="0,0,14,0">
+                                    <TextBlock Text="Prozessoren" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                    <ScrollViewer MaxHeight="360" VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding CpuCompare}" ItemTemplate="{StaticResource CompareRow}"/>
+                                    </ScrollViewer>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="Grafikkarten" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                                    <ScrollViewer MaxHeight="360" VerticalScrollBarVisibility="Auto">
+                                        <ItemsControl ItemsSource="{Binding GpuCompare}" ItemTemplate="{StaticResource CompareRow}"/>
+                                    </ScrollViewer>
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="DEINE ERGEBNISSE" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="Jeder Test ab 30 Sekunden wird gespeichert – so siehst du z. B., ob Übertakten/Undervolten etwas gebracht hat."/>
+                            <ItemsControl ItemsSource="{Binding History}" Margin="0,8,0,0">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,2">
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="130"/><ColumnDefinition Width="170"/><ColumnDefinition Width="170"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Date, StringFormat={}{0:dd.MM.yy HH:mm}}" Style="{StaticResource Muted}"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding CpuScore, StringFormat=CPU {0:N0}}" FontFamily="{StaticResource NumFont}"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding GpuScore, StringFormat=GPU {0:N0}}" FontFamily="{StaticResource NumFont}"/>
+                                            <TextBlock Grid.Column="3" Style="{StaticResource Muted}" TextTrimming="CharacterEllipsis"><Run Text="{Binding Mode, Mode=OneWay}"/><Run Text=" · "/><Run Text="{Binding Seconds, Mode=OneWay}"/><Run Text=" s"/></TextBlock>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Button Content="Liste leeren" HorizontalAlignment="Left" Margin="0,8,0,0" Click="ClearHistory_Click"/>
                         </StackPanel>
                     </Border>
                     <Border Style="{StaticResource Card}">

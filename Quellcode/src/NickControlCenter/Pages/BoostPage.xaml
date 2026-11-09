@@ -1,7 +1,11 @@
 <UserControl x:Class="NickControlCenter.BoostPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:NickControlCenter">
+             xmlns:local="clr-namespace:NickControlCenter"
+             xmlns:core="clr-namespace:NickControlCenter;assembly=NickControlCenter.Core">
+    <UserControl.Resources>
+        <local:EqualsConverter x:Key="Eq"/>
+    </UserControl.Resources>
     <Grid Margin="28,0,16,16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -34,9 +38,8 @@
         </Border>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="2,0,0,8">
-            <RadioButton Style="{StaticResource Tab}" Content="Optimierungen" GroupName="BT" IsChecked="True" Checked="Tab_Checked" Tag="T1"/>
-            <RadioButton Style="{StaticResource Tab}" Content="Spiele &amp; Steam" GroupName="BT" Checked="Tab_Checked" Tag="T2"/>
-            <RadioButton Style="{StaticResource Tab}" Content="ARK" GroupName="BT" Checked="Tab_Checked" Tag="T3"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Spiele &amp; Profile" GroupName="BT" IsChecked="True" Checked="Tab_Checked" Tag="T2"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Windows-Optimierungen" GroupName="BT" Checked="Tab_Checked" Tag="T1"/>
             <RadioButton Style="{StaticResource Tab}" Content="Werkzeuge" GroupName="BT" Checked="Tab_Checked" Tag="T4"/>
             <RadioButton Style="{StaticResource Tab}" Content="Hintergrund-Apps" GroupName="BT" Checked="Tab_Checked" Tag="T5"/>
             <RadioButton Style="{StaticResource Tab}" Content="Protokoll" GroupName="BT" Checked="Tab_Checked" Tag="T6"/>
@@ -44,7 +47,7 @@
 
         <Grid Grid.Row="2">
             <!-- ======== Optimierungen ======== -->
-            <ScrollViewer x:Name="T1" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer x:Name="T1" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
                 <StackPanel Margin="0,0,12,0">
                     <local:FindingsPanel Area="Boost"/>
                     <Border Style="{StaticResource Card}">
@@ -87,125 +90,159 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <!-- ======== Spiele & Steam ======== -->
-            <ScrollViewer x:Name="T2" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
-                <StackPanel Margin="0,0,12,0">
-                    <Border Style="{StaticResource Card}">
-                        <Grid>
-                            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                            <TextBlock Text="&#xE7FC;" Style="{StaticResource Icon}" FontSize="28" Foreground="{DynamicResource AccentBrush}" Margin="0,0,16,0"/>
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Text="STEAM" Style="{StaticResource Kicker}"/>
-                                <TextBlock Text="{Binding SteamText}" Style="{StaticResource H2}" FontSize="14.5"/>
-                                <TextBlock Style="{StaticResource Caption}" Margin="0,4,0,0"
-                                           Text="Liest deine lokale Steam-Bibliothek (kein Passwort, nichts wird hochgeladen) und erkennt alle installierten Spiele mit ihrer exe. Pro Spiel wählst du ein Profil – startet das Spiel, stellt der Auto-Boost automatisch alles passend ein."/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                <Button Style="{StaticResource AccentButton}" Content="Mit Steam verbinden" Click="Steam_Click" x:Name="SteamBtn" Padding="16,9"/>
-                                <Button Content="Trennen" Click="SteamOff_Click" Margin="0,6,0,0" x:Name="SteamOffBtn"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                    <Border Style="{StaticResource Card}">
+            <!-- ======== Spiele & Profile ======== -->
+            <Grid x:Name="T2">
+                <Grid.ColumnDefinitions><ColumnDefinition Width="330"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                <!-- Liste -->
+                <Border Style="{StaticResource Card}" Margin="0,0,10,0" Padding="12">
+                    <Grid>
+                        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
                         <StackPanel>
-                            <TextBlock Text="AUTO-BOOST" Style="{StaticResource Kicker}"/>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Automatisch boosten, sobald ein Spiel mit Profil startet" IsChecked="{Binding Settings.AutoBoost}"/>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Dabei gewählte Hintergrund-Apps schließen (nur Profil Max-FPS)" IsChecked="{Binding Settings.AutoCloseApps}" Margin="0,8,0,0"/>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Spiel-exe optimieren (Vollbildoptimierung aus, starke Grafikkarte, hohe Priorität)" IsChecked="{Binding Settings.GameExeTweaks}" Margin="0,8,0,0"/>
-                            <TextBlock Text="{Binding AutoStatus}" Style="{StaticResource Muted}" Margin="0,8,0,0"/>
-                            <TextBlock Style="{StaticResource Caption}" Margin="0,6,0,0" Text="Max-FPS: hohe CPU-Priorität, Timer 0,5 ms, Apps schließen · Ausgewogen: erhöhte Priorität, sonst nichts."/>
-                            <WrapPanel Margin="0,10,0,0">
-                                <Button Content="Eigene exe hinzufügen …" Click="AddExe_Click" Margin="0,0,8,6"/>
-                                <Button Content="Spielordner wählen …" Click="AddFolder_Click" Margin="0,0,8,6" ToolTip="Für ARK außerhalb von Steam"/>
-                            </WrapPanel>
-                            <ItemsControl ItemsSource="{Binding AutoBoostList}" Margin="0,4,0,0">
-                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border Background="{StaticResource PanelAltBrush}" BorderBrush="{StaticResource LineStrongBrush}" BorderThickness="1" CornerRadius="3" Padding="8,3" Margin="0,0,6,6">
-                                            <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="{Binding StringFormat={}{0}.exe}" FontSize="12" VerticalAlignment="Center"/>
-                                                <Button Content="&#xE711;" Style="{StaticResource IconButton}" Width="22" Height="22" FontSize="9" Click="RemoveAuto_Click" Tag="{Binding}"/>
-                                            </StackPanel>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
+                            <TextBlock Text="DEINE SPIELE" Style="{StaticResource Kicker}"/>
+                            <TextBlock Text="{Binding GamesText}" Style="{StaticResource Muted}"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Auto-Boost beim Spielstart" IsChecked="{Binding Settings.AutoBoost}" Margin="0,10,0,0"/>
+                            <TextBlock Text="{Binding AutoStatus}" Style="{StaticResource Muted}" Margin="0,4,0,0" TextWrapping="Wrap"/>
                         </StackPanel>
-                    </Border>
-                    <TextBlock Text="ERKANNTE SPIELE" Style="{StaticResource Kicker}" Margin="0,4,0,8"/>
-                    <ItemsControl ItemsSource="{Binding Games}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Border Style="{StaticResource SubCard}" Margin="0,0,0,6">
+                        <StackPanel Grid.Row="1" Margin="0,10,0,8">
+                            <Button Style="{StaticResource AccentButton}" Content="Spiel hinzufügen (exe wählen) …" Click="AddExe_Click" HorizontalAlignment="Stretch"/>
+                            <Grid Margin="0,6,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                <ComboBox x:Name="KnownBox" ItemsSource="{x:Static local:BoostService.KnownGameNames}" ToolTip="Bekanntes Spiel aus der Liste wählen – Einstellungen sind schon darauf abgestimmt"/>
+                                <Button Grid.Column="1" Content="+" Margin="6,0,0,0" Width="34" Click="AddKnown_Click" ToolTip="Ausgewähltes Spiel hinzufügen"/>
+                            </Grid>
+                        </StackPanel>
+                        <ListBox Grid.Row="2" x:Name="GameList" SelectedItem="{Binding SelectedGame}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="{x:Type local:GameVM}">
                                     <Grid>
-                                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="200"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
                                         <StackPanel>
-                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
-                                            <TextBlock Style="{StaticResource Muted}" TextTrimming="CharacterEllipsis"><Run Text="{Binding ExeName, Mode=OneWay}"/><Run Text="  ·  "/><Run Text="{Binding Root, Mode=OneWay}"/></TextBlock>
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Text="{Binding Sub}" Style="{StaticResource Muted}" FontSize="11" TextTrimming="CharacterEllipsis"/>
                                         </StackPanel>
-                                        <ComboBox Grid.Column="1" ItemsSource="{x:Static local:GameVM.ProfileNames}" SelectedIndex="{Binding Profile}" Margin="10,0" VerticalAlignment="Center"
-                                                  ToolTip="Profil für dieses Spiel (wird beim Spielstart automatisch angewendet)"/>
-                                        <Button Grid.Column="2" Content="Spielen" Click="Play_Click" VerticalAlignment="Center"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding StateText}" FontSize="10.5" FontWeight="Bold" VerticalAlignment="Center" Margin="8,0,0,0" Foreground="{DynamicResource AccentBrush}"/>
                                     </Grid>
-                                </Border>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </ScrollViewer>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <StackPanel Grid.Row="3" Margin="0,8,0,0">
+                            <TextBlock Text="{Binding SteamText}" Style="{StaticResource Muted}" TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                <Button Content="Mit Steam verbinden" Click="Steam_Click" x:Name="SteamBtn"/>
+                                <Button Content="Trennen" Click="SteamOff_Click" Margin="6,0,0,0" x:Name="SteamOffBtn"/>
+                                <Button Content="&#xE72C;" Style="{StaticResource IconButton}" Click="Rescan_Click" ToolTip="Spiele neu suchen (Steam, Epic, Riot)" Margin="6,0,0,0"/>
+                            </StackPanel>
+                            <CheckBox Content="Bekannte Spiele automatisch erkennen, sobald sie laufen" IsChecked="{Binding Settings.DetectRunning}" Margin="0,8,0,0" FontSize="12"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
 
-            <!-- ======== ARK ======== -->
-            <ScrollViewer x:Name="T3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
-                <StackPanel Margin="0,0,12,0">
-                    <Border Style="{StaticResource Card}">
-                        <StackPanel>
-                            <TextBlock Text="ARK: SURVIVAL EVOLVED / ASCENDED" Style="{StaticResource Kicker}"/>
-                            <TextBlock x:Name="ArkFound" Style="{StaticResource H2}" FontSize="14.5"/>
-                            <TextBlock Style="{StaticResource Caption}" Margin="0,4,0,0" Text="Diese Einstellungen schreibt der Boost in die ARK-Configs (GameUserSettings.ini / Engine.ini). Die Originale werden vorher gesichert. ARK muss dafür geschlossen sein."/>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Grafik-Configs anpassen" IsChecked="{Binding Settings.ArkGraphics}" Margin="0,12,0,0"/>
-                            <Grid Margin="0,12,0,0" IsEnabled="{Binding Settings.ArkGraphics}">
-                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="260"/></Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
-                                <TextBlock Text="Grafik-Preset" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
-                                <ComboBox Grid.Column="1" SelectedIndex="{Binding Settings.ArkPreset}" Margin="0,0,0,6">
-                                    <ComboBoxItem Content="Nicht ändern"/><ComboBoxItem Content="Maximale FPS"/><ComboBoxItem Content="Ausgewogen"/>
-                                </ComboBox>
-                                <TextBlock Grid.Row="1" Text="FPS-Limit" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="{Binding Settings.ArkFps}" Margin="0,0,0,6">
-                                    <ComboBoxItem Content="Nicht ändern"/><ComboBoxItem Content="Unbegrenzt"/><ComboBoxItem Content="60"/><ComboBoxItem Content="75"/>
-                                    <ComboBoxItem Content="120"/><ComboBoxItem Content="144"/><ComboBoxItem Content="165"/><ComboBoxItem Content="240"/>
-                                </ComboBox>
-                                <TextBlock Grid.Row="2" Text="Auflösungs-Skalierung" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
-                                <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding Settings.ArkRes}">
-                                    <ComboBoxItem Content="Nicht ändern"/><ComboBoxItem Content="100 %"/><ComboBoxItem Content="90 %"/><ComboBoxItem Content="80 %"/>
-                                    <ComboBoxItem Content="75 %"/><ComboBoxItem Content="70 %"/><ComboBoxItem Content="60 %"/>
-                                </ComboBox>
+                <!-- Profil des gewählten Spiels -->
+                <TextBlock Grid.Column="1" x:Name="NoGame" Style="{StaticResource Muted}" Margin="12" TextWrapping="Wrap"
+                           Text="Wähle links ein Spiel oder füge eins hinzu – z. B. VALORANT, Fortnite, CS2 oder jede beliebige exe. Für jedes Spiel stellst du ein eigenes Profil ein; beim Spielstart wird es automatisch aktiv."/>
+                <ScrollViewer Grid.Column="1" x:Name="GameDetail" VerticalScrollBarVisibility="Auto" DataContext="{Binding SelectedGame}">
+                    <StackPanel Margin="0,0,12,0">
+                        <Border Style="{StaticResource Card}">
+                            <Grid>
+                                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" Style="{StaticResource H2}"/>
+                                    <TextBlock Style="{StaticResource Muted}" TextTrimming="CharacterEllipsis"><Run Text="{Binding P.Source, Mode=OneWay}"/><Run Text="  ·  "/><Run Text="{Binding P.Exe, Mode=OneWay, TargetNullValue='exe wird beim ersten Start erkannt'}"/></TextBlock>
+                                    <TextBlock Text="{Binding Summary}" Style="{StaticResource Caption}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
+                                    <Button Style="{StaticResource AccentButton}" Content="Spielen" Click="Play_Click"/>
+                                    <Button Content="&#xE74D;" Style="{StaticResource IconButton}" Click="Remove_Click" ToolTip="Aus der Liste entfernen" Margin="6,0,0,0"/>
+                                </StackPanel>
                             </Grid>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="V-Sync aus" IsChecked="{Binding Settings.ArkVsyncOff}" Margin="0,12,0,0"/>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Bewegungs-/Tiefenunschärfe, Linsenreflexe aus" IsChecked="{Binding Settings.ArkPostFxOff}" Margin="0,8,0,0"/>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="ASA: volumetrische Wolken &amp; Nebel aus (+5–15 FPS, sieht schlichter aus)" IsChecked="{Binding Settings.AsaVolumetricsOff}" Margin="0,8,0,0"/>
-                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="ASE: Intro-Videos überspringen" IsChecked="{Binding Settings.ArkSkipIntros}" Margin="0,8,0,0"/>
-                        </StackPanel>
-                    </Border>
-                    <Border Style="{StaticResource Card}">
-                        <StackPanel>
-                            <TextBlock Text="STARTOPTIONEN (STEAM)" Style="{StaticResource Kicker}"/>
-                            <TextBlock Style="{StaticResource Caption}" Text="In Steam: Rechtsklick auf ARK → Eigenschaften → Startoptionen → einfügen."/>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
-                                <TextBlock Text="ASA" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                                <TextBox Grid.Column="1" x:Name="AsaArgs" Text="-USEALLAVAILABLECORES -nosplash" IsReadOnly="True" FontFamily="{StaticResource MonoFont}" Margin="0,0,8,6"/>
-                                <Button Grid.Column="2" Content="Kopieren" Click="CopyAsa_Click" Margin="0,0,0,6"/>
-                                <TextBlock Grid.Row="1" Text="ASE" FontWeight="SemiBold" VerticalAlignment="Center"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="AseArgs" Text="-USEALLAVAILABLECORES -nosplash -high" IsReadOnly="True" FontFamily="{StaticResource MonoFont}" Margin="0,0,8,0"/>
-                                <Button Grid.Row="1" Grid.Column="2" Content="Kopieren" Click="CopyAse_Click"/>
-                            </Grid>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-            </ScrollViewer>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="PROFIL FÜR DIESES SPIEL" Style="{StaticResource Kicker}"/>
+                                <Border Style="{StaticResource SegmentBox}" HorizontalAlignment="Left">
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton Style="{StaticResource Segment}" Content="Max-FPS" GroupName="GP" Tag="0" Click="Preset_Click" IsChecked="{Binding PresetIndex, Mode=OneWay, Converter={StaticResource Eq}, ConverterParameter=0}" ToolTip="Alles für maximale FPS und niedrigen Input-Lag – ideal für Shooter"/>
+                                        <RadioButton Style="{StaticResource Segment}" Content="Ausgewogen" GroupName="GP" Tag="1" Click="Preset_Click" IsChecked="{Binding PresetIndex, Mode=OneWay, Converter={StaticResource Eq}, ConverterParameter=1}" ToolTip="Mehr FPS, aber Grafik bleibt schön – ideal für Story-/Open-World-Spiele"/>
+                                        <RadioButton Style="{StaticResource Segment}" Content="Eigene" GroupName="GP" Tag="2" Click="Preset_Click" IsChecked="{Binding PresetIndex, Mode=OneWay, Converter={StaticResource Eq}, ConverterParameter=2}" ToolTip="Wird automatisch gewählt, sobald du unten etwas änderst"/>
+                                        <RadioButton Style="{StaticResource Segment}" Content="Aus" GroupName="GP" Tag="3" Click="Preset_Click" IsChecked="{Binding PresetIndex, Mode=OneWay, Converter={StaticResource Eq}, ConverterParameter=3}" ToolTip="Für dieses Spiel nichts tun"/>
+                                    </StackPanel>
+                                </Border>
+                                <Button Content="✨  Empfohlene Einstellungen für meinen PC" HorizontalAlignment="Left" Margin="0,12,0,0" Click="Recommend_Click"
+                                        ToolTip="Schaut auf Grafikkarte, Monitor (Auflösung und Hz), CPU und RAM und schlägt vor, wie dieses Spiel am besten läuft"/>
+                                <Border Background="{StaticResource InfoSoftBrush}" CornerRadius="4" Padding="12,9" Margin="0,12,0,0" Visibility="{Binding HasHint, Converter={StaticResource BoolToVis}}">
+                                    <StackPanel>
+                                        <TextBlock Text="TIPPS FÜR DIESES SPIEL" FontSize="10.5" FontWeight="Bold" Foreground="{StaticResource InfoBrush}"/>
+                                        <TextBlock Text="{Binding Hint}" TextWrapping="Wrap" Margin="0,3,0,0" FontSize="12.5"/>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="BEIM SPIELSTART (WINDOWS)" Style="{StaticResource Kicker}"/>
+                                <Grid Margin="0,0,0,10">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="170"/><ColumnDefinition Width="200"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="CPU-Priorität" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{x:Static core:GameCatalog.PriorityNames}" SelectedIndex="{Binding Priority}"/>
+                                </Grid>
+                                <UniformGrid Columns="2">
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Timer-Auflösung 0,5 ms" IsChecked="{Binding Timer}" Margin="0,0,10,10" ToolTip="Gleichmäßigere Frametimes, weniger Input-Lag – nur solange das Spiel läuft"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Energieplan Höchstleistung" IsChecked="{Binding PowerPlan}" Margin="0,0,10,10" ToolTip="Nur solange das Spiel läuft, danach wieder dein normaler Plan"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Hintergrund-Apps schließen" IsChecked="{Binding CloseApps}" Margin="0,0,10,10" ToolTip="Die im Reiter „Hintergrund-Apps“ angehakten Programme"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="RAM + Standby-Liste freigeben" IsChecked="{Binding CleanRam}" Margin="0,0,10,10"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Desktop-Kacheln pausieren" IsChecked="{Binding PauseTiles}" Margin="0,0,10,10" ToolTip="Kacheln werden während des Spiels ausgeblendet und danach wieder gezeigt"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Vollbild-Optimierung aus + starke GPU" IsChecked="{Binding ExeTweaks}" Margin="0,0,10,10" ToolTip="Windows-Einträge für die Spiel-exe (wirkt ab dem nächsten Start)"/>
+                                </UniformGrid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="GRAFIK IM SPIEL" Style="{StaticResource Kicker}"/>
+                                <TextBlock Text="{Binding ConfigText}" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="11.5"/>
+                                <StackPanel Visibility="{Binding CanGraphics, Converter={StaticResource BoolToVis}}" Margin="0,10,0,0">
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Grafik-Config dieses Spiels anpassen" IsChecked="{Binding Graphics}"/>
+                                    <Grid Margin="0,10,0,0" IsEnabled="{Binding Graphics}">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="170"/><ColumnDefinition Width="240"/></Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                                        <TextBlock Text="Grafik-Qualität" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Column="1" ItemsSource="{x:Static core:GameCatalog.QualityNames}" SelectedIndex="{Binding GfxQuality}" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="1" Text="FPS-Limit" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{x:Static core:GameCatalog.FpsLimitNames}" SelectedIndex="{Binding FpsLimit}" Margin="0,0,0,6"/>
+                                        <TextBlock Grid.Row="2" Text="Auflösungs-Skalierung" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                        <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{x:Static core:GameCatalog.ResolutionNames}" SelectedIndex="{Binding ResScale}"/>
+                                    </Grid>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="V-Sync aus" IsChecked="{Binding VsyncOff}" Margin="0,10,0,0" IsEnabled="{Binding Graphics}"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Bewegungs-/Tiefenunschärfe, Linsenreflexe aus" IsChecked="{Binding PostFxOff}" Margin="0,8,0,0" IsEnabled="{Binding Graphics}"
+                                              Visibility="{Binding EngineIniOk, Converter={StaticResource BoolToVis}}"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Volumetrische Wolken &amp; Nebel aus (UE5, +5–15 FPS)" IsChecked="{Binding VolumetricsOff}" Margin="0,8,0,0" IsEnabled="{Binding Graphics}"
+                                              Visibility="{Binding IsUe5, Converter={StaticResource BoolToVis}}"/>
+                                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                        <Button Content="Jetzt in die Config schreiben" Click="ApplyGfx_Click" ToolTip="Spiel muss geschlossen sein. Passiert sonst automatisch über „Spielen“ und beim BOOST."/>
+                                        <Button Content="Original wiederherstellen" Click="RestoreGfx_Click" Margin="8,0,0,0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <CheckBox Style="{StaticResource ToggleSwitch}" Content="Intro-Videos überspringen" IsChecked="{Binding SkipIntros}" Margin="0,10,0,0"
+                                          Visibility="{Binding HasIntros, Converter={StaticResource BoolToVis}}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Visibility="{Binding HasLaunchOptions, Converter={StaticResource BoolToVis}}">
+                            <StackPanel>
+                                <TextBlock Text="EMPFOHLENE STARTOPTIONEN" Style="{StaticResource Kicker}"/>
+                                <TextBlock Style="{StaticResource Caption}" Text="Steam: Rechtsklick aufs Spiel → Eigenschaften → Startoptionen → einfügen."/>
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBox Text="{Binding LaunchOptions, Mode=OneWay}" IsReadOnly="True" FontFamily="{StaticResource MonoFont}"/>
+                                    <Button Grid.Column="1" Content="Kopieren" Click="CopyLaunch_Click" Margin="8,0,0,0"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
 
             <!-- ======== Werkzeuge ======== -->
             <ScrollViewer x:Name="T4" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
@@ -214,7 +251,7 @@
                         <StackPanel>
                             <TextBlock Text="TEMPORÄRE DATEIEN" Style="{StaticResource Kicker}"/>
                             <TextBlock Style="{StaticResource Caption}" Text="Löscht Windows- und Benutzer-Temp (Dateien älter als 1 Stunde). Läuft im Hintergrund – die App bleibt bedienbar, gesperrte Dateien werden übersprungen."/>
-                            <ProgressBar Value="{Binding CleanProgress}" Maximum="100" Margin="0,10,0,6"/>
+                            <ProgressBar Value="{Binding CleanProgress, Mode=OneWay}" Maximum="100" Margin="0,10,0,6"/>
                             <TextBlock Text="{Binding CleanStatus}" Style="{StaticResource Muted}" TextWrapping="Wrap"/>
                             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                                 <Button Style="{StaticResource AccentButton}" Content="Jetzt aufräumen" Click="Clean_Click"/>
@@ -272,7 +309,7 @@
                 <Border Style="{StaticResource Card}" Margin="0,0,12,0" VerticalAlignment="Top">
                     <StackPanel>
                         <TextBlock Text="LAUFENDE HINTERGRUND-PROGRAMME" Style="{StaticResource Kicker}"/>
-                        <TextBlock Style="{StaticResource Caption}" Text="Häkchen = wird beim Boost geschlossen. Browser werden nur sanft geschlossen (gespeicherte Tabs bleiben)."/>
+                        <TextBlock Style="{StaticResource Caption}" Text="Alle Programme, die gerade laufen – das größte zuerst. Häkchen = wird beim Boost bzw. Spielstart geschlossen. Programme mit offenem Fenster werden nur sanft geschlossen (wie mit X – nichts geht verloren), reine Hintergrund-Programme werden beendet."/>
                         <ItemsControl ItemsSource="{Binding BackgroundApps}" Margin="0,10,0,0">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
@@ -283,7 +320,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                        <TextBlock x:Name="NoApps" Text="Keine bekannten Hintergrund-Programme aktiv – sehr gut!" Foreground="{StaticResource GoodBrush}" Margin="0,8,0,0"/>
+                        <TextBlock x:Name="NoApps" Text="Keine Programme im Hintergrund gefunden – sehr gut!" Foreground="{StaticResource GoodBrush}" Margin="0,8,0,0"/>
                         <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
                             <Button Content="Liste aktualisieren" Click="RefreshApps_Click"/>
                             <Button Content="Ausgewählte jetzt schließen" Click="CloseApps_Click" Margin="8,0,0,0"/>
