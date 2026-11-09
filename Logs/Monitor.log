@@ -26,3 +26,8 @@
 2026-11-09 12:47:51  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
 2026-11-09 12:48:22  INFO     [Monitor] GPU-Leistungssensoren: 
 2026-11-09 12:48:22  INFO     [Monitor] Messwerte: CPU 49,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 39 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-09 12:58:23  INFO     [Monitor] Messwerte: CPU 50,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 39 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-09 13:08:23  INFO     [Monitor] Messwerte: CPU 48,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 40 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-09 13:18:23  INFO     [Monitor] Messwerte: CPU 48,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 40 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-09 13:28:24  INFO     [Monitor] Messwerte: CPU 47,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 38 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-09 13:38:24  INFO     [Monitor] Messwerte: CPU 47,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 38 %, NaN W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
