@@ -1,0 +1,147 @@
+<UserControl x:Class="NickControlCenter.StressPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
+        <StackPanel Margin="0,0,12,0">
+            <local:FindingsPanel Area="Stress"/>
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="1.15*"/></Grid.ColumnDefinitions>
+                <!-- Einstellungen -->
+                <StackPanel Margin="0,0,12,0" IsEnabled="{Binding NotRunning}">
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="PROZESSOR" Style="{StaticResource Kicker}"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="CPU belasten" IsChecked="{Binding Settings.Cpu}"/>
+                            <TextBlock x:Name="CpuInfo" Style="{StaticResource Muted}" Margin="52,2,0,0"/>
+                            <Grid Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Rechenart" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" x:Name="ModeBox" SelectionChanged="Mode_Changed">
+                                    <ComboBoxItem Content="Gemischt (empfohlen)"/>
+                                    <ComboBoxItem Content="Gleitkomma (FPU)"/>
+                                    <ComboBoxItem Content="AVX / Vektor (heißeste Last)"/>
+                                    <ComboBoxItem Content="Ganzzahl"/>
+                                </ComboBox>
+                            </Grid>
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/><ColumnDefinition Width="60"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Threads" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" x:Name="ThreadSlider" Minimum="0" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="Threads_Changed"/>
+                                <TextBlock Grid.Column="2" x:Name="ThreadText" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="GRAFIKKARTE" Style="{StaticResource Kicker}"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Grafikkarte belasten (NVIDIA, AMD, Intel)" IsChecked="{Binding Settings.Gpu}"/>
+                            <Grid Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Karte" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" x:Name="AdapterBox" SelectionChanged="Adapter_Changed"/>
+                            </Grid>
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/><ColumnDefinition Width="60"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Intensität" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="10" Maximum="100" Value="{Binding Settings.GpuIntensity}" IsSnapToTickEnabled="True" TickFrequency="5"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Settings.GpuIntensity, StringFormat={}{0} %}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="ARBEITSSPEICHER" Style="{StaticResource Kicker}"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="RAM schreiben &amp; prüfen" IsChecked="{Binding Settings.Ram}"/>
+                            <Grid Margin="0,12,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/><ColumnDefinition Width="60"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="vom freien RAM" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="10" Maximum="80" Value="{Binding Settings.RamPercent}" IsSnapToTickEnabled="True" TickFrequency="5"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Settings.RamPercent, StringFormat={}{0} %}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="DAUER &amp; SICHERHEIT" Style="{StaticResource Kicker}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Dauer" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" x:Name="DurBox" SelectionChanged="Dur_Changed">
+                                    <ComboBoxItem Content="2 Minuten (Schnelltest)" Tag="2"/><ComboBoxItem Content="5 Minuten" Tag="5"/><ComboBoxItem Content="10 Minuten" Tag="10"/>
+                                    <ComboBoxItem Content="15 Minuten" Tag="15"/><ComboBoxItem Content="30 Minuten" Tag="30"/><ComboBoxItem Content="60 Minuten" Tag="60"/><ComboBoxItem Content="Bis ich stoppe" Tag="0"/>
+                                </ComboBox>
+                            </Grid>
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/><ColumnDefinition Width="60"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="CPU-Abbruch" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" x:Name="CpuLim" Minimum="70" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" ValueChanged="CpuLim_Changed"/>
+                                <TextBlock Grid.Column="2" x:Name="CpuLimText" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                            <Grid Margin="0,8,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/><ColumnDefinition Width="60"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="GPU-Abbruch" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="70" Maximum="100" Value="{Binding Settings.GpuLimit}" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Settings.GpuLimit, StringFormat={}{0:0} °C}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Live -->
+                <StackPanel Grid.Column="1">
+                    <Border Style="{StaticResource AccentCard}">
+                        <StackPanel>
+                            <Grid>
+                                <StackPanel>
+                                    <TextBlock Text="STATUS" Style="{StaticResource Kicker}"/>
+                                    <TextBlock Text="{Binding State}" Style="{StaticResource H1}" FontSize="22"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Elapsed}" Style="{StaticResource BigNum}" FontSize="36" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <ProgressBar Value="{Binding Progress}" Maximum="100" Margin="0,10,0,12"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource AccentButton}" Padding="28,10" FontSize="14" Click="Start_Click" IsEnabled="{Binding NotRunning}">
+                                    <StackPanel Orientation="Horizontal"><TextBlock Text="&#xE768;" Style="{StaticResource Icon}" Margin="0,0,8,0"/><TextBlock Text="Test starten"/></StackPanel>
+                                </Button>
+                                <Button Style="{StaticResource DangerButton}" Padding="22,10" Margin="10,0,0,0" Click="Stop_Click" IsEnabled="{Binding Running}">
+                                    <StackPanel Orientation="Horizontal"><TextBlock Text="&#xE71A;" Style="{StaticResource Icon}" Margin="0,0,8,0"/><TextBlock Text="Stopp"/></StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <UniformGrid Columns="3">
+                        <Border Style="{StaticResource Card}" Margin="0,0,10,12"><StackPanel><TextBlock Text="CPU-PUNKTE" Style="{StaticResource Kicker}"/><TextBlock Text="{Binding CpuScore}" FontFamily="{StaticResource NumFont}" FontSize="17" FontWeight="SemiBold"/></StackPanel></Border>
+                        <Border Style="{StaticResource Card}" Margin="0,0,10,12"><StackPanel><TextBlock Text="GPU-PUNKTE" Style="{StaticResource Kicker}"/><TextBlock Text="{Binding GpuScore}" FontFamily="{StaticResource NumFont}" FontSize="17" FontWeight="SemiBold"/></StackPanel></Border>
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,12"><StackPanel><TextBlock Text="RECHENFEHLER" Style="{StaticResource Kicker}"/><TextBlock Text="{Binding ErrorsText}" FontFamily="{StaticResource NumFont}" FontSize="17" FontWeight="SemiBold"/></StackPanel></Border>
+                    </UniformGrid>
+                    <UniformGrid Columns="2">
+                        <Border Style="{StaticResource Card}" Margin="0,0,10,12" Padding="14,12">
+                            <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="70"/></Grid.RowDefinitions>
+                                <Grid><TextBlock Text="CPU" Style="{StaticResource Kicker}"/><TextBlock x:Name="CpuNow" HorizontalAlignment="Right" FontWeight="SemiBold"/></Grid>
+                                <local:Sparkline Grid.Row="1" x:Name="CpuChart" Stroke="#F43F5E" Points="180"/></Grid>
+                        </Border>
+                        <Border Style="{StaticResource Card}" Margin="0,0,0,12" Padding="14,12">
+                            <Grid><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="70"/></Grid.RowDefinitions>
+                                <Grid><TextBlock Text="GRAFIKKARTE" Style="{StaticResource Kicker}"/><TextBlock x:Name="GpuNow" HorizontalAlignment="Right" FontWeight="SemiBold"/></Grid>
+                                <local:Sparkline Grid.Row="1" x:Name="GpuChart" Stroke="#FB923C" Points="180"/></Grid>
+                        </Border>
+                    </UniformGrid>
+                    <Border Style="{StaticResource Card}" Visibility="{Binding HasSummary, Converter={StaticResource BoolToVis}}">
+                        <StackPanel>
+                            <TextBlock Text="ERGEBNIS" Style="{StaticResource Kicker}"/>
+                            <TextBlock Text="{Binding Summary}" TextWrapping="Wrap" LineHeight="20"/>
+                            <Button Content="Bericht-Ordner öffnen" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Reports_Click"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="VERLAUF" Style="{StaticResource Kicker}"/>
+                            <ItemsControl ItemsSource="{Binding Events}" FontFamily="{StaticResource MonoFont}" FontSize="11.5" Foreground="{StaticResource SubTextBrush}" MaxHeight="220"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

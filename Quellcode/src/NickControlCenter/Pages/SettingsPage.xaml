@@ -1,0 +1,92 @@
+<UserControl x:Class="NickControlCenter.SettingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
+        <Grid Margin="0,0,12,0" MaxWidth="1150" HorizontalAlignment="Left">
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,12,0">
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="AKZENTFARBE DER APP" Style="{StaticResource Kicker}"/>
+                        <ItemsControl x:Name="Accents">
+                            <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Tag="{Binding Hex}" ToolTip="{Binding Name}" Click="Accent_Click" Width="40" Height="40" Margin="0,0,8,8" Cursor="Hand">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="b" CornerRadius="5" Background="{Binding Hex}" BorderBrush="#30FFFFFF" BorderThickness="1"/>
+                                                <ControlTemplate.Triggers><Trigger Property="IsMouseOver" Value="True"><Setter TargetName="b" Property="BorderBrush" Value="White"/><Setter TargetName="b" Property="BorderThickness" Value="2"/></Trigger></ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Grid Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBox x:Name="AccentHex" FontFamily="{StaticResource MonoFont}" ToolTip="Eigene Farbe, z. B. #FF6A00"/>
+                            <Button Grid.Column="1" Content="Übernehmen" Margin="8,0,0,0" Click="AccentHex_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="START &amp; SCHLIESSEN" Style="{StaticResource Kicker}"/>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="AutoStart" Content="Mit Windows starten (nur Symbol unten rechts)" Click="Autostart_Click"/>
+                        <TextBlock Style="{StaticResource Muted}" Margin="52,2,0,10" Text="Über die Aufgabenplanung – ohne Admin-Abfrage. Nötig, damit Lüfter, RGB und Kacheln nach dem Hochfahren laufen."/>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="ToTray" Content="X schließt nicht, sondern läuft im Hintergrund weiter" Click="Tray_Click"/>
+                        <TextBlock Style="{StaticResource Muted}" Margin="52,2,0,10" Text="Ganz beenden: „App beenden“ unten links oder Rechtsklick auf das Symbol unten rechts → Beenden."/>
+                        <Button Style="{StaticResource DangerButton}" Content="App jetzt komplett beenden" HorizontalAlignment="Left" Click="Exit_Click"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="VERKNÜPFUNGEN" Style="{StaticResource Kicker}"/>
+                        <TextBlock x:Name="LinkState" Style="{StaticResource Caption}"/>
+                        <Button Content="Verknüpfungen auf Desktop und im Startmenü erstellen" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Links_Click"/>
+                        <TextBlock Style="{StaticResource Muted}" Margin="0,10,0,0" TextWrapping="Wrap"
+                                   Text="An die Taskleiste anheften: Windows erlaubt das Programmen nicht selbst. Einfach: App läuft → Rechtsklick auf das Symbol in der Taskleiste → „An Taskleiste anheften“. Oder im Startmenü Rechtsklick auf „Nick Control Center“ → „An Taskleiste anheften“."/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="ANZEIGE" Style="{StaticResource Kicker}"/>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="Fahr" Content="Temperaturen in °F" Click="Fahr_Click"/>
+                        <Button Content="Messquelle (HWiNFO) einstellen …" HorizontalAlignment="Left" Margin="0,12,0,0" Click="Monitor_Click"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="ORDNER" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Muted}" Text="Protokolle (Logs)"/>
+                        <TextBlock x:Name="LogPath" FontFamily="{StaticResource MonoFont}" FontSize="11.5" TextWrapping="Wrap"/>
+                        <TextBlock Style="{StaticResource Muted}" Text="Einstellungen &amp; Sicherungen" Margin="0,8,0,0"/>
+                        <TextBlock x:Name="CfgPath" FontFamily="{StaticResource MonoFont}" FontSize="11.5" TextWrapping="Wrap"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Button Content="Logs öffnen" Click="Logs_Click"/>
+                            <Button Content="Einstellungen öffnen" Margin="8,0,0,0" Click="Cfg_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="ALTE EINZEL-APPS" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Caption}" Text="Lüfter- und RGB-Einstellungen der alten Fan-Control-App wurden beim ersten Start übernommen. Laufen die alten Apps noch oder starten sie mit Windows, meldet der Problemlöser das und entfernt sie auf Wunsch aus dem Autostart."/>
+                        <Button Content="Zum Problemlöser" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Diag_Click"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="ÜBER" Style="{StaticResource Kicker}"/>
+                        <TextBlock x:Name="About" Style="{StaticResource Caption}"/>
+                        <TextBlock Style="{StaticResource Muted}" Margin="0,8,0,0" TextWrapping="Wrap"
+                                   Text="Sensoren: LibreHardwareMonitor (MPL-2.0) und optional HWiNFO. RGB-Protokolle basieren auf OpenRGB (GPL-2.0)."/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

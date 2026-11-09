@@ -1,0 +1,176 @@
+<UserControl x:Class="NickControlCenter.TweakerPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
+        <StackPanel Margin="0,0,12,0">
+            <local:FindingsPanel Area="Tweaker"/>
+
+            <!-- Sicherheitsrückfrage -->
+            <Border Style="{StaticResource Card}" Background="{StaticResource WarnSoftBrush}" BorderBrush="#66FBBF24" Visibility="{Binding Svc.Confirming, Converter={StaticResource BoolToVis}}">
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="Läuft alles stabil?" Style="{StaticResource H2}" Foreground="{StaticResource WarnBrush}"/>
+                        <TextBlock Style="{StaticResource Caption}" FontSize="13">
+                            <Run Text="Ohne Bestätigung werden die alten Werte in"/> <Run Text="{Binding Svc.Countdown, Mode=OneWay}" FontWeight="Bold"/> <Run Text="Sekunden automatisch wiederhergestellt (Schutz, falls Bild/PC hängt)."/>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Content="Zurücksetzen" Click="Revert_Click" Margin="0,0,8,0"/>
+                        <Button Style="{StaticResource AccentButton}" Content="Behalten" Click="Keep_Click" Padding="22,8"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                <!-- CPU -->
+                <Border Style="{StaticResource Card}" Margin="0,0,12,12">
+                    <StackPanel>
+                        <TextBlock Text="PROZESSOR" Style="{StaticResource Kicker}"/>
+                        <TextBlock Text="{Binding Svc.CpuName}" Style="{StaticResource H2}"/>
+                        <TextBlock x:Name="CpuMeta" Style="{StaticResource Muted}" Margin="0,2,0,6"/>
+                        <TextBlock Text="{Binding Svc.CpuInfo}" Style="{StaticResource Caption}"/>
+                        <TextBlock Text="Vorschläge" Style="{StaticResource Muted}" Margin="0,12,0,6"/>
+                        <WrapPanel>
+                            <Button Content="Windows-Standard" Click="CpuPreset_Click" Tag="def" Margin="0,0,6,6"/>
+                            <Button Content="Leise &amp; kühl" Click="CpuPreset_Click" Tag="quiet" Margin="0,0,6,6"/>
+                            <Button Content="Effizient" Click="CpuPreset_Click" Tag="eff" Margin="0,0,6,6"/>
+                            <Button Content="Ausgewogen" Click="CpuPreset_Click" Tag="bal" Margin="0,0,6,6"/>
+                            <Button Content="Leistung" Click="CpuPreset_Click" Tag="perf" Margin="0,0,6,6"/>
+                        </WrapPanel>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" Content="Eigenen Energieplan verwenden" IsChecked="{Binding UsePlan}" Margin="0,10,0,0"/>
+                        <StackPanel IsEnabled="{Binding UsePlan}" Margin="0,8,0,0">
+                            <Grid Margin="0,4">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Turbo-Modus" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" SelectedIndex="{Binding Boost}">
+                                    <ComboBoxItem Content="Turbo aus (kühl, langsam)"/><ComboBoxItem Content="Normal"/><ComboBoxItem Content="Aggressiv (max. Takt)"/><ComboBoxItem Content="Effizient"/>
+                                </ComboBox>
+                            </Grid>
+                            <Grid Margin="0,4">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Max. Takt" Style="{StaticResource Muted}" VerticalAlignment="Center" ToolTip="Weniger Takt = weniger Spannung = kühler/leiser (Undervolt-Effekt)"/>
+                                <Slider Grid.Column="1" Minimum="{Binding CpuCapMin}" Maximum="{Binding CpuCapMax}" Value="{Binding MaxFreq}" TickFrequency="100" IsSnapToTickEnabled="True"/>
+                                <TextBlock Grid.Column="2" Text="{Binding MaxFreqText}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Min. Leistung" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="1" Maximum="100" Value="{Binding MinState}" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                <TextBlock Grid.Column="2" Text="{Binding MinState, StringFormat={}{0} %}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Max. Leistung" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="20" Maximum="100" Value="{Binding MaxState}" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                <TextBlock Grid.Column="2" Text="{Binding MaxState, StringFormat={}{0} %}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Energie-Präferenz" Style="{StaticResource Muted}" VerticalAlignment="Center" ToolTip="0 = immer volle Leistung, 100 = maximal sparen (Intel Speed Shift / AMD CPPC)"/>
+                                <Slider Grid.Column="1" Minimum="-1" Maximum="100" Value="{Binding Epp}" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                <TextBlock Grid.Column="2" Text="{Binding EppText}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Kern-Parking" Style="{StaticResource Muted}" VerticalAlignment="Center" ToolTip="Mindestanteil aktiver Kerne. 100 % = Kerne schlafen nie (weniger Latenz)"/>
+                                <Slider Grid.Column="1" Minimum="-1" Maximum="100" Value="{Binding MinCores}" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                <TextBlock Grid.Column="2" Text="{Binding MinCoresText}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Button Content="Echten Turbo-Takt messen" HorizontalAlignment="Left" Margin="0,8,0,0" Click="Probe_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- GPU -->
+                <Border Grid.Column="1" Style="{StaticResource Card}" Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="GRAFIKKARTE" Style="{StaticResource Kicker}"/>
+                        <TextBlock Text="{Binding Svc.Gpu.Name}" Style="{StaticResource H2}"/>
+                        <TextBlock Text="{Binding Svc.Gpu.Vendor}" Style="{StaticResource Muted}" Margin="0,2,0,6"/>
+                        <TextBlock Text="{Binding Svc.Gpu.Info}" Style="{StaticResource Caption}"/>
+                        <StackPanel IsEnabled="{Binding Svc.GpuAvailable}">
+                            <TextBlock Text="Vorschläge (auf diese Karte abgestimmt)" Style="{StaticResource Muted}" Margin="0,12,0,6"/>
+                            <WrapPanel>
+                                <Button Content="Werkseinstellung" Click="GpuPreset_Click" Tag="def" Margin="0,0,6,6"/>
+                                <Button Content="Undervolt (kühler)" Click="GpuPreset_Click" Tag="uv" Margin="0,0,6,6"/>
+                                <Button Content="Leichtes OC" Click="GpuPreset_Click" Tag="oc1" Margin="0,0,6,6"/>
+                                <Button Content="Maximales OC" Click="GpuPreset_Click" Tag="oc2" Margin="0,0,6,6"/>
+                            </WrapPanel>
+                            <Grid Margin="0,10,0,4" IsEnabled="{Binding Svc.Gpu.PowerAdjustable}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Leistungslimit" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="{Binding Svc.Gpu.PowerMinPct}" Maximum="{Binding Svc.Gpu.PowerMaxPct}" Value="{Binding PowerPct}" IsSnapToTickEnabled="True" TickFrequency="1"/>
+                                <TextBlock Grid.Column="2" Text="{Binding PowerPct, StringFormat={}{0} %}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4" IsEnabled="{Binding Svc.Gpu.OffsetsSupported}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Kern-Takt" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="{Binding Svc.Gpu.CoreMin}" Maximum="{Binding Svc.Gpu.CoreMax}" Value="{Binding CoreOffset}" IsSnapToTickEnabled="True" TickFrequency="5"/>
+                                <TextBlock Grid.Column="2" Text="{Binding CoreOffset, StringFormat={}{0:+0;-0;0} MHz}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4" IsEnabled="{Binding MemAdjustable}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Speicher-Takt" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <Slider Grid.Column="1" Minimum="{Binding Svc.Gpu.MemMin}" Maximum="{Binding Svc.Gpu.MemMax}" Value="{Binding MemOffset}" IsSnapToTickEnabled="True" TickFrequency="10"/>
+                                <TextBlock Grid.Column="2" Text="{Binding MemOffset, StringFormat={}{0:+0;-0;0} MHz}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4" Visibility="{Binding Svc.Gpu.ClockLockSupported, Converter={StaticResource BoolToVis}}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Takt-Obergrenze" Style="{StaticResource Muted}" VerticalAlignment="Center" ToolTip="NVIDIA: Begrenzt den Boost-Takt (Undervolt-Effekt). Ganz links = aus."/>
+                                <Slider Grid.Column="1" Minimum="0" Maximum="{Binding Svc.Gpu.CapMax}" Value="{Binding ClockCap}" IsSnapToTickEnabled="True" TickFrequency="15"/>
+                                <TextBlock Grid.Column="2" Text="{Binding ClockCapText}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                            <Grid Margin="0,4" Visibility="{Binding Svc.Gpu.VoltageSupported, Converter={StaticResource BoolToVis}}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="90"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Spannung (Undervolt)" Style="{StaticResource Muted}" VerticalAlignment="Center" ToolTip="AMD RX 7000/9000: Spannungs-Offset. Nur negativ – weniger Spannung = kühler bei gleicher Leistung."/>
+                                <Slider Grid.Column="1" Minimum="{Binding Svc.Gpu.VoltMin}" Maximum="0" Value="{Binding VoltOffset}" IsSnapToTickEnabled="True" TickFrequency="5"/>
+                                <TextBlock Grid.Column="2" Text="{Binding VoltOffset, StringFormat={}{0} mV}" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold"/>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <Border Style="{StaticResource AccentCard}">
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Svc.Status}" Style="{StaticResource Caption}" FontSize="13"/>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" Content="Werte beim Windows-Start anwenden (mit Absturz-Schutz)" IsChecked="{Binding ApplyOnStart}" Margin="0,10,0,0"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Content="Werkseinstellung" Click="Reset_Click" Margin="0,0,8,0"/>
+                        <Button Content="Stabilitätstest (2 min)" Click="Test_Click" Margin="0,0,8,0"/>
+                        <Button Style="{StaticResource AccentButton}" Content="Anwenden" Click="Apply_Click" Padding="26,9"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="PROFILE" Style="{StaticResource Kicker}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                        <TextBox x:Name="ProfName" ToolTip="Name, z. B. „Zocken“ oder „Leise“"/>
+                        <Button Grid.Column="1" Content="Aktuelle Werte speichern" Margin="8,0,0,0" Click="SaveProf_Click"/>
+                    </Grid>
+                    <ItemsControl x:Name="ProfList" Margin="0,8,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,2">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="160"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1" Style="{StaticResource Muted}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"><Run Text="{Binding Cpu, Mode=OneWay}"/><Run Text=" · "/><Run Text="{Binding Gpu, Mode=OneWay}"/></TextBlock>
+                                    <Button Grid.Column="2" Content="Laden" Click="LoadProf_Click" Padding="10,4"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

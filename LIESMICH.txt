@@ -1,0 +1,49 @@
+NICK CONTROL CENTER
+===================
+
+Alles in einer App: Lüfter, RGB-Beleuchtung, FPS-Booster (mit Spielprofilen + Steam),
+PC-Monitor, Stresstest (NVIDIA, AMD, Intel), Tweaker (NVIDIA + AMD), Windows-Design,
+Desktop-Kacheln, Treiber-Updates und ein Problemlöser.
+
+START
+-----
+1. NickControlCenter.exe doppelklicken (fragt nach Admin-Rechten – nötig für Lüfter,
+   Sensoren und Tweaks).
+2. Beim ersten Start legt die App Verknüpfungen auf dem Desktop und im Startmenü an.
+   An die Taskleiste anheften: App läuft -> Rechtsklick aufs Symbol in der Taskleiste
+   -> "An Taskleiste anheften".
+3. X schließt das Fenster nur – die App läuft unten rechts (Symbol neben der Uhr) weiter.
+   Ganz beenden: "App beenden" unten links oder Rechtsklick aufs Symbol -> Beenden.
+
+WICHTIG
+-------
+- Die alten Einzel-Apps (NickFanControl, ARK-Booster, fps-Booster, PC-Monitor, Tweaker,
+  CustomizeWindows) NICHT gleichzeitig laufen lassen. Der Problemlöser erkennt sie und
+  nimmt sie auf Knopfdruck aus dem Autostart. Lüfter- und RGB-Einstellungen der alten
+  Fan-Control werden automatisch übernommen.
+- Andere RGB-/Lüfter-Programme (Armoury Crate, iCUE, SignalRGB, MSI Center, RGB Fusion,
+  Wallpaper Engine usw.) können Flackern oder Lüfter-Chaos verursachen. Die App zeigt
+  dann einen Hinweis mit Optionen: Schließen / Dienst stoppen / aus Autostart / deinstallieren.
+- Für Lüftersteuerung und manche Sensoren braucht Windows den Treiber "PawnIO"
+  (https://pawnio.eu). Fehlt er, sagt dir der Problemlöser Bescheid.
+- HWiNFO (optional, für die genauesten Temperaturen): In HWiNFO unter Einstellungen
+  "Shared Memory Support" einschalten und HWiNFO laufen lassen. Die App nutzt dann
+  HWiNFO automatisch (umstellbar unter Monitor -> Messquelle). In der kostenlosen
+  HWiNFO-Version muss Shared Memory alle 12 Stunden neu aktiviert werden.
+- GPU-Übertakten im Tweaker: Änderungen werden 20 Sekunden lang angezeigt und
+  automatisch zurückgesetzt, wenn du nicht "Behalten" klickst.
+- Boost & Design-Tweaks sichern die alten Werte. "Alles zurücksetzen" stellt sie wieder her.
+
+LOGS
+----
+Alles wird im Ordner "Logs" neben der exe protokolliert:
+  Gesamt.log, Allgemein.log, Luefter.log, Beleuchtung.log, Boost.log,
+  Monitor.log, Stresstest.log, Tweaker.log, Problemloeser.log
+Wenn etwas nicht geht: den Logs-Ordner schicken.
+
+Einstellungen & Sicherungen: %AppData%\NickControlCenter
+
+QUELLCODE
+---------
+Im Ordner "Quellcode" (.NET 8, WPF). Bauen:
+  dotnet publish src\NickControlCenter -c Release -r win-x64 --self-contained -p:PublishSingleFile=true

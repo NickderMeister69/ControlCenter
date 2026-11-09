@@ -1,0 +1,301 @@
+<UserControl x:Class="NickControlCenter.BoostPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
+    <Grid Margin="28,0,16,16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Kopf: BOOST -->
+        <Border Style="{StaticResource AccentCard}" Margin="0,0,12,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Status}" Style="{StaticResource H2}" FontSize="18"/>
+                    <TextBlock Text="{Binding LastBoostText}" Style="{StaticResource Muted}" Margin="0,3,0,0"/>
+                    <TextBlock Text="Jede Änderung wird vorher gesichert – „Alles zurücksetzen“ stellt den Originalzustand exakt wieder her." Style="{StaticResource Caption}" Margin="0,6,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button Content="Alles zurücksetzen" Margin="0,0,10,0" Padding="16,10" Click="Undo_Click" IsEnabled="{Binding NotBusy}"/>
+                    <Button Style="{StaticResource AccentButton}" Padding="34,12" FontSize="16" Click="Boost_Click" IsEnabled="{Binding NotBusy}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE7FC;" Style="{StaticResource Icon}" FontSize="18" Margin="0,0,10,0"/>
+                            <TextBlock Text="BOOST" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="2,0,0,8">
+            <RadioButton Style="{StaticResource Tab}" Content="Optimierungen" GroupName="BT" IsChecked="True" Checked="Tab_Checked" Tag="T1"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Spiele &amp; Steam" GroupName="BT" Checked="Tab_Checked" Tag="T2"/>
+            <RadioButton Style="{StaticResource Tab}" Content="ARK" GroupName="BT" Checked="Tab_Checked" Tag="T3"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Werkzeuge" GroupName="BT" Checked="Tab_Checked" Tag="T4"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Hintergrund-Apps" GroupName="BT" Checked="Tab_Checked" Tag="T5"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Protokoll" GroupName="BT" Checked="Tab_Checked" Tag="T6"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <!-- ======== Optimierungen ======== -->
+            <ScrollViewer x:Name="T1" VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="0,0,12,0">
+                    <local:FindingsPanel Area="Boost"/>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="BEIM BOOST AUSSERDEM" Style="{StaticResource Kicker}"/>
+                            <WrapPanel>
+                                <CheckBox Style="{StaticResource ToggleSwitch}" Content="Wiederherstellungspunkt" IsChecked="{Binding Settings.RestorePoint}" Margin="0,0,26,8"/>
+                                <CheckBox Style="{StaticResource ToggleSwitch}" Content="Gewählte Hintergrund-Apps schließen" IsChecked="{Binding Settings.CloseAppsOnBoost}" Margin="0,0,26,8"/>
+                                <CheckBox Style="{StaticResource ToggleSwitch}" Content="Temp-Dateien löschen" IsChecked="{Binding Settings.CleanOnBoost}" Margin="0,0,26,8"/>
+                                <CheckBox Style="{StaticResource ToggleSwitch}" Content="RAM + Standby-Liste freigeben" IsChecked="{Binding Settings.RamOnBoost}" Margin="0,0,26,8"/>
+                            </WrapPanel>
+                        </StackPanel>
+                    </Border>
+                    <ItemsControl ItemsSource="{Binding Tweaks}">
+                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource Card}" Margin="0,0,10,10" Padding="16,12">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <CheckBox Style="{StaticResource ToggleSwitch}" IsChecked="{Binding IsOn}" VerticalAlignment="Top" Margin="0,2,12,0"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding Title}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Description}" Style="{StaticResource Caption}" Margin="0,3,0,0"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <Border Background="{StaticResource InfoSoftBrush}" CornerRadius="3" Padding="6,1" Margin="0,0,6,0"><TextBlock Text="{Binding Group}" FontSize="10.5" Foreground="{StaticResource InfoBrush}"/></Border>
+                                                <Border Background="{StaticResource WarnSoftBrush}" CornerRadius="3" Padding="6,1" Margin="0,0,6,0" Visibility="{Binding Restart, Converter={StaticResource BoolToVis}}"><TextBlock Text="Neustart" FontSize="10.5" Foreground="{StaticResource WarnBrush}"/></Border>
+                                                <Border Background="{StaticResource BadSoftBrush}" CornerRadius="3" Padding="6,1" Visibility="{Binding Expert, Converter={StaticResource BoolToVis}}"><TextBlock Text="Experte" FontSize="10.5" Foreground="{StaticResource BadBrush}"/></Border>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <Border Grid.Column="2" Background="{StaticResource GoodSoftBrush}" CornerRadius="3" Padding="7,2" VerticalAlignment="Top" Margin="8,0,0,0"
+                                                Visibility="{Binding Active, Converter={StaticResource BoolToVis}}">
+                                            <TextBlock Text="AKTIV" FontSize="10.5" FontWeight="Bold" Foreground="{StaticResource GoodBrush}"/>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ======== Spiele & Steam ======== -->
+            <ScrollViewer x:Name="T2" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <StackPanel Margin="0,0,12,0">
+                    <Border Style="{StaticResource Card}">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="&#xE7FC;" Style="{StaticResource Icon}" FontSize="28" Foreground="{DynamicResource AccentBrush}" Margin="0,0,16,0"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="STEAM" Style="{StaticResource Kicker}"/>
+                                <TextBlock Text="{Binding SteamText}" Style="{StaticResource H2}" FontSize="14.5"/>
+                                <TextBlock Style="{StaticResource Caption}" Margin="0,4,0,0"
+                                           Text="Liest deine lokale Steam-Bibliothek (kein Passwort, nichts wird hochgeladen) und erkennt alle installierten Spiele mit ihrer exe. Pro Spiel wählst du ein Profil – startet das Spiel, stellt der Auto-Boost automatisch alles passend ein."/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                <Button Style="{StaticResource AccentButton}" Content="Mit Steam verbinden" Click="Steam_Click" x:Name="SteamBtn" Padding="16,9"/>
+                                <Button Content="Trennen" Click="SteamOff_Click" Margin="0,6,0,0" x:Name="SteamOffBtn"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="AUTO-BOOST" Style="{StaticResource Kicker}"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Automatisch boosten, sobald ein Spiel mit Profil startet" IsChecked="{Binding Settings.AutoBoost}"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Dabei gewählte Hintergrund-Apps schließen (nur Profil Max-FPS)" IsChecked="{Binding Settings.AutoCloseApps}" Margin="0,8,0,0"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Spiel-exe optimieren (Vollbildoptimierung aus, starke Grafikkarte, hohe Priorität)" IsChecked="{Binding Settings.GameExeTweaks}" Margin="0,8,0,0"/>
+                            <TextBlock Text="{Binding AutoStatus}" Style="{StaticResource Muted}" Margin="0,8,0,0"/>
+                            <TextBlock Style="{StaticResource Caption}" Margin="0,6,0,0" Text="Max-FPS: hohe CPU-Priorität, Timer 0,5 ms, Apps schließen · Ausgewogen: erhöhte Priorität, sonst nichts."/>
+                            <WrapPanel Margin="0,10,0,0">
+                                <Button Content="Eigene exe hinzufügen …" Click="AddExe_Click" Margin="0,0,8,6"/>
+                                <Button Content="Spielordner wählen …" Click="AddFolder_Click" Margin="0,0,8,6" ToolTip="Für ARK außerhalb von Steam"/>
+                            </WrapPanel>
+                            <ItemsControl ItemsSource="{Binding AutoBoostList}" Margin="0,4,0,0">
+                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{StaticResource PanelAltBrush}" BorderBrush="{StaticResource LineStrongBrush}" BorderThickness="1" CornerRadius="3" Padding="8,3" Margin="0,0,6,6">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding StringFormat={}{0}.exe}" FontSize="12" VerticalAlignment="Center"/>
+                                                <Button Content="&#xE711;" Style="{StaticResource IconButton}" Width="22" Height="22" FontSize="9" Click="RemoveAuto_Click" Tag="{Binding}"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                    <TextBlock Text="ERKANNTE SPIELE" Style="{StaticResource Kicker}" Margin="0,4,0,8"/>
+                    <ItemsControl ItemsSource="{Binding Games}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource SubCard}" Margin="0,0,0,6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="200"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                            <TextBlock Style="{StaticResource Muted}" TextTrimming="CharacterEllipsis"><Run Text="{Binding ExeName, Mode=OneWay}"/><Run Text="  ·  "/><Run Text="{Binding Root, Mode=OneWay}"/></TextBlock>
+                                        </StackPanel>
+                                        <ComboBox Grid.Column="1" ItemsSource="{x:Static local:GameVM.ProfileNames}" SelectedIndex="{Binding Profile}" Margin="10,0" VerticalAlignment="Center"
+                                                  ToolTip="Profil für dieses Spiel (wird beim Spielstart automatisch angewendet)"/>
+                                        <Button Grid.Column="2" Content="Spielen" Click="Play_Click" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ======== ARK ======== -->
+            <ScrollViewer x:Name="T3" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <StackPanel Margin="0,0,12,0">
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="ARK: SURVIVAL EVOLVED / ASCENDED" Style="{StaticResource Kicker}"/>
+                            <TextBlock x:Name="ArkFound" Style="{StaticResource H2}" FontSize="14.5"/>
+                            <TextBlock Style="{StaticResource Caption}" Margin="0,4,0,0" Text="Diese Einstellungen schreibt der Boost in die ARK-Configs (GameUserSettings.ini / Engine.ini). Die Originale werden vorher gesichert. ARK muss dafür geschlossen sein."/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Grafik-Configs anpassen" IsChecked="{Binding Settings.ArkGraphics}" Margin="0,12,0,0"/>
+                            <Grid Margin="0,12,0,0" IsEnabled="{Binding Settings.ArkGraphics}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition Width="260"/></Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                                <TextBlock Text="Grafik-Preset" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Column="1" SelectedIndex="{Binding Settings.ArkPreset}" Margin="0,0,0,6">
+                                    <ComboBoxItem Content="Nicht ändern"/><ComboBoxItem Content="Maximale FPS"/><ComboBoxItem Content="Ausgewogen"/>
+                                </ComboBox>
+                                <TextBlock Grid.Row="1" Text="FPS-Limit" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" SelectedIndex="{Binding Settings.ArkFps}" Margin="0,0,0,6">
+                                    <ComboBoxItem Content="Nicht ändern"/><ComboBoxItem Content="Unbegrenzt"/><ComboBoxItem Content="60"/><ComboBoxItem Content="75"/>
+                                    <ComboBoxItem Content="120"/><ComboBoxItem Content="144"/><ComboBoxItem Content="165"/><ComboBoxItem Content="240"/>
+                                </ComboBox>
+                                <TextBlock Grid.Row="2" Text="Auflösungs-Skalierung" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                <ComboBox Grid.Row="2" Grid.Column="1" SelectedIndex="{Binding Settings.ArkRes}">
+                                    <ComboBoxItem Content="Nicht ändern"/><ComboBoxItem Content="100 %"/><ComboBoxItem Content="90 %"/><ComboBoxItem Content="80 %"/>
+                                    <ComboBoxItem Content="75 %"/><ComboBoxItem Content="70 %"/><ComboBoxItem Content="60 %"/>
+                                </ComboBox>
+                            </Grid>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="V-Sync aus" IsChecked="{Binding Settings.ArkVsyncOff}" Margin="0,12,0,0"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Bewegungs-/Tiefenunschärfe, Linsenreflexe aus" IsChecked="{Binding Settings.ArkPostFxOff}" Margin="0,8,0,0"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="ASA: volumetrische Wolken &amp; Nebel aus (+5–15 FPS, sieht schlichter aus)" IsChecked="{Binding Settings.AsaVolumetricsOff}" Margin="0,8,0,0"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="ASE: Intro-Videos überspringen" IsChecked="{Binding Settings.ArkSkipIntros}" Margin="0,8,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="STARTOPTIONEN (STEAM)" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="In Steam: Rechtsklick auf ARK → Eigenschaften → Startoptionen → einfügen."/>
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="60"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                                <TextBlock Text="ASA" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                <TextBox Grid.Column="1" x:Name="AsaArgs" Text="-USEALLAVAILABLECORES -nosplash" IsReadOnly="True" FontFamily="{StaticResource MonoFont}" Margin="0,0,8,6"/>
+                                <Button Grid.Column="2" Content="Kopieren" Click="CopyAsa_Click" Margin="0,0,0,6"/>
+                                <TextBlock Grid.Row="1" Text="ASE" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="AseArgs" Text="-USEALLAVAILABLECORES -nosplash -high" IsReadOnly="True" FontFamily="{StaticResource MonoFont}" Margin="0,0,8,0"/>
+                                <Button Grid.Row="1" Grid.Column="2" Content="Kopieren" Click="CopyAse_Click"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ======== Werkzeuge ======== -->
+            <ScrollViewer x:Name="T4" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <UniformGrid Columns="2" Margin="0,0,12,0" VerticalAlignment="Top">
+                    <Border Style="{StaticResource Card}" Margin="0,0,10,10">
+                        <StackPanel>
+                            <TextBlock Text="TEMPORÄRE DATEIEN" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="Löscht Windows- und Benutzer-Temp (Dateien älter als 1 Stunde). Läuft im Hintergrund – die App bleibt bedienbar, gesperrte Dateien werden übersprungen."/>
+                            <ProgressBar Value="{Binding CleanProgress}" Maximum="100" Margin="0,10,0,6"/>
+                            <TextBlock Text="{Binding CleanStatus}" Style="{StaticResource Muted}" TextWrapping="Wrap"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button Style="{StaticResource AccentButton}" Content="Jetzt aufräumen" Click="Clean_Click"/>
+                                <Button Content="Abbrechen" Margin="8,0,0,0" Click="CleanCancel_Click"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Margin="0,0,10,10">
+                        <StackPanel>
+                            <TextBlock Text="SHADER-CACHE" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="NVIDIA, AMD, Intel und DirectX. Hilft bei Rucklern nach Treiber-Updates. Beim nächsten Spielstart werden Shader neu erstellt (erster Start dauert kurz länger)."/>
+                            <Button Content="Shader-Cache leeren" Click="Shader_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Margin="0,0,10,10">
+                        <StackPanel>
+                            <TextBlock Text="ARBEITSSPEICHER" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="Gibt ungenutzten RAM frei und leert die Standby-Liste (wie ISLC) – hilft gegen Ruckler bei 16 GB RAM oder weniger. Spiele und Anti-Cheat werden nie angefasst."/>
+                            <Button Content="RAM freigeben" Click="Ram_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Margin="0,0,10,10">
+                        <StackPanel>
+                            <TextBlock Text="NETZWERK" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="DNS-Cache leeren und Ping zu Cloudflare, Google, Steam und Epic messen."/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button Content="DNS leeren" Click="Dns_Click"/>
+                                <Button Content="Ping-Test" Click="Ping_Click" Margin="8,0,0,0"/>
+                            </StackPanel>
+                            <TextBlock x:Name="PingText" Style="{StaticResource Muted}" Margin="0,8,0,0" FontFamily="{StaticResource MonoFont}"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Margin="0,0,10,10">
+                        <StackPanel>
+                            <TextBlock Text="WIEDERHERSTELLUNGSPUNKT" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="Windows-Sicherung vor größeren Änderungen (Windows erlaubt einen pro 24 Stunden)."/>
+                            <Button Content="Punkt erstellen" Click="Restore_Click" HorizontalAlignment="Left" Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Style="{StaticResource Card}" Margin="0,0,10,10">
+                        <StackPanel>
+                            <TextBlock Text="TIMER-AUFLÖSUNG" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Caption}" Text="Setzt den Windows-Zeitgeber sofort auf 0,5 ms (gleichmäßigere Frametimes). Gilt solange die App läuft."/>
+                            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                                <Button Content="Jetzt aktivieren" Click="TimerOn_Click"/>
+                                <Button Content="Zurück auf Standard" Click="TimerOff_Click" Margin="8,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </UniformGrid>
+            </ScrollViewer>
+
+            <!-- ======== Hintergrund-Apps ======== -->
+            <ScrollViewer x:Name="T5" VerticalScrollBarVisibility="Auto" Visibility="Collapsed">
+                <Border Style="{StaticResource Card}" Margin="0,0,12,0" VerticalAlignment="Top">
+                    <StackPanel>
+                        <TextBlock Text="LAUFENDE HINTERGRUND-PROGRAMME" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Caption}" Text="Häkchen = wird beim Boost geschlossen. Browser werden nur sanft geschlossen (gespeicherte Tabs bleiben)."/>
+                        <ItemsControl ItemsSource="{Binding BackgroundApps}" Margin="0,10,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,3">
+                                        <CheckBox IsChecked="{Binding Selected}" Content="{Binding Name}"/>
+                                        <TextBlock Text="{Binding MbText}" Style="{StaticResource Muted}" HorizontalAlignment="Right"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <TextBlock x:Name="NoApps" Text="Keine bekannten Hintergrund-Programme aktiv – sehr gut!" Foreground="{StaticResource GoodBrush}" Margin="0,8,0,0"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                            <Button Content="Liste aktualisieren" Click="RefreshApps_Click"/>
+                            <Button Content="Ausgewählte jetzt schließen" Click="CloseApps_Click" Margin="8,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </ScrollViewer>
+
+            <!-- ======== Protokoll ======== -->
+            <Border x:Name="T6" Style="{StaticResource Card}" Margin="0,0,12,0" Visibility="Collapsed">
+                <ListBox ItemsSource="{Binding Output}" FontFamily="{StaticResource MonoFont}" FontSize="12"/>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,142 @@
+<UserControl x:Class="NickControlCenter.TilesPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
+        <Grid Margin="0,0,12,0">
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="1.1*"/></Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,12,0">
+                <Border Style="{StaticResource AccentCard}">
+                    <StackPanel>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" Content="Desktop-Kacheln anzeigen" IsChecked="{Binding Visible}" FontSize="14"/>
+                        <TextBlock Style="{StaticResource Caption}" Margin="52,4,0,0" Text="Ziehen = verschieben · Klick = öffnen · Rechtsklick = Menü. Kacheln liegen unter allen Fenstern und bleiben bei Win+D sichtbar."/>
+                        <WrapPanel Margin="0,12,0,0">
+                            <Button Content="Automatisch anordnen" Click="Arrange_Click" Margin="0,0,8,6"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Positionen sperren" IsChecked="{Binding Settings.Locked}" Margin="8,4,16,6" Click="Save_Click"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Am Raster ausrichten" IsChecked="{Binding Settings.Snap}" Margin="0,4,0,6" Click="Save_Click"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="AUSSEHEN" Style="{StaticResource Kicker}"/>
+                        <Border Style="{StaticResource SegmentBox}">
+                            <UniformGrid Columns="5" x:Name="StyleBox">
+                                <RadioButton Style="{StaticResource Segment}" Content="Mac" GroupName="TS" Checked="Style_Checked"/>
+                                <RadioButton Style="{StaticResource Segment}" Content="Glas" GroupName="TS" Checked="Style_Checked"/>
+                                <RadioButton Style="{StaticResource Segment}" Content="Akzent" GroupName="TS" Checked="Style_Checked"/>
+                                <RadioButton Style="{StaticResource Segment}" Content="Bunt" GroupName="TS" Checked="Style_Checked"/>
+                                <RadioButton Style="{StaticResource Segment}" Content="Minimal" GroupName="TS" Checked="Style_Checked"/>
+                            </UniformGrid>
+                        </Border>
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Ecken" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="0" Maximum="32" Value="{Binding Settings.Corner}" PreviewMouseUp="Rebuild_Up"/>
+                        </Grid>
+                        <Grid Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Deckkraft" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="0.3" Maximum="1" Value="{Binding Settings.Opacity}" PreviewMouseUp="Rebuild_Up"/>
+                        </Grid>
+                        <Grid Margin="0,8,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Größe" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="0.7" Maximum="1.5" Value="{Binding Settings.Scale}" PreviewMouseUp="Rebuild_Up"/>
+                        </Grid>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" Content="Schatten" IsChecked="{Binding Settings.Shadow}" Click="Rebuild_Click" Margin="0,12,0,0"/>
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Akzentfarbe" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Text="{Binding Settings.Accent}" FontFamily="{StaticResource MonoFont}"/>
+                            <Button Grid.Column="2" Content="Übernehmen" Margin="8,0,0,0" Click="Rebuild_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="NEUE KACHEL" Style="{StaticResource Kicker}"/>
+                        <ItemsControl x:Name="Catalog">
+                            <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Button Margin="0,0,6,6" Padding="10,8" HorizontalContentAlignment="Left" Click="Add_Click" Tag="{Binding Type}">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="{Binding Icon}" Style="{StaticResource Icon}" Foreground="{DynamicResource AccentBrush}" Margin="0,0,10,0" VerticalAlignment="Top"/>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                                <TextBlock Text="{Binding Desc}" Style="{StaticResource Muted}" FontSize="11"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="DEINE KACHELN" Style="{StaticResource Kicker}"/>
+                        <ListBox x:Name="TileList" ItemsSource="{Binding Tiles}" SelectionChanged="Tile_Selected" MaxHeight="300">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock><Run Text="{Binding Type, Mode=OneWay}" FontWeight="SemiBold"/><Run Text="  "/><Run Text="{Binding Title, Mode=OneWay}"/><Run Text="  "/><Run Text="{Binding Target, Mode=OneWay}" Foreground="{StaticResource MutedBrush}"/></TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" x:Name="Editor" Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock Text="KACHEL BEARBEITEN" Style="{StaticResource Kicker}"/>
+                        <Grid Margin="0,4">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Titel" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" x:Name="ETitle"/>
+                        </Grid>
+                        <Grid Margin="0,4">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Größe" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" x:Name="ESize">
+                                <ComboBoxItem Content="Klein"/><ComboBoxItem Content="Breit"/><ComboBoxItem Content="Groß"/><ComboBoxItem Content="Hoch"/>
+                            </ComboBox>
+                        </Grid>
+                        <Grid Margin="0,4" x:Name="TargetRow">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock x:Name="TargetLabel" Text="Ziel" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" x:Name="ETarget"/>
+                            <Button Grid.Column="2" Content="…" Width="34" Margin="6,0,0,0" Click="Browse_Click"/>
+                        </Grid>
+                        <Grid Margin="0,4" x:Name="ActionRow">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Aktion" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" x:Name="EAction" ItemsSource="{x:Static local:TilesService.Actions}"/>
+                        </Grid>
+                        <StackPanel x:Name="MetricRow" Margin="0,6,0,0">
+                            <TextBlock Text="Angezeigte Werte" Style="{StaticResource Muted}" Margin="0,0,0,4"/>
+                            <ItemsControl x:Name="EMetrics">
+                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate><DataTemplate><CheckBox Content="{Binding Label}" IsChecked="{Binding On}" Margin="0,2"/></DataTemplate></ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                        <Grid Margin="0,6,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Eigene Farbe" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" x:Name="EColor" FontFamily="{StaticResource MonoFont}" ToolTip="Leer = Stil-Farbe, sonst z. B. #22D3EE"/>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                            <Button Style="{StaticResource AccentButton}" Content="Speichern" Click="EditSave_Click"/>
+                            <Button Style="{StaticResource DangerButton}" Content="Kachel entfernen" Margin="8,0,0,0" Click="EditRemove_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

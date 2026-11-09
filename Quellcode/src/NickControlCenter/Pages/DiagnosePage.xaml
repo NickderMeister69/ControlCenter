@@ -1,0 +1,59 @@
+<UserControl x:Class="NickControlCenter.DiagnosePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,20,20">
+        <StackPanel MaxWidth="1100" HorizontalAlignment="Left">
+            <Border Style="{StaticResource AccentCard}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock Text="PRÜFUNG" Style="{StaticResource Kicker}"/>
+                        <TextBlock x:Name="Summary" Style="{StaticResource H2}"/>
+                        <TextBlock Text="{Binding LastScan}" Style="{StaticResource Muted}" Margin="0,4,0,0"/>
+                        <TextBlock Style="{StaticResource Caption}" Margin="0,8,0,0"
+                                   Text="Geprüft wird: andere RGB-/Lüfter-/Tuning-Programme (inkl. Hintergrunddienste), alte Einzel-Apps im Autostart, Wallpaper Engine und Overlays, HWiNFO-Verbindung, Treiber PawnIO, Windows-Einstellungen (Dynamische Beleuchtung, Speicherintegrität, XMP, Speicherplatz) und Temperaturen. Läuft automatisch alle 30 Sekunden."/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Top">
+                        <Button Style="{StaticResource AccentButton}" Click="Scan_Click" Padding="18,9">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE72C;" Style="{StaticResource Icon}" FontSize="13" Margin="0,0,8,0"/>
+                                <TextBlock Text="Jetzt prüfen"/>
+                            </StackPanel>
+                        </Button>
+                        <Button Content="Ausgeblendete wieder zeigen" Margin="0,8,0,0" Click="Reset_Click"/>
+                        <Button Content="Protokoll öffnen" Margin="0,8,0,0" Click="Log_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ProgressBar IsIndeterminate="True" Visibility="{Binding Scanning, Converter={StaticResource BoolToVis}}" Margin="0,0,0,12"/>
+
+            <TextBlock x:Name="AllGood" Text="✔  Alles in Ordnung – nichts gefunden, was stört." Foreground="{StaticResource GoodBrush}" FontSize="15" Margin="2,6,0,16" Visibility="Collapsed"/>
+            <local:FindingsPanel x:Name="Panel" Area="All"/>
+
+            <Border Style="{StaticResource Card}" x:Name="DisabledCard">
+                <StackPanel>
+                    <TextBlock Text="VOM PROBLEMLÖSER DEAKTIVIERTE DIENSTE" Style="{StaticResource Kicker}"/>
+                    <TextBlock Style="{StaticResource Caption}" Text="Hier lassen sich Dienste wieder einschalten, die du über den Problemlöser deaktiviert hast."/>
+                    <ItemsControl x:Name="Disabled" Margin="0,10,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" VerticalAlignment="Center" FontFamily="{StaticResource MonoFont}"/>
+                                    <Button Grid.Column="1" Content="Wieder aktivieren" Click="Enable_Click" Tag="{Binding}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

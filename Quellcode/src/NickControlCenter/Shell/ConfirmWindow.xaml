@@ -1,0 +1,18 @@
+<Window x:Class="NickControlCenter.ConfirmWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="480" SizeToContent="Height" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True"
+        Background="Transparent" WindowStartupLocation="CenterOwner" ShowInTaskbar="False" Topmost="True"
+        FontFamily="{StaticResource UiFont}" Foreground="{StaticResource TextBrush}">
+    <Border Background="{StaticResource PanelBrush}" BorderBrush="{DynamicResource AccentDimBrush}" BorderThickness="1" CornerRadius="6" Margin="12">
+        <Border.Effect><DropShadowEffect BlurRadius="24" ShadowDepth="0" Opacity="0.6"/></Border.Effect>
+        <StackPanel Margin="22,18,22,18">
+            <TextBlock x:Name="TitleText" Style="{StaticResource H2}" TextWrapping="Wrap"/>
+            <TextBlock x:Name="BodyText" Style="{StaticResource Caption}" FontSize="13" Margin="0,10,0,18" LineHeight="19"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="NoButton" Margin="0,0,8,0" Click="No_Click" IsCancel="True"/>
+                <Button x:Name="YesButton" Style="{StaticResource AccentButton}" Click="Yes_Click" IsDefault="True"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
