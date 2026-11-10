@@ -6,3 +6,101 @@
 2026-11-09 12:41:58  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
 2026-11-09 12:44:33  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
 2026-11-09 12:47:51  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-09 13:58:07  INFO     [Luefter] Lüfterprofil „Leise“: schneller ab 78 °C, Sicherheit ab 88 °C
+2026-11-09 13:58:15  INFO     [Luefter] Lüfterprofil „Normal“: schneller ab 70 °C, Sicherheit ab 85 °C
+2026-11-09 18:27:44  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:28:06  INFO     [Luefter] Sicherheitsmodus beendet: 66 °C
+2026-11-09 18:28:40  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:29:14  INFO     [Luefter] Sicherheitsmodus beendet: 66 °C
+2026-11-09 18:30:06  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:34:31  INFO     [Luefter] Sicherheitsmodus beendet: 68 °C
+2026-11-09 18:35:29  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 18:38:21  INFO     [Luefter] Sicherheitsmodus beendet: 72 °C
+2026-11-09 18:39:48  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 18:40:23  INFO     [Luefter] Sicherheitsmodus beendet: 68 °C
+2026-11-09 18:40:39  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:41:19  INFO     [Luefter] Sicherheitsmodus beendet: 74 °C
+2026-11-09 18:41:37  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:43:29  INFO     [Luefter] Sicherheitsmodus beendet: 72 °C
+2026-11-09 18:43:30  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:43:31  INFO     [Luefter] Sicherheitsmodus beendet: 74 °C
+2026-11-09 18:43:41  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:44:53  INFO     [Luefter] Sicherheitsmodus beendet: 73 °C
+2026-11-09 18:45:03  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:45:37  INFO     [Luefter] Sicherheitsmodus beendet: 75 °C
+2026-11-09 18:46:06  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 18:46:50  INFO     [Luefter] Sicherheitsmodus beendet: 69 °C
+2026-11-09 18:47:29  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 18:53:18  INFO     [Luefter] Sicherheitsmodus beendet: 74 °C
+2026-11-09 18:53:25  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 18:53:57  INFO     [Luefter] Sicherheitsmodus beendet: 68 °C
+2026-11-09 18:54:31  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:54:52  INFO     [Luefter] Sicherheitsmodus beendet: 72 °C
+2026-11-09 18:54:55  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:57:07  INFO     [Luefter] Sicherheitsmodus beendet: 68 °C
+2026-11-09 18:57:33  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 18:59:00  INFO     [Luefter] Sicherheitsmodus beendet: 70 °C
+2026-11-09 18:59:05  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 18:59:47  INFO     [Luefter] Sicherheitsmodus beendet: 70 °C
+2026-11-09 18:59:57  INFO     [Luefter] Sicherheitsmodus: 87 °C
+2026-11-09 19:02:04  INFO     [Luefter] Sicherheitsmodus beendet: 71 °C
+2026-11-09 19:02:45  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 19:10:00  INFO     [Luefter] Sicherheitsmodus beendet: 66 °C
+2026-11-09 19:10:36  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:11:12  INFO     [Luefter] Sicherheitsmodus beendet: 75 °C
+2026-11-09 19:11:38  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:15:15  INFO     [Luefter] Sicherheitsmodus beendet: 68 °C
+2026-11-09 19:15:22  INFO     [Luefter] Sicherheitsmodus: 87 °C
+2026-11-09 19:18:18  INFO     [Luefter] Sicherheitsmodus beendet: 74 °C
+2026-11-09 19:18:24  INFO     [Luefter] Sicherheitsmodus: 87 °C
+2026-11-09 19:19:12  INFO     [Luefter] Sicherheitsmodus beendet: 72 °C
+2026-11-09 19:20:00  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 19:21:40  INFO     [Luefter] Sicherheitsmodus beendet: 73 °C
+2026-11-09 19:21:49  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:22:27  INFO     [Luefter] Sicherheitsmodus beendet: 74 °C
+2026-11-09 19:24:18  INFO     [Luefter] Sicherheitsmodus: 87 °C
+2026-11-09 19:28:25  INFO     [Luefter] Sicherheitsmodus beendet: 71 °C
+2026-11-09 19:29:29  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:30:38  INFO     [Luefter] Sicherheitsmodus beendet: 67 °C
+2026-11-09 19:31:01  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:33:25  INFO     [Luefter] Sicherheitsmodus beendet: 73 °C
+2026-11-09 19:33:31  INFO     [Luefter] Sicherheitsmodus: 88 °C
+2026-11-09 19:33:40  INFO     [Luefter] Sicherheitsmodus beendet: 70 °C
+2026-11-09 19:33:45  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:34:51  INFO     [Luefter] Sicherheitsmodus beendet: 74 °C
+2026-11-09 19:35:11  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 19:36:45  INFO     [Luefter] Sicherheitsmodus beendet: 67 °C
+2026-11-09 19:37:28  INFO     [Luefter] Sicherheitsmodus: 87 °C
+2026-11-09 19:44:26  INFO     [Luefter] Sicherheitsmodus beendet: 75 °C
+2026-11-09 19:44:30  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:55:00  INFO     [Luefter] Sicherheitsmodus beendet: 74 °C
+2026-11-09 19:55:28  INFO     [Luefter] Sicherheitsmodus: 85 °C
+2026-11-09 19:56:56  INFO     [Luefter] Sicherheitsmodus beendet: 67 °C
+2026-11-09 19:58:26  INFO     [Luefter] Sicherheitsmodus: 87 °C
+2026-11-09 20:02:07  INFO     [Luefter] Sicherheitsmodus beendet: 75 °C
+2026-11-09 20:02:08  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 20:02:19  INFO     [Luefter] Sicherheitsmodus beendet: 70 °C
+2026-11-09 20:02:29  INFO     [Luefter] Sicherheitsmodus: 87 °C
+2026-11-09 20:03:45  INFO     [Luefter] Sicherheitsmodus beendet: 73 °C
+2026-11-09 20:04:41  INFO     [Luefter] Sicherheitsmodus: 86 °C
+2026-11-09 20:15:58  INFO     [Luefter] Sicherheitsmodus beendet: 68 °C
+2026-11-09 20:16:43  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-10 14:57:41  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 15:02:44  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 15:02:53  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 15:21:04  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 15:21:14  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 15:32:45  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 15:32:56  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 15:37:57  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 15:38:07  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 15:46:58  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 15:47:09  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 15:52:04  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 15:57:38  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 16:15:12  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 16:15:49  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 16:23:51  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 16:24:01  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-10 16:27:03  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-10 16:27:13  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.

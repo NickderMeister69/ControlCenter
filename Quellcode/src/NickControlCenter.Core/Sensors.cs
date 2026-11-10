@@ -44,6 +44,8 @@ public sealed class SensorSnapshot
     public double GpuClock { get; set; } = double.NaN;
     public double GpuMemClock { get; set; } = double.NaN;
     public double GpuPower { get; set; } = double.NaN;
+    /// <summary>GPU-Leistung nur geschätzt (Karte meldet keine Watt).</summary>
+    public bool GpuPowerEstimated { get; set; }
     public double GpuFanRpm { get; set; } = double.NaN;
     public double GpuVramUsedGb { get; set; } = double.NaN;
     public double GpuVramTotalGb { get; set; } = double.NaN;

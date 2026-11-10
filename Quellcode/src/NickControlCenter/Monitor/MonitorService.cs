@@ -47,6 +47,8 @@ public sealed class Metric : ObservableObject
     public double Crit { get; init; } = double.NaN;
     public bool IsTemp { get; init; }
     public bool IsRate { get; init; }
+    /// <summary>Wert ist geschätzt → „≈“ davor.</summary>
+    public bool Estimated { get; set; }
     public double[] History = new double[600];
     public int Count;
     public int Head;
@@ -105,6 +107,7 @@ public sealed class Metric : ObservableObject
         if (double.IsNaN(v)) return "–";
         if (IsTemp) return Fmt.Temp(v, fahrenheit);
         if (IsRate) return Fmt.Rate(v);
+        if (Estimated && Unit == "W") return $"≈ {v:0} W";
         return Unit switch
         {
             "%" => $"{v:0} %", "MHz" => v >= 1000 ? $"{v / 1000:0.00} GHz" : $"{v:0} MHz", "W" => $"{v:0} W",
@@ -160,6 +163,7 @@ public sealed class MonitorService : ObservableObject, IDisposable
         Add("ram.load", "RAM-Auslastung", "Arbeitsspeicher", "%", 100, 85, 95);
         Add("ram.used", "RAM belegt", "Arbeitsspeicher", "GB", 64);
         Add("board.temp", "Mainboard", "Mainboard", "°C", 80, 60, 70, temp: true);
+        Add("pc.power", "PC-Verbrauch (geschätzt)", "Strom", "W", 600);
         Add("net.down", "Download", "Netzwerk", "B/s", 12_500_000, rate: true);
         Add("net.up", "Upload", "Netzwerk", "B/s", 12_500_000, rate: true);
         if (!Settings.OverlayFpsAdded)
@@ -233,6 +237,9 @@ public sealed class MonitorService : ObservableObject, IDisposable
         P("gpu.temp", s.GpuTemp); P("gpu.hotspot", s.GpuHotSpot); P("gpu.load", s.GpuLoad); P("gpu.clock", s.GpuClock); P("gpu.mem", s.GpuMemClock);
         P("gpu.power", s.GpuPower); P("gpu.fan", s.GpuFanRpm); P("gpu.vram", s.GpuVramUsedGb); P("ram.load", s.RamLoad); P("ram.used", s.RamUsedGb);
         P("board.temp", s.BoardTemp); P("net.down", s.NetDownBps); P("net.up", s.NetUpBps);
+        P("pc.power", EnergyService.Instance.NowWatts);
+        if (Metrics.TryGetValue("gpu.power", out var gp)) gp.Estimated = s.GpuPowerEstimated;
+        if (Metrics.TryGetValue("pc.power", out var pp)) pp.Estimated = true;
         if (_fpsOn)
         {
             var fr = FpsCounter.Instance.Foreground();

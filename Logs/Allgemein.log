@@ -69,3 +69,161 @@
 2026-11-09 12:44:34  INFO     [Allgemein] Beendet.
 2026-11-09 12:47:44  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
 2026-11-09 12:47:53  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-09 17:21:22  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-09 18:03:42  INFO     [Allgemein] Desktop-Kacheln wieder eingeblendet
+2026-11-09 18:09:46  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-09 18:23:35  INFO     [Allgemein] Desktop-Kacheln wieder eingeblendet
+2026-11-09 18:24:44  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-10 14:57:34  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 14:57:44  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 14:58:37  INFO     [Allgemein] Kachel hinzugefügt: Drives
+2026-11-10 14:58:45  INFO     [Allgemein] Kachel hinzugefügt: Security
+2026-11-10 14:59:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 1 Update bereit (online geprüft)
+2026-11-10 14:59:14  INFO     [Allgemein] Kachel hinzugefügt: Network
+2026-11-10 15:00:13  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:02:43  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-10 15:02:43  INFO     [Allgemein] Beenden …
+2026-11-10 15:02:45  INFO     [Allgemein] Beendet.
+2026-11-10 15:02:47  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 15:02:54  WARNUNG  [Allgemein] Tastenkürzel: The type initializer for 'NickControlCenter.HotkeyService' threw an exception.
+2026-11-10 15:02:55  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:03:03  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 1 Update bereit (online geprüft)
+2026-11-10 15:07:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (lokal geprüft)
+2026-11-10 15:12:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (lokal geprüft)
+2026-11-10 15:13:21  INFO     [Allgemein] Kachel hinzugefügt: System
+2026-11-10 15:13:35  INFO     [Allgemein] Kachel hinzugefügt: Action
+2026-11-10 15:14:25  INFO     [Allgemein] Kachel-Aktion: Herunterfahren
+2026-11-10 15:15:28  FEHLER   [Allgemein] Seite Werkzeuge konnte nicht geladen werden: TypeInitializationException: The type initializer for 'NickControlCenter.HotkeyService' threw an exception.
+   at NickControlCenter.HotkeyService.get_Instance()
+   at NickControlCenter.ToolsPage..ctor()
+   at NickControlCenter.MainWindow.<>c.<.ctor>b__6_16()
+   at NickControlCenter.MainWindow.Show(String key, PageDef def)
+2026-11-10 15:17:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-10 15:21:04  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-10 15:21:04  INFO     [Allgemein] Beenden …
+2026-11-10 15:21:04  INFO     [Allgemein] Beendet.
+2026-11-10 15:21:07  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 15:21:14  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + B (FPS-Boost ausführen) ist belegt
+2026-11-10 15:21:14  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + R (Arbeitsspeicher freigeben) ist belegt
+2026-11-10 15:21:15  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:21:24  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-10 15:24:45  INFO     [Allgemein] Downloads sortiert: 8 Dateien verschoben
+2026-11-10 15:26:17  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-10 15:27:46  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + B (FPS-Boost ausführen) ist belegt
+2026-11-10 15:27:46  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + R (Arbeitsspeicher freigeben) ist belegt
+2026-11-10 15:27:58  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + B (FPS-Boost ausführen) ist belegt
+2026-11-10 15:27:58  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + R (Arbeitsspeicher freigeben) ist belegt
+2026-11-10 15:28:02  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + B (FPS-Boost ausführen) ist belegt
+2026-11-10 15:28:02  WARNUNG  [Allgemein] Tastenkürzel Strg + Alt + R (Arbeitsspeicher freigeben) ist belegt
+2026-11-10 15:31:17  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-10 15:32:45  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-10 15:32:45  INFO     [Allgemein] Beenden …
+2026-11-10 15:32:46  INFO     [Allgemein] Beendet.
+2026-11-10 15:32:49  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 15:32:57  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:33:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-10 15:35:34  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\roaming\discord\cache geleert – 370 MB frei
+2026-11-10 15:35:35  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\crashdumps geleert – 160 MB frei
+2026-11-10 15:35:35  INFO     [Allgemein] Speicherplatz: c:\windows\softwaredistribution\download geleert – 36 MB frei
+2026-11-10 15:35:35  INFO     [Allgemein] Speicherplatz: C:\Users\nickg\AppData\Local\Temp\ geleert – 27 MB frei
+2026-11-10 15:35:35  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\microsoft\edge\user data\default\cache geleert – 12 MB frei
+2026-11-10 15:35:35  INFO     [Allgemein] Speicherplatz: c:\windows\temp geleert – 4 MB frei
+2026-11-10 15:35:35  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\roaming\discord\code cache geleert – 901 KB frei
+2026-11-10 15:35:36  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\nvidia\dxcache geleert – 64 KB frei
+2026-11-10 15:35:36  INFO     [Allgemein] Speicherplatz: c:\windows\serviceprofiles\networkservice\appdata\local\microsoft\windows\deliveryoptimization\cache geleert – 4 KB frei
+2026-11-10 15:36:01  INFO     [Allgemein] Speicherplatz: C:\Users\nickg\AppData\Local\Temp\ geleert – 0 KB frei
+2026-11-10 15:36:01  INFO     [Allgemein] Speicherplatz: c:\windows\temp geleert – 0 KB frei
+2026-11-10 15:36:01  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\nvidia\dxcache geleert – 0 KB frei
+2026-11-10 15:36:57  INFO     [Allgemein] Speicherplatz: C:\Users\nickg\AppData\Local\Temp\ geleert – 0 KB frei
+2026-11-10 15:36:57  INFO     [Allgemein] Speicherplatz: c:\windows\temp geleert – 0 KB frei
+2026-11-10 15:36:57  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\nvidia\dxcache geleert – 0 KB frei
+2026-11-10 15:37:57  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-10 15:37:57  INFO     [Allgemein] Beenden …
+2026-11-10 15:37:57  INFO     [Allgemein] Beendet.
+2026-11-10 15:38:01  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 15:38:08  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:38:26  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\crashdumps geleert – 35 MB frei
+2026-11-10 15:38:27  INFO     [Allgemein] Speicherplatz: C:\Users\nickg\AppData\Local\Temp\ geleert – 11 MB frei
+2026-11-10 15:38:27  INFO     [Allgemein] Speicherplatz: c:\windows\temp geleert – 0 KB frei
+2026-11-10 15:38:28  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\nvidia\dxcache geleert – 0 KB frei
+2026-11-10 15:39:54  INFO     [Allgemein] Tastenkürzel: screenoff
+2026-11-10 15:41:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-10 15:42:31  INFO     [Allgemein] winget: 18 Updates verfügbar
+2026-11-10 15:42:50  OK       [Allgemein] winget: 7-Zip 26.03 (x64) 26.03 → 26.06: ✔ Aktualisiert
+2026-11-10 15:43:10  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (lokal geprüft)
+2026-11-10 15:43:23  OK       [Allgemein] winget: App Installer 1.29.379.0 → 1.29.380: ✔ Aktualisiert
+2026-11-10 15:43:23  FEHLER   [Allgemein] Fehler in der Oberfläche: Win32Exception: An error occurred trying to start process 'C:\Users\nickg\AppData\Local\Microsoft\WindowsApps\winget.exe' with working directory 'C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter'. Das System kann auf die Datei nicht zugreifen.
+   at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInfo)
+   at System.Diagnostics.Process.Start(ProcessStartInfo startInfo)
+   at NickControlCenter.AppUpdates.Run(String args, Int32 timeoutMs, Action`1 progress)
+   at NickControlCenter.AppUpdates.UpgradeAsync(AppUpdate a)
+   at NickControlCenter.ToolsPage.UpdAll_Click(Object s, RoutedEventArgs e)
+   at System.Threading.Tasks.Task.<>c.<ThrowAsync>b__128_0(Object state)
+   at System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   at System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2026-11-10 15:44:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-10 15:46:16  WARNUNG  [Allgemein] winget: App Installer 1.29.379.0 → 1.29.380: Fehlgeschlagen (Code -1978335189)
+2026-11-10 15:46:18  WARNUNG  [Allgemein] winget: App Installer 1.29.379.0 → 1.29.380: Fehlgeschlagen (Code -1978335189)
+2026-11-10 15:46:58  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-10 15:46:58  INFO     [Allgemein] Beenden …
+2026-11-10 15:46:58  INFO     [Allgemein] Beendet.
+2026-11-10 15:47:02  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 15:47:10  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:47:38  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Windows ist aktuell (online geprüft)
+2026-11-10 15:47:46  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 438 Mbit/s
+2026-11-10 15:48:07  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:49:18  INFO     [Allgemein] winget: 16 Updates verfügbar
+2026-11-10 15:49:32  OK       [Allgemein] winget: CPUID CPU-Z 2.20.2 2.20.2 → 3.02: ✔ Aktualisiert
+2026-11-10 15:50:26  OK       [Allgemein] winget: Epic Games Launcher 1.3.193.0 → 1.3.210.0: ✔ Aktualisiert
+2026-11-10 15:50:39  WARNUNG  [Allgemein] winget: HWiNFO® 64 8.50 → 8.54: Fehlgeschlagen – Programm erst schließen
+2026-11-10 15:50:50  OK       [Allgemein] winget: Microsoft .NET Runtime - 8.0.14 (x64) 8.0.14 → 8.0.33: ✔ Aktualisiert
+2026-11-10 15:50:56  OK       [Allgemein] winget: Microsoft ASP.NET Core 8.0.14 - Shared Framework (x86) 8.0.14 → 8.0.33: ✔ Aktualisiert
+2026-11-10 15:51:05  OK       [Allgemein] winget: Microsoft Visual C++ 2013 Redistributable (x64) - 12.0.30501 12.0.30501.0 → 12.0.40664.0: ✔ Aktualisiert
+2026-11-10 15:51:17  OK       [Allgemein] winget: Microsoft Windows Desktop Runtime - 8.0.29 (x64) 8.0.29 → 8.0.33: ✔ Aktualisiert
+2026-11-10 15:51:33  OK       [Allgemein] winget: Microsoft Windows Desktop Runtime - 9.0.18 (x64) 9.0.18 → 9.0.22: ✔ Aktualisiert
+2026-11-10 15:51:50  OK       [Allgemein] winget: Microsoft Windows Desktop Runtime 10.0.9 (x64) 10.0.9 → 10.0.14: ✔ Aktualisiert
+2026-11-10 15:52:04  INFO     [Allgemein] Beenden …
+2026-11-10 15:52:05  INFO     [Allgemein] Beendet.
+2026-11-10 15:57:30  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 15:57:38  INFO     [Allgemein] exe wurde verschoben: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\ControlCenter.exe → C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\ControlCenter.update.exe – Verknüpfungen und Autostart werden angepasst
+2026-11-10 15:57:38  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-10 15:57:38  OK       [Allgemein] Autostart eingerichtet (Aufgabenplanung, startet im Tray).
+2026-11-10 15:57:39  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 504 Mbit/s
+2026-11-10 15:57:39  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 15:57:48  INFO     [Allgemein] winget: 7 Updates verfügbar
+2026-11-10 15:57:48  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)
+2026-11-10 15:57:59  OK       [Allgemein] winget: HWiNFO® 64 8.50 → 8.54: ✔ Aktualisiert
+2026-11-10 15:58:28  OK       [Allgemein] winget: Oracle VirtualBox 7.2.10 7.2.10 → 7.2.22: ✔ Aktualisiert
+2026-11-10 15:58:36  OK       [Allgemein] winget: Rockstar Games Launcher 1.0.109.3031 → 1.0.110.3150: ✔ Aktualisiert
+2026-11-10 15:59:03  OK       [Allgemein] winget: Tailscale 1.104.1 → 1.104.5: ✔ Aktualisiert
+2026-11-10 16:00:00  OK       [Allgemein] winget: Vortex 2.4.0 → 2.10.1: ✔ Aktualisiert
+2026-11-10 16:00:15  OK       [Allgemein] winget: Windows-Terminal 1.24.12741.0 → 1.25.2733.0: ✔ Aktualisiert
+2026-11-10 16:00:23  OK       [Allgemein] winget: WindowsAppRuntime.1.5 1.5.8 → 1.5.9: ✔ Aktualisiert
+2026-11-10 16:02:26  INFO     [Allgemein] winget: 0 Updates verfügbar
+2026-11-10 16:02:41  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (lokal geprüft)
+2026-11-10 16:07:41  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (lokal geprüft)
+2026-11-10 16:12:41  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (lokal geprüft)
+2026-11-10 16:15:12  INFO     [Allgemein] Beenden …
+2026-11-10 16:15:13  INFO     [Allgemein] Beendet.
+2026-11-10 16:15:42  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 16:15:50  INFO     [Allgemein] exe wurde verschoben: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\ControlCenter.update.exe → C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter\ControlCenter.exe – Verknüpfungen und Autostart werden angepasst
+2026-11-10 16:15:50  OK       [Allgemein] Verknüpfungen auf Desktop und im Startmenü angelegt.
+2026-11-10 16:15:50  OK       [Allgemein] Autostart eingerichtet (Aufgabenplanung, startet im Tray).
+2026-11-10 16:15:51  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 16:15:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)
+2026-11-10 16:16:54  OK       [Allgemein] Werbeblocker an (AdGuard DNS – Werbung & Tracker) auf 1 Adapter(n)
+2026-11-10 16:17:17  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 420 Mbit/s
+2026-11-10 16:17:45  INFO     [Allgemein] winget: 0 Updates verfügbar
+2026-11-10 16:20:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (lokal geprüft)
+2026-11-10 16:23:51  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-10 16:23:51  INFO     [Allgemein] Beenden …
+2026-11-10 16:23:52  INFO     [Allgemein] Beendet.
+2026-11-10 16:23:55  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 16:24:03  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 16:24:10  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)
+2026-11-10 16:27:02  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-10 16:27:02  INFO     [Allgemein] Beenden …
+2026-11-10 16:27:03  INFO     [Allgemein] Beendet.
+2026-11-10 16:27:06  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-10 16:27:15  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.14 (Aktuell), NVIDIA Studio-Treiber: 621.14 (Aktuell)
+2026-11-10 16:27:22  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)

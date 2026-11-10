@@ -59,3 +59,347 @@
 2026-11-09 12:49:12  OK       [Boost] Temp-Dateien: Fertig – 14 MB frei, 11 Dateien gelöscht, 87 übersprungen (0,0 s)
 2026-11-09 12:49:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 1648 MB frei geworden (jetzt 10,5 von 15,8 GB belegt)
 2026-11-09 12:49:15  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-09 17:19:17  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-09 17:19:17  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-09 17:19:27  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-09 17:19:27  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-09 17:19:27  OK       [Boost] Windows-Spielmodus an: an
+2026-11-09 17:19:27  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-09 17:19:27  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-09 17:19:27  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-09 17:19:27  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-09 17:19:27  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-09 17:19:27  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-09 17:19:27  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-09 17:19:27  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-09 17:19:27  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-09 17:19:27  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-09 17:19:27  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-09 17:19:27  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-09 17:19:27  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-09 17:19:27  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 17:19:29  OK       [Boost] Temp-Dateien: Fertig – 73 MB frei, 66 Dateien gelöscht, 16 übersprungen (0,0 s)
+2026-11-09 17:19:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 1136 MB frei geworden (jetzt 8,8 von 15,8 GB belegt)
+2026-11-09 17:19:30  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-09 17:19:36  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:50  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:50  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:50  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:50  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:51  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:51  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:51  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:51  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:19:52  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:20:00  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen
+2026-11-09 17:20:06  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Auflösung 100 %, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-09 17:20:31  OK       [Boost] ARK: Survival Ascended: empfohlene Einstellungen für diesen PC übernommen – Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen, FPS Unbegrenzt
+2026-11-09 17:20:31  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 17:20:31  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-09 17:20:48  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen, FPS Unbegrenzt
+2026-11-09 17:20:48  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen, FPS Unbegrenzt
+2026-11-09 17:20:49  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität erhöht · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen, FPS Unbegrenzt
+2026-11-09 17:20:49  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · Hintergrund-Apps schließen · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Ausgewogen, FPS Unbegrenzt
+2026-11-09 17:20:53  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-09 17:20:53  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-09 17:21:22  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, Hintergrund-Apps schließen, RAM freigeben, Kacheln pausiert
+2026-11-09 17:21:22  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 17:21:24  OK       [Boost] Arbeitsspeicher aufgeräumt – 26 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)
+2026-11-09 17:22:14  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-09 17:22:14  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-09 17:22:35  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-09 17:22:37  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-09 17:22:38  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-09 17:22:40  WARNUNG  [Boost] Razer Cortex (Razer.InGameOverlay): läuft noch (ungespeicherte Daten?)
+2026-11-09 17:22:40  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-09 17:22:43  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-09 17:22:43  OK       [Boost] Windows-Spielmodus an: an
+2026-11-09 17:22:43  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-09 17:22:43  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-09 17:22:43  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-09 17:22:43  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-09 17:22:43  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-09 17:22:43  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-09 17:22:45  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-09 17:22:45  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-09 17:22:45  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-09 17:22:45  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-09 17:22:45  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-09 17:22:45  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 17:22:45  WARNUNG  [Boost] ARK: Survival Ascended läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-09 17:22:45  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 17:22:55  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-09 17:22:57  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-09 17:22:59  OK       [Boost] EA App: geschlossen
+2026-11-09 17:23:02  WARNUNG  [Boost] Razer Cortex (Razer.InGameOverlay): läuft noch (ungespeicherte Daten?)
+2026-11-09 17:23:03  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 16 übersprungen (0,0 s)
+2026-11-09 17:23:08  OK       [Boost] Arbeitsspeicher aufgeräumt – 1013 MB frei geworden (jetzt 10,8 von 15,8 GB belegt)
+2026-11-09 17:23:08  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-09 17:25:50  OK       [Boost] Arbeitsspeicher aufgeräumt (jetzt 14,4 von 15,8 GB belegt)
+2026-11-09 18:03:42  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-09 18:08:57  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-09 18:08:57  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-09 18:09:08  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-09 18:09:08  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-09 18:09:08  OK       [Boost] Windows-Spielmodus an: an
+2026-11-09 18:09:08  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-09 18:09:08  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-09 18:09:08  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-09 18:09:08  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-09 18:09:08  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-09 18:09:08  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-09 18:09:08  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-09 18:09:08  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-09 18:09:08  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-09 18:09:08  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-09 18:09:08  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-09 18:09:08  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 18:09:08  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-09 18:09:08  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 18:09:14  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-09 18:09:16  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-09 18:09:17  OK       [Boost] EA App: geschlossen
+2026-11-09 18:09:19  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-09 18:09:19  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 32 übersprungen (0,0 s)
+2026-11-09 18:09:20  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-09 18:09:20  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-09 18:09:21  OK       [Boost] Arbeitsspeicher aufgeräumt – 1059 MB frei geworden (jetzt 8,2 von 15,8 GB belegt)
+2026-11-09 18:09:21  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-09 18:09:46  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, Hintergrund-Apps schließen, RAM freigeben, Kacheln pausiert
+2026-11-09 18:09:46  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 18:09:48  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-09 18:09:48  OK       [Boost] Arbeitsspeicher aufgeräumt – 340 MB frei geworden (jetzt 6,1 von 15,8 GB belegt)
+2026-11-09 18:09:49  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-09 18:09:51  OK       [Boost] EA App: geschlossen
+2026-11-09 18:09:52  WARNUNG  [Boost] Razer.InGameOverlay: läuft noch (ungespeicherte Daten?)
+2026-11-09 18:23:35  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-09 18:24:44  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, Hintergrund-Apps schließen, RAM freigeben, Kacheln pausiert
+2026-11-09 18:24:44  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-09 18:24:46  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-09 18:24:46  OK       [Boost] Arbeitsspeicher aufgeräumt (jetzt 5,1 von 15,8 GB belegt)
+2026-11-09 18:24:47  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-09 18:24:49  OK       [Boost] EA App: geschlossen
+2026-11-09 18:24:50  WARNUNG  [Boost] Razer Cortex (Razer.InGameOverlay): läuft noch (ungespeicherte Daten?)
+2026-11-10 14:57:41  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 14:57:42  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 15:00:16  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-10 15:00:16  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-10 15:00:26  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-10 15:00:26  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-10 15:00:26  OK       [Boost] Windows-Spielmodus an: an
+2026-11-10 15:00:26  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-10 15:00:26  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-10 15:00:26  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-10 15:00:26  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-10 15:00:26  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-10 15:00:26  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-10 15:00:26  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-10 15:00:26  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-10 15:00:26  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-10 15:00:26  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-10 15:00:26  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-10 15:00:26  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 15:00:26  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-10 15:00:26  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 15:00:29  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-10 15:00:31  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-10 15:00:32  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-10 15:00:34  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-10 15:00:34  OK       [Boost] Temp-Dateien: Fertig – 11 MB frei, 22 Dateien gelöscht, 9 übersprungen (0,0 s)
+2026-11-10 15:00:35  OK       [Boost] Arbeitsspeicher aufgeräumt – 1465 MB frei geworden (jetzt 5,4 von 15,8 GB belegt)
+2026-11-10 15:00:35  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-10 15:02:53  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 15:02:54  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 15:07:42  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-10 15:07:49  INFO     [Boost] Aufwärmen: Aim Lab gestartet
+2026-11-10 15:08:34  OK       [Boost] Arbeitsspeicher aufgeräumt – 1320 MB frei geworden (jetzt 5,8 von 15,8 GB belegt)
+2026-11-10 15:08:58  OK       [Boost] Arbeitsspeicher aufgeräumt – 185 MB frei geworden (jetzt 7,2 von 15,8 GB belegt)
+2026-11-10 15:09:09  OK       [Boost] Arbeitsspeicher aufgeräumt – 114 MB frei geworden (jetzt 5,5 von 15,8 GB belegt)
+2026-11-10 15:19:17  OK       [Boost] Wallpaper Engine hinzugefügt – Profil „Ausgewogen“
+2026-11-10 15:19:17  INFO     [Boost] Unbekanntes Spiel erkannt (Spieleordner): Wallpaper Engine · C:\Program Files (x86)\Steam\steamapps\common\wallpaper_engine\wallpaper64.exe
+2026-11-10 15:19:17  OK       [Boost] 🎮 Wallpaper Engine gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-10 15:19:17  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:19:18  OK       [Boost] Arbeitsspeicher aufgeräumt – 709 MB frei geworden (jetzt 6,2 von 15,8 GB belegt)
+2026-11-10 15:19:32  INFO     [Boost] Wallpaper Engine beendet
+2026-11-10 15:19:35  OK       [Boost] 🎮 Wallpaper Engine gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-10 15:19:35  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:19:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 18 MB frei geworden (jetzt 6,1 von 15,8 GB belegt)
+2026-11-10 15:21:14  OK       [Boost] Timer-Auflösung aktiv: 1,00 ms
+2026-11-10 15:21:14  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 15:21:17  OK       [Boost] 🎮 Wallpaper Engine gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-10 15:21:17  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:21:18  OK       [Boost] Arbeitsspeicher aufgeräumt – 423 MB frei geworden (jetzt 5,8 von 15,8 GB belegt)
+2026-11-10 15:29:08  OK       [Boost] Temp-Dateien: Fertig – 8 MB frei, 6 Dateien gelöscht, 54 übersprungen (0,0 s)
+2026-11-10 15:29:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 356 MB frei geworden (jetzt 6,2 von 15,8 GB belegt)
+2026-11-10 15:29:12  OK       [Boost] Shader-Cache: Fertig – 4,58 GB frei, 362 Dateien gelöscht, 9 übersprungen (0,1 s)
+2026-11-10 15:29:15  OK       [Boost] DNS-Cache geleert
+2026-11-10 15:29:50  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-10 15:29:50  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-10 15:30:00  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-10 15:30:00  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-10 15:30:00  OK       [Boost] Windows-Spielmodus an: an
+2026-11-10 15:30:00  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-10 15:30:00  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-10 15:30:00  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-10 15:30:00  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-10 15:30:00  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-10 15:30:00  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-10 15:30:01  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-10 15:30:01  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-10 15:30:01  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-10 15:30:01  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-10 15:30:01  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-10 15:30:01  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-10 15:30:01  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-10 15:30:01  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:30:01  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 15:30:01  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-10 15:30:01  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 15:30:04  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-10 15:30:05  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-10 15:30:07  OK       [Boost] EA App: geschlossen
+2026-11-10 15:30:08  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-10 15:30:10  WARNUNG  [Boost] Microsoft OneDrive Sync Service (OneDrive.Sync.Service): läuft noch (ungespeicherte Daten?)
+2026-11-10 15:30:11  WARNUNG  [Boost] CefSharp.BrowserSubprocess (CefSharp.BrowserSubprocess): läuft noch (ungespeicherte Daten?)
+2026-11-10 15:30:13  WARNUNG  [Boost] RazerCortex (RazerCortex): läuft noch (ungespeicherte Daten?)
+2026-11-10 15:30:13  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 54 übersprungen (0,0 s)
+2026-11-10 15:30:14  OK       [Boost] Arbeitsspeicher aufgeräumt – 577 MB frei geworden (jetzt 5,7 von 15,8 GB belegt)
+2026-11-10 15:30:14  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-10 15:32:56  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 15:32:56  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 15:32:59  OK       [Boost] 🎮 Wallpaper Engine gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-10 15:32:59  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:33:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 461 MB frei geworden (jetzt 5,9 von 15,8 GB belegt)
+2026-11-10 15:38:07  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 15:38:07  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 15:38:10  OK       [Boost] 🎮 Wallpaper Engine gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-10 15:38:10  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:38:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 374 MB frei geworden (jetzt 6,8 von 15,8 GB belegt)
+2026-11-10 15:46:22  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-10 15:46:22  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-10 15:46:33  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-10 15:46:33  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-10 15:46:33  OK       [Boost] Windows-Spielmodus an: an
+2026-11-10 15:46:33  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-10 15:46:33  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-10 15:46:33  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-10 15:46:33  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-10 15:46:33  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-10 15:46:33  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-10 15:46:33  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-10 15:46:33  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-10 15:46:33  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-10 15:46:33  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-10 15:46:33  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-10 15:46:33  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-10 15:46:33  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-10 15:46:33  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:46:33  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 15:46:33  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-10 15:46:33  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 15:46:36  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-10 15:46:37  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-10 15:46:39  OK       [Boost] EA App: geschlossen
+2026-11-10 15:46:41  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-10 15:46:42  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-10 15:46:44  WARNUNG  [Boost] CefSharp.BrowserSubprocess (CefSharp.BrowserSubprocess): läuft noch (ungespeicherte Daten?)
+2026-11-10 15:46:45  OK       [Boost] RazerCortex: geschlossen
+2026-11-10 15:46:45  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 43 übersprungen (0,0 s)
+2026-11-10 15:46:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 1458 MB frei geworden (jetzt 7,0 von 15,8 GB belegt)
+2026-11-10 15:46:47  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-10 15:47:09  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 15:47:09  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 15:47:12  OK       [Boost] 🎮 Wallpaper Engine gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-10 15:47:12  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:47:13  OK       [Boost] Arbeitsspeicher aufgeräumt – 330 MB frei geworden (jetzt 6,6 von 15,8 GB belegt)
+2026-11-10 15:48:10  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-10 15:48:16  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-10 15:48:20  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-10 15:48:31  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-10 15:49:08  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-10 15:49:16  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-10 15:57:38  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 15:57:38  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 15:57:41  OK       [Boost] 🎮 Wallpaper Engine gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-10 15:57:41  OK       [Boost] Wallpaper Engine: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-10 15:57:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 865 MB frei geworden (jetzt 6,4 von 15,8 GB belegt)
+2026-11-10 16:15:50  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 16:15:50  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 16:17:17  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:18  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:20  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:22  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:23  INFO     [Boost] Steam im Hintergrund gestartet (für Spiele-Updates)
+2026-11-10 16:17:25  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:27  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:29  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:31  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:33  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:35  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:37  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:39  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:41  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:43  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:45  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:47  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:49  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:51  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:53  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:55  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:57  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:17:59  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:01  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:03  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:05  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:07  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:09  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:11  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:13  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:15  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:17  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:19  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:21  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:23  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:25  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:27  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:29  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:31  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:33  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:34  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:35  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:37  INFO     [Boost] Spiele-Updates (online geprüft): Wallpaper Engine
+2026-11-10 16:18:47  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-10 16:18:47  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-10 16:18:57  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-10 16:18:58  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-10 16:18:58  OK       [Boost] Windows-Spielmodus an: an
+2026-11-10 16:18:58  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-10 16:18:58  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-10 16:18:58  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-10 16:18:58  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-10 16:18:58  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-10 16:18:58  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-10 16:18:58  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-10 16:18:58  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-10 16:18:58  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-10 16:18:58  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-10 16:18:58  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-10 16:18:58  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-10 16:18:58  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-10 16:18:58  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 16:18:58  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus, Volumetrische Wolken/Nebel aus)
+2026-11-10 16:18:58  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-10 16:19:01  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-10 16:19:02  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-10 16:19:04  OK       [Boost] EA App: geschlossen
+2026-11-10 16:19:05  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-10 16:19:07  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-10 16:19:08  WARNUNG  [Boost] CefSharp.BrowserSubprocess (CefSharp.BrowserSubprocess): läuft noch (ungespeicherte Daten?)
+2026-11-10 16:19:10  OK       [Boost] RazerCortex: geschlossen
+2026-11-10 16:19:10  OK       [Boost] Temp-Dateien: Fertig – 87 MB frei, 9 Dateien gelöscht, 125 übersprungen (0,0 s)
+2026-11-10 16:19:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 1387 MB frei geworden (jetzt 7,2 von 15,8 GB belegt)
+2026-11-10 16:19:12  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-10 16:24:01  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 16:24:02  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-10 16:27:13  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-10 16:27:13  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)

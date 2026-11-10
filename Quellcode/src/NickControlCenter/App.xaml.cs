@@ -39,10 +39,20 @@ public partial class App : Application
         base.OnStartup(e);
         Env.UnblockSelf();
         SelfUpdate.Cleanup();
+        // Reste des früheren Festplatten-Tests entfernen
+        foreach (var d in System.IO.DriveInfo.GetDrives())
+            try { var t = System.IO.Path.Combine(d.RootDirectory.FullName, "ControlCenterTest"); if (d.IsReady && System.IO.Directory.Exists(t)) System.IO.Directory.Delete(t, true); } catch { }
         bool startInTray = e.Args.Any(a => a.Equals("--tray", StringComparison.OrdinalIgnoreCase) || a.Equals("/tray", StringComparison.OrdinalIgnoreCase));
 
         // Nur eine Instanz: ein zweiter Start holt das Fenster nach vorne
         _mutex = new Mutex(true, "Global\\NickControlCenter_SingleInstance", out bool isFirst);
+        // „ControlCenter.update.exe“ per Doppelklick gestartet → als ControlCenter.exe einspielen und die starten
+        if (SelfUpdate.RedirectIfStartedAsUpdate(mainInstanceRunning: !isFirst))
+        {
+            if (isFirst) { try { _mutex.ReleaseMutex(); } catch { } }
+            Shutdown();
+            return;
+        }
         // nach einem Update (oder Treiber-Installation) auf das Ende der alten Instanz warten statt aufzugeben
         if (!isFirst && e.Args.Any(a => a.Equals("--restart", StringComparison.OrdinalIgnoreCase)))
         {
@@ -69,6 +79,7 @@ public partial class App : Application
         Services.Hub.Preference = s.SensorSource;
         Services.Hub.IntervalMs = s.SensorIntervalMs;
         Services.Hub.Start();
+        _ = EnergyService.Instance;
         _ = Task.Run(HwinfoLauncher.StartIfWanted);
 
         Services.Fans = new FanController();
@@ -108,6 +119,11 @@ public partial class App : Application
         Services.Tweaker.ApplyOnStartup(startInTray);
         Services.Tiles.Start();
         _ = Services.Drivers.CheckAsync(silent: true);
+        try { HotkeyService.Instance.Start(); } catch (Exception ex) { Log.Warn(LogModule.App, "Tastenkürzel: " + ex.Message); }
+        var weekly = new DispatcherTimer { Interval = TimeSpan.FromMinutes(30) };
+        weekly.Tick += (_, _) => AutoSortDownloads();
+        weekly.Start();
+        Dispatcher.BeginInvoke(AutoSortDownloads, DispatcherPriority.ApplicationIdle);
 
         FirstRun();
         var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
@@ -132,6 +148,20 @@ public partial class App : Application
         };
         f.Actions.Add(new FixAction { Label = "Geräte neu suchen", Icon = "", Primary = true, Run = () => { Services.Fans.Rgb.Rescan(); Services.Diagnose.Clear(f.Id); return Task.FromResult("Suche gestartet."); } });
         return f;
+    }
+
+    /// <summary>Downloads einmal pro Woche sortieren (wenn eingeschaltet).</summary>
+    private static async void AutoSortDownloads()
+    {
+        var s = AppSettings.Current;
+        if (!s.DownloadsAutoSort || (DateTime.Now - s.DownloadsLastSort).TotalDays < 7) return;
+        s.DownloadsLastSort = DateTime.Now; s.Save();
+        try
+        {
+            var (moved, _) = await Task.Run(() => DownloadsCleaner.Sort(DownloadsCleaner.Plan()));
+            if (moved > 0) Ui.Toast($"Downloads aufgeräumt: {moved} Dateien in Ordner sortiert");
+        }
+        catch (Exception ex) { Log.Warn(LogModule.App, "Downloads sortieren: " + ex.Message); }
     }
 
     private void FirstRun()

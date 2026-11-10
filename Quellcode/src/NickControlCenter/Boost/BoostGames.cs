@@ -33,6 +33,8 @@ public sealed class GameVM : ObservableObject
     public bool HasHint => Hint != null;
     public string? LaunchOptions => Known?.LaunchOptions;
     public bool HasLaunchOptions => LaunchOptions != null;
+    public string? LastSession => P.LastSession;
+    public bool HasSession => P.LastSession != null;
     public bool HasIntros => Known?.IntroFolder != null && P.Root != null;
     public bool IsUe5 => Known?.Engine == "UE5" || (Known == null && P.Process.Contains("-Win64-Shipping", StringComparison.OrdinalIgnoreCase));
     public bool CanLaunch => P.LaunchUri != null || P.Exe != null || P.SteamAppId > 0;
@@ -102,6 +104,60 @@ public sealed class GameVM : ObservableObject
     public bool VolumetricsOff { get => P.VolumetricsOff; set { P.VolumetricsOff = value; Edited(); } }
     public bool SkipIntros { get => P.SkipIntros; set { P.SkipIntros = value; Edited(); } }
 
+    // ---- Feineinstellungen (Unreal Engine)
+    public string EngineName => Known?.Engine is "UE4" or "UE5" ? Known.Engine : IsUe5 ? "UE5" : "UE4";
+    private List<SgItem>? _sgItems;
+    public List<SgItem> SgItems => _sgItems ??= UnrealTweaks.Categories.Select(c => new SgItem(this, c)).ToList();
+    private List<TweakItem>? _tweakItems;
+    public List<TweakItem> TweakItems => _tweakItems ??= UnrealTweaks.For(EngineName).Select(t => new TweakItem(this, t)).ToList();
+    public LookPreset[] LookPresets => UnrealTweaks.Presets(Known?.Id);
+    public string LookPresetText => P.LookPreset != null ? $"Aktiv: „{P.LookPreset}“" : "Keine Kombination gewählt";
+    public string ConsoleCommands => string.Join("\n", UnrealTweaks.All.Where(t => P.EngineTweaks.Contains(t.Id)).Select(t => t.Console));
+    internal void FineEdited(string? preset = null)
+    {
+        P.LookPreset = preset;
+        if (P.Preset != GamePreset.Custom) P.Preset = GamePreset.Custom;
+        if (!P.Graphics) P.Graphics = true;
+        _svc.ProfileEdited(this);
+        RaiseAll(nameof(PresetIndex), nameof(StateText), nameof(Summary), nameof(LookPresetText), nameof(ConsoleCommands), nameof(Graphics));
+    }
+    public void ApplyLook(LookPreset lp)
+    {
+        P.SgOverride = new Dictionary<string, int>(lp.Sg);
+        P.EngineTweaks = lp.Tweaks.Where(id => TweakItems.Any(t => t.Id == id)).ToList();
+        P.PostFxOff = lp.PostFxOff; P.VolumetricsOff = lp.VolumetricsOff && IsUe5;
+        P.GfxQuality = 0; P.VsyncOff = true;
+        if (lp.FpsLimit >= 0) P.FpsLimit = lp.FpsLimit;
+        if (lp.ResScale > 0) P.ResScale = lp.ResScale;
+        foreach (var i in SgItems) i.Refresh();
+        foreach (var t in TweakItems) t.Refresh();
+        FineEdited(lp.Name);
+        RaiseAll(nameof(PostFxOff), nameof(VolumetricsOff), nameof(GfxQuality), nameof(VsyncOff), nameof(FpsLimit), nameof(ResScale));
+    }
+    public void ClearFine()
+    {
+        P.SgOverride.Clear(); P.EngineTweaks.Clear();
+        foreach (var i in SgItems) i.Refresh();
+        foreach (var t in TweakItems) t.Refresh();
+        FineEdited(null);
+    }
+
+    // ---- weitere Start-Optionen
+    public bool PCoresOnly { get => P.PCoresOnly; set { P.PCoresOnly = value; Edited(); } }
+    public bool QuietNotifications { get => P.QuietNotifications; set { P.QuietNotifications = value; Edited(); } }
+    public bool ThrottleBackground { get => P.ThrottleBackground; set { P.ThrottleBackground = value; Edited(); } }
+    public bool HybridCpu => CpuTopology.IsHybrid;
+
+    // ---- Beleuchtung beim Spielen (gehört nicht zum Boost-Preset → kein Wechsel auf „Eigene“)
+    public static string[] RgbModeNames { get; } = { "Nicht ändern", "Bildschirm-Farben (wie Ambilight)", "Feste Farbe", "Temperatur (blau → rot)", "Gespeichertes RGB-Profil", "Licht aus" };
+    public int RgbMode { get => P.RgbMode; set { P.RgbMode = Math.Clamp(value, 0, 5); _svc.SaveGames(); RaiseAll(nameof(RgbMode), nameof(ShowRgbColor), nameof(ShowRgbProfile)); } }
+    public string RgbColor { get => P.RgbColor; set { if (RgbF.TryParseHex(value, out var c)) { P.RgbColor = c.Hex; _svc.SaveGames(); } Raise(); Raise(nameof(RgbBrush)); } }
+    public System.Windows.Media.Brush RgbBrush => ColorItem.Frozen(RgbF.FromHex(P.RgbColor));
+    public string? RgbProfile { get => P.RgbProfile; set { P.RgbProfile = value; _svc.SaveGames(); Raise(); } }
+    public bool ShowRgbColor => P.RgbMode == 2;
+    public bool ShowRgbProfile => P.RgbMode == 4;
+    public IEnumerable<string> RgbProfileNames => Services.Fans?.Rgb.Profiles.Select(p => p.Name) ?? Enumerable.Empty<string>();
+
     private void Edited([CallerMemberName] string? name = null)
     {
         if (P.Preset != GamePreset.Custom) P.Preset = GamePreset.Custom;
@@ -114,8 +170,56 @@ public sealed class GameVM : ObservableObject
     public void SetKnown(KnownGame? k) { Known = k; P.KnownId = k?.Id; }
 }
 
+/// <summary>Eine Grafik-Kategorie im Spielprofil.</summary>
+public sealed class SgItem : ObservableObject
+{
+    private readonly GameVM _g;
+    public SgCategory C { get; }
+    public SgItem(GameVM g, SgCategory c) { _g = g; C = c; }
+    public string Label => C.Label;
+    public string Hint => C.Hint;
+    /// <summary>0 = wie Voreinstellung, 1…4 = Niedrig…Episch</summary>
+    public int Index
+    {
+        get => _g.P.SgOverride.TryGetValue(C.Key, out var v) ? v + 1 : 0;
+        set
+        {
+            if (value <= 0) _g.P.SgOverride.Remove(C.Key); else _g.P.SgOverride[C.Key] = Math.Clamp(value - 1, 0, 3);
+            Raise(); _g.FineEdited();
+        }
+    }
+    public void Refresh() => Raise(nameof(Index));
+}
+
+/// <summary>Eine Feineinstellung (Konsolenvariable) im Spielprofil.</summary>
+public sealed class TweakItem : ObservableObject
+{
+    private readonly GameVM _g;
+    public UnrealTweak T { get; }
+    public TweakItem(GameVM g, UnrealTweak t) { _g = g; T = t; }
+    public string Id => T.Id;
+    public string Title => T.Title;
+    public string Description => T.Description + (T.PvpNote ? " Im PvP fair bleiben – am besten nur in PvE/Einzelspieler." : "");
+    public string Gain => T.Gain;
+    public string LookText => T.LookText;
+    public System.Windows.Media.Brush LookBrush => T.Look switch { -1 => Palette.Good, 0 => Palette.Good, 1 => Palette.Warn, _ => Palette.Bad };
+    public bool On
+    {
+        get => _g.P.EngineTweaks.Contains(T.Id);
+        set
+        {
+            _g.P.EngineTweaks.Remove(T.Id);
+            if (value) _g.P.EngineTweaks.Add(T.Id);
+            Raise(); _g.FineEdited();
+        }
+    }
+    public void Refresh() => Raise(nameof(On));
+}
+
 public sealed partial class BoostService
 {
+    private int? _notifyPrev;
+    private readonly HashSet<int> _throttled = new();
     private readonly Dictionary<string, HashSet<int>> _activeGames = new(StringComparer.OrdinalIgnoreCase);
     private string? _gamePowerPrev;
     private bool _gameTimer;
@@ -147,6 +251,8 @@ public sealed partial class BoostService
             Save();
         }
         Games.Clear();
+        // fälschlich als Spiel erkannte Programme (z. B. Wallpaper Engine) wieder entfernen
+        Settings.Games.RemoveAll(p => NoGame.Contains(p.Process) || p.SteamAppId == 431960);
         foreach (var p in Settings.Games.OrderBy(p => p.Name)) Games.Add(new GameVM(this, p));
         Raise(nameof(GamesText));
     }
@@ -570,16 +676,25 @@ public sealed partial class BoostService
         var sg = GameCatalog.Scalability(g.P.GfxQuality);
         foreach (var (k, v) in sg) ini.Set("ScalabilityGroups", k, v);
         if (sg.Count > 0) parts.Add("Qualität " + GameCatalog.QualityNames[g.P.GfxQuality].Split(' ')[0]);
+        foreach (var (k, v) in g.P.SgOverride) ini.Set("ScalabilityGroups", k, Math.Clamp(v, 0, 3).ToString());
+        if (g.P.SgOverride.Count > 0) parts.Add($"{g.P.SgOverride.Count} Kategorien einzeln");
         // ARK (UE4) hat eigene Schalter für Bloom/Lichtstrahlen
         if (g.Known?.Id == "ase" && g.P.GfxQuality == 1) { ini.Set(us, "bDisableBloom", "True"); ini.Set(us, "bDisableLightShafts", "True"); }
         int res = GameCatalog.ResolutionScales[Math.Clamp(g.P.ResScale, 0, GameCatalog.ResolutionScales.Length - 1)];
         if (res > 0) { ini.Set("ScalabilityGroups", "sg.ResolutionQuality", res.ToString()); parts.Add($"Auflösung {res} %"); }
         ini.Save(gus);
 
-        if (g.EngineIniOk && (g.P.PostFxOff || g.P.VolumetricsOff))
+        if (g.EngineIniOk)
         {
             BackupIni(eng, g.Key);
             var e = IniFile.Load(eng);
+            // Feineinstellungen: gewählte setzen, abgewählte (von der App verwaltete) wieder entfernen
+            var chosen = UnrealTweaks.All.Where(t => g.P.EngineTweaks.Contains(t.Id)).ToList();
+            var keep = chosen.SelectMany(t => t.Lines.Select(l => l.Cvar)).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            foreach (var cv in UnrealTweaks.ManagedCvars.Where(c => !keep.Contains(c)))
+                if (!(cv is "r.VolumetricCloud" or "r.VolumetricFog" && g.P.VolumetricsOff)) e.Remove("SystemSettings", cv);
+            foreach (var t in chosen) foreach (var (cv, v) in t.Lines) e.Set("SystemSettings", cv, v);
+            if (chosen.Count > 0) parts.Add($"{chosen.Count} Feineinstellungen");
             if (g.P.PostFxOff)
             {
                 e.Set("SystemSettings", "r.MotionBlurQuality", "0"); e.Set("SystemSettings", "r.DepthOfFieldQuality", "0");
@@ -752,6 +867,8 @@ public sealed partial class BoostService
                             Ui.Toast($"{k.Name} erkannt – Profil „{GameCatalog.PresetNames[(int)vm.P.Preset]}“ angelegt");
                         }
 
+            if (Settings.DetectAnyGame) DetectUnknownGame(running);
+
             if (!Settings.AutoBoost) { AutoStatus = "Auto-Boost aus"; StopAll(); return; }
 
             var now = new List<string>();
@@ -773,6 +890,7 @@ public sealed partial class BoostService
                 else if (!gg.P.Active || gg.P.Hidden) GameStopped(gg);
             }
             AutoStatus = now.Count > 0 ? $"Aktiv für: {string.Join(", ", now)}" : "Wartet auf Spielstart …";
+            if (_activeGames.Count > 0) { TrackSession(running); RamWatchdog(); }
         }
         finally
         {
@@ -814,9 +932,42 @@ public sealed partial class BoostService
         if (g.P.CloseApps) { _ = CloseSelectedAppsAsync(); done.Add("Hintergrund-Apps schließen"); }
         if (g.P.CleanRam) { _ = CleanRamAsync(); done.Add("RAM freigeben"); }
         if (g.P.PauseTiles) { try { Services.Tiles?.SetGamePause(true); done.Add("Kacheln pausiert"); } catch { } }
+        if (g.P.PCoresOnly && CpuTopology.IsHybrid)
+        {
+            int ok = 0;
+            foreach (var p in ps) try { p.ProcessorAffinity = (IntPtr)CpuTopology.PerformanceMask; ok++; } catch { }
+            done.Add(ok > 0 ? "nur P-Kerne" : "P-Kerne (vom Spiel blockiert)");
+        }
+        if (g.P.QuietNotifications && _notifyPrev == null)
+        {
+            try
+            {
+                using var k = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\PushNotifications", true);
+                _notifyPrev = k.GetValue("ToastEnabled") as int? ?? 1;
+                k.SetValue("ToastEnabled", 0, RegistryValueKind.DWord);
+                done.Add("Benachrichtigungen aus");
+            }
+            catch { }
+        }
+        if (g.P.ThrottleBackground)
+        {
+            int n = 0;
+            foreach (var name in Settings.SelectedApps)
+                foreach (var p in Process.GetProcessesByName(name))
+                    using (p) try { if (p.PriorityClass is ProcessPriorityClass.Normal or ProcessPriorityClass.AboveNormal) { p.PriorityClass = ProcessPriorityClass.BelowNormal; _throttled.Add(p.Id); n++; } } catch { }
+            if (n > 0) done.Add($"{n} Hintergrund-Programme ausgebremst");
+        }
         // exe-Optimierungen für den nächsten Start sicherstellen
         if (g.P.ExeTweaks || g.P.Priority > 0) Task.Run(() => GameExeTweaks(g));
         Say($"🎮 {g.Name} gestartet → {(done.Count == 0 ? "nichts zu tun" : string.Join(", ", done))}", LogLevel.Ok);
+        if (done.Count > 0)
+        {
+            Settings.LastSummary = new List<string> { $"🎮 Auto-Boost für {g.Name}" }.Concat(done.Select(d => "✔ " + d)).ToList();
+            System.Windows.Application.Current?.Dispatcher.BeginInvoke(() => RaiseAll(nameof(Summary), nameof(HasSummary)));
+        }
+        _sessions[g.Key] = new Session { Start = DateTime.Now, Pids = ps.Select(p => p.Id).ToHashSet(), EnergyStart = EnergyService.Instance.TotalWh };
+        ApplyGameRgb(g);
+        if (_sessions.Count == 1) FpsCounter.Instance.Acquire();
         Sort();
     }
 
@@ -825,6 +976,7 @@ public sealed partial class BoostService
         _activeGames.Remove(g.Key);
         g.Running = false;
         Say($"{g.Name} beendet");
+        EndSession(g);
         if (_activeGames.Count > 0) { Sort(); return; }
         // letztes Spiel zu → vorübergehende Änderungen zurück
         if (_gameTimer && !(Settings.Applied && IsOn("timer"))) SetTimerResolution(false);
@@ -836,12 +988,220 @@ public sealed partial class BoostService
         }
         _gamePowerPrev = null;
         try { Services.Tiles?.SetGamePause(false); } catch { }
+        try { Services.Fans?.Rgb.PopGameEffect(); } catch { }
+        if (_notifyPrev is int np)
+        {
+            try { using var k = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Windows\CurrentVersion\PushNotifications", true); k.SetValue("ToastEnabled", np, RegistryValueKind.DWord); } catch { }
+            _notifyPrev = null;
+        }
+        foreach (var pid in _throttled) try { using var p = Process.GetProcessById(pid); p.PriorityClass = ProcessPriorityClass.Normal; } catch { }
+        _throttled.Clear();
         Sort();
+    }
+
+    /// <summary>Beleuchtung fürs Spiel umschalten (nach dem Spiel kommt die alte zurück).</summary>
+    private void ApplyGameRgb(GameVM g)
+    {
+        var rgb = Services.Fans?.Rgb;
+        if (rgb == null || g.P.RgbMode == 0) return;
+        try
+        {
+            switch (g.P.RgbMode)
+            {
+                case 1: rgb.PushGameEffect(new EffectConfig { Type = LightEffect.Screen }); break;
+                case 2: rgb.PushGameEffect(new EffectConfig { Type = LightEffect.Static, Colors = new() { g.P.RgbColor } }); break;
+                case 3: rgb.PushGameEffect(new EffectConfig { Type = LightEffect.Temperature, Colors = new() { "#0050FF", "#00FF60", "#FFB000", "#FF0000" } }); break;
+                case 4:
+                    var pr = rgb.Profiles.FirstOrDefault(x => x.Name == g.P.RgbProfile);
+                    if (pr != null) rgb.PushGameEffect(pr.Effect.Clone(), pr.Brightness);
+                    break;
+                case 5: rgb.PushGameEffect(new EffectConfig { Type = LightEffect.Off }); break;
+            }
+            Log.Info(LogModule.Rgb, $"{g.Name}: Beleuchtung fürs Spiel – {GameVM.RgbModeNames[g.P.RgbMode]}");
+        }
+        catch (Exception ex) { Log.Warn(LogModule.Rgb, "Spiel-Beleuchtung: " + ex.Message); }
     }
 
     private void StopAll()
     {
         foreach (var key in _activeGames.Keys.ToList())
             if (Games.FirstOrDefault(x => x.Key == key) is { } g) GameStopped(g); else _activeGames.Remove(key);
+    }
+
+    // ================================================================ Jedes Spiel erkennen (auch unbekannte)
+
+    private static readonly string[] GameFolders =
+    {
+        @"\steamapps\common\", @"\Epic Games\", @"\Riot Games\", @"\XboxGames\", @"\GOG Galaxy\Games\", @"\GOG Games\",
+        @"\EA Games\", @"\Ubisoft Game Launcher\games\", @"\Battle.net\", @"\Rockstar Games\", @"\Games\"
+    };
+    private static readonly HashSet<string> NoGame = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "explorer", "steam", "steamwebhelper", "EpicGamesLauncher", "EpicWebHelper", "RiotClientServices", "RiotClientUx", "Battle.net", "Agent",
+        "EADesktop", "upc", "UbisoftConnect", "GalaxyClient", "Discord", "chrome", "msedge", "firefox", "opera", "brave", "vlc", "mpc-hc64",
+        "CrashReportClient", "UnrealCEFSubProcess", "EasyAntiCheat", "EasyAntiCheat_EOS", "BEService", "Launcher", "ApplicationFrameHost",
+        "ControlCenter", "NickControlCenter", "ControlCenter.update", "obs64",
+        "wallpaper32", "wallpaper64", "webwallpaper32", "wallpaperservice32", "ui32", "Lively", "Livelywpf", "Rainmeter", "mpv", "PotPlayerMini64", "Netflix", "Plex", "PowerPnt", "Kodi", "Spotify", "Teams", "ms-teams", "devenv", "Code", "WindowsTerminal", "Taskmgr", "mmc"
+    };
+    private string? _fsCandidate; private DateTime _fsSince;
+
+    /// <summary>
+    /// Läuft ein Spiel, das noch nicht in der Liste ist? Erkennung über den Ordner (Steam, Epic, Riot, Xbox, GOG …)
+    /// oder: Vollbild-Fenster im Vordergrund, das länger als 15 s offen ist und nicht zu einem normalen Programm gehört.
+    /// </summary>
+    private void DetectUnknownGame(Dictionary<string, List<Process>> running)
+    {
+        try
+        {
+            var fg = Native.GetForegroundWindow();
+            if (fg == IntPtr.Zero) return;
+            Native.GetWindowThreadProcessId(fg, out uint pid);
+            Process? p = null;
+            foreach (var l in running.Values) { p = l.FirstOrDefault(x => x.Id == pid); if (p != null) break; }
+            if (p == null || NoGame.Contains(p.ProcessName) || SystemProcs.Contains(p.ProcessName)) return;
+            var key = p.ProcessName.ToLowerInvariant();
+            if (Games.Any(g => g.Key == key || (g.Known?.Processes.Any(x => x.Equals(p.ProcessName, StringComparison.OrdinalIgnoreCase)) ?? false))) return;
+            string? exe = null;
+            try { exe = p.MainModule?.FileName; } catch { }
+            bool inGameFolder = exe != null && GameFolders.Any(f => exe.Contains(f, StringComparison.OrdinalIgnoreCase));
+            bool fullscreen = Native.IsFullscreen(fg);
+            if (!inGameFolder && !fullscreen) { _fsCandidate = null; return; }
+            if (!inGameFolder)
+            {
+                // Vollbild allein reicht erst nach 15 s (Videos, Präsentationen …)
+                if (_fsCandidate != key) { _fsCandidate = key; _fsSince = DateTime.Now; return; }
+                if ((DateTime.Now - _fsSince).TotalSeconds < 15) return;
+            }
+            string name;
+            try { name = p.MainModule?.FileVersionInfo.ProductName?.Trim() ?? ""; } catch { name = ""; }
+            if (name.Length < 2 || name.Contains("Unreal", StringComparison.OrdinalIgnoreCase)) name = p.MainWindowTitle is { Length: > 1 } t ? t : p.ProcessName;
+            var root = exe == null ? null : Path.GetDirectoryName(exe);
+            var bi = exe?.IndexOf(@"\Binaries\", StringComparison.OrdinalIgnoreCase) ?? -1;
+            if (bi > 0) root = Path.GetDirectoryName(exe![..bi]);
+            var vm = AddProfile(name, p.ProcessName, exe, root, "Erkannt", GameCatalog.Find(p.ProcessName, 0, name), null, null);
+            _fsCandidate = null;
+            Ui.Toast($"Spiel erkannt: {vm.Name} – Profil „{GameCatalog.PresetNames[(int)vm.P.Preset]}“ ist aktiv (boostet + gibt RAM frei)");
+            Log.Info(LogModule.Boost, $"Unbekanntes Spiel erkannt ({(inGameFolder ? "Spieleordner" : "Vollbild")}): {vm.Name} · {exe}");
+        }
+        catch { }
+    }
+
+    // ================================================================ Sitzungen (FPS, Temperaturen) und Absturz-Erkennung
+
+    private sealed class Session
+    {
+        public DateTime Start;
+        public HashSet<int> Pids = new();
+        public List<double> Fps = new();
+        public double MaxCpu = double.NaN, MaxGpu = double.NaN;
+        public bool CrashReporter;
+        public double EnergyStart;
+    }
+    private readonly Dictionary<string, Session> _sessions = new(StringComparer.OrdinalIgnoreCase);
+    private DateTime _lastRamClean = DateTime.MinValue;
+
+    private void TrackSession(Dictionary<string, List<Process>> running)
+    {
+        var snap = HardwareHub.Instance.Latest;
+        bool crashUi = running.ContainsKey("CrashReportClient") || running.ContainsKey("UnrealCEFSubProcess") && running.ContainsKey("CrashReportClient")
+                       || running.Keys.Any(k => k.Contains("CrashReport", StringComparison.OrdinalIgnoreCase) || k.Equals("WerFault", StringComparison.OrdinalIgnoreCase));
+        foreach (var (key, se) in _sessions)
+        {
+            if (!_activeGames.TryGetValue(key, out var pids)) continue;
+            foreach (var pid in pids)
+            {
+                var f = FpsCounter.Instance.Get(pid);
+                if (!double.IsNaN(f.Fps) && f.Fps > 1) { se.Fps.Add(f.Fps); break; }
+            }
+            if (SensorSnapshot.Plausible(snap.CpuTemp)) se.MaxCpu = double.IsNaN(se.MaxCpu) ? snap.CpuTemp : Math.Max(se.MaxCpu, snap.CpuTemp);
+            if (SensorSnapshot.Plausible(snap.GpuTemp)) se.MaxGpu = double.IsNaN(se.MaxGpu) ? snap.GpuTemp : Math.Max(se.MaxGpu, snap.GpuTemp);
+            if (crashUi) se.CrashReporter = true;
+        }
+    }
+
+    /// <summary>Während des Spielens: RAM über 85 % belegt → automatisch freigeben (höchstens alle 3 Minuten).</summary>
+    private void RamWatchdog()
+    {
+        if (!Settings.RamWatchdog || (DateTime.Now - _lastRamClean).TotalMinutes < 3) return;
+        var m = Native.Memory();
+        if (m.LoadPct < 85) return;
+        _lastRamClean = DateTime.Now;
+        Say($"RAM zu {m.LoadPct:0} % voll – gebe Arbeitsspeicher frei");
+        _ = CleanRamAsync();
+    }
+
+    private void EndSession(GameVM g)
+    {
+        if (!_sessions.Remove(g.Key, out var se)) return;
+        if (_sessions.Count == 0) FpsCounter.Instance.Release();
+        var dur = DateTime.Now - se.Start;
+        if (dur.TotalSeconds < 20) { CheckCrashAsync(g, se, dur); return; }
+        string fps = "";
+        if (se.Fps.Count >= 5)
+        {
+            var sorted = se.Fps.OrderBy(x => x).ToList();
+            double low = sorted.Take(Math.Max(1, sorted.Count / 100)).Average();
+            fps = $" · Ø {se.Fps.Average():0} FPS · schlechteste 1 % {low:0} FPS";
+        }
+        var temps = (double.IsNaN(se.MaxCpu) ? "" : $" · CPU max. {se.MaxCpu:0} °C") + (double.IsNaN(se.MaxGpu) ? "" : $" · GPU max. {se.MaxGpu:0} °C");
+        double wh = EnergyService.Instance.TotalWh - se.EnergyStart;
+        if (wh > 1) temps += $" · {wh / 1000:0.00} kWh ≈ {EnergyService.Instance.Cost(wh):0.00} €";
+        g.P.LastSession = $"{se.Start:dd.MM. HH:mm} · {(dur.TotalHours >= 1 ? $"{(int)dur.TotalHours} h {dur.Minutes} min" : $"{(int)dur.TotalMinutes} min")}{fps}{temps}";
+        g.RaiseAllProps();
+        SaveGames();
+        Say($"{g.Name}: Sitzung {g.P.LastSession}", LogLevel.Ok);
+        CheckCrashAsync(g, se, dur);
+    }
+
+    /// <summary>
+    /// Ist das Spiel abgestürzt (Windows-Fehlerbericht, Grafiktreiber-Reset oder Crash-Reporter)?
+    /// Bei übertakteter Grafikkarte wird die Übertaktung dann automatisch gesenkt.
+    /// </summary>
+    private void CheckCrashAsync(GameVM g, Session se, TimeSpan dur)
+    {
+        var proc = g.P.Process;
+        var since = DateTime.Now - dur - TimeSpan.FromSeconds(30);
+        Task.Run(() =>
+        {
+            string? why = se.CrashReporter ? "Absturzmeldung des Spiels" : null;
+            try
+            {
+                var from = since.ToUniversalTime().ToString("o");
+                // Grafiktreiber hat sich zurückgesetzt (TDR) oder ist abgestürzt
+                var qSys = new System.Diagnostics.Eventing.Reader.EventLogQuery("System", System.Diagnostics.Eventing.Reader.PathType.LogName,
+                    $"*[System[(Provider[@Name='nvlddmkm'] or Provider[@Name='Display'] or Provider[@Name='amdkmdag'] or Provider[@Name='amdwddmg']) and (Level=1 or Level=2 or Level=3) and TimeCreated[@SystemTime>='{from}']]]");
+                using (var r = new System.Diagnostics.Eventing.Reader.EventLogReader(qSys))
+                    if (r.ReadEvent() is { } ev) { why ??= $"Grafiktreiber-Fehler (Ereignis {ev.Id})"; ev.Dispose(); }
+                // Windows-Fehlerbericht für die Spiel-exe
+                var qApp = new System.Diagnostics.Eventing.Reader.EventLogQuery("Application", System.Diagnostics.Eventing.Reader.PathType.LogName,
+                    $"*[System[(EventID=1000 or EventID=1002) and TimeCreated[@SystemTime>='{from}']]]");
+                using var ra = new System.Diagnostics.Eventing.Reader.EventLogReader(qApp);
+                for (var ev = ra.ReadEvent(); ev != null; ev = ra.ReadEvent())
+                    using (ev)
+                    {
+                        string text = "";
+                        try { text = string.Join(" ", ev.Properties.Select(x => x.Value?.ToString())); } catch { }
+                        if (text.Contains(proc, StringComparison.OrdinalIgnoreCase)) { why ??= ev.Id == 1002 ? "Spiel hat nicht mehr reagiert" : "Windows-Fehlerbericht (Absturz)"; break; }
+                    }
+            }
+            catch (Exception ex) { Log.Write(LogModule.Boost, "Absturz-Prüfung: " + ex.Message); }
+            if (why == null) return;
+            Log.Warn(LogModule.Boost, $"{g.Name} ist offenbar abgestürzt: {why}");
+            App.Current?.Dispatcher.BeginInvoke(() =>
+            {
+                var change = Services.Tweaker.StepDownAfterCrash(g.Name);
+                var f = new Finding
+                {
+                    Id = "crash:" + g.Key, Severity = change != null ? Severity.Warning : Severity.Hint, Areas = Area.Boost | Area.Tweaker,
+                    Title = $"{g.Name} ist abgestürzt",
+                    Detail = $"Erkannt: {why}." + (change != null ? " " + change : " Die Grafikkarte war nicht übertaktet."),
+                    Advice = change != null ? "Im Tweaker mit dem Stabilitätstest prüfen. Unreal-Engine-5-Spiele wie ARK Ascended vertragen oft weniger Übertaktung als andere Spiele."
+                                            : "Grafiktreiber aktuell? Spieldateien in Steam überprüfen lassen. Im Problemlöser nach Konflikten schauen."
+                };
+                f.Actions.Add(new FixAction { Label = "Zum Tweaker", Primary = true, Run = () => { Ui.Go("Tweaker"); return Task.FromResult("Geöffnet."); } });
+                DiagnosticsService.Instance.Report(f);
+                Ui.Toast(change != null ? "Absturz erkannt – Grafikkarten-Übertaktung wurde automatisch gesenkt" : $"{g.Name} ist abgestürzt ({why})", true);
+            });
+        });
     }
 }

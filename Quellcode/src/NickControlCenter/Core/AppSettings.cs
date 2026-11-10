@@ -25,6 +25,11 @@ public sealed class AppSettings
     public List<string>? DashSections { get; set; }
     public List<string>? DashCards { get; set; }
     public List<string>? DashKpis { get; set; }
+    public bool DashPowerSeen { get; set; }
+    /// <summary>Downloads einmal pro Woche automatisch sortieren.</summary>
+    public bool DownloadsAutoSort { get; set; }
+    public DateTime DownloadsLastSort { get; set; }
+    public int DownloadsOldDays { get; set; } = 30;
     /// <summary>Vom Nutzer ausgeblendete Hinweise im Problemlöser (Id).</summary>
     public List<string> IgnoredFindings { get; set; } = new();
     /// <summary>Vom Problemlöser deaktivierte Dienste (zum Wieder-Aktivieren): Name → alter Starttyp.</summary>

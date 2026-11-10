@@ -243,6 +243,27 @@ public sealed class TweakerService : ObservableObject
         Ui.Toast(why, true);
     }
 
+    /// <summary>
+    /// Ein Spiel ist mit übertakteter Grafikkarte abgestürzt → Übertaktung automatisch halbieren (bzw. ganz zurück).
+    /// Rückgabe: Beschreibung der Änderung oder null, wenn nichts übertaktet war.
+    /// </summary>
+    public string? StepDownAfterCrash(string game)
+    {
+        var g = Settings.Gpu;
+        if (!Gpu.Available || (g.CoreOffset <= 0 && g.MemOffset <= 0)) return null;
+        var n = g.Clone();
+        if (g.CoreOffset <= 30 && g.MemOffset <= 150) { n.CoreOffset = 0; n.MemOffset = 0; }
+        else { n.CoreOffset = Math.Max(0, g.CoreOffset / 2 / 15 * 15); n.MemOffset = Math.Max(0, g.MemOffset / 2 / 50 * 50); }
+        try { Gpu.Apply(n); } catch { }
+        Settings.Gpu = Gpu.Clamp(n);
+        Settings.Stable = false;
+        Save();
+        var msg = $"{game} ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern {g.CoreOffset:+0;-0;0} → {n.CoreOffset:+0;-0;0} MHz, Speicher {g.MemOffset:+0;-0;0} → {n.MemOffset:+0;-0;0} MHz.";
+        Log.Warn(LogModule.Tweaker, msg);
+        Status = msg;
+        return msg;
+    }
+
     public async Task ResetAllAsync()
     {
         _confirm.Stop(); Countdown = 0; _undo = null;

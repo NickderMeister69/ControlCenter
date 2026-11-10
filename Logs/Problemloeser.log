@@ -8,3 +8,51 @@
 2026-11-09 12:41:59  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
 2026-11-09 12:47:52  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
 2026-11-09 12:47:52  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-10 14:57:42  WARNUNG  [Problemloeser] Gefunden: MSI Afterburner / RivaTuner läuft – Afterburner setzt eigene GPU-Takt-Offsets und Lüfterkurven – das überschreibt den Tweaker. RTSS hängt sich in jedes 3D-Programm (auch in den GPU-Stresstest).
+2026-11-10 14:57:42  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-10 14:57:42  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-10 14:58:12  WARNUNG  [Problemloeser] Gefunden: Razer Synapse / Chroma läuft – Synapse setzt die Razer-Beleuchtung immer wieder auf das eigene Profil zurück.
+2026-11-10 14:59:42  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „MSI Afterburner / RivaTuner läuft“ …
+2026-11-10 14:59:44  OK       [Problemloeser] „Autostart entfernen“: Aufgabe „MSIAfterburner“ deaktiviert
+2026-11-10 14:59:48  INFO     [Problemloeser] Aktion „Schließen“ für „MSI Afterburner / RivaTuner läuft“ …
+2026-11-10 14:59:50  OK       [Problemloeser] „Schließen“: 1 Prozess(e) beendet.
+2026-11-10 14:59:54  OK       [Problemloeser] Erledigt: prog:afterburner
+2026-11-10 14:59:54  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Razer Synapse / Chroma läuft“ …
+2026-11-10 14:59:56  INFO     [Problemloeser] Aktion „Schließen“ für „Razer Synapse / Chroma läuft“ …
+2026-11-10 14:59:56  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-10 14:59:58  OK       [Problemloeser] „Schließen“: 1 Prozess(e) beendet.
+2026-11-10 15:00:05  INFO     [Problemloeser] Aktion „Schließen“ für „Razer Synapse / Chroma läuft“ …
+2026-11-10 15:00:05  OK       [Problemloeser] Erledigt: prog:synapse
+2026-11-10 15:00:07  OK       [Problemloeser] „Schließen“: 0 Prozess(e) beendet.
+2026-11-10 15:02:54  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-10 15:02:54  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-10 15:15:55  INFO     [Problemloeser] Autostart „Discord – Update“: an
+2026-11-10 15:16:09  INFO     [Problemloeser] Treiberprüfung: 28 Geräte, 4 alt, 2 Hinweise, Mainboard Gigabyte Technology Co., Ltd. B760 DS3H AX DDR4
+2026-11-10 15:16:40  INFO     [Problemloeser] Treiberprüfung: 28 Geräte, 4 alt, 2 Hinweise, Mainboard Gigabyte Technology Co., Ltd. B760 DS3H AX DDR4
+2026-11-10 15:18:41  WARNUNG  [Problemloeser] Gefunden: Wallpaper Engine läuft – Wallpaper Engine rendert ständig im Hintergrund (GPU-Last, verfälscht Stresstest und Messwerte) und hat eigene RGB-Plugins (iCUE/Razer/LED), die Farben überschreiben können.
+2026-11-10 15:20:05  INFO     [Problemloeser] Ignoriert: Wallpaper Engine läuft
+2026-11-10 15:20:06  INFO     [Problemloeser] Ignoriert: HWiNFO läuft
+2026-11-10 15:20:07  INFO     [Problemloeser] Ignoriert: Speicherintegrität (Kernisolierung) ist an
+2026-11-10 15:20:25  OK       [Problemloeser] Erledigt: prog:wallpaperengine
+2026-11-10 15:20:25  OK       [Problemloeser] Erledigt: prog:hwinfo
+2026-11-10 15:20:25  OK       [Problemloeser] Erledigt: sys:hvci
+2026-11-10 15:22:58  WARNUNG  [Problemloeser] Gefunden: Wallpaper Engine läuft – Wallpaper Engine rendert ständig im Hintergrund (GPU-Last, verfälscht Stresstest und Messwerte) und hat eigene RGB-Plugins (iCUE/Razer/LED), die Farben überschreiben können.
+2026-11-10 15:22:58  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-10 15:22:58  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-10 15:24:08  INFO     [Problemloeser] Ignoriert: Wallpaper Engine läuft
+2026-11-10 15:24:08  INFO     [Problemloeser] Ignoriert: HWiNFO läuft
+2026-11-10 15:24:08  INFO     [Problemloeser] Ignoriert: Speicherintegrität (Kernisolierung) ist an
+2026-11-10 15:24:17  OK       [Problemloeser] Erledigt: prog:wallpaperengine
+2026-11-10 15:24:17  OK       [Problemloeser] Erledigt: prog:hwinfo
+2026-11-10 15:24:17  OK       [Problemloeser] Erledigt: sys:hvci
+2026-11-10 15:47:45  INFO     [Problemloeser] Windows Update: 3 Treiber-Updates angeboten: Apple, Inc. USBDevice Driver Update (552.0.0.0), Intel Corporation Bluetooth Driver Update (24.80.0.2), Microsoft Corporation AudioProcessingObject Driver Update (1.0.4.55794)
+2026-11-10 15:47:46  INFO     [Problemloeser] Treiberprüfung: 30 Geräte, 3 Updates über Windows Update, 4 alt, Mainboard Gigabyte Technology Co., Ltd. B760 DS3H AX DDR4
+2026-11-10 15:48:20  WARNUNG  [Problemloeser] Treiber über Windows Update installiert: Apple, Inc. USBDevice Driver Update (552.0.0.0), Microsoft Corporation AudioProcessingObject Driver Update (1.0.4.55794), Intel Corporation Bluetooth Driver Update (24.80.0.2) → Code 4
+2026-11-10 15:48:35  OK       [Problemloeser] Treiber über Windows Update installiert: Intel Corporation Bluetooth Driver Update (24.80.0.2) → Code 2, Neustart nötig
+2026-11-10 15:49:23  OK       [Problemloeser] Treiber über Windows Update installiert: Apple, Inc. USBDevice Driver Update (552.0.0.0), Microsoft Corporation AudioProcessingObject Driver Update (1.0.4.55794) → Code 2
+2026-11-10 15:51:09  INFO     [Problemloeser] Gefunden: Optional: HWiNFO für noch genauere Temperaturen – Die App misst selbst (LibreHardwareMonitor). Läuft HWiNFO mit „Shared Memory Support“, übernimmt sie automatisch dessen Werte – z. B. für neue Hardware, die LibreHardwareMonitor noch nicht kennt.
+2026-11-10 16:02:44  INFO     [Problemloeser] Autostart „EpicGamesLauncher“: aus
+2026-11-10 16:04:08  WARNUNG  [Problemloeser] Gefunden: MSI Afterburner / RivaTuner läuft – Afterburner setzt eigene GPU-Takt-Offsets und Lüfterkurven – das überschreibt den Tweaker. RTSS hängt sich in jedes 3D-Programm (auch in den GPU-Stresstest).
+2026-11-10 16:04:38  OK       [Problemloeser] Erledigt: prog:afterburner
+2026-11-10 16:16:12  INFO     [Problemloeser] Autostart „SignalRgb“: aus
+2026-11-10 16:16:15  INFO     [Problemloeser] Autostart „Win11CustomizerTiles“: aus

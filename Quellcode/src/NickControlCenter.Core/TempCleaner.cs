@@ -156,6 +156,15 @@ public static class Fmt
         return mbit >= 100 ? $"{mbit:0} Mbit/s" : mbit >= 1 ? $"{mbit:0.0} Mbit/s" : $"{mbit:0.00} Mbit/s";
     }
 
+    public static string Bytes(double bytes) =>
+        bytes >= 1e12 ? $"{bytes / (1L << 40):0.00} TB" : Size(bytes);
+
+    public static string Duration(TimeSpan t)
+    {
+        if (t < TimeSpan.Zero) t = TimeSpan.Zero;
+        return t.TotalHours >= 1 ? $"{(int)t.TotalHours} h {t.Minutes:00} min" : t.TotalMinutes >= 1 ? $"{t.Minutes} min {t.Seconds:00} s" : $"{t.Seconds} s";
+    }
+
     public static string Temp(double c, bool fahrenheit) =>
         double.IsNaN(c) ? "–" : fahrenheit ? $"{c * 9 / 5 + 32:0} °F" : $"{c:0} °C";
 }

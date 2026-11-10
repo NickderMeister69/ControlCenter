@@ -44,12 +44,17 @@ public partial class DashboardPage : UserControl
         TweakCpu.Text = "CPU: " + Services.Tweaker.Settings.Cpu;
         TweakGpu.Text = "Grafikkarte: " + (Services.Tweaker.Gpu.Available ? Services.Tweaker.Settings.Gpu.ToString() : Services.Tweaker.Gpu.Info);
         OverlayToggle.IsChecked = Services.Monitor.OverlayOn;
+        var en = EnergyService.Instance;
+        Smooth.Text(PowerNow, en.NowWatts, v => double.IsNaN(v) ? "–" : $"{v:0} W");
+        PowerText.Text = en.Summary.Substring(Math.Max(0, en.Summary.IndexOf('\n') + 1));
+        PowerNow.ToolTip = en.Summary;
+        if (!PriceBox.IsKeyboardFocused) PriceBox.Text = en.Settings.PricePerKwh.ToString("0.00");
         HintsHead.Visibility = DiagnosticsService.Instance.Findings.Any(f => f.Severity >= Severity.Hint) ? Visibility.Visible : Visibility.Collapsed;
     }
 
     // ---------------------------------------------------------------- Dashboard anpassen
     private static readonly string[] DefSections = { "system", "kpis", "cards", "hints" };
-    private static readonly string[] DefCards = { "fans", "rgb", "boost", "drivers", "tweaker", "extras" };
+    private static readonly string[] DefCards = { "fans", "rgb", "boost", "power", "drivers", "tweaker", "extras" };
     private static readonly string[] DefKpis = { "cpu.temp", "gpu.temp", "cpu.load", "gpu.load", "ram.load", "cpu.power", "gpu.power", "net.down" };
 
     private Dictionary<string, FrameworkElement> SectionMap => new()
@@ -58,14 +63,14 @@ public partial class DashboardPage : UserControl
     };
     private Dictionary<string, FrameworkElement> CardMap => new()
     {
-        ["fans"] = CardFans, ["rgb"] = CardRgb, ["boost"] = CardBoost, ["drivers"] = CardDrivers, ["tweaker"] = CardTweaker, ["extras"] = CardExtras
+        ["fans"] = CardFans, ["rgb"] = CardRgb, ["boost"] = CardBoost, ["drivers"] = CardDrivers, ["tweaker"] = CardTweaker, ["extras"] = CardExtras, ["power"] = CardPower
     };
 
     private void SetupEditor()
     {
         var st = AppSettings.Current;
         SecList.Load(new[] { ("system", "Systemzeile (CPU, GPU, RAM)"), ("kpis", "Kennzahlen"), ("cards", "Karten"), ("hints", "Wichtige Hinweise") }, st.DashSections ?? DefSections.ToList());
-        CardList.Load(new[] { ("fans", "Lüfter"), ("rgb", "Beleuchtung"), ("boost", "FPS-Boost"), ("drivers", "Grafiktreiber"), ("tweaker", "Tweaker"), ("extras", "Kacheln, Overlay & Stresstest") }, st.DashCards ?? DefCards.ToList());
+        CardList.Load(new[] { ("fans", "Lüfter"), ("rgb", "Beleuchtung"), ("boost", "FPS-Boost"), ("drivers", "Grafiktreiber"), ("tweaker", "Tweaker"), ("extras", "Kacheln, Overlay & Stresstest"), ("power", "Stromverbrauch & Kosten") }, st.DashCards ?? DefCards.ToList());
         KpiList.Load(Services.Monitor.Metrics.Values.Where(x => !x.Key.StartsWith("sensor:")).Select(x => (x.Key, x.Label)), st.DashKpis ?? DefKpis.ToList());
         SecList.Changed += SaveLayout; CardList.Changed += SaveLayout; KpiList.Changed += SaveLayout;
         ApplyLayout();
@@ -84,6 +89,7 @@ public partial class DashboardPage : UserControl
         var st = AppSettings.Current;
         var secs = st.DashSections ?? DefSections.ToList();
         var cards = st.DashCards ?? DefCards.ToList();
+        if (st.DashCards != null && !st.DashPowerSeen) { cards.Insert(Math.Min(3, cards.Count), "power"); st.DashCards = cards; st.DashPowerSeen = true; st.Save(); }
         var kpis = st.DashKpis ?? DefKpis.ToList();
         // Bereiche: Reihenfolge im Haupt-Stapel (Bearbeiten-Leiste und -Panel bleiben oben)
         var sm = SectionMap;
@@ -104,6 +110,12 @@ public partial class DashboardPage : UserControl
         }
         var m = Services.Monitor.Metrics;
         Kpis.ItemsSource = kpis.Where(m.ContainsKey).Select(k => m[k]).ToList();
+    }
+
+    private void Price_LostFocus(object s, RoutedEventArgs e)
+    {
+        if (double.TryParse(PriceBox.Text.Replace(',', '.'), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var p) && p is > 0 and < 5)
+        { EnergyService.Instance.Settings.PricePerKwh = p; EnergyService.Instance.Save(); }
     }
 
     private void Edit_Click(object s, RoutedEventArgs e)

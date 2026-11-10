@@ -26,7 +26,7 @@ public sealed class Finding : ObservableObject
 {
     public required string Id { get; init; }
     public required string Title { get; init; }
-    public string Detail { get; init; } = "";
+    public string Detail { get; set; } = "";
     public string Advice { get; init; } = "";
     public Severity Severity { get; init; }
     public Area Areas { get; init; }
@@ -235,6 +235,7 @@ public sealed class DiagnosticsService : ObservableObject
                 Technical = string.Join("\n", hits.Select(h => $"Prozess {h.Name}.exe (PID {h.Pid}) {h.Path}")) +
                             (svc.Count > 0 ? "\n" + string.Join("\n", svc.Select(s => $"Dienst „{s.Display}“ ({s.Name}), Start: {s.StartMode}")) : "")
             };
+            if (prog.Id == "wallpaperengine") AddWallpaperLedAction(f);
             AddProgramActions(f, prog, hits.Select(h => h.Name).Distinct().ToList(), svc, hits.Select(h => h.Path).FirstOrDefault(p => p.Length > 0));
             res.Add(f);
         }
@@ -438,6 +439,32 @@ public sealed class DiagnosticsService : ObservableObject
             });
 
         return res;
+    }
+
+    /// <summary>Wallpaper Engine: LED-Plugin direkt hier schalten statt in Wallpaper Engine.</summary>
+    private static void AddWallpaperLedAction(Finding f)
+    {
+        var on = WallpaperEngineLed.IsEnabled();
+        if (on == true)
+        {
+            f.Detail += "\n\nDas LED-Plugin (iCUE & Chroma) ist gerade AN – dadurch können Razer- und Corsair-Geräte andere Farben zeigen als hier eingestellt.";
+            f.Actions.Add(new FixAction
+            {
+                Label = "LED-Plugin ausschalten", Icon = "", Primary = true,
+                Confirm = "Wallpaper Engine wird kurz geschlossen, das LED-Plugin in den Einstellungen ausgeschaltet und Wallpaper Engine danach wieder gestartet. Dein Hintergrund bleibt, nur die RGB-Steuerung durch Wallpaper Engine ist aus.",
+                Run = () => Task.Run(() => WallpaperEngineLed.SetEnabled(false))
+            });
+        }
+        else if (on == false)
+        {
+            f.Detail += "\n\nDas LED-Plugin ist schon aus ✔ – Wallpaper Engine färbt deine RGB-Geräte nicht um.";
+            f.Actions.Add(new FixAction
+            {
+                Label = "LED-Plugin wieder einschalten", Icon = "",
+                Confirm = "Wallpaper Engine wird kurz geschlossen und mit eingeschaltetem LED-Plugin neu gestartet. Dann kann Wallpaper Engine deine RGB-Farben wieder überschreiben.",
+                Run = () => Task.Run(() => WallpaperEngineLed.SetEnabled(true))
+            });
+        }
     }
 
     private void AddProgramActions(Finding f, KnownProgram prog, List<string> processNames, List<SvcInfo> svc, string? exePath)

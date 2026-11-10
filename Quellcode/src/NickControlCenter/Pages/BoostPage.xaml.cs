@@ -78,6 +78,22 @@ public partial class BoostPage : UserControl, IPage
         if (Sel != null && (s as FrameworkElement)?.Tag is string t && int.TryParse(t, out var i)) Sel.PresetIndex = i;
     }
 
+    private void LookPreset_Click(object s, RoutedEventArgs e)
+    {
+        if (Sel is { } g && (s as FrameworkElement)?.DataContext is LookPreset lp)
+        {
+            g.ApplyLook(lp);
+            Ui.Toast($"{g.Name}: „{lp.Name}“ gewählt – wird beim nächsten Start übernommen");
+            if (!g.Running) Task.Run(() => _b.ApplyGameFiles(g, false));
+        }
+    }
+    private void ClearFine_Click(object s, RoutedEventArgs e) { if (Sel is { } g) { g.ClearFine(); if (!g.Running) Task.Run(() => _b.ApplyGameFiles(g, false)); } }
+    private void CopyConsole_Click(object s, RoutedEventArgs e)
+    {
+        if (Sel?.ConsoleCommands is { Length: > 0 } c) { Clipboard.SetText(c); Ui.Toast("Konsolenbefehle kopiert – im Spiel Konsole öffnen und Zeile für Zeile einfügen"); }
+        else Ui.Toast("Erst Profi-Einstellungen auswählen", true);
+    }
+
     private void Recommend_Click(object s, RoutedEventArgs e)
     {
         if (Sel is not { } g) return;

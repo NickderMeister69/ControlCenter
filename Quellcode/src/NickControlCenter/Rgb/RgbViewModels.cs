@@ -313,6 +313,16 @@ public sealed class LightZoneVM : ObservableObject
     public int ColorOrder { get => Cfg.ColorOrder; set { Cfg.ColorOrder = Math.Clamp(value, 0, 6); Raise(); _ctl.Changed(); } }
     public bool ShowColorOrder => Desc.PerLed;
 
+    // ---- Farbabgleich (damit Lüfter, Wasserkühlung, Maus, Mauspad gleich aussehen)
+    public static string[] GammaNames { get; } = { "Automatisch", "An (satter)", "Aus (heller)" };
+    public int GammaIndex { get => Cfg.Gamma; set { Cfg.Gamma = Math.Clamp(value, 0, 2); Raise(); _ctl.Changed(); } }
+    public bool GammaEffective => Cfg.Gamma == 1 || (Cfg.Gamma == 0 && !Desc.DeviceName.Contains("Razer", StringComparison.OrdinalIgnoreCase) && Desc.Zone.Device.Vendor != "Razer");
+    public double GainR { get => Cfg.GainR * 100; set { Cfg.GainR = Math.Clamp(value / 100, 0, 1); Raise(); Raise(nameof(GainText)); _ctl.Changed(); } }
+    public double GainG { get => Cfg.GainG * 100; set { Cfg.GainG = Math.Clamp(value / 100, 0, 1); Raise(); Raise(nameof(GainText)); _ctl.Changed(); } }
+    public double GainB { get => Cfg.GainB * 100; set { Cfg.GainB = Math.Clamp(value / 100, 0, 1); Raise(); Raise(nameof(GainText)); _ctl.Changed(); } }
+    public string GainText => $"R {Cfg.GainR * 100:0} % · G {Cfg.GainG * 100:0} % · B {Cfg.GainB * 100:0} %";
+    public void ResetCalibration() { Cfg.GainR = Cfg.GainG = Cfg.GainB = 1; Cfg.Gamma = 0; RaiseAll(nameof(GainR), nameof(GainG), nameof(GainB), nameof(GainText), nameof(GammaIndex)); _ctl.Changed(); }
+
     public static string[] ScreenRegionChoices { get; } = { "Wie oben eingestellt", "Ganzer Bildschirm", "Linke Seite", "Rechte Seite", "Oben", "Unten", "Mitte" };
     public int ScreenRegionIndex
     {
@@ -411,7 +421,7 @@ public sealed class RgbController : ObservableObject, IDisposable
     }
 
     // ---- Eigenschaften
-    public bool Enabled { get => _cfg.Rgb.Enabled; set { _cfg.Rgb.Enabled = value; Raise(); Changed(); Log.Info(LogModule.Rgb, value ? "Beleuchtung an" : "Beleuchtung aus (Geräte behalten letzte Farbe)"); } }
+    public bool Enabled { get => _cfg.Rgb.Enabled; set { _cfg.Rgb.Enabled = value; Raise(); Changed(); Log.Info(LogModule.Rgb, value ? "Beleuchtung an" : "Beleuchtung aus (alle Geräte dunkel)"); } }
 
     public double Brightness
     {
@@ -485,6 +495,30 @@ public sealed class RgbController : ObservableObject, IDisposable
         Log.Info(LogModule.Rgb, $"Profil „{p.Name}“ geladen");
     }
 
+    // ---- Beleuchtung beim Spielen (vorübergehend, wird nach dem Spiel zurückgestellt)
+    private EffectConfig? _beforeGame;
+    private double _beforeGameBright;
+    public bool GameEffectActive => _beforeGame != null;
+
+    /// <summary>Während eines Spiels einen anderen Effekt zeigen. Der bisherige wird gemerkt.</summary>
+    public void PushGameEffect(EffectConfig effect, double? brightness = null)
+    {
+        if (_beforeGame == null) { _beforeGame = Global.Config.Clone(); _beforeGameBright = Brightness; }
+        Global.LoadFrom(effect);
+        if (brightness is double b) Brightness = b * 100;
+        Raise(nameof(EffectName));
+    }
+
+    /// <summary>Nach dem Spiel: vorherigen Effekt wiederherstellen.</summary>
+    public void PopGameEffect()
+    {
+        if (_beforeGame == null) return;
+        Global.LoadFrom(_beforeGame);
+        Brightness = _beforeGameBright;
+        _beforeGame = null;
+        Raise(nameof(EffectName));
+    }
+
     public void DeleteProfile(RgbProfile p)
     {
         Profiles.Remove(p);
@@ -502,6 +536,8 @@ public sealed class RgbController : ObservableObject, IDisposable
     }
 
     public void SetLedCount(LightZoneVM z, int count) => _engine.SetLedCount(z.Desc.Zone, count);
+    public void HoldWhite(string hex) { _engine.HoldColor(RgbF.FromHex(hex), 90); Log.Info(LogModule.Rgb, "Farbabgleich: alle Geräte " + hex); }
+    public void StopHold() => _engine.StopTest();
     public void ColorTest() { _engine.ColorTest(); Log.Info(LogModule.Rgb, "Farbtest: rot → grün → blau → weiß"); }
     public void Identify(LightZoneVM z) { _engine.Identify(z.Desc.Zone); Log.Info(LogModule.Rgb, $"Anschluss „{z.DisplayName}“ blinkt zum Erkennen"); }
     public void Rescan() { Log.Info(LogModule.Rgb, "Geräte werden neu gesucht"); _engine.Rescan(); }
@@ -569,7 +605,8 @@ public sealed class RgbController : ObservableObject, IDisposable
                 snap = EffectSnap.From(c);
             }
             else snap = globalSnap;
-            var ez = new EngineZone { Target = z.Desc.Zone, Enabled = z.Enabled, LedCount = Math.Max(1, z.LedCount), Effect = snap, FlickerGuard = z.Cfg.FlickerGuard, ColorOrder = z.Cfg.ColorOrder };
+            var ez = new EngineZone { Target = z.Desc.Zone, Enabled = z.Enabled, LedCount = Math.Max(1, z.LedCount), Effect = snap, FlickerGuard = z.Cfg.FlickerGuard, ColorOrder = z.Cfg.ColorOrder,
+                                     GammaOn = z.GammaEffective, GainR = z.Cfg.GainR, GainG = z.Cfg.GainG, GainB = z.Cfg.GainB };
             if (z.Engine != null) { ez.Current = z.Engine.Current; ez.LastSent = z.Engine.LastSent; ez.LastSendTime = z.Engine.LastSendTime; }
             z.Engine = ez;
             zones.Add(ez);

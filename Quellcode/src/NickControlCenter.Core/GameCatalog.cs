@@ -39,6 +39,8 @@ public sealed class GameProfile
     public string? KnownId { get; set; }
     /// <summary>Vom Nutzer entfernt (taucht bei der automatischen Suche nicht wieder auf).</summary>
     public bool Hidden { get; set; }
+    /// <summary>Zusammenfassung der letzten Spielsitzung (Dauer, FPS, Temperaturen).</summary>
+    public string? LastSession { get; set; }
 
     public GamePreset Preset { get; set; } = GamePreset.Off;
     /// <summary>0 = normal, 1 = erhöht, 2 = hoch</summary>
@@ -62,6 +64,26 @@ public sealed class GameProfile
     public bool PostFxOff { get; set; }
     public bool VolumetricsOff { get; set; }
     public bool SkipIntros { get; set; }
+
+    /// <summary>Beleuchtung beim Spielen: 0 = nicht ändern, 1 = Bildschirm-Farben, 2 = feste Farbe, 3 = Temperatur, 4 = gespeichertes RGB-Profil, 5 = aus.</summary>
+    public int RgbMode { get; set; }
+    public string RgbColor { get; set; } = "#FF2040";
+    public string? RgbProfile { get; set; }
+
+    /// <summary>Einzelne Grafik-Kategorien (sg.*): Wert 0…3, fehlt = aus der Qualitätsstufe.</summary>
+    public Dictionary<string, int> SgOverride { get; set; } = new();
+    /// <summary>Gewählte Feineinstellungen (Ids aus <see cref="UnrealTweaks.All"/>).</summary>
+    public List<string> EngineTweaks { get; set; } = new();
+    /// <summary>Name der zuletzt gewählten Kombination („Schön &amp; flüssig“ …).</summary>
+    public string? LookPreset { get; set; }
+
+    // weitere Optionen beim Spielstart
+    /// <summary>Intel-Hybrid-CPUs: Spiel nur auf Leistungskernen (P-Kerne).</summary>
+    public bool PCoresOnly { get; set; }
+    /// <summary>Windows-Benachrichtigungen während des Spiels aus.</summary>
+    public bool QuietNotifications { get; set; }
+    /// <summary>Gewählte Hintergrund-Programme ausbremsen (niedrige Priorität) statt schließen.</summary>
+    public bool ThrottleBackground { get; set; }
 
     public bool Active => Preset != GamePreset.Off;
 }

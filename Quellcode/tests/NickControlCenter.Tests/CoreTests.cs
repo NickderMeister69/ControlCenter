@@ -491,3 +491,97 @@ public class HwinfoClockTests
         Assert.Equal(4600, s.CpuClock);
     }
 }
+
+public class AimTests
+{
+    [Fact]
+    public void Sens_conversion_and_cm360()
+    {
+        var cs = AimTools.Games.First(g => g.Name.StartsWith("Counter"));
+        var val = AimTools.Games.First(g => g.Name == "VALORANT");
+        Assert.Equal(0.314, AimTools.Convert(1, cs, val), 3);
+        Assert.Equal(1.0, AimTools.Convert(AimTools.Convert(1, cs, val), val, cs), 6);
+        // VALORANT 0.4 @ 800 DPI ≈ 40,8 cm/360°
+        Assert.Equal(40.8, AimTools.CmPer360(0.4, 800, val), 1);
+        Assert.Equal(1000, AimTools.NearestPollingRate(930));
+        Assert.Equal(125, AimTools.NearestPollingRate(118));
+    }
+}
+
+public class SteamUpdateTests
+{
+    private const string Pending = "\"AppState\"\n{\n\t\"appid\"\t\t\"2399830\"\n\t\"name\"\t\t\"ARK: Survival Ascended\"\n\t\"StateFlags\"\t\t\"6\"\n\t\"SizeOnDisk\"\t\t\"150000000000\"\n\t\"buildid\"\t\t\"100\"\n\t\"LastUpdated\"\t\t\"1762700000\"\n\t\"BytesToDownload\"\t\t\"2147483648\"\n\t\"BytesDownloaded\"\t\t\"536870912\"\n\t\"TargetBuildID\"\t\t\"101\"\n}";
+    private const string Current = "\"AppState\"\n{\n\t\"appid\"\t\t\"730\"\n\t\"name\"\t\t\"Counter-Strike 2\"\n\t\"StateFlags\"\t\t\"4\"\n\t\"buildid\"\t\t\"55\"\n\t\"TargetBuildID\"\t\t\"55\"\n\t\"BytesToDownload\"\t\t\"0\"\n\t\"BytesDownloaded\"\t\t\"0\"\n}";
+
+    [Fact]
+    public void Manifest_WithPendingUpdate_IsDetected()
+    {
+        var g = SteamUpdates.ParseManifest(Pending, @"D:\SteamLibrary")!;
+        Assert.True(g.NeedsUpdate);
+        Assert.Equal(1610612736, g.Remaining);
+        Assert.Equal(25, g.Progress, 1);
+    }
+
+    [Fact]
+    public void Manifest_UpToDate_NeedsNoUpdate()
+    {
+        var g = SteamUpdates.ParseManifest(Current, @"C:\Steam")!;
+        Assert.False(g.NeedsUpdate);
+        Assert.False(g.Updating);
+    }
+
+    [Fact]
+    public void DriverSize_IsParsed()
+    {
+        Assert.Equal((long)(675.5 * 1048576), DriverCheck.ParseSize("675.50 MB"));
+        Assert.Equal(0, DriverCheck.ParseSize(""));
+    }
+}
+
+public class SteamOnlineTests
+{
+    [Fact]
+    public void PublicBuild_IsFoundAnywhere()
+    {
+        var json = "{\"data\":{\"2399830\":{\"appid\":\"2399830\",\"common\":{\"name\":\"ARK\"},\"depots\":{\"branches\":{\"public\":{\"buildid\":\"26504900\",\"timeupdated\":\"1794107156\"},\"beta\":{\"buildid\":\"1\"}}}}},\"status\":\"success\"}";
+        Assert.Equal(26504900, SteamUpdates.ParsePublicBuild(json));
+        Assert.Equal(0, SteamUpdates.ParsePublicBuild("{}"));
+    }
+}
+
+public class VaultTests
+{
+    [Fact]
+    public void Vault_RoundTrip_And_WrongPassword()
+    {
+        var path = Path.Combine(Path.GetTempPath(), "vt-" + Guid.NewGuid() + ".vault");
+        try
+        {
+            var v = new Vault(path);
+            v.Create("richtig-123", iterations: 1000);
+            v.Entries.Add(new VaultEntry { Title = "Test", User = "nick", Password = "geheim" });
+            v.Save();
+            Assert.DoesNotContain("geheim", File.ReadAllText(path));
+            v.Lock();
+            Assert.False(v.Unlocked);
+            var w = new Vault(path);
+            Assert.False(w.Unlock("falsch"));
+            Assert.True(w.Unlock("richtig-123"));
+            Assert.Equal("geheim", w.Entries.Single().Password);
+            Assert.True(w.ChangePassword("richtig-123", "neu-456"));
+            var z = new Vault(path);
+            Assert.False(z.Unlock("richtig-123"));
+            Assert.True(z.Unlock("neu-456"));
+        }
+        finally { foreach (var f in new[] { path, path + ".bak" }) if (File.Exists(f)) File.Delete(f); }
+    }
+
+    [Fact]
+    public void Generator_UsesAllGroups()
+    {
+        var pw = Vault.Generate(24, true);
+        Assert.Equal(24, pw.Length);
+        Assert.True(Vault.Strength(pw).Score >= 3);
+        Assert.Equal(1, Vault.Strength("abc").Score);
+    }
+}

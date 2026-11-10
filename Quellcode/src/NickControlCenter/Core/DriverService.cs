@@ -26,7 +26,11 @@ public sealed class DriverRow : ObservableObject
     public bool Downloading => _progress > 0 && _progress < 100;
     private string _status = "";
     public string Status { get => _status; set => Set(ref _status, value); }
-    public void Refresh() => RaiseAll(nameof(Installed), nameof(Latest), nameof(Date), nameof(UpdateAvailable), nameof(StateText), nameof(StateBrush), nameof(IsCurrent), nameof(CanInstall), nameof(InstallText));
+    /// <summary>Größe des Treiber-Downloads (0 = unbekannt).</summary>
+    public long Bytes { get; set; }
+    public string SizeInfo => Offer == null ? "" : InstallEstimate.Text(Bytes, InstallEstimate.GpuDriverInstallSeconds) + " (Download + Installation)";
+    public bool HasSizeInfo => Offer != null && (UpdateAvailable || VersionUnknown);
+    public void Refresh() => RaiseAll(nameof(SizeInfo), nameof(HasSizeInfo), nameof(Installed), nameof(Latest), nameof(Date), nameof(UpdateAvailable), nameof(StateText), nameof(StateBrush), nameof(IsCurrent), nameof(CanInstall), nameof(InstallText));
 }
 
 /// <summary>
@@ -137,6 +141,14 @@ public sealed class DriverService : ObservableObject
                 Status = $"{GpuName} · Treiber {InstalledVersion} – Intel-Treiber über den „Intel Driver & Support Assistant“.";
             }
 
+            // Größe der Downloads (NVIDIA liefert sie mit, sonst beim Server nachfragen)
+            foreach (var r in rows.Where(r => r.Offer != null))
+            {
+                r.Bytes = r.Offer!.Bytes;
+                if (r.Bytes <= 0 && r.Offer.DownloadUrl.Length > 0)
+                    r.Bytes = await InstallEstimate.SizeOfAsync(r.Offer.DownloadUrl, Vendor == GpuVendor.Amd ? "https://www.amd.com/" : "https://www.nvidia.com/");
+            }
+            if (rows.Any(r => r.UpdateAvailable)) _ = InstallEstimate.MeasureAsync().ContinueWith(_ => System.Windows.Application.Current?.Dispatcher.BeginInvoke(() => { foreach (var r in Rows) r.Refresh(); }));
             Rows.Clear();
             foreach (var r in rows) { r.Refresh(); Rows.Add(r); }
             Raise(nameof(UpdateAvailable)); RaiseAll(nameof(GpuName), nameof(InstalledVersion), nameof(Vendor));
@@ -192,6 +204,7 @@ public sealed class DriverService : ObservableObject
             var file = Path.Combine(downloads, Path.GetFileName(new Uri(row.Offer.DownloadUrl).LocalPath));
             row.Status = "Lade herunter …";
             row.Progress = 0.1;
+            var dlStart = DateTime.Now;
             using var req = new HttpRequestMessage(HttpMethod.Get, row.Offer.DownloadUrl);
             req.Headers.Referrer = new Uri(Vendor == GpuVendor.Amd ? "https://www.amd.com/" : "https://www.nvidia.com/");
             using var resp = await Http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
@@ -210,11 +223,14 @@ public sealed class DriverService : ObservableObject
                     {
                         last = DateTime.Now;
                         row.Progress = total > 0 ? Math.Max(0.1, done * 100.0 / total) : 50;
-                        row.Status = total > 0 ? $"{Fmt.Size(done)} von {Fmt.Size(total)}" : Fmt.Size(done);
+                        double secs = (DateTime.Now - dlStart).TotalSeconds;
+                        string eta = total > 0 && done > (1 << 20) && secs > 2 ? $" · noch ca. {InstallEstimate.DurationText(TimeSpan.FromSeconds((total - done) / (done / secs)))}" : "";
+                        row.Status = total > 0 ? $"{Fmt.Size(done)} von {Fmt.Size(total)}{eta}" : Fmt.Size(done);
                     }
                 }
             }
             row.Progress = 100;
+            try { InstallEstimate.Report(new FileInfo(file).Length, DateTime.Now - dlStart); } catch { }
             Log.Ok(LogModule.App, $"Treiber geladen: {file}");
             row.Status = $"Heruntergeladen: {Path.GetFileName(file)} (Download-Ordner).";
             if (!Dialogs.Confirm("Treiber jetzt installieren?",

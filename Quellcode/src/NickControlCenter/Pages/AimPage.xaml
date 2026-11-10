@@ -1,0 +1,116 @@
+<UserControl x:Class="NickControlCenter.AimPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter"
+             xmlns:core="clr-namespace:NickControlCenter;assembly=NickControlCenter.Core">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
+        <Grid Margin="0,0,12,0">
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+            <StackPanel Margin="0,0,12,0">
+                <!-- Input-Lag-Check -->
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <Grid>
+                            <TextBlock Text="INPUT-LAG-CHECK" Style="{StaticResource Kicker}"/>
+                            <Button HorizontalAlignment="Right" Content="Neu prüfen" Padding="10,3" FontSize="12" Click="Recheck_Click"/>
+                        </Grid>
+                        <TextBlock Style="{StaticResource Caption}" Text="Prüft alles auf PC-Seite, was die Verzögerung zwischen Mausbewegung und Bild beeinflusst. Rote Punkte kannst du direkt beheben."/>
+                        <ItemsControl x:Name="Checks" Margin="0,10,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0,4">
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <Ellipse Width="9" Height="9" Fill="{Binding Brush}" VerticalAlignment="Top" Margin="0,5,10,0"/>
+                                        <StackPanel Grid.Column="1">
+                                            <TextBlock Text="{Binding Title}" FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding Detail}" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="11.5"/>
+                                        </StackPanel>
+                                        <Button Grid.Column="2" Content="{Binding FixText}" Padding="10,3" FontSize="12" VerticalAlignment="Top" Margin="8,0,0,0"
+                                                Click="Fix_Click" Visibility="{Binding CanFix, Converter={StaticResource BoolToVis}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+
+                <!-- Im Spiel -->
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="IM SPIEL EINSTELLEN (VALORANT)" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Caption}" Text="Diese Einstellungen kann (und darf) nur das Spiel selbst setzen – abhaken, wenn erledigt. Bleibt gespeichert."/>
+                        <ItemsControl x:Name="InGame" Margin="0,8,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding On}" Margin="0,3">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Label}" FontWeight="SemiBold"/>
+                                            <TextBlock Text="{Binding Why}" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </CheckBox>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <!-- Sens-Umrechner -->
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="EMPFINDLICHKEIT UMRECHNEN" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Caption}" Text="Gleiches Zielgefühl in jedem Spiel: gleicher Mausweg für eine 360°-Drehung (cm/360°)."/>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                            <TextBlock Text="Von Spiel" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" x:Name="FromGame" DisplayMemberPath="Name" SelectionChanged="Sens_Changed" Margin="0,0,0,6"/>
+                            <TextBlock Grid.Row="1" Text="Empfindlichkeit" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="SensBox" Text="0.4" TextChanged="Sens_Changed" Margin="0,0,0,6" FontFamily="{StaticResource MonoFont}"/>
+                            <TextBlock Grid.Row="2" Text="Maus-DPI" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="DpiBox" Text="800" TextChanged="Sens_Changed" Margin="0,0,0,6" FontFamily="{StaticResource MonoFont}"/>
+                            <TextBlock Grid.Row="3" Text="Nach Spiel" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="3" Grid.Column="1" x:Name="ToGame" DisplayMemberPath="Name" SelectionChanged="Sens_Changed"/>
+                        </Grid>
+                        <Border Style="{StaticResource SubCard}" Margin="0,12,0,0">
+                            <StackPanel>
+                                <TextBlock x:Name="SensResult" Style="{StaticResource H2}" FontSize="20"/>
+                                <TextBlock x:Name="SensCm" Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                                <TextBlock x:Name="SensHint" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="11.5" Margin="0,4,0,0"/>
+                            </StackPanel>
+                        </Border>
+                        <TextBlock Text="Dieselbe Einstellung in allen Spielen" Style="{StaticResource Muted}" Margin="0,10,0,4"/>
+                        <ItemsControl x:Name="SensAll" FontFamily="{StaticResource MonoFont}" FontSize="12"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Maus-Check -->
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="MAUS-CHECK" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Caption}" Text="Misst die Abtastrate (Polling Rate) deiner Maus: Knopf drücken und die Maus 3 Sekunden schnell im Kreis bewegen."/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Button Style="{StaticResource AccentButton}" Content="Abtastrate messen" Click="Poll_Click" x:Name="PollBtn"/>
+                        </StackPanel>
+                        <TextBlock x:Name="PollResult" Style="{StaticResource H2}" FontSize="18" Margin="0,10,0,0"/>
+                        <TextBlock x:Name="PollHint" Style="{StaticResource Muted}" TextWrapping="Wrap" FontSize="11.5"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Aufwärmen -->
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="AUFWÄRMEN" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Caption}" Text="Startet erst Aim Lab (kostenlos auf Steam, hat offizielle VALORANT-Übungen). Sobald du Aim Lab schließt, startet VALORANT automatisch."/>
+                        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                            <Button Style="{StaticResource AccentButton}" Content="Aufwärmen starten" Click="Warmup_Click"/>
+                            <Button Content="Aim Lab auf Steam" Margin="8,0,0,0" Click="AimLabStore_Click"/>
+                        </StackPanel>
+                        <TextBlock x:Name="WarmupStatus" Style="{StaticResource Muted}" TextWrapping="Wrap" Margin="0,8,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

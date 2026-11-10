@@ -22,12 +22,17 @@ public partial class MainWindow : Window
             ["Dashboard"] = new("Dashboard", "Alles auf einen Blick – Temperaturen, Lüfter, Beleuchtung, Warnungen und Schnellaktionen.", () => new DashboardPage()),
             ["Monitor"] = new("Monitor", "Live-Werte aller Sensoren mit Verlauf, frei wählbaren Kacheln, Overlay und Aufzeichnung.", () => new MonitorPage()),
             ["FPS-Boost"] = new("FPS-Boost", "Windows für Spiele optimieren – mit eigenem Profil pro Spiel (Steam, Epic, Riot oder jede exe), Werkzeugen und Auto-Boost. Alles rückgängig machbar.", () => new BoostPage()),
+            ["Zielen & Maus"] = new("Zielen & Maus", "Input-Lag-Check, Empfindlichkeit umrechnen, Maus-Abtastrate messen und Aufwärmen mit Aim Lab.", () => new AimPage()),
             ["Lüfter"] = new("Lüfter", "Jeder Lüfter einzeln: Minimum, Temperaturkurve, fest oder BIOS. Mit Sicherheitsmodus.", () => new FansPage()),
             ["Beleuchtung"] = new("Beleuchtung", "RGB für Mainboard, Lüfter-Hubs und Razer – ohne Zusatzprogramm.", () => new RgbPage()),
             ["Tweaker"] = new("Tweaker", "CPU und Grafikkarte feinjustieren – Intel, AMD und NVIDIA, mit Sicherheitsrückfrage.", () => new TweakerPage()),
             ["Stresstest"] = new("Stresstest", "CPU, Grafikkarte (jeder Hersteller) und Arbeitsspeicher auf Stabilität prüfen.", () => new StressPage()),
             ["Design & Farben"] = new("Design & Farben", "Akzentfarbe, Hell/Dunkel, Hintergrundbild, Taskleiste, Startmenü und Explorer anpassen.", () => new CustomizePage()),
             ["Desktop-Kacheln"] = new("Desktop-Kacheln", "Live-Widgets auf dem Desktop: Uhr, Systemwerte, Netzwerk, Apps, Notizen und mehr.", () => new TilesPage()),
+            ["Werkzeuge"] = new("Werkzeuge", "Programme aktualisieren, Downloads aufräumen, Speicherplatz finden, automatisch ausschalten und Tastenkürzel.", () => new ToolsPage()),
+            ["Passwort-Tresor"] = new("Passwort-Tresor", "Alle Passwörter an einem Ort – AES-256-verschlüsselt, mit Master-Passwort, nur auf deinem PC.", () => new PasswordPage()),
+            ["VPN & Werbeblocker"] = new("VPN & Werbeblocker", "Werbung und Tracker für den ganzen PC blocken – und ein VPN mit einem Klick verbinden.", () => new PrivacyPage()),
+            ["Autostart"] = new("Autostart", "Programme, die mit Windows starten – mit Einschätzung, was den Start bremst. Abschalten wie im Task-Manager, alles umkehrbar.", () => new StartupPage()),
             ["Problemlöser"] = new("Problemlöser", "Findet Programme und Einstellungen, die stören – und behebt sie mit einem Klick.", () => new DiagnosePage()),
             ["Treiber"] = new("Treiber", "Grafiktreiber prüfen und aktualisieren – NVIDIA (Game Ready & Studio), AMD und Intel.", () => new DriversPage()),
             ["Protokoll"] = new("Protokoll", "Alles, was die App tut, steht hier und im Ordner „Logs“ neben der exe.", () => new LogPage()),
@@ -38,7 +43,9 @@ public partial class MainWindow : Window
         Width = Math.Max(MinWidth, s.WindowWidth);
         Height = Math.Max(MinHeight, s.WindowHeight);
         SizeChanged += (_, _) => { if (WindowState == WindowState.Normal) { s.WindowWidth = Width; s.WindowHeight = Height; } };
-        StateChanged += (_, _) => RootBorder.Margin = WindowState == WindowState.Maximized ? new Thickness(7) : new Thickness(0);
+        // Maximiert: genau auf den Arbeitsbereich des Monitors (ohne Taskleiste) – sonst verschwindet unten „App beenden“ hinter der Taskleiste
+        SourceInitialized += (_, _) => System.Windows.Interop.HwndSource.FromHwnd(new System.Windows.Interop.WindowInteropHelper(this).Handle)?.AddHook(MaxHook);
+        StateChanged += (_, _) => RootBorder.BorderThickness = WindowState == WindowState.Maximized ? new Thickness(0) : new Thickness(1);
         IsVisibleChanged += (_, _) => { if (!IsVisible) s.Save(); NotifyVisibility(); };
 
         _toastTimer.Tick += (_, _) => { _toastTimer.Stop(); ToastBox.Visibility = Visibility.Collapsed; };
@@ -122,6 +129,32 @@ public partial class MainWindow : Window
     }
 
     private void Min_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct POINT { public int X, Y; }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct MINMAXINFO { public POINT Reserved, MaxSize, MaxPosition, MinTrackSize, MaxTrackSize; }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct RECT { public int Left, Top, Right, Bottom; }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    private struct MONITORINFO { public int Size; public RECT Monitor, Work; public uint Flags; }
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint flags);
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern bool GetMonitorInfo(IntPtr mon, ref MONITORINFO info);
+
+    private IntPtr MaxHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+    {
+        if (msg != 0x0024) return IntPtr.Zero; // WM_GETMINMAXINFO
+        var mon = MonitorFromWindow(hwnd, 2); // MONITOR_DEFAULTTONEAREST
+        var mi = new MONITORINFO { Size = System.Runtime.InteropServices.Marshal.SizeOf<MONITORINFO>() };
+        if (mon == IntPtr.Zero || !GetMonitorInfo(mon, ref mi)) return IntPtr.Zero;
+        var mmi = System.Runtime.InteropServices.Marshal.PtrToStructure<MINMAXINFO>(lParam);
+        mmi.MaxPosition.X = mi.Work.Left - mi.Monitor.Left;
+        mmi.MaxPosition.Y = mi.Work.Top - mi.Monitor.Top;
+        mmi.MaxSize.X = mi.Work.Right - mi.Work.Left;
+        mmi.MaxSize.Y = mi.Work.Bottom - mi.Work.Top;
+        System.Runtime.InteropServices.Marshal.StructureToPtr(mmi, lParam, true);
+        return IntPtr.Zero;
+    }
+
     private void Max_Click(object sender, RoutedEventArgs e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
     private void Close_Click(object sender, RoutedEventArgs e) => Close(); // App fängt das ab → läuft im Tray weiter
     private void Exit_Click(object sender, RoutedEventArgs e) => App.Instance.ExitApp(ask: true);

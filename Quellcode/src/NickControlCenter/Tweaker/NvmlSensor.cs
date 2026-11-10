@@ -66,6 +66,21 @@ internal static class NvmlSensor
                         }
                         if (!_powerLogged) { _powerLogged = true; Log.Warn(LogModule.Monitor, $"NVML-Leistung nicht lesbar ({Nvml.Err(pr)}), Energiezähler: {(er == 0 ? "ok" : Nvml.Err(er))}"); }
                     }
+                    // letzte Notlösung: aus Auslastung und Leistungslimit schätzen (als „geschätzt“ markiert)
+                    if ((double.IsNaN(s.GpuPower) || s.GpuPower <= 0.5) && !double.IsNaN(s.GpuLoad))
+                    {
+                        if (_limitW <= 0)
+                        {
+                            if (Nvml.Call(() => Nvml.nvmlDeviceGetPowerManagementDefaultLimit(_dev, out uint lim) is var x && x == 0 ? SetLimit(lim) : x) != 0)
+                                Nvml.Call(() => Nvml.nvmlDeviceGetPowerManagementLimit(_dev, out uint lim2) is var y && y == 0 ? SetLimit(lim2) : y);
+                        }
+                        if (_limitW > 0)
+                        {
+                            s.GpuPower = _limitW * (0.08 + 0.92 * Math.Clamp(s.GpuLoad, 0, 100) / 100);
+                            s.GpuPowerEstimated = true;
+                            if (!_estLogged) { _estLogged = true; Log.Warn(LogModule.Monitor, $"Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit ({_limitW:0} W)"); }
+                        }
+                    }
                 }
                 if (double.IsNaN(s.GpuClock) && Nvml.nvmlDeviceGetClockInfo(_dev, Nvml.CLOCK_GRAPHICS, out uint c) == 0) s.GpuClock = c;
                 if (double.IsNaN(s.GpuMemClock) && Nvml.nvmlDeviceGetClockInfo(_dev, Nvml.CLOCK_MEM, out uint m) == 0) s.GpuMemClock = m;
@@ -99,7 +114,9 @@ internal static class NvmlSensor
     private static float _last;
     private static ulong _lastMj;
     private static DateTime _lastMjTime;
-    private static bool _powerLogged;
+    private static bool _powerLogged, _estLogged;
+    private static double _limitW;
+    private static int SetLimit(uint mw) { _limitW = mw / 1000.0; return 0; }
     private static int SetPower(SensorSnapshot s, double w) { s.GpuPower = w; return 0; }
     private static int Store(uint t) { _last = t; return 0; }
     private static int Put(SensorSnapshot s, uint t) { s.GpuTemp = t; return 0; }

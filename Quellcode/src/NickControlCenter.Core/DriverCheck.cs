@@ -6,7 +6,7 @@ namespace NickControlCenter;
 
 public enum GpuVendor { Unknown, Nvidia, Amd, Intel }
 
-public sealed record DriverOffer(string Kind, string Version, string ReleaseDate, string DownloadUrl, string DetailsUrl);
+public sealed record DriverOffer(string Kind, string Version, string ReleaseDate, string DownloadUrl, string DetailsUrl, long Bytes = 0);
 
 /// <summary>
 /// Hilfsfunktionen für die Treiber-Prüfung (Netzwerkzugriff passiert in der App, hier nur das Auswerten – damit testbar).
@@ -98,9 +98,17 @@ public static class DriverCheck
             string Get(string p) => info.TryGetProperty(p, out var v) ? Uri.UnescapeDataString(v.GetString() ?? "") : "";
             var ver = Get("Version");
             if (ver.Length == 0) return null;
-            return new DriverOffer(kind, ver, Get("ReleaseDateTime"), Get("DownloadURL"), Get("DetailsURL"));
+            return new DriverOffer(kind, ver, Get("ReleaseDateTime"), Get("DownloadURL"), Get("DetailsURL"), ParseSize(Get("DownloadURLFileSize")));
         }
         catch { return null; }
+    }
+
+    /// <summary>„675.14 MB“ / „1,2 GB“ → Bytes (0 = unbekannt).</summary>
+    public static long ParseSize(string text)
+    {
+        var m = Regex.Match(text ?? "", @"([\d.,]+)\s*(KB|MB|GB)", RegexOptions.IgnoreCase);
+        if (!m.Success || !double.TryParse(m.Groups[1].Value.Replace(',', '.'), System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var v)) return 0;
+        return (long)(v * m.Groups[2].Value.ToUpperInvariant() switch { "GB" => 1L << 30, "MB" => 1L << 20, _ => 1024 });
     }
 
     /// <summary>AMD-Downloadseite → neuester Adrenalin-Installer (Version, URL).</summary>

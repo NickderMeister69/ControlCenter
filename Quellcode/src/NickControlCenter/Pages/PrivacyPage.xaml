@@ -1,0 +1,75 @@
+<UserControl x:Class="NickControlCenter.PrivacyPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
+        <StackPanel Margin="0,0,12,0" MaxWidth="1000" HorizontalAlignment="Left">
+
+            <!-- Werbeblocker -->
+            <Border Style="{StaticResource AccentCard}">
+                <StackPanel>
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="WERBEBLOCKER (GANZER PC)" Style="{StaticResource Kicker}"/>
+                            <TextBlock x:Name="AdState" Text="…" Style="{StaticResource H2}"/>
+                            <TextBlock x:Name="AdTest" Style="{StaticResource Caption}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        <CheckBox x:Name="AdToggle" Style="{StaticResource ToggleSwitch}" HorizontalAlignment="Right" VerticalAlignment="Top" Click="AdToggle_Click"/>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <TextBlock Text="Filter:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <ComboBox x:Name="AdProvider" Width="320" DisplayMemberPath="Name" SelectionChanged="AdProvider_Changed"/>
+                    </StackPanel>
+                    <TextBlock x:Name="AdProviderDesc" Style="{StaticResource Muted}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                    <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,10,0,0"
+                               Text="Wirkt in allen Browsern, Apps und Spielen: Werbe- und Tracker-Adressen werden über einen filternden DNS-Dienst (AdGuard DNS) gar nicht erst gefunden. Nichts wird installiert, ausschalten stellt deine vorherige Einstellung exakt wieder her. Tipp: In Chrome/Edge unter Einstellungen → Datenschutz „Sicheres DNS“ auf „Aktueller Dienstanbieter“ stellen, sonst umgehen die Browser den Filter. YouTube-Werbung lässt sich so nicht blocken (kommt vom selben Server wie die Videos) – dafür braucht es eine Browser-Erweiterung wie uBlock Origin."/>
+                    <Button Content="uBlock Origin für den Browser" Click="Link_Click" Tag="https://ublockorigin.com/" HorizontalAlignment="Left" Margin="0,8,0,0" Padding="10,4"/>
+                </StackPanel>
+            </Border>
+
+            <!-- VPN -->
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="VPN (WIREGUARD)" Style="{StaticResource Kicker}"/>
+                            <TextBlock x:Name="VpnState" Text="…" Style="{StaticResource H2}" FontSize="15"/>
+                            <TextBlock x:Name="IpText" Style="{StaticResource Caption}" Margin="0,4,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Button x:Name="WgInstall" Style="{StaticResource AccentButton}" Content="WireGuard installieren" Click="WgInstall_Click" Padding="12,5" Margin="0,0,8,0"/>
+                            <Button x:Name="ImportBtn" Content="VPN-Konfiguration hinzufügen …" Click="Import_Click" Padding="12,5"/>
+                        </StackPanel>
+                    </Grid>
+                    <ProgressBar x:Name="VpnBusy" IsIndeterminate="True" Margin="0,8,0,0" Visibility="Collapsed"/>
+                    <ItemsControl x:Name="Tunnels" Margin="0,10,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:VpnTunnel}">
+                                <Border Style="{StaticResource SubCard}" Margin="0,0,0,5" Padding="10,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold"><Run Text="{Binding Name, Mode=OneWay}"/><Run Text="   "/><Run Text="{Binding StateText, Mode=OneWay}" Foreground="{Binding StateBrush, Mode=OneWay}"/></TextBlock>
+                                            <TextBlock Text="{Binding Endpoint}" Style="{StaticResource Muted}" FontSize="11.5"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Button Content="{Binding ButtonText}" Style="{StaticResource AccentButton}" Click="Toggle_Click" Padding="14,4" IsEnabled="{Binding NotBusy}"/>
+                                            <Button Content="Entfernen" Click="Delete_Click" Padding="10,4" Margin="6,0,0,0" IsEnabled="{Binding NotBusy}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,8,0,0"
+                               Text="So geht's: 1) WireGuard installieren (ein Klick). 2) Bei einem VPN-Anbieter eine WireGuard-Datei (.conf) herunterladen – kostenlos und ohne Datenlimit z. B. bei Proton VPN (Konto anlegen → Downloads → WireGuard-Konfiguration → Windows). 3) Hier „VPN-Konfiguration hinzufügen“ und auf „Verbinden“. Die App verbindet unsichtbar über den WireGuard-Dienst, ganz ohne Fenster. Beim Zocken das VPN besser aus – es erhöht den Ping."/>
+                    <WrapPanel Margin="0,8,0,0">
+                        <Button Content="Proton VPN (kostenlos)" Click="Link_Click" Tag="https://account.protonvpn.com/downloads" Margin="0,0,8,6" Padding="10,4"/>
+                        <Button Content="Mullvad" Click="Link_Click" Tag="https://mullvad.net/de/account/wireguard-config" Margin="0,0,8,6" Padding="10,4"/>
+                        <Button Content="IP neu prüfen" Click="Ip_Click" Margin="0,0,8,6" Padding="10,4"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

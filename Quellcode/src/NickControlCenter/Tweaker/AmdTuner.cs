@@ -210,7 +210,7 @@ public sealed class AmdTuner : IGpuTuner
     }
 
     public GpuSettings PresetUndervolt() => Clamp(new GpuSettings { PowerPct = 100, VoltOffset = VoltageSupported ? Math.Max(VoltMin, -50) : 0, CoreOffset = VoltageSupported ? 0 : Math.Max(CoreMin, -(int)(_defGfx * 0.05)) });
-    public GpuSettings PresetLightOc() => Clamp(new GpuSettings { PowerPct = PowerMaxPct, CoreOffset = CoreMax / 2, MemOffset = MemMax / 2 });
+    public GpuSettings PresetLightOc() => Clamp(new GpuSettings { PowerPct = PowerMaxPct, CoreOffset = CoreMax * 4 / 10 / 10 * 10, MemOffset = MemMax * 4 / 10 / 10 * 10 });
     public GpuSettings PresetMaxOc() => Clamp(new GpuSettings { PowerPct = PowerMaxPct, CoreOffset = CoreMax, MemOffset = MemMax });
 
     public List<string> Apply(GpuSettings s)

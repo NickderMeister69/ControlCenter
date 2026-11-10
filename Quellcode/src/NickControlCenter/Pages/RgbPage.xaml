@@ -367,6 +367,28 @@
                                                ToolTip="Stimmen die Farben im Farbtest nicht (z. B. Rot leuchtet grün), hier umstellen"/>
                                     <ComboBox Grid.Column="1" ItemsSource="{x:Static local:LightZoneVM.ColorOrderNames}" SelectedIndex="{Binding ColorOrder}"/>
                                 </Grid>
+                                <Expander Margin="0,10,0,0" Foreground="{StaticResource SubTextBrush}">
+                                    <Expander.Header><TextBlock Text="Farbabgleich (wenn dieses Gerät andere Farben zeigt als der Rest)" FontSize="12"/></Expander.Header>
+                                    <StackPanel Margin="0,8,0,0">
+                                        <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap"
+                                                   Text="Oben „Weiß abgleichen“ drücken – alle Geräte leuchten weiß. Bei diesem Gerät den Kanal etwas runterdrehen, der zu stark ist (z. B. wirkt es bläulich → Blau runter), bis es aussieht wie die anderen."/>
+                                        <Grid Margin="0,8,0,0">
+                                            <Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition Width="160"/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="Gamma" Style="{StaticResource Muted}" VerticalAlignment="Center" ToolTip="An = sattere Farben (für ARGB-Lüfter). Aus = für Geräte, die selbst korrigieren (Razer, Corsair …)."/>
+                                            <ComboBox Grid.Column="1" ItemsSource="{x:Static local:LightZoneVM.GammaNames}" SelectedIndex="{Binding GammaIndex}"/>
+                                        </Grid>
+                                        <Grid Margin="0,6,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="Rot" Foreground="#F43F5E" VerticalAlignment="Center"/><Slider Grid.Column="1" Minimum="20" Maximum="100" Value="{Binding GainR}"/></Grid>
+                                        <Grid Margin="0,4,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="Grün" Foreground="#34D399" VerticalAlignment="Center"/><Slider Grid.Column="1" Minimum="20" Maximum="100" Value="{Binding GainG}"/></Grid>
+                                        <Grid Margin="0,4,0,0"><Grid.ColumnDefinitions><ColumnDefinition Width="100"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                            <TextBlock Text="Blau" Foreground="#60A5FA" VerticalAlignment="Center"/><Slider Grid.Column="1" Minimum="20" Maximum="100" Value="{Binding GainB}"/></Grid>
+                                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                                            <TextBlock Text="{Binding GainText}" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                            <Button Content="Zurücksetzen" Margin="12,0,0,0" Padding="8,3" FontSize="12" Click="CalReset_Click"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Expander>
                                 <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="{Binding IsHub, Converter={StaticResource BoolToVis}}">
                                     <TextBlock Text="Lüfter am Hub" Style="{StaticResource Muted}" VerticalAlignment="Center" Width="100"/>
                                     <Button Content="−" Width="30" Padding="0,4" Click="FanMinus_Click"/>
@@ -384,6 +406,7 @@
                                     <CheckBox Style="{StaticResource ToggleSwitch}" Content="Flacker-Schutz" IsChecked="{Binding FlickerGuard}" Margin="0,0,22,6"
                                               ToolTip="Sendet seltener und nur bei sichtbarer Änderung. Einschalten, wenn dieser Lüfter flackert."/>
                                     <Button Content="Farbtest" Padding="10,4" FontSize="12" Click="ColorTest_Click" Margin="0,0,6,0" ToolTip="Alle Anschlüsse 2 s rot, grün, blau, weiß – zeigt, ob die Farben stimmen"/>
+                                    <Button Content="Weiß abgleichen" Padding="10,4" FontSize="12" Click="HoldWhite_Click" Margin="0,0,6,0" ToolTip="Alle Geräte 90 s weiß – dann unter „Farbabgleich“ einstellen, bis alle gleich aussehen. Nochmal klicken = beenden."/>
                                     <Button Content="Blinken lassen" Padding="10,4" FontSize="12" Click="Identify_Click" ToolTip="Lässt diesen Anschluss 3 s weiß blinken – so siehst du, welcher es ist"/>
                                 </WrapPanel>
                                 <Border Style="{StaticResource SubCard}" Margin="0,10,0,0" Visibility="{Binding OwnEffect, Converter={StaticResource BoolToVis}}">

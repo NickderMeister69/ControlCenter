@@ -1,0 +1,12 @@
+Control Center – Stresstest vom 10.11.2026 15:07
+
+■ Gestoppt.
+Dauer: 4 min 8 s
+CPU: Intel Core i5-13400F · Ø 127.747 Punkte/s · max. 66 °C · max. 97 W · Fehler 0
+Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 410 Punkte/s · max. 63 °C · max. 115 W · Fehler 0
+Vergleich CPU: Platz 24 von 38 in der Liste.
+Vergleich Grafikkarte: Platz 34 von 43 in der Liste.
+
+Verlauf:
+15:03:16  Stresstest gestartet: CPU (AVX/Vektor, 16 Threads), Grafikkarte · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+15:07:24  Ergebnis: ■ Gestoppt. | Dauer: 4 min 8 s | CPU: Intel Core i5-13400F · Ø 127.747 Punkte/s · max. 66 °C · max. 97 W · Fehler 0 | Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 410 Punkte/s · max. 63 °C · max. 115 W · Fehler 0 | Vergleich CPU: Platz 24 von 38 in der Liste. | Vergleich Grafikkarte: Platz 34 von 43 in der Liste.

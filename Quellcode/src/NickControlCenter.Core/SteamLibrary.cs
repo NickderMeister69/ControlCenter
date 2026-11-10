@@ -78,3 +78,76 @@ public static class SteamLibrary
         return games.OrderBy(g => g.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
     }
 }
+
+/// <summary>Update-Zustand eines installierten Steam-Spiels (aus appmanifest_*.acf).</summary>
+public sealed record SteamGameState(int AppId, string Name, string Library, long SizeOnDisk, bool NeedsUpdate, bool Updating, bool Paused,
+                                    long BytesToDownload, long BytesDownloaded, DateTime? LastUpdated, long BuildId = 0)
+{
+    /// <summary>Neueste Version laut Steam-Server (0 = nicht geprüft).</summary>
+    public long LatestBuild { get; init; }
+    /// <summary>Update nur online erkannt (Steam lief nicht) – Größe kennt erst Steam.</summary>
+    public bool OnlineOnly { get; init; }
+    public double Progress => BytesToDownload > 0 ? Math.Clamp(BytesDownloaded * 100.0 / BytesToDownload, 0, 100) : 0;
+    public long Remaining => Math.Max(0, BytesToDownload - BytesDownloaded);
+}
+
+public static class SteamUpdates
+{
+    /// <summary>Build-Nummer des öffentlichen Zweigs aus einer App-Info (JSON von api.steamcmd.net) – sucht „branches“ → „public“ → „buildid“.</summary>
+    public static long ParsePublicBuild(string json)
+    {
+        try
+        {
+            using var doc = System.Text.Json.JsonDocument.Parse(json);
+            return Find(doc.RootElement);
+        }
+        catch { return 0; }
+        static long Find(System.Text.Json.JsonElement e)
+        {
+            if (e.ValueKind != System.Text.Json.JsonValueKind.Object) return 0;
+            foreach (var p in e.EnumerateObject())
+            {
+                if (p.NameEquals("branches") && p.Value.ValueKind == System.Text.Json.JsonValueKind.Object &&
+                    p.Value.TryGetProperty("public", out var pub) && pub.TryGetProperty("buildid", out var b))
+                    return long.TryParse(b.ValueKind == System.Text.Json.JsonValueKind.String ? b.GetString() : b.GetRawText(), out var v) ? v : 0;
+                var r = Find(p.Value);
+                if (r > 0) return r;
+            }
+            return 0;
+        }
+    }
+
+    // StateFlags von Steam
+    private const int UpdateRequired = 2, FullyInstalled = 4, UpdateRunning = 256, UpdatePaused = 512, UpdateStarted = 1024;
+
+    public static SteamGameState? ParseManifest(string txt, string library)
+    {
+        var name = SteamLibrary.ParseValue(txt, "name");
+        if (!int.TryParse(SteamLibrary.ParseValue(txt, "appid"), out int id) || name == null) return null;
+        if (name.StartsWith("Steamworks", StringComparison.OrdinalIgnoreCase) || name.Contains("Redistributable") || name.StartsWith("Proton", StringComparison.OrdinalIgnoreCase) || id == 228980) return null;
+        long L(string k) => long.TryParse(SteamLibrary.ParseValue(txt, k), out var v) ? v : 0;
+        int flags = (int)L("StateFlags");
+        long build = L("buildid"), target = L("TargetBuildID");
+        long toDl = L("BytesToDownload"), done = L("BytesDownloaded");
+        bool running = (flags & (UpdateRunning | UpdateStarted)) != 0;
+        bool paused = (flags & UpdatePaused) != 0;
+        bool needs = (flags & UpdateRequired) != 0 || running || paused || (target > 0 && target != build) || (toDl > 0 && done < toDl);
+        long last = L("LastUpdated");
+        return new SteamGameState(id, name, library, L("SizeOnDisk"), needs, running, paused, toDl, done,
+                                  last > 0 ? DateTimeOffset.FromUnixTimeSeconds(last).LocalDateTime : null, build);
+    }
+
+    public static List<SteamGameState> Scan(IEnumerable<string> libraries)
+    {
+        var list = new List<SteamGameState>();
+        foreach (var lib in libraries)
+        {
+            var apps = Path.Combine(lib, "steamapps");
+            string[] files;
+            try { files = Directory.GetFiles(apps, "appmanifest_*.acf"); } catch { continue; }
+            foreach (var f in files)
+                try { if (ParseManifest(File.ReadAllText(f), lib) is { } g && list.All(x => x.AppId != g.AppId)) list.Add(g); } catch { }
+        }
+        return list.OrderByDescending(g => g.NeedsUpdate).ThenBy(g => g.Name, StringComparer.CurrentCultureIgnoreCase).ToList();
+    }
+}

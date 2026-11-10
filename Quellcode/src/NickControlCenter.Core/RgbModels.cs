@@ -56,6 +56,12 @@ public sealed class LightZoneConfig
     public EffectConfig Effect { get; set; } = new();
     /// <summary>Flacker-Schutz: Anschluss wird seltener und nur bei sichtbarer Änderung aktualisiert.</summary>
     public bool FlickerGuard { get; set; }
+    /// <summary>Gamma-Korrektur: 0 = automatisch (an für ARGB-Lüfter/Streifen, aus für Razer & Co.), 1 = an, 2 = aus.</summary>
+    public int Gamma { get; set; }
+    /// <summary>Farbabgleich (Weißabgleich) je Kanal 0…1 – damit alle Geräte die gleiche Farbe zeigen.</summary>
+    public double GainR { get; set; } = 1;
+    public double GainG { get; set; } = 1;
+    public double GainB { get; set; } = 1;
     /// <summary>Farbreihenfolge der LEDs: 0 = automatisch, sonst Index in <see cref="ColorOrders"/>.</summary>
     public int ColorOrder { get; set; }
     public static readonly string[] ColorOrderNames = { "Automatisch", "RGB", "RBG", "GRB", "GBR", "BRG", "BGR" };

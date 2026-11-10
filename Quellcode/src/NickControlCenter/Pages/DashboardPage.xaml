@@ -139,6 +139,20 @@
                     </StackPanel>
                 </Border>
 
+                <!-- Strom -->
+                <Border x:Name="CardPower" Style="{StaticResource Card}" Margin="0,0,12,12">
+                    <StackPanel>
+                        <TextBlock Text="STROMVERBRAUCH" Style="{StaticResource Kicker}"/>
+                        <TextBlock x:Name="PowerNow" Style="{StaticResource BigNum}" FontSize="26"/>
+                        <TextBlock x:Name="PowerText" Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                        <Grid Margin="0,10,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition Width="70"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Strompreis €/kWh" Style="{StaticResource Muted}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBox Grid.Column="1" x:Name="PriceBox" FontFamily="{StaticResource MonoFont}" LostFocus="Price_LostFocus"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
                 <!-- Treiber -->
                 <Border x:Name="CardDrivers" Style="{StaticResource Card}" Margin="0,0,12,12">
                     <StackPanel>

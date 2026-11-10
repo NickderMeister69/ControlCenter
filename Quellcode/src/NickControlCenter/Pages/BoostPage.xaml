@@ -23,6 +23,16 @@
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="{Binding Status}" Style="{StaticResource H2}" FontSize="18"/>
                     <TextBlock Text="{Binding LastBoostText}" Style="{StaticResource Muted}" Margin="0,3,0,0"/>
+                    <ItemsControl ItemsSource="{Binding Summary}" Margin="0,8,0,0" Visibility="{Binding HasSummary, Converter={StaticResource BoolToVis}}">
+                        <ItemsControl.ItemsPanel><ItemsPanelTemplate><WrapPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource PanelAltBrush}" CornerRadius="11" Padding="10,3" Margin="0,0,6,6">
+                                    <TextBlock FontSize="12" Text="{Binding}"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                     <TextBlock Text="Jede Änderung wird vorher gesichert – „Alles zurücksetzen“ stellt den Originalzustand exakt wieder her." Style="{StaticResource Caption}" Margin="0,6,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
@@ -133,6 +143,9 @@
                                 <Button Content="&#xE72C;" Style="{StaticResource IconButton}" Click="Rescan_Click" ToolTip="Spiele neu suchen (Steam, Epic, Riot)" Margin="6,0,0,0"/>
                             </StackPanel>
                             <CheckBox Content="Bekannte Spiele automatisch erkennen, sobald sie laufen" IsChecked="{Binding Settings.DetectRunning}" Margin="0,8,0,0" FontSize="12"/>
+                            <CheckBox Content="Jedes Spiel erkennen (Spieleordner oder Vollbild) und automatisch boosten" IsChecked="{Binding Settings.DetectAnyGame}" Margin="0,4,0,0" FontSize="12"
+                                      ToolTip="Startest du ein Spiel aus Steam, Epic, Riot, Xbox, GOG … oder läuft ein Programm länger als 15 s im Vollbild, bekommt es automatisch ein Profil (Boost + RAM freigeben)"/>
+                            <CheckBox Content="Beim Spielen RAM automatisch freigeben, wenn er knapp wird (über 85 %)" IsChecked="{Binding Settings.RamWatchdog}" Margin="0,4,0,0" FontSize="12"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -149,6 +162,9 @@
                                     <TextBlock Text="{Binding Name}" Style="{StaticResource H2}"/>
                                     <TextBlock Style="{StaticResource Muted}" TextTrimming="CharacterEllipsis"><Run Text="{Binding P.Source, Mode=OneWay}"/><Run Text="  ·  "/><Run Text="{Binding P.Exe, Mode=OneWay, TargetNullValue='exe wird beim ersten Start erkannt'}"/></TextBlock>
                                     <TextBlock Text="{Binding Summary}" Style="{StaticResource Caption}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                                    <TextBlock Margin="0,6,0,0" TextWrapping="Wrap" FontSize="12" Visibility="{Binding HasSession, Converter={StaticResource BoolToVis}}">
+                                        <Run Text="Letzte Sitzung: " Foreground="{StaticResource MutedBrush}"/><Run Text="{Binding LastSession, Mode=OneWay}" Foreground="{DynamicResource AccentBrush}"/>
+                                    </TextBlock>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Top">
                                     <Button Style="{StaticResource AccentButton}" Content="Spielen" Click="Play_Click"/>
@@ -194,7 +210,34 @@
                                     <CheckBox Style="{StaticResource ToggleSwitch}" Content="RAM + Standby-Liste freigeben" IsChecked="{Binding CleanRam}" Margin="0,0,10,10"/>
                                     <CheckBox Style="{StaticResource ToggleSwitch}" Content="Desktop-Kacheln pausieren" IsChecked="{Binding PauseTiles}" Margin="0,0,10,10" ToolTip="Kacheln werden während des Spiels ausgeblendet und danach wieder gezeigt"/>
                                     <CheckBox Style="{StaticResource ToggleSwitch}" Content="Vollbild-Optimierung aus + starke GPU" IsChecked="{Binding ExeTweaks}" Margin="0,0,10,10" ToolTip="Windows-Einträge für die Spiel-exe (wirkt ab dem nächsten Start)"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Benachrichtigungen aus" IsChecked="{Binding QuietNotifications}" Margin="0,0,10,10" ToolTip="Keine Windows-Popups während des Spiels – danach wieder an"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Hintergrund-Apps ausbremsen" IsChecked="{Binding ThrottleBackground}" Margin="0,0,10,10" ToolTip="Statt zu schließen: die angehakten Hintergrund-Programme bekommen niedrige Priorität (Discord, Browser bleiben offen)"/>
+                                    <CheckBox Style="{StaticResource ToggleSwitch}" Content="Nur Leistungskerne (P-Kerne)" IsChecked="{Binding PCoresOnly}" Margin="0,0,10,10" Visibility="{Binding HybridCpu, Converter={StaticResource BoolToVis}}"
+                                              ToolTip="Intel 12./13./14. Gen: Spiel läuft nur auf den schnellen P-Kernen – kann Ruckler durch E-Kerne verhindern. Bei manchen Spielen besser aus, ausprobieren."/>
                                 </UniformGrid>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="BELEUCHTUNG BEIM SPIELEN" Style="{StaticResource Kicker}"/>
+                                <TextBlock Style="{StaticResource Caption}" Text="Startet das Spiel, wechselt die RGB-Beleuchtung – danach kommt deine normale Beleuchtung zurück."/>
+                                <Grid Margin="0,8,0,0">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="170"/><ColumnDefinition Width="260"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Beleuchtung" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{x:Static local:GameVM.RgbModeNames}" SelectedIndex="{Binding RgbMode}"/>
+                                </Grid>
+                                <Grid Margin="0,8,0,0" Visibility="{Binding ShowRgbColor, Converter={StaticResource BoolToVis}}">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="170"/><ColumnDefinition Width="32"/><ColumnDefinition Width="120"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="Farbe (Hex)" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                    <Border Grid.Column="1" Width="22" Height="22" CornerRadius="4" Background="{Binding RgbBrush}"/>
+                                    <TextBox Grid.Column="2" Text="{Binding RgbColor, UpdateSourceTrigger=LostFocus}" FontFamily="{StaticResource MonoFont}"/>
+                                </Grid>
+                                <Grid Margin="0,8,0,0" Visibility="{Binding ShowRgbProfile, Converter={StaticResource BoolToVis}}">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="170"/><ColumnDefinition Width="260"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="RGB-Profil" Style="{StaticResource Muted}" VerticalAlignment="Center"/>
+                                    <ComboBox Grid.Column="1" ItemsSource="{Binding RgbProfileNames}" SelectedItem="{Binding RgbProfile}"/>
+                                </Grid>
                             </StackPanel>
                         </Border>
 
@@ -226,6 +269,67 @@
                                 </StackPanel>
                                 <CheckBox Style="{StaticResource ToggleSwitch}" Content="Intro-Videos überspringen" IsChecked="{Binding SkipIntros}" Margin="0,10,0,0"
                                           Visibility="{Binding HasIntros, Converter={StaticResource BoolToVis}}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Card}" Visibility="{Binding CanGraphics, Converter={StaticResource BoolToVis}}">
+                            <StackPanel>
+                                <TextBlock Text="FEINEINSTELLUNGEN (UNREAL ENGINE)" Style="{StaticResource Kicker}"/>
+                                <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap"
+                                           Text="Jede Grafik-Kategorie einzeln und Profi-Einstellungen, die es im Spielmenü nicht gibt. Fertige Kombination wählen oder selbst zusammenstellen – wird beim „Spielen“ bzw. mit „Jetzt in die Config schreiben“ übernommen (Spiel muss zu sein)."/>
+                                <TextBlock Text="Fertige Kombinationen" Style="{StaticResource Muted}" Margin="0,10,0,4"/>
+                                <ItemsControl ItemsSource="{Binding LookPresets}">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,0,0,6">
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="170"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                                <Button Content="{Binding Name}" Click="LookPreset_Click" HorizontalAlignment="Stretch" Margin="0,0,10,0"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding Description}" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                                    <TextBlock Text="{Binding LookPresetText}" Foreground="{DynamicResource AccentBrush}" VerticalAlignment="Center"/>
+                                    <Button Content="Alles zurück auf Standard" Margin="12,0,0,0" Padding="8,3" FontSize="12" Click="ClearFine_Click"/>
+                                </StackPanel>
+                                <TextBlock Text="Grafik-Kategorien einzeln" Style="{StaticResource Muted}" Margin="0,12,0,4"/>
+                                <ItemsControl ItemsSource="{Binding SgItems}">
+                                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><UniformGrid Columns="2"/></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="0,0,12,6" ToolTip="{Binding Hint}">
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="130"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                                <TextBlock Text="{Binding Label}" VerticalAlignment="Center"/>
+                                                <ComboBox Grid.Column="1" ItemsSource="{x:Static core:UnrealTweaks.LevelNames}" SelectedIndex="{Binding Index}"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <StackPanel Visibility="{Binding EngineIniOk, Converter={StaticResource BoolToVis}}">
+                                    <TextBlock Text="Profi-Einstellungen (Konsolenvariablen in der Engine.ini)" Style="{StaticResource Muted}" Margin="0,12,0,4"/>
+                                    <ItemsControl ItemsSource="{Binding TweakItems}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,0,0,8">
+                                                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                                    <CheckBox Style="{StaticResource ToggleSwitch}" IsChecked="{Binding On}" VerticalAlignment="Top" Margin="0,2,10,0"/>
+                                                    <StackPanel Grid.Column="1">
+                                                        <TextBlock Text="{Binding Title}" FontWeight="SemiBold"/>
+                                                        <TextBlock Text="{Binding Description}" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap"/>
+                                                    </StackPanel>
+                                                    <StackPanel Grid.Column="2" Margin="8,0,0,0" HorizontalAlignment="Right">
+                                                        <TextBlock Text="{Binding Gain}" FontWeight="SemiBold" Foreground="{StaticResource GoodBrush}" HorizontalAlignment="Right"/>
+                                                        <TextBlock Text="{Binding LookText}" FontSize="10.5" Foreground="{Binding LookBrush}" HorizontalAlignment="Right"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                        <Button Content="Als Konsolenbefehle kopieren" Click="CopyConsole_Click" ToolTip="Zum Ausprobieren im laufenden Spiel: Konsole öffnen (ARK: Tab bzw. ^), Befehl einfügen. Gilt dann bis zum Neustart."/>
+                                    </StackPanel>
+                                </StackPanel>
                             </StackPanel>
                         </Border>
 

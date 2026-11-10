@@ -23,8 +23,14 @@ public sealed class BoostSettings
     public List<string>? AutoBoostProcesses { get; set; }
     /// <summary>Bekannte Spiele automatisch erkennen, sobald sie laufen.</summary>
     public bool DetectRunning { get; set; } = true;
+    /// <summary>Auch unbekannte Spiele erkennen (Spieleordner oder Vollbild).</summary>
+    public bool DetectAnyGame { get; set; } = true;
+    /// <summary>Beim Spielen RAM automatisch freigeben, wenn er knapp wird.</summary>
+    public bool RamWatchdog { get; set; } = true;
     public bool Applied { get; set; }
     public DateTime? LastBoost { get; set; }
+    /// <summary>Was beim letzten Boost gemacht wurde (kurze Punkte für die Anzeige).</summary>
+    public List<string> LastSummary { get; set; } = new();
     /// <summary>Steam verbunden (Bibliothek wird gelesen).</summary>
     public bool SteamConnected { get; set; }
     /// <summary>Ein Profil pro Spiel.</summary>
@@ -145,6 +151,34 @@ public sealed partial class BoostService : ObservableObject
         if (Settings.Applied && IsOn("timer")) SetTimerResolution(true);
     }
 
+    /// <summary>Ist diese Optimierung gerade wirklich gesetzt?</summary>
+    public bool IsActive(string id) { RefreshActive(); return Tweaks.FirstOrDefault(t => t.T.Id == id)?.Active ?? false; }
+
+    /// <summary>Eine einzelne Optimierung anwenden (mit Sicherung, rückgängig über „Alles zurücksetzen“).</summary>
+    public void ApplySingle(string id)
+    {
+        var t = Tweaks.FirstOrDefault(x => x.T.Id == id);
+        if (t == null) return;
+        try
+        {
+            switch (t.T.Special)
+            {
+                case "power": SetPowerPlan(); break;
+                case "timer": SetTimerResolution(true); break;
+                case "nagle": foreach (var k in NagleKeys()) { SetTracked(new RegValue(k, "TcpAckFrequency", 1)); SetTracked(new RegValue(k, "TCPNoDelay", 1)); } break;
+                default:
+                    foreach (var v in t.T.Values) SetTracked(v);
+                    if (t.T.Special == "mouse") ApplyMouse(0, 0, 0);
+                    break;
+            }
+            t.IsOn = true;
+            Native.BroadcastSettingChange("Policy");
+            Say($"{t.Title}: an", LogLevel.Ok);
+        }
+        catch (Exception ex) { Say($"{t.Title}: {ex.Message}", LogLevel.Warn); }
+        RefreshActive();
+    }
+
     public bool IsOn(string id) => Tweaks.FirstOrDefault(t => t.T.Id == id)?.IsOn ?? false;
 
     private void Say(string msg, LogLevel lvl = LogLevel.Info)
@@ -221,9 +255,12 @@ public sealed partial class BoostService : ObservableObject
         {
             Say("1-Klick-Boost gestartet");
             bool reboot = false;
+            int ok = 0, failed = 0, rebootCount = 0, games = 0;
+            bool restore = false;
+            var gameNames = new List<string>();
             await Task.Run(() =>
             {
-                if (Settings.RestorePoint) CreateRestorePoint();
+                if (Settings.RestorePoint) { try { CreateRestorePoint(); restore = true; } catch { } }
                 foreach (var t in Tweaks.Where(t => t.IsOn).ToList())
                 {
                     try
@@ -238,23 +275,41 @@ public sealed partial class BoostService : ObservableObject
                                 if (t.T.Special == "mouse") ApplyMouse(0, 0, 0);
                                 break;
                         }
-                        if (t.T.NeedsRestart) reboot = true;
+                        if (t.T.NeedsRestart) { reboot = true; rebootCount++; }
+                        ok++;
                         Say($"{t.Title}: an", LogLevel.Ok);
                     }
-                    catch (Exception ex) { Say($"{t.Title}: fehlgeschlagen – {ex.Message}", LogLevel.Warn); }
+                    catch (Exception ex) { failed++; Say($"{t.Title}: fehlgeschlagen – {ex.Message}", LogLevel.Warn); }
                 }
                 // Spielprofile: exe-Optimierungen und Grafik-Configs vorbereiten
                 foreach (var g in Games.Where(g => g.P.Active && !g.P.Hidden).ToList())
                 {
-                    if (g.P.ExeTweaks || g.P.Priority > 0) GameExeTweaks(g);
-                    if (g.P.Graphics || g.P.SkipIntros) ApplyGameFiles(g, fromBoost: true);
+                    bool any = false;
+                    if (g.P.ExeTweaks || g.P.Priority > 0) { GameExeTweaks(g); any = true; }
+                    if (g.P.Graphics || g.P.SkipIntros) { ApplyGameFiles(g, fromBoost: true); any = true; }
+                    if (any) { games++; gameNames.Add(g.Name); }
                 }
             });
             if (IsOn("timer")) SetTimerResolution(true);
             Native.BroadcastSettingChange("Policy");
-            if (Settings.CloseAppsOnBoost) await CloseSelectedAppsAsync();
+            int closed = Settings.CloseAppsOnBoost ? await CloseSelectedAppsAsync() : 0;
+            LastCleanFreed = 0;
             if (Settings.CleanOnBoost) await CleanAsync(includeShader: false);
-            if (Settings.RamOnBoost) await CleanRamAsync();
+            double ram = Settings.RamOnBoost ? await CleanRamAsync() : 0;
+
+            var sum = new List<string>();
+            if (ok > 0) sum.Add($"{ok} Boost-Einstellung{(ok == 1 ? "" : "en")} angewendet");
+            if (games > 0) sum.Add($"{games} Spielprofil{(games == 1 ? "" : "e")} optimiert ({string.Join(", ", gameNames.Take(3))}{(gameNames.Count > 3 ? " …" : "")})");
+            if (closed > 0) sum.Add($"{closed} Hintergrund-App{(closed == 1 ? "" : "s")} geschlossen");
+            if (LastCleanFreed > 1 << 20) sum.Add($"{Fmt.Size(LastCleanFreed)} Temp-Dateien gelöscht");
+            if (ram > 10) sum.Add(ram >= 1024 ? $"{ram / 1024:0.0} GB Arbeitsspeicher freigegeben" : $"{ram:0} MB Arbeitsspeicher freigegeben");
+            else if (Settings.RamOnBoost) sum.Add("Arbeitsspeicher aufgeräumt");
+            if (IsOn("timer")) sum.Add("Windows-Timer auf 0,5 ms (weniger Input-Lag)");
+            if (restore) sum.Add("Wiederherstellungspunkt erstellt");
+            if (failed > 0) sum.Add($"⚠ {failed} Einstellung{(failed == 1 ? "" : "en")} fehlgeschlagen (siehe Protokoll)");
+            if (rebootCount > 0) sum.Add($"↻ {rebootCount} Punkt{(rebootCount == 1 ? " wirkt" : "e wirken")} erst nach einem Neustart");
+            Settings.LastSummary = sum.Select(x => x.StartsWith("⚠") || x.StartsWith("↻") ? x : "✔ " + x).ToList();
+            RaiseAll(nameof(Summary), nameof(HasSummary));
 
             Settings.Applied = true;
             Settings.LastBoost = DateTime.Now;
@@ -452,6 +507,7 @@ public sealed partial class BoostService : ObservableObject
         {
             // nur Dateien älter als 1 Stunde – laufende Installer/Programme brauchen ihre frischen Temp-Dateien
             var r = await TempCleaner.CleanAsync(folders, prog, ct, shaderOnly ? TimeSpan.Zero : TimeSpan.FromHours(1));
+            LastCleanFreed = r.FreedBytes;
             CleanProgress = 100;
             CleanStatus = (r.Cancelled ? "Abgebrochen – " : "Fertig – ") + $"{Fmt.Size(r.FreedBytes)} frei, {r.Deleted} Dateien gelöscht, {r.Skipped} übersprungen ({r.Duration.TotalSeconds:0.0} s)";
             Say((shaderOnly ? "Shader-Cache: " : "Temp-Dateien: ") + CleanStatus, LogLevel.Ok);
@@ -460,8 +516,13 @@ public sealed partial class BoostService : ObservableObject
     }
 
     public void CancelClean() => _cleanCts?.Cancel();
+    private double LastCleanFreed;
 
-    public async Task CleanRamAsync()
+    /// <summary>Zusammenfassung des letzten Boosts (für die Anzeige oben).</summary>
+    public List<string> Summary => Settings.LastSummary;
+    public bool HasSummary => Settings.LastSummary.Count > 0;
+
+    public async Task<double> CleanRamAsync()
     {
         var before = Native.Memory();
         var skip = new HashSet<string>(BoostCatalog.NeverTouch, StringComparer.OrdinalIgnoreCase);
@@ -488,6 +549,7 @@ public sealed partial class BoostService : ObservableObject
         double freed = (before.UsedGb - after.UsedGb) * 1024;
         Say($"Arbeitsspeicher aufgeräumt{(freed > 10 ? $" – {freed:0} MB frei geworden" : "")} (jetzt {after.UsedGb:0.0} von {after.TotalGb:0.0} GB belegt)", LogLevel.Ok);
         Ui.Toast("Arbeitsspeicher aufgeräumt" + (freed > 10 ? $" – {freed:0} MB frei" : ""));
+        return freed;
     }
 
     public async Task FlushDnsAsync()
@@ -584,10 +646,11 @@ public sealed partial class BoostService : ObservableObject
 
     private List<BackgroundApp> _lastApps = new();
 
-    public async Task CloseSelectedAppsAsync()
+    public async Task<int> CloseSelectedAppsAsync()
     {
         var sel = Settings.SelectedApps.ToList();
-        if (sel.Count == 0) return;
+        if (sel.Count == 0) return 0;
+        int closedCount = 0;
         await Task.Run(() =>
         {
             foreach (var name in sel)
@@ -602,10 +665,12 @@ public sealed partial class BoostService : ObservableObject
                 var rest = System.Diagnostics.Process.GetProcessesByName(name);
                 if (rest.Length > 0 && def is { Kill: true }) foreach (var p in rest) { try { p.Kill(); } catch { } }
                 bool gone = System.Diagnostics.Process.GetProcessesByName(name).Length == 0;
+                if (gone) closedCount++;
                 Say($"{def?.Name ?? name}: {(gone ? "geschlossen" : "läuft noch (ungespeicherte Daten?)")}", gone ? LogLevel.Ok : LogLevel.Warn);
             }
         });
         RefreshApps();
+        return closedCount;
     }
 
     public void OnExit()

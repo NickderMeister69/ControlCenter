@@ -14,6 +14,10 @@ public sealed class EngineZone
     public required EffectSnap Effect { get; init; }
     public bool FlickerGuard { get; init; }
     public int ColorOrder { get; init; }
+    public bool GammaOn { get; init; } = true;
+    public double GainR { get; init; } = 1;
+    public double GainG { get; init; } = 1;
+    public double GainB { get; init; } = 1;
     /// <summary>Zuletzt berechnete Farben (für die Live-Vorschau).</summary>
     public volatile RgbF[] Current = Array.Empty<RgbF>();
     public RgbF[]? Smoothed;
@@ -103,7 +107,12 @@ public sealed class RgbEngine : IDisposable
     /// <summary>Lässt einen Anschluss 3 s weiß blinken (zum Finden, welcher Lüfter welcher ist).</summary>
     private DateTime? _testUntil;
     /// <summary>Farbtest: alle Anschlüsse 2 s rot, grün, blau, weiß – zum Prüfen, ob die Farben stimmen.</summary>
-    public void ColorTest() => _actions.Enqueue(() => { _testStart = DateTime.Now; _testUntil = DateTime.Now.AddSeconds(8); });
+    public void ColorTest() => _actions.Enqueue(() => { _testStart = DateTime.Now; _testUntil = DateTime.Now.AddSeconds(8); _whiteHold = false; });
+    private bool _whiteHold;
+    /// <summary>Alle Geräte 60 s weiß (oder in einer Farbe) – zum Abgleichen, bis alle gleich aussehen.</summary>
+    public void HoldColor(RgbF c, int seconds) => _actions.Enqueue(() => { _holdColor = c; _testStart = DateTime.Now.AddSeconds(-100); _testUntil = DateTime.Now.AddSeconds(seconds); _whiteHold = true; });
+    public void StopTest() => _actions.Enqueue(() => { _testUntil = null; _whiteHold = false; });
+    private RgbF _holdColor = RgbF.White;
     private DateTime _testStart;
 
     public void Identify(RgbZone zone) => _actions.Enqueue(() => _identify = (zone, DateTime.Now.AddSeconds(3)));
@@ -184,7 +193,7 @@ public sealed class RgbEngine : IDisposable
                 if (_testUntil is { } tu && DateTime.Now < tu)
                 {
                     int step = (int)((DateTime.Now - _testStart).TotalSeconds / 2);
-                    var tc = step switch { 0 => new RgbF(1, 0, 0), 1 => new RgbF(0, 1, 0), 2 => new RgbF(0, 0, 1), _ => RgbF.White };
+                    var tc = _whiteHold ? _holdColor : step switch { 0 => new RgbF(1, 0, 0), 1 => new RgbF(0, 1, 0), 2 => new RgbF(0, 0, 1), _ => RgbF.White };
                     for (int i = 0; i < n; i++) arr[i] = tc;
                 }
                 else if (ident != null && ident.Value.zone == z.Target)
@@ -200,7 +209,8 @@ public sealed class RgbEngine : IDisposable
                 z.Current = arr;
             }
 
-            if (st.Enabled || NightActive || (_testUntil is { } tt && DateTime.Now < tt)) SendToDevices(st, ident?.zone);
+            // „Beleuchtung aus“ = alle Geräte dunkel schalten (vorher behielten sie nur ihre letzte Farbe – sah aus, als passiere nichts)
+            SendToDevices(st, ident?.zone);
             var elapsed = (sw.Elapsed - frameStart).TotalMilliseconds;
             Thread.Sleep((int)Math.Max(5, 33 - elapsed));
         }
@@ -209,7 +219,7 @@ public sealed class RgbEngine : IDisposable
     private void SendToDevices(EngineState st, RgbZone? identZone)
     {
         var now = DateTime.Now;
-        double bright = NightActive ? 0 : st.Brightness;
+        double bright = NightActive || !st.Enabled ? 0 : st.Brightness;
         foreach (var dev in _devices)
         {
             if (_errors.TryGetValue(dev, out var errs) && errs >= 5)
@@ -236,7 +246,9 @@ public sealed class RgbEngine : IDisposable
                     {
                         var c = cur[Math.Min(i, cur.Length - 1)].Scale(z.Target == identZone || testing ? 1 : bright);
                         int o = i * 3;
-                        byte r = Gamma[c.R8], g = Gamma[c.G8], b = Gamma[c.B8];
+                        // Farbabgleich je Kanal, dann (optional) Gamma
+                        var cc = new RgbF(c.R * z.GainR, c.G * z.GainG, c.B * z.GainB);
+                        byte r = z.GammaOn ? Gamma[cc.R8] : cc.R8, g = z.GammaOn ? Gamma[cc.G8] : cc.G8, b = z.GammaOn ? Gamma[cc.B8] : cc.B8;
                         if (map == null) { buf[o] = r; buf[o + 1] = g; buf[o + 2] = b; }
                         else
                         {

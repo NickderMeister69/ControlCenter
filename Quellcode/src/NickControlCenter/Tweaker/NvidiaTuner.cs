@@ -180,8 +180,9 @@ public sealed class NvidiaTuner : IGpuTuner
         PowerPct = 100, CoreOffset = OffsetsSupported ? UndervoltOffset : 0, MemOffset = 0,
         ClockCap = OffsetsSupported ? TypicalBoost : Round15(TypicalBoost * 0.93)
     });
+    // Leichtes OC bewusst vorsichtig (40 %); Maximales OC = volles Limit (stürzt ein Spiel ab, senkt der Absturzschutz automatisch)
     public GpuSettings PresetLightOc() => Clamp(new GpuSettings
-    { PowerPct = PowerMaxPct, CoreOffset = CoreMax / 2, MemOffset = MemMax / 2 });
+    { PowerPct = PowerMaxPct, CoreOffset = Round15(CoreMax * 0.4), MemOffset = (int)(MemMax * 0.4) / 50 * 50 });
     public GpuSettings PresetMaxOc() => Clamp(new GpuSettings
     { PowerPct = PowerMaxPct, CoreOffset = CoreMax, MemOffset = MemMax });
     static int Round15(double v) => (int)(v / 15) * 15;
