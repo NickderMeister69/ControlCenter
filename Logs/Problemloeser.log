@@ -119,3 +119,17 @@
 2026-11-12 11:50:44  OK       [Problemloeser] Erledigt: crash:arkascended
 2026-11-12 19:39:57  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
 2026-11-12 19:40:27  INFO     [Problemloeser] Gefunden: Grafiktreiber-Update: 621.24 (installiert 621.14) – Für NVIDIA GeForce RTX 4060 gibt es einen neueren GeForce Game Ready-Treiber. Neue Treiber bringen oft mehr FPS und Fehlerbehebungen für aktuelle Spiele.
+2026-11-12 19:47:38  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-12 19:47:41  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-12 19:47:54  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-12 19:47:54  INFO     [Problemloeser] Aktion „Programm schließen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-12 19:47:56  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-12 19:47:57  OK       [Problemloeser] „Programm schließen“: 1 Prozess(e) beendet.
+2026-11-12 19:47:58  WARNUNG  [Problemloeser] Gefunden: Dienst „GIGABYTE Update Service“ startet automatisch – Dieser Hersteller-Dienst läuft gerade nicht, startet aber mit Windows und übernimmt dann die Beleuchtung/Lüfter. Häufige Ursache für Flackern nach dem Hochfahren.
+2026-11-12 19:47:58  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-12 19:47:58  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-12 19:47:59  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-12 19:48:03  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-12 19:48:04  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-12 19:48:05  OK       [Problemloeser] Erledigt: svc:GigabyteUpdateService
+2026-11-12 19:50:07  INFO     [Problemloeser] Gefunden: Grafiktreiber-Update: 621.24 (installiert 621.14) – Für NVIDIA GeForce RTX 4060 gibt es einen neueren GeForce Game Ready-Treiber. Neue Treiber bringen oft mehr FPS und Fehlerbehebungen für aktuelle Spiele.

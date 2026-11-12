@@ -199,7 +199,7 @@ public sealed class OverlayWindow : Window
         Rebuild();
         _timer.Interval = TimeSpan.FromMilliseconds(80);
         int placeTick = 0;
-        _timer.Tick += (_, _) => { Refresh(); if (++placeTick % 12 == 0) Place(); };
+        _timer.Tick += (_, _) => { Refresh(); UpdateVisibility(); if (++placeTick % 12 == 0) Place(); };
         Loaded += (_, _) => { Place(); _timer.Start(); };
         SourceInitialized += (_, _) =>
         {
@@ -222,7 +222,8 @@ public sealed class OverlayWindow : Window
     {
         if (msg == 0x0312 && wParam.ToInt32() == HotkeyId)
         {
-            Visibility = Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+            _userHidden = !_userHidden; // Tastenkürzel blendet aus/ein – unabhängig von „nur in Spielen“
+            UpdateVisibility();
             handled = true;
         }
         return IntPtr.Zero;
@@ -283,13 +284,23 @@ public sealed class OverlayWindow : Window
         "gpu.clock" => "GPU Takt", "gpu.power" => "GPU W", "gpu.vram" => "VRAM", "ram.load" => "RAM", "net.down" => "↓", "net.up" => "↑", _ => m.Label
     };
 
+    private bool _userHidden;
+
+    /// <summary>„Nur in Spielen“: ausblenden, solange kein Spiel im Vordergrund ist (Browser, Desktop …).</summary>
+    private void UpdateVisibility()
+    {
+        bool show = !_userHidden && (!_svc.Settings.OverlayOnlyInGames || _svc.GameActive);
+        var want = show ? Visibility.Visible : Visibility.Hidden;
+        if (Visibility != want) Visibility = want;
+    }
+
     private void Refresh()
     {
         foreach (var row in _panel.Children.OfType<Panel>())
             foreach (var tb in row.Children.OfType<TextBlock>().Where(t => t.Tag is Metric))
             {
                 var m = (Metric)tb.Tag;
-                tb.Text = m.Key is "fps" or "fps.low" ? (double.IsNaN(m.ShownValue) ? "–" : $"{m.ShownValue:0}") : m.Text;
+                tb.Text = m.Key is "fps" or "fps.low" ? (double.IsNaN(m.ShownValue) ? "–" : m.DesktopHz && m.Key == "fps" ? $"{m.ShownValue:0} Hz" : $"{m.ShownValue:0}") : m.Text;
                 tb.Foreground = !_svc.Settings.OverlayAlertColors || m.Brush == Palette.Text || m.Brush == Palette.Muted ? _textBrush : m.Brush;
             }
     }

@@ -328,3 +328,33 @@
 2026-11-12 19:39:59  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
 2026-11-12 19:40:32  INFO     [Monitor] GPU-Leistungssensoren: 
 2026-11-12 19:40:32  INFO     [Monitor] Messwerte: CPU 51,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 33 %, 44,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-12 19:48:58  INFO     [Monitor] FPS-Messung beendet
+2026-11-12 19:49:36  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-12 19:49:37  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-12 19:49:37  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-12 19:49:37  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-12 19:49:37  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-12 19:49:38  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-12 19:50:13  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-12 19:50:13  INFO     [Monitor] Messwerte: CPU 47,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 32 %, 43,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-12 19:53:28  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-12 19:53:28  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-12 19:53:28  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-12 19:53:28  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-12 19:53:28  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-12 19:53:29  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-12 19:54:04  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-12 19:54:04  INFO     [Monitor] Messwerte: CPU 53,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 9 %, 18,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aktiv, GPU 42,0 °C · Quelle HWiNFO
+2026-11-12 20:04:04  INFO     [Monitor] Messwerte: CPU 51,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 40,0 °C, Last 9 %, 18,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 40,0 °C · HWiNFO aktiv, GPU 40,0 °C · Quelle HWiNFO
+2026-11-12 20:14:04  INFO     [Monitor] Messwerte: CPU 46,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 31 %, 42,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aktiv, GPU 38,0 °C · Quelle HWiNFO
+2026-11-12 20:24:04  INFO     [Monitor] Messwerte: CPU 47,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 33 %, 44,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-12 20:25:31  INFO     [Monitor] FPS-Messung beendet
+2026-11-12 20:25:37  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-12 20:25:38  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-12 20:25:38  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-12 20:25:38  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-12 20:25:38  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-12 20:25:39  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-12 20:26:13  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-12 20:26:13  INFO     [Monitor] Messwerte: CPU 51,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 43,0 °C, Last 15 %, 25,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 43,0 °C · HWiNFO aktiv, GPU 43,0 °C · Quelle HWiNFO
+2026-11-12 20:27:33  INFO     [Monitor] FPS-Messung beendet

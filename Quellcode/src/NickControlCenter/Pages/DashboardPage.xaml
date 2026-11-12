@@ -185,7 +185,8 @@
                     <StackPanel>
                         <TextBlock Text="SCHNELLZUGRIFF" Style="{StaticResource Kicker}"/>
                         <CheckBox Style="{StaticResource ToggleSwitch}" Content="Desktop-Kacheln anzeigen" IsChecked="{Binding Tiles.Visible}" Margin="0,4,0,8"/>
-                        <CheckBox Style="{StaticResource ToggleSwitch}" Content="In-Game-Overlay (Strg+Umschalt+O)" x:Name="OverlayToggle" Click="Overlay_Click" Margin="0,0,0,10"/>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" Content="In-Game-Overlay (Strg+Umschalt+O)" x:Name="OverlayToggle" Click="Overlay_Click" Margin="0,0,0,6"/>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" Content="Overlay nur in Spielen" x:Name="OverlayGamesToggle" Click="OverlayGames_Click" Margin="0,0,0,10"/>
                         <WrapPanel>
                             <Button Content="Stresstest 5 min" Margin="0,0,8,8" Click="Stress_Click"/>
                             <Button Content="Problemlöser" Margin="0,0,8,8" Click="Go_Click" Tag="Problemlöser"/>

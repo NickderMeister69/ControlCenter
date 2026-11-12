@@ -163,6 +163,7 @@
                             <TextBlock Text="IN-GAME-OVERLAY" Style="{StaticResource Kicker}"/>
                             <TextBlock Style="{StaticResource Caption}" Text="Kleine Anzeige immer im Vordergrund, klick-durchlässig. Strg+Umschalt+O blendet sie ein/aus. Funktioniert in Spielen mit „Randloses Fenster“. FPS werden über Windows gemessen (nichts wird ins Spiel eingeschleust – Anti-Cheat-sicher), bei DirectX-Spielen."/>
                             <CheckBox Style="{StaticResource ToggleSwitch}" Content="Overlay anzeigen" x:Name="OverlayOn" Click="Overlay_Click" Margin="0,12,0,0"/>
+                            <CheckBox Style="{StaticResource ToggleSwitch}" Content="Nur in Spielen anzeigen (beim Surfen ausblenden)" x:Name="OverlayGames" Click="OverlayGames_Click" Margin="0,8,0,0"/>
                             <CheckBox Style="{StaticResource ToggleSwitch}" Content="Nebeneinander (von links nach rechts)" IsChecked="{Binding Settings.OverlayHorizontal}" Click="OverlayLayout_Click" Margin="0,8,0,0"/>
                             <Grid Margin="0,12,0,0">
                                 <Grid.ColumnDefinitions><ColumnDefinition Width="110"/><ColumnDefinition/></Grid.ColumnDefinitions>

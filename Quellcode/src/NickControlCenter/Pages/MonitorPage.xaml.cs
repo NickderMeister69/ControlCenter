@@ -80,6 +80,7 @@ public partial class MonitorPage : UserControl, IPage
     {
         _visible = visible;
         OverlayOn.IsChecked = _m.OverlayOn;
+        OverlayGames.IsChecked = _m.OverlayOnlyInGames;
         _m.UseFps(visible || _m.OverlayOn);
         if (!visible) _m.Save();
         OnUpdate();
@@ -158,6 +159,7 @@ public partial class MonitorPage : UserControl, IPage
     private void PinSensor_Click(object s, RoutedEventArgs e) { if ((s as FrameworkElement)?.Tag is string id) { _m.AddTile("sensor:" + id); Ui.Toast("Als Kachel hinzugefügt"); } }
     private void OverlayLayout_Click(object s, RoutedEventArgs e) { _m.Save(); _m.RefreshOverlay(); }
     private void Overlay_Click(object s, RoutedEventArgs e) => _m.SetOverlay(OverlayOn.IsChecked == true);
+    private void OverlayGames_Click(object s, RoutedEventArgs e) => _m.OverlayOnlyInGames = OverlayGames.IsChecked == true;
     private void InitOverlayStyle()
     {
         var st = _m.Settings;

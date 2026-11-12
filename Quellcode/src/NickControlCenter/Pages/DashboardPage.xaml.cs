@@ -44,6 +44,7 @@ public partial class DashboardPage : UserControl
         TweakCpu.Text = "CPU: " + Services.Tweaker.Settings.Cpu;
         TweakGpu.Text = "Grafikkarte: " + (Services.Tweaker.Gpu.Available ? Services.Tweaker.Settings.Gpu.ToString() : Services.Tweaker.Gpu.Info);
         OverlayToggle.IsChecked = Services.Monitor.OverlayOn;
+        OverlayGamesToggle.IsChecked = Services.Monitor.OverlayOnlyInGames;
         var en = EnergyService.Instance;
         Smooth.Text(PowerNow, en.NowWatts, v => double.IsNaN(v) ? "–" : $"{v:0} W");
         PowerText.Text = en.Summary.Substring(Math.Max(0, en.Summary.IndexOf('\n') + 1));
@@ -155,6 +156,7 @@ public partial class DashboardPage : UserControl
     private async void Boost_Click(object sender, RoutedEventArgs e) => await Services.Boost.BoostAsync();
     private async void Ram_Click(object sender, RoutedEventArgs e) => await Services.Boost.CleanRamAsync();
     private void Overlay_Click(object sender, RoutedEventArgs e) => Services.Monitor.SetOverlay(OverlayToggle.IsChecked == true);
+    private void OverlayGames_Click(object sender, RoutedEventArgs e) => Services.Monitor.OverlayOnlyInGames = OverlayGamesToggle.IsChecked == true;
 
     private void Stress_Click(object sender, RoutedEventArgs e)
     {

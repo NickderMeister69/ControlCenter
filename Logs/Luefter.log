@@ -133,3 +133,8 @@
 2026-11-12 11:44:43  INFO     [Luefter] Sicherheitsmodus beendet: 78 °C
 2026-11-12 14:59:59  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
 2026-11-12 19:39:56  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-12 19:48:58  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-12 19:49:37  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-12 19:53:28  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-12 20:25:31  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-12 20:25:38  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.

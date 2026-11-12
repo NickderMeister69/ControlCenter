@@ -17,6 +17,8 @@ public sealed class MonitorSettings
     public double OverlayFontSize { get; set; } = 14;
     public List<string> OverlayItems { get; set; } = new() { "cpu.temp", "cpu.load", "gpu.temp", "gpu.load", "ram.load" };
     public bool OverlayHotkey { get; set; } = true;
+    /// <summary>Overlay nur zeigen, wenn ein Spiel im Vordergrund ist (beim Surfen ausgeblendet).</summary>
+    public bool OverlayOnlyInGames { get; set; } = true;
     /// <summary>Werte nebeneinander (von links nach rechts) statt untereinander.</summary>
     public bool OverlayHorizontal { get; set; } = true;
     public string OverlayFont { get; set; } = "Bahnschrift";
@@ -247,6 +249,7 @@ public sealed class MonitorService : ObservableObject, IDisposable
         {
             var fr = FpsCounter.Instance.Foreground();
             if (Metrics.TryGetValue("fps", out var fm)) fm.DesktopHz = fr.Desktop;
+            GameActive = !fr.Desktop;
             if (fr.Desktop) { P("fps", fr.Hz); P("fps.low", double.NaN); P("frametime", double.IsNaN(fr.Hz) ? double.NaN : 1000 / fr.Hz); }
             else { P("fps", fr.Fps); P("fps.low", fr.Low1); P("frametime", fr.FrameMs); }
         }
@@ -343,6 +346,15 @@ public sealed class MonitorService : ObservableObject, IDisposable
     }
 
     public void RefreshOverlay() => _overlay?.Rebuild();
+
+    /// <summary>Ist gerade ein Spiel im Vordergrund? (aus der FPS-Erkennung)</summary>
+    public bool GameActive { get; private set; }
+
+    public bool OverlayOnlyInGames
+    {
+        get => Settings.OverlayOnlyInGames;
+        set { Settings.OverlayOnlyInGames = value; Save(); Raise(); }
+    }
 
     public void Dispose()
     {

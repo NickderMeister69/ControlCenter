@@ -379,3 +379,30 @@
 2026-11-12 19:40:00  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 369 Mbit/s
 2026-11-12 19:40:13  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
 2026-11-12 19:42:16  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-12 19:47:12  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 19:48:54  OK       [Allgemein] Treiber geladen: C:\Users\nickg\Downloads\621.24-desktop-win10-win11-64bit-international-dch-whql.exe
+2026-11-12 19:48:57  INFO     [Allgemein] Treiber-Installation: App beendet sich, Installer 621.24-desktop-win10-win11-64bit-international-dch-whql.exe startet.
+2026-11-12 19:48:57  INFO     [Allgemein] Beenden …
+2026-11-12 19:48:58  INFO     [Allgemein] Beendet.
+2026-11-12 19:49:34  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-12 19:49:39  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.14 · GeForce Game Ready-Treiber: 621.24 (Update verfügbar), NVIDIA Studio-Treiber: 621.24 (Update verfügbar)
+2026-11-12 19:49:41  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 395 Mbit/s
+2026-11-12 19:49:48  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-12 19:53:26  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-12 19:53:30  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-12 19:53:37  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-12 19:58:32  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:03:32  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:08:32  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:13:32  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:18:32  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:23:32  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:25:31  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-12 20:25:31  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-12 20:25:31  INFO     [Allgemein] Beenden …
+2026-11-12 20:25:31  INFO     [Allgemein] Beendet.
+2026-11-12 20:25:34  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-12 20:25:40  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-12 20:25:47  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-12 20:26:59  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 345 Mbit/s
+2026-11-12 20:27:07  INFO     [Allgemein] winget: 0 Updates verfügbar

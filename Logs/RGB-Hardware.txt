@@ -1,4 +1,4 @@
-Control Center – Hardware-Liste vom 12.11.2026 19:39
+Control Center – Hardware-Liste vom 12.11.2026 20:25
 
 RGB-Geräte:
   [OK] Gigabyte: Gigabyte B760 DS3H AX DDR4 – Wird gesteuert
