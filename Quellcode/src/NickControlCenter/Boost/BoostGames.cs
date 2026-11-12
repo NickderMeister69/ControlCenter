@@ -1045,6 +1045,18 @@ public sealed partial class BoostService
     };
     private string? _fsCandidate; private DateTime _fsSince;
 
+    /// <summary>Kein Spiel (Browser, Launcher, Windows-Teile …)?</summary>
+    public static bool IsNonGame(string processName) =>
+        NoGame.Contains(processName) || SystemProcs.Contains(processName) ||
+        processName is "dwm" or "csrss" or "ShellExperienceHost" or "StartMenuExperienceHost" or "SearchHost" or "TextInputHost" or "LockApp" or "SystemSettings";
+
+    /// <summary>Gehört der Prozess zu einem Spiel aus der Spieleliste?</summary>
+    public bool IsGameProcess(string processName)
+    {
+        var key = processName.ToLowerInvariant();
+        return Games.Any(g => g.Key == key || (g.Known?.Processes.Any(x => x.Equals(processName, StringComparison.OrdinalIgnoreCase)) ?? false));
+    }
+
     /// <summary>
     /// Läuft ein Spiel, das noch nicht in der Liste ist? Erkennung über den Ordner (Steam, Epic, Riot, Xbox, GOG …)
     /// oder: Vollbild-Fenster im Vordergrund, das länger als 15 s offen ist und nicht zu einem normalen Programm gehört.

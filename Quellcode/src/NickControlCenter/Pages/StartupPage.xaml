@@ -11,6 +11,15 @@
                     <TextBlock x:Name="Summary" Style="{StaticResource H2}" FontSize="15"/>
                     <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,0"
                                Text="Jedes Programm hier startet mit Windows und macht den PC beim Hochfahren langsamer. Grün = kann aus, Gelb = nach Bedarf, Rot = an lassen. Ausschalten funktioniert wie im Task-Manager: nichts wird gelöscht, du kannst es jederzeit wieder einschalten."/>
+                    <Border Background="{StaticResource PanelAltBrush}" CornerRadius="6" Padding="12,8" Margin="0,10,0,0" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox x:Name="SelfAuto" Style="{StaticResource ToggleSwitch}" Click="SelfAuto_Click" VerticalAlignment="Center"/>
+                            <StackPanel Margin="10,0,0,0">
+                                <TextBlock Text="Control Center mit Windows starten" FontWeight="SemiBold"/>
+                                <TextBlock x:Name="SelfAutoText" Style="{StaticResource Muted}" FontSize="11.5"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
                 <Button HorizontalAlignment="Right" VerticalAlignment="Top" Content="Neu laden" Click="Reload_Click" Padding="12,4"/>
             </Grid>

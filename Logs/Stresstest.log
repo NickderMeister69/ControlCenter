@@ -31,3 +31,16 @@
 2026-11-10 16:21:10  OK       [Stresstest] Laufwerkstest: SEQ1M Q8T1 L 2.319 MB/s / S 173 MB/s · SEQ1M Q1T1 L 2.327 MB/s / S 1.114 MB/s · RND4K Q32T1 L 67,7 MB/s  (16.534 IOPS) / S 81,6 MB/s  (19.915 IOPS) · RND4K Q1T1 L 67,8 MB/s  (16.558 IOPS) / S 83,3 MB/s  (20.330 IOPS)
 2026-11-10 16:23:55  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
 2026-11-10 16:27:06  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-10 19:43:24  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-10 19:49:28  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-10 21:31:07  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-10 21:33:26  INFO     [Stresstest] RAM-Test: 3,2 GB werden geschrieben und geprüft
+2026-11-10 21:33:26  INFO     [Stresstest] Stresstest gestartet: CPU (AVX/Vektor, 16 Threads), Grafikkarte, RAM (50 % frei) · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-10 21:33:26  INFO     [Stresstest] GPU-Last läuft auf „NVIDIA GeForce RTX 4060“ (Intensität 100 %)
+2026-11-10 21:34:49  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 1 min 23 s | CPU: 13th Gen Intel Core i5-13400F · Ø 101.285 Punkte/s · max. 70 °C · max. 102 W · Fehler 0 | Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 347 Punkte/s · max. 65 °C · max. 115 W · Fehler 0 | RAM: 45 Durchläufe · Fehler 0 | Vergleich CPU: Platz 24 von 38 in der Liste. | Vergleich Grafikkarte: Platz 34 von 43 in der Liste.
+2026-11-11 17:00:07  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-12 09:21:51  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-12 10:13:52  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-12 10:45:23  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-12 10:48:34  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-12 19:39:53  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)

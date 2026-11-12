@@ -101,8 +101,12 @@ public static class JsonStore
         return new T();
     }
 
+    /// <summary>Nach dem Wiederherstellen einer Sicherung: nichts mehr speichern, bis die App neu gestartet ist.</summary>
+    public static bool Frozen { get; set; }
+
     public static void Save<T>(string name, T value)
     {
+        if (Frozen) return;
         try
         {
             Directory.CreateDirectory(Folder);

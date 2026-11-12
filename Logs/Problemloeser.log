@@ -56,3 +56,66 @@
 2026-11-10 16:04:38  OK       [Problemloeser] Erledigt: prog:afterburner
 2026-11-10 16:16:12  INFO     [Problemloeser] Autostart „SignalRgb“: aus
 2026-11-10 16:16:15  INFO     [Problemloeser] Autostart „Win11CustomizerTiles“: aus
+2026-11-10 19:03:14  WARNUNG  [Problemloeser] Gefunden: Snipping Tool ist abgestürzt – Erkannt: Absturzmeldung des Spiels. Snipping Tool ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +50 → +15 MHz, Speicher +300 → +150 MHz.
+2026-11-10 19:08:03  INFO     [Problemloeser] Aktion „Zum Tweaker“ für „Snipping Tool ist abgestürzt“ …
+2026-11-10 19:08:03  OK       [Problemloeser] „Zum Tweaker“: Geöffnet.
+2026-11-10 19:08:24  INFO     [Problemloeser] Ignoriert: Snipping Tool ist abgestürzt
+2026-11-10 19:08:44  OK       [Problemloeser] Erledigt: crash:snippingtool
+2026-11-10 19:43:29  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-10 19:43:41  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-10 19:43:42  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-10 19:43:44  WARNUNG  [Problemloeser] Gefunden: Razer Synapse / Chroma läuft – Synapse setzt die Razer-Beleuchtung immer wieder auf das eigene Profil zurück.
+2026-11-10 19:43:44  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-10 19:43:48  INFO     [Problemloeser] Aktion „Schließen“ für „Razer Synapse / Chroma läuft“ …
+2026-11-10 19:43:50  OK       [Problemloeser] „Schließen“: 1 Prozess(e) beendet.
+2026-11-10 19:43:52  OK       [Problemloeser] Erledigt: prog:synapse
+2026-11-10 19:52:40  INFO     [Problemloeser] Windows Update: 0 Treiber-Updates angeboten
+2026-11-10 19:52:40  INFO     [Problemloeser] Treiberprüfung: 27 Geräte, 0 Updates über Windows Update, Mainboard Gigabyte Technology Co., Ltd. B760 DS3H AX DDR4
+2026-11-10 21:33:53  WARNUNG  [Problemloeser] Gefunden: HWiNFO liefert keine neuen Werte mehr – In der kostenlosen HWiNFO-Version schaltet sich „Shared Memory“ nach 12 Stunden ab. Die App ist automatisch auf die eigenen Sensoren umgestiegen.
+2026-11-10 21:34:07  INFO     [Problemloeser] Aktion „HWiNFO neu starten“ für „HWiNFO liefert keine neuen Werte mehr“ …
+2026-11-10 21:34:09  OK       [Problemloeser] „HWiNFO neu starten“: HWiNFO neu gestartet.
+2026-11-10 21:34:24  OK       [Problemloeser] Erledigt: hw:stale
+2026-11-11 17:00:11  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-11 17:00:41  WARNUNG  [Problemloeser] Gefunden: Razer Synapse / Chroma läuft – Synapse setzt die Razer-Beleuchtung immer wieder auf das eigene Profil zurück.
+2026-11-11 17:06:50  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-11 17:06:50  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-11 17:06:52  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-11 17:06:53  INFO     [Problemloeser] Aktion „Schließen“ für „Razer Synapse / Chroma läuft“ …
+2026-11-11 17:06:56  OK       [Problemloeser] „Schließen“: 1 Prozess(e) beendet.
+2026-11-11 17:06:58  OK       [Problemloeser] Erledigt: prog:synapse
+2026-11-12 09:21:56  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-12 09:22:25  WARNUNG  [Problemloeser] Gefunden: Razer Synapse / Chroma läuft – Synapse setzt die Razer-Beleuchtung immer wieder auf das eigene Profil zurück.
+2026-11-12 09:41:06  INFO     [Problemloeser] Aktion „Ordner öffnen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-12 09:41:06  OK       [Problemloeser] „Ordner öffnen“: Ordner geöffnet.
+2026-11-12 09:42:55  WARNUNG  [Problemloeser] Gefunden: Dienst „GIGABYTE Update Service“ startet automatisch – Dieser Hersteller-Dienst läuft gerade nicht, startet aber mit Windows und übernimmt dann die Beleuchtung/Lüfter. Häufige Ursache für Flackern nach dem Hochfahren.
+2026-11-12 09:42:55  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-12 09:43:11  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-12 09:43:12  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-12 09:43:14  OK       [Problemloeser] Erledigt: svc:GigabyteUpdateService
+2026-11-12 09:43:16  INFO     [Problemloeser] Aktion „Ordner öffnen“ für „Razer Synapse / Chroma läuft“ …
+2026-11-12 09:43:16  OK       [Problemloeser] „Ordner öffnen“: Ordner geöffnet.
+2026-11-12 09:44:40  OK       [Problemloeser] Erledigt: prog:synapse
+2026-11-12 09:44:46  WARNUNG  [Problemloeser] Gefunden: Wallpaper Engine läuft – Wallpaper Engine rendert ständig im Hintergrund (GPU-Last, verfälscht Stresstest und Messwerte) und hat eigene RGB-Plugins (iCUE/Razer/LED), die Farben überschreiben können.
+2026-11-12 09:44:46  INFO     [Problemloeser] Gefunden: HWiNFO läuft – HWiNFO darf parallel laufen (der Monitor kann sogar dessen Werte mitlesen). Bei sehr kurzen Abfrage-Intervallen können Sensorwerte kurz springen.
+2026-11-12 09:44:46  INFO     [Problemloeser] Gefunden: Speicherintegrität (Kernisolierung) ist an – Ein Sicherheitsfeature von Windows. Es kostet in manchen CPU-lastigen Spielen 5–10 % FPS. Bewusst kein automatisches Abschalten – das ist eine Sicherheitsentscheidung.
+2026-11-12 09:44:52  INFO     [Problemloeser] Ignoriert: Wallpaper Engine läuft
+2026-11-12 09:44:53  INFO     [Problemloeser] Ignoriert: HWiNFO läuft
+2026-11-12 09:44:53  INFO     [Problemloeser] Ignoriert: Speicherintegrität (Kernisolierung) ist an
+2026-11-12 09:44:55  OK       [Problemloeser] Erledigt: prog:wallpaperengine
+2026-11-12 09:44:55  OK       [Problemloeser] Erledigt: prog:hwinfo
+2026-11-12 09:44:55  OK       [Problemloeser] Erledigt: sys:hvci
+2026-11-12 10:02:03  INFO     [Problemloeser] Windows Update: 0 Treiber-Updates angeboten
+2026-11-12 10:02:03  INFO     [Problemloeser] Treiberprüfung: 26 Geräte, 0 Updates über Windows Update, Mainboard Gigabyte Technology Co., Ltd. B760 DS3H AX DDR4
+2026-11-12 10:13:56  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-12 10:34:05  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-12 10:34:07  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-12 10:34:14  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-12 10:34:15  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-12 10:34:17  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-12 11:49:44  WARNUNG  [Problemloeser] Gefunden: ARK: Survival Ascended ist abgestürzt – Erkannt: Absturzmeldung des Spiels. ARK: Survival Ascended ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +50 → +15 MHz, Speicher +300 → +150 MHz.
+2026-11-12 11:49:49  INFO     [Problemloeser] Aktion „Zum Tweaker“ für „ARK: Survival Ascended ist abgestürzt“ …
+2026-11-12 11:49:49  OK       [Problemloeser] „Zum Tweaker“: Geöffnet.
+2026-11-12 11:50:15  INFO     [Problemloeser] Ignoriert: ARK: Survival Ascended ist abgestürzt
+2026-11-12 11:50:44  OK       [Problemloeser] Erledigt: crash:arkascended
+2026-11-12 19:39:57  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-12 19:40:27  INFO     [Problemloeser] Gefunden: Grafiktreiber-Update: 621.24 (installiert 621.14) – Für NVIDIA GeForce RTX 4060 gibt es einen neueren GeForce Game Ready-Treiber. Neue Treiber bringen oft mehr FPS und Fehlerbehebungen für aktuelle Spiele.

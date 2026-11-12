@@ -9,7 +9,25 @@ public partial class StartupPage : UserControl, IPage
 
     public StartupPage() { InitializeComponent(); }
 
-    public void OnVisibleChanged(bool visible) { if (visible) Reload(); }
+    public void OnVisibleChanged(bool visible) { if (visible) { Reload(); RefreshSelf(); } }
+
+    private async void RefreshSelf()
+    {
+        bool on = await Task.Run(Autostart.IsEnabled);
+        SelfAuto.IsChecked = on;
+        SelfAutoText.Text = on ? "An – startet unsichtbar im Tray, damit Lüfter, RGB und Auto-Boost sofort laufen" : "Aus – Lüfter und Beleuchtung laufen erst, wenn du die App öffnest";
+    }
+
+    private async void SelfAuto_Click(object s, RoutedEventArgs e)
+    {
+        bool on = SelfAuto.IsChecked == true;
+        AppSettings.Current.Autostart = on; AppSettings.Current.Save();
+        string? err = null;
+        bool ok = await Task.Run(() => { if (on) return Autostart.Enable(out err); Autostart.Disable(); return true; });
+        if (!ok) Ui.Toast("Autostart fehlgeschlagen: " + err, true);
+        else Ui.Toast(on ? "Control Center startet jetzt mit Windows" : "Control Center startet nicht mehr mit Windows");
+        RefreshSelf();
+    }
 
     private async void Reload()
     {

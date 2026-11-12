@@ -22,6 +22,7 @@ public partial class SettingsPage : UserControl, IPage
         ToTray.IsChecked = s.CloseToTray;
         Fahr.IsChecked = s.Fahrenheit;
         AutoStart.IsChecked = Autostart.IsEnabled();
+        RefreshBackups();
         HwAuto.IsChecked = s.HwinfoAutostart;
         var hw = HwinfoLauncher.FindExe();
         HwState.Text = hw == null ? "HWiNFO ist nicht installiert (kostenlos auf hwinfo.com) – oder wähle die exe aus." :
@@ -52,6 +53,34 @@ public partial class SettingsPage : UserControl, IPage
 
     private void Tray_Click(object s, RoutedEventArgs e) { AppSettings.Current.CloseToTray = ToTray.IsChecked == true; AppSettings.Current.Save(); }
     private void Fahr_Click(object s, RoutedEventArgs e) { AppSettings.Current.Fahrenheit = Fahr.IsChecked == true; AppSettings.Current.Save(); }
+    private sealed record BackupItem(string Dir, string Text) { public override string ToString() => Text; }
+
+    private void RefreshBackups()
+    {
+        var list = SettingsBackup.List().Select(d => new BackupItem(d, SettingsBackup.Describe(d))).ToList();
+        BackupList.ItemsSource = list;
+        BackupList.SelectedIndex = list.Count > 0 ? 0 : -1;
+        BackupState.Text = list.Count == 0 ? "Noch keine Sicherung" : $"{list.Count} Sicherungen · zuletzt {list[0].Text}";
+    }
+
+    private void BackupNow_Click(object s, RoutedEventArgs e)
+    {
+        Ui.Toast(SettingsBackup.Create("von Hand") != null ? "Einstellungen gesichert" : "Sichern fehlgeschlagen", false);
+        RefreshBackups();
+    }
+
+    private void Restore_Click(object s, RoutedEventArgs e)
+    {
+        if (BackupList.SelectedItem is not BackupItem b) return;
+        if (!Dialogs.Confirm("Einstellungen wiederherstellen?", $"Alle Einstellungen werden auf den Stand vom {b.Text} zurückgesetzt. Der jetzige Stand wird vorher noch gesichert. Danach startet die App neu.", "Wiederherstellen", "Abbrechen")) return;
+        SettingsBackup.Restore(b.Dir);
+        JsonStore.Frozen = true; // beim Beenden nichts überschreiben
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("cmd.exe", $"/s /c \"ping -n 3 127.0.0.1 >nul & start \"\" \"{Env.ExePath}\" --restart\"") { UseShellExecute = false, CreateNoWindow = true });
+        App.Instance.ExitApp(ask: false);
+    }
+
+    private void BackupFolder_Click(object s, RoutedEventArgs e) { System.IO.Directory.CreateDirectory(SettingsBackup.Folder); Env.Open(SettingsBackup.Folder); }
+
     private void Exit_Click(object s, RoutedEventArgs e) => App.Instance.ExitApp(ask: true);
     private void Links_Click(object s, RoutedEventArgs e)
     {

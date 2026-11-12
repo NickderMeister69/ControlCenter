@@ -102,24 +102,77 @@ public sealed class FpsCounter : IDisposable
         }
     }
 
-    /// <summary>FPS des Fensters im Vordergrund (das Spiel).</summary>
-    public (double Fps, double Low1, double FrameMs, int Pid) Foreground()
+    /// <summary>
+    /// FPS des Spiels im Vordergrund. Ist gerade kein Spiel vorne (Desktop, Browser, Video …), zählt nicht „wie oft
+    /// das Programm ein Bild schickt“ (Browser schicken nur bei Änderungen → springt zwischen 30 und 180),
+    /// sondern es wird die Bildwiederholrate des Monitors gemeldet (Desktop = true, Hz).
+    /// </summary>
+    public (double Fps, double Low1, double FrameMs, int Pid, bool Desktop, double Hz) Foreground()
     {
         var h = Native.GetForegroundWindow();
-        if (h == IntPtr.Zero) return (double.NaN, double.NaN, double.NaN, 0);
+        double hz = RefreshRate(h);
+        if (h == IntPtr.Zero) return (double.NaN, double.NaN, double.NaN, 0, true, hz);
         Native.GetWindowThreadProcessId(h, out uint pid);
+        string name = "";
+        try { using var p = System.Diagnostics.Process.GetProcessById((int)pid); name = p.ProcessName; } catch { }
+        var boost = Services.Boost;
+        bool knownGame = boost != null && name.Length > 0 && boost.IsGameProcess(name);
+        bool nonGame = name.Length == 0 || BoostService.IsNonGame(name);
         var r = Get((int)pid);
-        if (!double.IsNaN(r.Fps)) return (r.Fps, r.Low1, r.FrameMs, (int)pid);
-        // Vordergrund liefert nichts (z. B. Launcher davor) → Prozess mit den meisten Bildern
-        int best = 0; double bestFps = double.NaN;
-        lock (_frames)
-            foreach (var p in _frames.Keys.ToList())
-            {
-                var g = Get(p);
-                if (!double.IsNaN(g.Fps) && (double.IsNaN(bestFps) || g.Fps > bestFps) && g.Fps >= 10) { best = p; bestFps = g.Fps; r = g; }
-            }
-        return (r.Fps, r.Low1, r.FrameMs, best);
+        bool game = knownGame || (!nonGame && Native.IsFullscreen(h) && !double.IsNaN(r.Fps));
+        if (!game) return (double.NaN, double.NaN, double.NaN, 0, true, hz);
+        if (!double.IsNaN(r.Fps)) return (r.Fps, r.Low1, r.FrameMs, (int)pid, false, hz);
+        // Spiel vorne, liefert aber nichts (z. B. Fenster des Launchers davor) → anderer Prozess desselben Spiels
+        if (boost != null)
+        {
+            lock (_frames)
+                foreach (var p in _frames.Keys.ToList())
+                {
+                    string n2 = "";
+                    try { using var pr = System.Diagnostics.Process.GetProcessById(p); n2 = pr.ProcessName; } catch { continue; }
+                    if (!boost.IsGameProcess(n2)) continue;
+                    var g = Get(p);
+                    if (!double.IsNaN(g.Fps)) return (g.Fps, g.Low1, g.FrameMs, p, false, hz);
+                }
+        }
+        return (double.NaN, double.NaN, double.NaN, (int)pid, false, hz);
     }
+
+    /// <summary>Bildwiederholrate (Hz) des Monitors, auf dem das Fenster liegt.</summary>
+    public static double RefreshRate(IntPtr hwnd)
+    {
+        try
+        {
+            var mon = MonitorFromWindow(hwnd, 2);
+            var mi = new MONITORINFOEX { cbSize = System.Runtime.InteropServices.Marshal.SizeOf<MONITORINFOEX>() };
+            string? dev = mon != IntPtr.Zero && GetMonitorInfo(mon, ref mi) ? mi.szDevice : null;
+            var dm = new DEVMODE { dmSize = (short)System.Runtime.InteropServices.Marshal.SizeOf<DEVMODE>() };
+            if (EnumDisplaySettings(dev, -1, ref dm) && dm.dmDisplayFrequency > 1) return dm.dmDisplayFrequency;
+        }
+        catch { }
+        return double.NaN;
+    }
+
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+    private struct MONITORINFOEX
+    {
+        public int cbSize; public int l1, t1, r1, b1, l2, t2, r2, b2; public uint dwFlags;
+        [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst = 32)] public string szDevice;
+    }
+    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, CharSet = System.Runtime.InteropServices.CharSet.Unicode)]
+    private struct DEVMODE
+    {
+        [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst = 32)] public string dmDeviceName;
+        public short dmSpecVersion, dmDriverVersion, dmSize, dmDriverExtra; public int dmFields;
+        public int dmPositionX, dmPositionY, dmDisplayOrientation, dmDisplayFixedOutput;
+        public short dmColor, dmDuplex, dmYResolution, dmTTOption, dmCollate;
+        [System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.ByValTStr, SizeConst = 32)] public string dmFormName;
+        public short dmLogPixels; public int dmBitsPerPel, dmPelsWidth, dmPelsHeight, dmDisplayFlags, dmDisplayFrequency;
+        public int dmICMMethod, dmICMIntent, dmMediaType, dmDitherType, dmReserved1, dmReserved2, dmPanningWidth, dmPanningHeight;
+    }
+    [System.Runtime.InteropServices.DllImport("user32.dll")] private static extern IntPtr MonitorFromWindow(IntPtr h, uint flags);
+    [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)] private static extern bool GetMonitorInfo(IntPtr mon, ref MONITORINFOEX mi);
+    [System.Runtime.InteropServices.DllImport("user32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode)] private static extern bool EnumDisplaySettings(string? device, int mode, ref DEVMODE dm);
 
     public void Dispose() { lock (_lock) { _users = 1; } Release(); }
 }

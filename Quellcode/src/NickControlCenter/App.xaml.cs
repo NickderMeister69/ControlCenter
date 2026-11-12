@@ -126,6 +126,7 @@ public partial class App : Application
         Dispatcher.BeginInvoke(AutoSortDownloads, DispatcherPriority.ApplicationIdle);
 
         FirstRun();
+        try { SettingsBackup.Daily(); } catch { }
         var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
         upd.Tick += (_, _) =>
         {

@@ -76,6 +76,7 @@ public static class SelfUpdate
             long size = -1;
             for (int i = 0; i < 10; i++) { var s = new FileInfo(UpdateFile).Length; if (s == size && s > 1_000_000) break; size = s; Thread.Sleep(500); }
             Cleanup();
+            SettingsBackup.Create("vor dem Update");
             File.Move(Env.ExePath, OldFile);
             File.Move(UpdateFile, Env.ExePath);
             Log.Ok(LogModule.App, "Neue Version eingespielt – App startet neu");

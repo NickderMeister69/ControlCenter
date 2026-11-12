@@ -42,6 +42,20 @@
                 </Border>
                 <Border Style="{StaticResource Card}">
                     <StackPanel>
+                        <TextBlock Text="EINSTELLUNGEN SICHERN" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap"
+                                   Text="Alle deine Einstellungen (Lüfter, Beleuchtung, Boost, Spielprofile, Overlay, Tweaker …) werden sofort bei jeder Änderung gespeichert und bleiben bei Updates erhalten. Zusätzlich sichert die App sie einmal am Tag und vor jedem Update – die letzten 15 Stände kannst du hier zurückholen."/>
+                        <TextBlock x:Name="BackupState" Style="{StaticResource Muted}" Margin="0,6,0,0"/>
+                        <WrapPanel Margin="0,8,0,0">
+                            <Button Style="{StaticResource AccentButton}" Content="Jetzt sichern" Click="BackupNow_Click" Margin="0,0,8,6" Padding="12,5"/>
+                            <ComboBox x:Name="BackupList" Width="280" Margin="0,0,8,6"/>
+                            <Button Content="Diesen Stand wiederherstellen" Click="Restore_Click" Margin="0,0,8,6" Padding="12,5"/>
+                            <Button Content="Ordner öffnen" Click="BackupFolder_Click" Margin="0,0,8,6" Padding="12,5"/>
+                        </WrapPanel>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
                         <TextBlock Text="VERKNÜPFUNGEN" Style="{StaticResource Kicker}"/>
                         <TextBlock x:Name="LinkState" Style="{StaticResource Caption}"/>
                         <Button Content="Verknüpfungen auf Desktop und im Startmenü erstellen" HorizontalAlignment="Left" Margin="0,10,0,0" Click="Links_Click"/>

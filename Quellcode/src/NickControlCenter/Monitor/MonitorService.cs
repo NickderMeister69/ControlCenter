@@ -49,6 +49,8 @@ public sealed class Metric : ObservableObject
     public bool IsRate { get; init; }
     /// <summary>Wert ist geschätzt → „≈“ davor.</summary>
     public bool Estimated { get; set; }
+    /// <summary>FPS-Anzeige außerhalb von Spielen: Bildwiederholrate des Monitors („180 Hz“).</summary>
+    public bool DesktopHz { get; set; }
     public double[] History = new double[600];
     public int Count;
     public int Head;
@@ -108,6 +110,7 @@ public sealed class Metric : ObservableObject
         if (IsTemp) return Fmt.Temp(v, fahrenheit);
         if (IsRate) return Fmt.Rate(v);
         if (Estimated && Unit == "W") return $"≈ {v:0} W";
+        if (DesktopHz && Unit == "FPS") return $"{v:0} Hz";
         return Unit switch
         {
             "%" => $"{v:0} %", "MHz" => v >= 1000 ? $"{v / 1000:0.00} GHz" : $"{v:0} MHz", "W" => $"{v:0} W",
@@ -243,7 +246,9 @@ public sealed class MonitorService : ObservableObject, IDisposable
         if (_fpsOn)
         {
             var fr = FpsCounter.Instance.Foreground();
-            P("fps", fr.Fps); P("fps.low", fr.Low1); P("frametime", fr.FrameMs);
+            if (Metrics.TryGetValue("fps", out var fm)) fm.DesktopHz = fr.Desktop;
+            if (fr.Desktop) { P("fps", fr.Hz); P("fps.low", double.NaN); P("frametime", double.IsNaN(fr.Hz) ? double.NaN : 1000 / fr.Hz); }
+            else { P("fps", fr.Fps); P("fps.low", fr.Low1); P("frametime", fr.FrameMs); }
         }
         foreach (var m in Metrics.Values.Where(m => m.Key.StartsWith("sensor:")))
         {
