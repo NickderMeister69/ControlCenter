@@ -27,6 +27,7 @@ public partial class App : Application
 
     private Mutex? _mutex;
     private EventWaitHandle? _showEvent;
+    private System.IO.FileSystemWatcher? _updWatch;
     private MainWindow? _win;
     private WF.NotifyIcon? _tray;
     private WF.ToolStripMenuItem? _trayPause, _trayRgb, _trayTiles;
@@ -127,15 +128,27 @@ public partial class App : Application
 
         FirstRun();
         try { SettingsBackup.Daily(); } catch { }
-        var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(10) };
-        upd.Tick += (_, _) =>
+        // Update sofort einspielen, sobald eine „ControlCenter.update.exe“ neben der exe auftaucht (Ordner wird überwacht, Timer als Reserve)
+        var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
+        void TryUpdate()
         {
             if (!SelfUpdate.Pending || _exiting) return;
             upd.Stop();
             bool tray = _win == null || !_win.IsVisible;
             if (SelfUpdate.Apply(tray)) { _tray?.ShowBalloonTip(3000, "Control Center", "Neue Version wird gestartet …", WF.ToolTipIcon.Info); ExitApp(ask: false); }
-        };
+            else upd.Start();
+        }
+        upd.Tick += (_, _) => TryUpdate();
         upd.Start();
+        try
+        {
+            _updWatch = new System.IO.FileSystemWatcher(Env.ExeDir, "*.update.exe") { NotifyFilter = System.IO.NotifyFilters.FileName | System.IO.NotifyFilters.LastWrite | System.IO.NotifyFilters.Size };
+            _updWatch.Created += (_, _) => Dispatcher.BeginInvoke(TryUpdate);
+            _updWatch.Changed += (_, _) => Dispatcher.BeginInvoke(TryUpdate);
+            _updWatch.Renamed += (_, _) => Dispatcher.BeginInvoke(TryUpdate);
+            _updWatch.EnableRaisingEvents = true;
+        }
+        catch { }
         if (!startInTray) ShowWindow();
     }
 

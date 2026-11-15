@@ -3394,3 +3394,439 @@
 2026-11-12 20:26:59  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 345 Mbit/s
 2026-11-12 20:27:07  INFO     [Allgemein] winget: 0 Updates verfügbar
 2026-11-12 20:27:33  INFO     [Monitor] FPS-Messung beendet
+2026-11-12 20:30:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:35:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:36:14  INFO     [Monitor] Messwerte: CPU 50,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 52,0 °C, Last 40 %, 51,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 52,0 °C · HWiNFO aktiv, GPU 52,0 °C · Quelle HWiNFO
+2026-11-12 20:40:42  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:45:42  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:46:14  INFO     [Monitor] Messwerte: CPU 48,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 13 %, 23,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aktiv, GPU 38,0 °C · Quelle HWiNFO
+2026-11-12 20:50:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:55:42  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 20:56:14  INFO     [Monitor] Messwerte: CPU 48,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-12 21:00:42  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 21:05:42  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 21:06:15  INFO     [Monitor] Messwerte: CPU 46,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 35 %, 46,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aktiv, GPU 44,0 °C · Quelle HWiNFO
+2026-11-12 21:10:42  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-12 21:13:14  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-12 21:13:14  INFO     [Monitor] FPS-Messung beendet
+2026-11-12 21:13:29  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 435 Mbit/s
+2026-11-12 21:13:43  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-12 21:13:43  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 4 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-12 21:13:49  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-12 21:13:49  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-12 21:13:49  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-12 21:13:52  OK       [Boost] Arbeitsspeicher aufgeräumt – 2155 MB frei geworden (jetzt 8,5 von 15,8 GB belegt)
+2026-11-12 21:14:10  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-12 21:14:11  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 8 Hintergrund-Programme ausgebremst
+2026-11-12 21:14:11  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-12 21:14:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 192 MB frei geworden (jetzt 7,6 von 15,8 GB belegt)
+2026-11-12 21:15:43  INFO     [Monitor] HWiNFO-Status: HWiNFO liefert keine neuen Werte (Shared Memory nach 12 h abgelaufen?) – nutze LibreHardwareMonitor
+2026-11-12 21:15:44  INFO     [Monitor] HWiNFO liefert keine Werte mehr (12-Stunden-Grenze?) – starte HWiNFO neu
+2026-11-12 21:15:44  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-12 21:15:50  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-12 21:15:52  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-12 21:16:14  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-12 21:16:15  INFO     [Monitor] Messwerte: CPU 71,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 58,0 °C, Last 55 %, 67,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 58,0 °C · HWiNFO aktiv, GPU 58,0 °C · Quelle HWiNFO
+2026-11-12 21:21:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:21:57  OK       [Boost] Arbeitsspeicher aufgeräumt – 82 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-12 21:24:49  INFO     [Boost] RAM zu 91 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:24:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 367 MB frei geworden (jetzt 14,1 von 15,8 GB belegt)
+2026-11-12 21:26:16  INFO     [Monitor] Messwerte: CPU 49,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-12 21:28:23  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:28:24  OK       [Boost] Arbeitsspeicher aufgeräumt – 761 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-12 21:29:22  INFO     [Luefter] Sicherheitsmodus: 88 °C
+2026-11-12 21:29:37  INFO     [Luefter] Sicherheitsmodus beendet: 68 °C
+2026-11-12 21:31:23  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:31:24  OK       [Boost] Arbeitsspeicher aufgeräumt – 570 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 21:35:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:35:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 420 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 21:36:16  INFO     [Monitor] Messwerte: CPU 58,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-12 21:38:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:38:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 478 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 21:41:35  INFO     [Boost] RAM zu 88 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:41:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 622 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-12 21:44:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:44:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 504 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 21:46:17  INFO     [Monitor] Messwerte: CPU 54,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-12 21:48:50  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:48:52  OK       [Boost] Arbeitsspeicher aufgeräumt – 851 MB frei geworden (jetzt 12,6 von 15,8 GB belegt)
+2026-11-12 21:56:17  INFO     [Monitor] Messwerte: CPU 56,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-12 21:59:44  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:59:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 587 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:05:53  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:05:55  OK       [Boost] Arbeitsspeicher aufgeräumt – 600 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-12 22:06:18  INFO     [Monitor] Messwerte: CPU 58,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-12 22:16:18  INFO     [Monitor] Messwerte: CPU 59,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-12 22:19:59  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:20:01  OK       [Boost] Arbeitsspeicher aufgeräumt – 531 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 22:25:14  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:25:16  OK       [Boost] Arbeitsspeicher aufgeräumt – 559 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:26:18  INFO     [Monitor] Messwerte: CPU 58,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 65,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 65,0 °C · HWiNFO aktiv, GPU 65,0 °C · Quelle HWiNFO
+2026-11-12 22:36:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:36:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 396 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 22:36:18  INFO     [Monitor] Messwerte: CPU 56,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-12 22:40:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:40:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 420 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 22:40:32  INFO     [Monitor] HWiNFO-Status: HWiNFO liefert keine neuen Werte (Shared Memory nach 12 h abgelaufen?) – nutze LibreHardwareMonitor
+2026-11-12 22:40:32  INFO     [Monitor] HWiNFO liefert keine Werte mehr (12-Stunden-Grenze?) – starte HWiNFO neu
+2026-11-12 22:40:33  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-12 22:40:36  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-12 22:40:39  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-12 22:40:45  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-12 22:43:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:43:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 561 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:46:02  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:46:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 458 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-12 22:46:19  INFO     [Monitor] Messwerte: CPU 53,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-12 22:49:11  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:49:13  OK       [Boost] Arbeitsspeicher aufgeräumt – 291 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-12 22:52:11  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:52:13  OK       [Boost] Arbeitsspeicher aufgeräumt – 365 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-12 22:55:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:55:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 519 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:56:19  INFO     [Monitor] Messwerte: CPU 56,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-12 22:59:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:59:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 569 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-12 23:02:47  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 23:02:49  OK       [Boost] Arbeitsspeicher aufgeräumt – 443 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 23:06:19  INFO     [Monitor] Messwerte: CPU 55,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-12 23:16:19  INFO     [Monitor] Messwerte: CPU 57,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-12 23:17:48  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 23:17:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 670 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-12 23:25:40  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 23:25:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 273 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-12 23:25:43  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-13 12:16:19  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-13 12:16:20  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-13 12:16:20  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-13 12:16:20  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-13 12:16:20  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-13 12:16:21  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-13 12:16:22  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-13 12:16:22  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-13 12:16:22  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-13 12:16:22  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-13 12:16:22  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-13 12:16:22  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-13 12:16:23  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-13 12:16:25  INFO     [Allgemein] Einstellungen gesichert (täglich): 15 Dateien
+2026-11-13 12:16:25  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-13 12:16:25  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-13 12:16:26  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-13 12:16:30  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-13 12:16:31  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-13 12:16:33  WARNUNG  [Problemloeser] Gefunden: Dienst „GIGABYTE Update Service“ startet automatisch – Dieser Hersteller-Dienst läuft gerade nicht, startet aber mit Windows und übernimmt dann die Beleuchtung/Lüfter. Häufige Ursache für Flackern nach dem Hochfahren.
+2026-11-13 12:16:33  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-13 12:16:34  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-13 12:16:34  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-13 12:16:40  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-13 12:16:40  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-13 12:16:42  OK       [Problemloeser] Erledigt: svc:GigabyteUpdateService
+2026-11-13 12:16:46  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-13 12:16:46  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-13 12:16:46  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-13 12:16:47  INFO     [Monitor] FPS-Messung beendet
+2026-11-13 12:16:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-13 12:16:58  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-13 12:16:58  INFO     [Monitor] Messwerte: CPU 33,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 31 %, 42,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-13 12:17:08  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-13 12:17:08  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 4 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-13 12:17:53  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-13 12:17:53  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-13 12:17:53  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-13 12:17:55  OK       [Boost] Arbeitsspeicher aufgeräumt – 1579 MB frei geworden (jetzt 6,2 von 15,8 GB belegt)
+2026-11-13 12:18:14  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-13 12:18:14  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 8 Hintergrund-Programme ausgebremst
+2026-11-13 12:18:14  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 416 MB frei geworden (jetzt 5,8 von 15,8 GB belegt)
+2026-11-13 12:18:22  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-13 12:18:22  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-13 12:18:38  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-13 12:18:38  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-13 12:18:38  OK       [Boost] Windows-Spielmodus an: an
+2026-11-13 12:18:38  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-13 12:18:38  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-13 12:18:38  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-13 12:18:38  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-13 12:18:38  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-13 12:18:38  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-13 12:18:39  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-13 12:18:39  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-13 12:18:39  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-13 12:18:39  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-13 12:18:39  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-13 12:18:39  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-13 12:18:39  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-13 12:18:39  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:39  WARNUNG  [Boost] ARK: Survival Ascended läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-13 12:18:39  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-13 12:18:39  WARNUNG  [Boost] BattlEye Launcher läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-13 12:18:39  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:39  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:47  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:48  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:50  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:51  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-13 12:18:53  WARNUNG  [Boost] Microsoft OneDrive Sync Service (OneDrive.Sync.Service): läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:54  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-13 12:18:56  OK       [Boost] RazerCortex: geschlossen
+2026-11-13 12:18:56  OK       [Boost] Temp-Dateien: Fertig – 23 MB frei, 71 Dateien gelöscht, 15 übersprungen (0,1 s)
+2026-11-13 12:18:58  OK       [Boost] Arbeitsspeicher aufgeräumt – 918 MB frei geworden (jetzt 8,2 von 15,8 GB belegt)
+2026-11-13 12:18:58  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-13 12:19:10  OK       [Boost] Epic Games Updater hinzugefügt – Profil „Ausgewogen“
+2026-11-13 12:19:10  INFO     [Boost] Unbekanntes Spiel erkannt (Spieleordner): Epic Games Updater · C:\Program Files\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesUpdater.exe
+2026-11-13 12:19:10  OK       [Boost] 🎮 Epic Games Updater gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-13 12:19:10  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-13 12:19:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 18 MB frei geworden (jetzt 9,6 von 15,8 GB belegt)
+2026-11-13 12:19:16  INFO     [Boost] Epic Games Updater beendet
+2026-11-13 12:20:40  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:20:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 1949 MB frei geworden (jetzt 11,9 von 15,8 GB belegt)
+2026-11-13 12:26:59  INFO     [Monitor] Messwerte: CPU 59,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 62,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 62,0 °C · HWiNFO aktiv, GPU 62,0 °C · Quelle HWiNFO
+2026-11-13 12:29:11  INFO     [Allgemein] Werbeblocker aus – vorherige DNS-Einstellung wiederhergestellt
+2026-11-13 12:29:21  OK       [Allgemein] Werbeblocker an (AdGuard DNS – Werbung & Tracker) auf 1 Adapter(n)
+2026-11-13 12:30:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:30:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 1691 MB frei geworden (jetzt 12,0 von 15,8 GB belegt)
+2026-11-13 12:30:53  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-13 12:35:25  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:35:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 844 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 12:37:00  INFO     [Monitor] Messwerte: CPU 65,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-13 12:39:16  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:39:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 972 MB frei geworden (jetzt 12,5 von 15,8 GB belegt)
+2026-11-13 12:42:19  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:42:22  OK       [Boost] Arbeitsspeicher aufgeräumt – 733 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 12:45:23  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:45:25  OK       [Boost] Arbeitsspeicher aufgeräumt – 866 MB frei geworden (jetzt 12,7 von 15,8 GB belegt)
+2026-11-13 12:47:00  INFO     [Monitor] Messwerte: CPU 50,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 95 %, 109,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-13 12:49:41  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:49:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 745 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 12:54:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:54:34  OK       [Boost] Arbeitsspeicher aufgeräumt – 742 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 12:57:00  INFO     [Monitor] Messwerte: CPU 51,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-13 12:57:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:57:34  OK       [Boost] Arbeitsspeicher aufgeräumt – 914 MB frei geworden (jetzt 12,7 von 15,8 GB belegt)
+2026-11-13 13:00:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:00:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 718 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:04:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:04:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 463 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 13:07:00  INFO     [Monitor] Messwerte: CPU 53,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-13 13:09:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:09:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 713 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:12:29  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:12:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 551 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-13 13:15:44  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:15:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 537 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 13:17:01  INFO     [Monitor] Messwerte: CPU 57,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-13 13:18:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:18:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 700 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 13:21:45  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:21:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 637 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 13:24:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:24:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 560 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 13:27:01  INFO     [Monitor] Messwerte: CPU 53,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-13 13:27:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:27:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 714 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 13:30:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:30:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 649 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 13:33:45  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:33:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 670 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 13:36:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:36:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 718 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:37:01  INFO     [Monitor] Messwerte: CPU 57,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-13 13:40:21  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:40:23  OK       [Boost] Arbeitsspeicher aufgeräumt – 571 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-13 13:43:21  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:43:23  OK       [Boost] Arbeitsspeicher aufgeräumt – 771 MB frei geworden (jetzt 12,7 von 15,8 GB belegt)
+2026-11-13 13:47:01  INFO     [Monitor] Messwerte: CPU 60,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-13 13:55:30  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:55:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 687 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:57:02  INFO     [Monitor] Messwerte: CPU 52,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-13 13:58:48  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:58:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 602 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 14:01:49  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:01:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 549 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-13 14:04:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:04:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 527 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:07:03  INFO     [Monitor] Messwerte: CPU 58,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 65,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 65,0 °C · HWiNFO aktiv, GPU 65,0 °C · Quelle HWiNFO
+2026-11-13 14:07:49  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:07:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 562 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:11:25  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:11:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 506 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:15:28  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:15:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 529 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:17:04  INFO     [Monitor] Messwerte: CPU 54,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-13 14:20:34  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:20:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 525 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:24:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:24:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 629 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 14:27:04  INFO     [Monitor] Messwerte: CPU 56,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-13 14:28:04  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:28:06  OK       [Boost] Arbeitsspeicher aufgeräumt – 543 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:31:05  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:31:07  OK       [Boost] Arbeitsspeicher aufgeräumt – 560 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:34:17  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:34:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 862 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 14:37:04  INFO     [Monitor] Messwerte: CPU 56,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-13 14:37:17  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:37:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 680 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 14:40:17  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:40:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 528 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:43:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:43:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 518 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:46:26  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-15 16:24:01  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-15 16:24:01  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-15 16:24:01  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 16:24:01  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 16:24:01  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-15 16:24:02  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-15 16:24:03  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-15 16:24:04  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-15 16:24:04  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-15 16:24:04  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-15 16:24:04  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-15 16:24:04  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:24:04  INFO     [Allgemein] Einstellungen gesichert (täglich): 15 Dateien
+2026-11-15 16:24:04  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:24:04  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-15 16:24:06  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-15 16:24:07  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 16:24:25  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 16:24:25  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 16:24:34  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-15 16:24:40  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-15 16:24:40  INFO     [Monitor] Messwerte: CPU 63,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 8 %, 17,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-15 16:24:53  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 1 Update bereit (online geprüft)
+2026-11-15 16:29:07  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 2 Updates bereit (lokal geprüft)
+2026-11-15 16:35:36  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-15 16:35:37  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-15 16:35:37  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 16:35:37  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 16:35:37  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-15 16:35:38  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-15 16:35:38  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-15 16:35:39  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-15 16:35:39  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-15 16:35:39  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-15 16:35:39  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-15 16:35:39  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:35:39  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:35:40  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-15 16:35:40  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-15 16:35:41  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-15 16:35:42  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 16:35:43  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 16:35:43  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 16:35:46  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-15 16:35:46  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-15 16:35:47  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-15 16:35:47  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-15 16:35:48  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-15 16:35:48  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-15 16:35:49  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Overwolf läuft“ …
+2026-11-15 16:35:51  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-15 16:35:58  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Overwolf läuft“ …
+2026-11-15 16:36:00  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-15 16:36:01  INFO     [Problemloeser] Aktion „Schließen“ für „Overwolf läuft“ …
+2026-11-15 16:36:04  OK       [Problemloeser] „Schließen“: 5 Prozess(e) beendet.
+2026-11-15 16:36:06  OK       [Problemloeser] Erledigt: prog:overwolf
+2026-11-15 16:36:12  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 16:36:12  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 16:36:15  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-15 16:36:15  INFO     [Monitor] Messwerte: CPU 47,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aktiv, GPU 41,0 °C · Quelle HWiNFO
+2026-11-15 16:36:25  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 16:36:25  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 16:36:25  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 16:36:25  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 16:36:25  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 16:36:25  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 16:36:25  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 16:36:25  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 16:36:25  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 16:36:25  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 16:36:25  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 16:36:25  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 16:36:25  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 16:36:25  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 16:36:25  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 16:36:25  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 16:36:25  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 16:36:25  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 4 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 16:36:25  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 16:36:25  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 16:36:25  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 16:36:25  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 16:36:25  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 16:36:28  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:30  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:31  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:33  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 16:36:34  WARNUNG  [Boost] Microsoft OneDrive Sync Service (OneDrive.Sync.Service): läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:36  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 16:36:37  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 16:36:37  OK       [Boost] Temp-Dateien: Fertig – 5 MB frei, 37 Dateien gelöscht, 39 übersprungen (0,0 s)
+2026-11-15 16:36:40  OK       [Boost] Arbeitsspeicher aufgeräumt – 2440 MB frei geworden (jetzt 5,8 von 15,8 GB belegt)
+2026-11-15 16:36:40  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 16:40:42  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 16:45:47  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 16:46:16  INFO     [Monitor] Messwerte: CPU 57,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 27 %, 37,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-15 16:46:30  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-15 16:46:30  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-15 16:46:30  INFO     [Allgemein] Beenden …
+2026-11-15 16:46:32  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-15 16:46:33  INFO     [Allgemein] Beendet.
+2026-11-15 16:46:34  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-15 16:46:34  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-15 16:46:34  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 16:46:34  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 16:46:34  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-15 16:46:36  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-15 16:46:37  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-15 16:46:37  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-15 16:46:37  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-15 16:46:37  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-15 16:46:37  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 16:46:37  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:46:37  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:46:41  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-15 16:46:43  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 16:46:43  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 16:46:51  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-15 16:47:13  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-15 16:47:13  INFO     [Monitor] Messwerte: CPU 55,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 35 %, 46,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-15 16:47:37  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:47:48  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:47:50  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:48:20  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 7 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 16:49:27  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:49:34  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:49:35  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:49:52  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:51:43  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 16:56:28  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-15 16:56:28  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-15 16:56:28  INFO     [Allgemein] Beenden …
+2026-11-15 16:56:28  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-15 16:56:28  INFO     [Allgemein] Beendet.
+2026-11-15 16:56:32  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-15 16:56:32  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-15 16:56:32  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 16:56:32  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 16:56:32  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-15 16:56:34  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-15 16:56:35  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-15 16:56:35  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-15 16:56:35  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-15 16:56:35  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-15 16:56:35  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 16:56:35  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:56:35  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:56:37  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-15 16:56:40  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 16:56:40  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 16:57:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-15 16:57:11  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-15 16:57:11  INFO     [Monitor] Messwerte: CPU 47,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-15 16:57:22  OK       [Boost] Temp-Dateien: Fertig – 8 MB frei, 3 Dateien gelöscht, 71 übersprungen (0,0 s)
+2026-11-15 16:57:25  OK       [Boost] Shader-Cache: Fertig – 836 MB frei, 148 Dateien gelöscht, 9 übersprungen (0,1 s)
+2026-11-15 16:57:27  OK       [Boost] DNS-Cache geleert
+2026-11-15 16:57:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 1341 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)

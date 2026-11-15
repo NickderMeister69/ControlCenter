@@ -113,6 +113,20 @@ public sealed class GameVM : ObservableObject
     public LookPreset[] LookPresets => UnrealTweaks.Presets(Known?.Id);
     public string LookPresetText => P.LookPreset != null ? $"Aktiv: „{P.LookPreset}“" : "Keine Kombination gewählt";
     public string ConsoleCommands => string.Join("\n", UnrealTweaks.All.Where(t => P.EngineTweaks.Contains(t.Id)).Select(t => t.Console));
+
+    /// <summary>Alles in einer Zeile mit „|“ getrennt – einmal in die Spiel-Konsole einfügen, fertig. Enthält auch die Grafik-Kategorien.</summary>
+    public string ConsoleOneLine
+    {
+        get
+        {
+            var parts = new List<string>();
+            if (P.SgOverride != null)
+                foreach (var (k, v) in P.SgOverride.Where(kv => kv.Value >= 0)) parts.Add($"{k} {v}");
+            foreach (var t in UnrealTweaks.All.Where(t => P.EngineTweaks.Contains(t.Id)))
+                parts.AddRange(t.Lines.Select(l => $"{l.Cvar} {l.Value}"));
+            return string.Join(" | ", parts);
+        }
+    }
     internal void FineEdited(string? preset = null)
     {
         P.LookPreset = preset;

@@ -133,3 +133,30 @@
 2026-11-12 19:48:04  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
 2026-11-12 19:48:05  OK       [Problemloeser] Erledigt: svc:GigabyteUpdateService
 2026-11-12 19:50:07  INFO     [Problemloeser] Gefunden: Grafiktreiber-Update: 621.24 (installiert 621.14) – Für NVIDIA GeForce RTX 4060 gibt es einen neueren GeForce Game Ready-Treiber. Neue Treiber bringen oft mehr FPS und Fehlerbehebungen für aktuelle Spiele.
+2026-11-13 12:16:25  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-13 12:16:30  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-13 12:16:31  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-13 12:16:33  WARNUNG  [Problemloeser] Gefunden: Dienst „GIGABYTE Update Service“ startet automatisch – Dieser Hersteller-Dienst läuft gerade nicht, startet aber mit Windows und übernimmt dann die Beleuchtung/Lüfter. Häufige Ursache für Flackern nach dem Hochfahren.
+2026-11-13 12:16:33  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-13 12:16:34  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-13 12:16:34  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-13 12:16:40  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-13 12:16:40  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-13 12:16:42  OK       [Problemloeser] Erledigt: svc:GigabyteUpdateService
+2026-11-13 12:30:53  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-15 16:24:04  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-15 16:24:34  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-15 16:35:40  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-15 16:35:40  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-15 16:35:46  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-15 16:35:46  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-15 16:35:47  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-15 16:35:47  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-15 16:35:48  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-15 16:35:49  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Overwolf läuft“ …
+2026-11-15 16:35:51  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-15 16:35:58  INFO     [Problemloeser] Aktion „Autostart entfernen“ für „Overwolf läuft“ …
+2026-11-15 16:36:00  OK       [Problemloeser] „Autostart entfernen“: Kein Autostart-Eintrag gefunden (startet evtl. als Dienst → „Dienst deaktivieren“).
+2026-11-15 16:36:01  INFO     [Problemloeser] Aktion „Schließen“ für „Overwolf läuft“ …
+2026-11-15 16:36:04  OK       [Problemloeser] „Schließen“: 5 Prozess(e) beendet.
+2026-11-15 16:36:06  OK       [Problemloeser] Erledigt: prog:overwolf

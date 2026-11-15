@@ -2106,3 +2106,240 @@
 2026-11-12 19:53:28  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
 2026-11-12 20:25:38  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
 2026-11-12 20:25:38  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-12 21:13:43  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-12 21:13:43  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 4 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-12 21:13:49  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-12 21:13:49  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-12 21:13:52  OK       [Boost] Arbeitsspeicher aufgeräumt – 2155 MB frei geworden (jetzt 8,5 von 15,8 GB belegt)
+2026-11-12 21:14:11  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 8 Hintergrund-Programme ausgebremst
+2026-11-12 21:14:11  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-12 21:14:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 192 MB frei geworden (jetzt 7,6 von 15,8 GB belegt)
+2026-11-12 21:21:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:21:57  OK       [Boost] Arbeitsspeicher aufgeräumt – 82 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-12 21:24:49  INFO     [Boost] RAM zu 91 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:24:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 367 MB frei geworden (jetzt 14,1 von 15,8 GB belegt)
+2026-11-12 21:28:23  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:28:24  OK       [Boost] Arbeitsspeicher aufgeräumt – 761 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-12 21:31:23  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:31:24  OK       [Boost] Arbeitsspeicher aufgeräumt – 570 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 21:35:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:35:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 420 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 21:38:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:38:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 478 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 21:41:35  INFO     [Boost] RAM zu 88 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:41:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 622 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-12 21:44:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:44:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 504 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 21:48:50  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:48:52  OK       [Boost] Arbeitsspeicher aufgeräumt – 851 MB frei geworden (jetzt 12,6 von 15,8 GB belegt)
+2026-11-12 21:59:44  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 21:59:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 587 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:05:53  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:05:55  OK       [Boost] Arbeitsspeicher aufgeräumt – 600 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-12 22:19:59  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:20:01  OK       [Boost] Arbeitsspeicher aufgeräumt – 531 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 22:25:14  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:25:16  OK       [Boost] Arbeitsspeicher aufgeräumt – 559 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:36:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:36:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 396 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 22:40:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:40:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 420 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 22:43:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:43:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 561 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:46:02  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:46:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 458 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-12 22:49:11  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:49:13  OK       [Boost] Arbeitsspeicher aufgeräumt – 291 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-12 22:52:11  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:52:13  OK       [Boost] Arbeitsspeicher aufgeräumt – 365 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-12 22:55:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:55:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 519 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-12 22:59:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 22:59:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 569 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-12 23:02:47  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 23:02:49  OK       [Boost] Arbeitsspeicher aufgeräumt – 443 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-12 23:17:48  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 23:17:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 670 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-12 23:25:40  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-12 23:25:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 273 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-13 12:16:22  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-13 12:16:23  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-13 12:17:08  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-13 12:17:08  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 4 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-13 12:17:53  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-13 12:17:53  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-13 12:17:55  OK       [Boost] Arbeitsspeicher aufgeräumt – 1579 MB frei geworden (jetzt 6,2 von 15,8 GB belegt)
+2026-11-13 12:18:14  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 8 Hintergrund-Programme ausgebremst
+2026-11-13 12:18:14  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 416 MB frei geworden (jetzt 5,8 von 15,8 GB belegt)
+2026-11-13 12:18:22  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-13 12:18:22  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-13 12:18:38  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-13 12:18:38  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-13 12:18:38  OK       [Boost] Windows-Spielmodus an: an
+2026-11-13 12:18:38  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-13 12:18:38  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-13 12:18:38  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-13 12:18:38  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-13 12:18:38  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-13 12:18:38  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-13 12:18:39  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-13 12:18:39  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-13 12:18:39  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-13 12:18:39  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-13 12:18:39  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-13 12:18:39  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-13 12:18:39  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-13 12:18:39  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:39  WARNUNG  [Boost] ARK: Survival Ascended läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-13 12:18:39  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-13 12:18:39  WARNUNG  [Boost] BattlEye Launcher läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-13 12:18:39  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:39  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-13 12:18:47  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:48  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:50  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:51  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-13 12:18:53  WARNUNG  [Boost] Microsoft OneDrive Sync Service (OneDrive.Sync.Service): läuft noch (ungespeicherte Daten?)
+2026-11-13 12:18:54  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-13 12:18:56  OK       [Boost] RazerCortex: geschlossen
+2026-11-13 12:18:56  OK       [Boost] Temp-Dateien: Fertig – 23 MB frei, 71 Dateien gelöscht, 15 übersprungen (0,1 s)
+2026-11-13 12:18:58  OK       [Boost] Arbeitsspeicher aufgeräumt – 918 MB frei geworden (jetzt 8,2 von 15,8 GB belegt)
+2026-11-13 12:18:58  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-13 12:19:10  OK       [Boost] Epic Games Updater hinzugefügt – Profil „Ausgewogen“
+2026-11-13 12:19:10  INFO     [Boost] Unbekanntes Spiel erkannt (Spieleordner): Epic Games Updater · C:\Program Files\Epic Games\Launcher\Portal\Binaries\Win64\EpicGamesUpdater.exe
+2026-11-13 12:19:10  OK       [Boost] 🎮 Epic Games Updater gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-13 12:19:10  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-13 12:19:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 18 MB frei geworden (jetzt 9,6 von 15,8 GB belegt)
+2026-11-13 12:19:16  INFO     [Boost] Epic Games Updater beendet
+2026-11-13 12:20:40  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:20:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 1949 MB frei geworden (jetzt 11,9 von 15,8 GB belegt)
+2026-11-13 12:30:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:30:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 1691 MB frei geworden (jetzt 12,0 von 15,8 GB belegt)
+2026-11-13 12:35:25  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:35:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 844 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 12:39:16  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:39:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 972 MB frei geworden (jetzt 12,5 von 15,8 GB belegt)
+2026-11-13 12:42:19  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:42:22  OK       [Boost] Arbeitsspeicher aufgeräumt – 733 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 12:45:23  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:45:25  OK       [Boost] Arbeitsspeicher aufgeräumt – 866 MB frei geworden (jetzt 12,7 von 15,8 GB belegt)
+2026-11-13 12:49:41  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:49:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 745 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 12:54:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:54:34  OK       [Boost] Arbeitsspeicher aufgeräumt – 742 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 12:57:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 12:57:34  OK       [Boost] Arbeitsspeicher aufgeräumt – 914 MB frei geworden (jetzt 12,7 von 15,8 GB belegt)
+2026-11-13 13:00:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:00:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 718 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:04:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:04:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 463 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 13:09:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:09:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 713 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:12:29  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:12:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 551 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-13 13:15:44  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:15:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 537 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 13:18:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:18:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 700 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 13:21:45  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:21:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 637 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 13:24:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:24:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 560 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 13:27:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:27:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 714 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 13:30:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:30:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 649 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 13:33:45  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:33:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 670 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 13:36:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:36:47  OK       [Boost] Arbeitsspeicher aufgeräumt – 718 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:40:21  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:40:23  OK       [Boost] Arbeitsspeicher aufgeräumt – 571 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-13 13:43:21  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:43:23  OK       [Boost] Arbeitsspeicher aufgeräumt – 771 MB frei geworden (jetzt 12,7 von 15,8 GB belegt)
+2026-11-13 13:55:30  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:55:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 687 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 13:58:48  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 13:58:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 602 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 14:01:49  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:01:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 549 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-13 14:04:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:04:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 527 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:07:49  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:07:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 562 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:11:25  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:11:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 506 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:15:28  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:15:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 529 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:20:34  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:20:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 525 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:24:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:24:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 629 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 14:28:04  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:28:06  OK       [Boost] Arbeitsspeicher aufgeräumt – 543 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:31:05  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:31:07  OK       [Boost] Arbeitsspeicher aufgeräumt – 560 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-13 14:34:17  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:34:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 862 MB frei geworden (jetzt 12,8 von 15,8 GB belegt)
+2026-11-13 14:37:17  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:37:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 680 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-13 14:40:17  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:40:19  OK       [Boost] Arbeitsspeicher aufgeräumt – 528 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-13 14:43:35  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-13 14:43:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 518 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-15 16:24:04  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:24:04  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:35:39  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:35:39  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:36:12  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 16:36:12  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 16:36:25  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 16:36:25  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 16:36:25  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 16:36:25  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 16:36:25  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 16:36:25  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 16:36:25  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 16:36:25  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 16:36:25  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 16:36:25  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 16:36:25  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 16:36:25  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 16:36:25  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 16:36:25  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 16:36:25  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 16:36:25  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 16:36:25  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 16:36:25  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 4 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 16:36:25  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 16:36:25  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 16:36:25  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 16:36:25  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 16:36:25  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 16:36:28  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:30  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:31  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:33  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 16:36:34  WARNUNG  [Boost] Microsoft OneDrive Sync Service (OneDrive.Sync.Service): läuft noch (ungespeicherte Daten?)
+2026-11-15 16:36:36  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 16:36:37  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 16:36:37  OK       [Boost] Temp-Dateien: Fertig – 5 MB frei, 37 Dateien gelöscht, 39 übersprungen (0,0 s)
+2026-11-15 16:36:40  OK       [Boost] Arbeitsspeicher aufgeräumt – 2440 MB frei geworden (jetzt 5,8 von 15,8 GB belegt)
+2026-11-15 16:36:40  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 16:46:37  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:46:37  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:47:37  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:47:48  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:47:50  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:48:20  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 7 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 16:49:27  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:49:34  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:49:35  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:49:52  INFO     [Boost] ARK: Survival Ascended: Profil geändert → Beim Spielstart: Priorität hoch · Timer 0,5 ms · Höchstleistung · RAM freigeben · Kacheln pausieren · Vollbild-Optimierung aus + starke GPU · Grafik: Nicht, FPS Unbegrenzt
+2026-11-15 16:56:35  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 16:56:35  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 16:57:22  OK       [Boost] Temp-Dateien: Fertig – 8 MB frei, 3 Dateien gelöscht, 71 übersprungen (0,0 s)
+2026-11-15 16:57:25  OK       [Boost] Shader-Cache: Fertig – 836 MB frei, 148 Dateien gelöscht, 9 übersprungen (0,1 s)
+2026-11-15 16:57:27  OK       [Boost] DNS-Cache geleert
+2026-11-15 16:57:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 1341 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)

@@ -94,6 +94,16 @@ public partial class BoostPage : UserControl, IPage
         else Ui.Toast("Erst Profi-Einstellungen auswählen", true);
     }
 
+    private void CopyOneLine_Click(object s, RoutedEventArgs e)
+    {
+        if (Sel?.ConsoleOneLine is { Length: > 0 } c)
+        {
+            try { Clipboard.SetText(c); } catch { return; }
+            Ui.Toast("Eine Zeile kopiert – im Spiel Konsole öffnen (ARK: Tab), Strg+V, Enter");
+        }
+        else Ui.Toast("Erst Grafik-Kategorien oder Profi-Einstellungen auswählen", true);
+    }
+
     private void Recommend_Click(object s, RoutedEventArgs e)
     {
         if (Sel is not { } g) return;

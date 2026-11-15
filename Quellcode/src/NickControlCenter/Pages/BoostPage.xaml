@@ -327,7 +327,11 @@
                                         </ItemsControl.ItemTemplate>
                                     </ItemsControl>
                                     <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
-                                        <Button Content="Als Konsolenbefehle kopieren" Click="CopyConsole_Click" ToolTip="Zum Ausprobieren im laufenden Spiel: Konsole öffnen (ARK: Tab bzw. ^), Befehl einfügen. Gilt dann bis zum Neustart."/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="Für Ingame kopieren (eine Zeile)" Style="{StaticResource AccentButton}" Click="CopyOneLine_Click" Padding="12,5"
+                                                    ToolTip="Alle Befehle in EINER Zeile, mit | getrennt: im Spiel Konsole öffnen (ARK: Tab), einmal einfügen, Enter – fertig. Gilt bis zum Neustart des Spiels."/>
+                                            <Button Content="Als einzelne Befehle kopieren" Click="CopyConsole_Click" Margin="8,0,0,0" Padding="10,5" ToolTip="Jeder Befehl in eigener Zeile (z. B. für die Engine.ini)."/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </StackPanel>
                             </StackPanel>
