@@ -160,3 +160,62 @@
 2026-11-15 16:36:01  INFO     [Problemloeser] Aktion „Schließen“ für „Overwolf läuft“ …
 2026-11-15 16:36:04  OK       [Problemloeser] „Schließen“: 5 Prozess(e) beendet.
 2026-11-15 16:36:06  OK       [Problemloeser] Erledigt: prog:overwolf
+2026-11-15 22:12:04  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-15 22:12:34  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-17 17:25:07  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-17 17:25:37  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-17 18:59:10  OK       [Problemloeser] Erledigt: prog:overwolf
+2026-11-17 20:11:43  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-17 20:11:44  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-17 20:11:46  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-17 20:11:46  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-17 20:11:46  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-17 22:46:38  INFO     [Problemloeser] Autostart „Overwolf – Overwolf Launcher“: aus
+2026-11-17 22:46:44  INFO     [Problemloeser] Autostart „Opera GX Browser Assistant“: aus
+2026-11-17 22:46:47  INFO     [Problemloeser] Autostart „Discord – Update“: aus
+2026-11-17 22:47:03  INFO     [Problemloeser] Autostart „EADM“: aus
+2026-11-17 22:47:10  INFO     [Problemloeser] Autostart „Ollama“: aus
+2026-11-18 00:28:43  INFO     [Problemloeser] Gefunden: Optional: HWiNFO für noch genauere Temperaturen – Die App misst selbst (LibreHardwareMonitor). Läuft HWiNFO mit „Shared Memory Support“, übernimmt sie automatisch dessen Werte – z. B. für neue Hardware, die LibreHardwareMonitor noch nicht kennt.
+2026-11-18 06:40:51  OK       [Problemloeser] Erledigt: hw:missing
+2026-11-19 17:17:02  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-19 17:24:25  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 17:24:26  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-19 17:24:27  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 17:24:27  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-19 17:24:28  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-19 19:59:50  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-19 20:00:22  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 20:00:23  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-19 20:00:25  WARNUNG  [Problemloeser] Gefunden: Dienst „GIGABYTE Update Service“ startet automatisch – Dieser Hersteller-Dienst läuft gerade nicht, startet aber mit Windows und übernimmt dann die Beleuchtung/Lüfter. Häufige Ursache für Flackern nach dem Hochfahren.
+2026-11-19 20:00:25  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-19 20:00:28  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-19 20:00:28  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-19 20:00:29  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-19 20:00:29  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-19 20:00:30  OK       [Problemloeser] Erledigt: svc:GigabyteUpdateService
+2026-11-19 20:01:23  WARNUNG  [Problemloeser] Gefunden: HWiNFO liefert keine neuen Werte mehr – In der kostenlosen HWiNFO-Version schaltet sich „Shared Memory“ nach 12 Stunden ab. Die App ist automatisch auf die eigenen Sensoren umgestiegen.
+2026-11-19 20:01:27  INFO     [Problemloeser] Aktion „HWiNFO neu starten“ für „HWiNFO liefert keine neuen Werte mehr“ …
+2026-11-19 20:01:29  OK       [Problemloeser] „HWiNFO neu starten“: HWiNFO neu gestartet.
+2026-11-19 20:01:37  OK       [Problemloeser] Erledigt: hw:stale
+2026-11-19 20:31:55  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-19 20:42:59  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 20:42:59  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-19 20:43:00  INFO     [Problemloeser] Aktion „Programm schließen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 20:43:01  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-19 20:43:02  OK       [Problemloeser] „Programm schließen“: 0 Prozess(e) beendet.
+2026-11-19 21:02:09  INFO     [Problemloeser] Gefunden: Optional: HWiNFO für noch genauere Temperaturen – Die App misst selbst (LibreHardwareMonitor). Läuft HWiNFO mit „Shared Memory Support“, übernimmt sie automatisch dessen Werte – z. B. für neue Hardware, die LibreHardwareMonitor noch nicht kennt.
+2026-11-19 21:40:39  WARNUNG  [Problemloeser] Gefunden: BattlEye Launcher ist abgestürzt – Erkannt: Absturzmeldung des Spiels. BattlEye Launcher ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +30 → 0 MHz, Speicher +50 → 0 MHz.
+2026-11-19 21:41:45  INFO     [Problemloeser] Aktion „Zum Tweaker“ für „BattlEye Launcher ist abgestürzt“ …
+2026-11-19 21:41:45  OK       [Problemloeser] „Zum Tweaker“: Geöffnet.
+2026-11-19 21:42:10  INFO     [Problemloeser] Ignoriert: BattlEye Launcher ist abgestürzt
+2026-11-19 21:42:39  OK       [Problemloeser] Erledigt: crash:arkascended_be
+2026-11-20 16:14:13  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-20 16:19:06  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+
+Kommt nach einem Neustart immer wieder? Dann installiert dein Mainboard-BIOS die Gigabyte-Software bei jedem Start neu. Abschalten im BIOS (beim Start Entf drücken): Settings → Miscellaneous → „GIGABYTE Utilities Downloader Configuration“ (bei manchen Boards „APP Center Download & Install“) → Disabled, dann F10 zum Speichern.
+2026-11-20 16:19:29  INFO     [Problemloeser] Aktion „Komplett entfernen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-20 16:19:32  OK       [Problemloeser] Gigabyte entfernen: Dienst GigabyteUpdateService: entfernt
+2026-11-20 16:19:32  OK       [Problemloeser] „Komplett entfernen“: Dienst GigabyteUpdateService: entfernt
+
+Wichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es nach dem Neustart wieder.
+2026-11-20 16:19:34  OK       [Problemloeser] Erledigt: prog:gigabyte

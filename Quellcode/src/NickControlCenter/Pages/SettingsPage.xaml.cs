@@ -23,6 +23,8 @@ public partial class SettingsPage : UserControl, IPage
         Fahr.IsChecked = s.Fahrenheit;
         AutoStart.IsChecked = Autostart.IsEnabled();
         RefreshBackups();
+        VersionText.Text = $"Installiert: Control Center {AppUpdater.CurrentText}";
+        AutoUpd.IsChecked = AppSettings.Current.AutoUpdateCheck;
         HwAuto.IsChecked = s.HwinfoAutostart;
         var hw = HwinfoLauncher.FindExe();
         HwState.Text = hw == null ? "HWiNFO ist nicht installiert (kostenlos auf hwinfo.com) – oder wähle die exe aus." :
@@ -53,6 +55,15 @@ public partial class SettingsPage : UserControl, IPage
 
     private void Tray_Click(object s, RoutedEventArgs e) { AppSettings.Current.CloseToTray = ToTray.IsChecked == true; AppSettings.Current.Save(); }
     private void Fahr_Click(object s, RoutedEventArgs e) { AppSettings.Current.Fahrenheit = Fahr.IsChecked == true; AppSettings.Current.Save(); }
+    private async void CheckUpdate_Click(object s, RoutedEventArgs e) => await AppUpdater.Instance.CheckAsync(silent: false);
+    private async void DoUpdate_Click(object s, RoutedEventArgs e)
+    {
+        var u = AppUpdater.Instance;
+        if (!Dialogs.Confirm($"Update auf {u.LatestText}?", $"{AppUpdater.CurrentText} → {u.LatestText} · {Fmt.Bytes(u.Size)}. Die App startet danach kurz neu, Einstellungen bleiben erhalten.", "Jetzt aktualisieren", "Später")) return;
+        if (!await u.DownloadAsync()) Ui.Toast(u.Status, true);
+    }
+    private void AutoUpd_Click(object s, RoutedEventArgs e) { AppSettings.Current.AutoUpdateCheck = AutoUpd.IsChecked == true; AppSettings.Current.Save(); }
+
     private sealed record BackupItem(string Dir, string Text) { public override string ToString() => Text; }
 
     private void RefreshBackups()

@@ -15,7 +15,14 @@ public partial class StartupPage : UserControl, IPage
     {
         bool on = await Task.Run(Autostart.IsEnabled);
         SelfAuto.IsChecked = on;
+        ShowOnBoot.IsChecked = AppSettings.Current.ShowWindowOnAutostart;
+        ShowOnBoot.IsEnabled = on;
         SelfAutoText.Text = on ? "An – startet unsichtbar im Tray, damit Lüfter, RGB und Auto-Boost sofort laufen" : "Aus – Lüfter und Beleuchtung laufen erst, wenn du die App öffnest";
+    }
+
+    private void ShowOnBoot_Click(object s, RoutedEventArgs e)
+    {
+        AppSettings.Current.ShowWindowOnAutostart = ShowOnBoot.IsChecked == true; AppSettings.Current.Save();
     }
 
     private async void SelfAuto_Click(object s, RoutedEventArgs e)

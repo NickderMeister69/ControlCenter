@@ -28,6 +28,13 @@ public sealed class AppSettings
     public bool DashPowerSeen { get; set; }
     /// <summary>Downloads einmal pro Woche automatisch sortieren.</summary>
     public bool DownloadsAutoSort { get; set; }
+    /// <summary>Beim Start mit Windows das Fenster öffnen (statt nur im Tray).</summary>
+    public bool ShowWindowOnAutostart { get; set; } = true;
+    /// <summary>Automatisch nach neuen Versionen (GitHub-Releases) suchen.</summary>
+    public bool AutoUpdateCheck { get; set; } = true;
+    /// <summary>Zuletzt per Knopf geladenes Release und die Version, von der aus es geladen wurde (Schutz vor Endlosschleife).</summary>
+    public string? UpdateAttemptTag { get; set; }
+    public string? UpdateAttemptFrom { get; set; }
     public DateTime DownloadsLastSort { get; set; }
     public int DownloadsOldDays { get; set; } = 30;
     /// <summary>Vom Nutzer ausgeblendete Hinweise im Problemlöser (Id).</summary>

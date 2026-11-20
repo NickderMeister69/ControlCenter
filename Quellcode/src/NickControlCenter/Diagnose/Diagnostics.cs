@@ -236,6 +236,7 @@ public sealed class DiagnosticsService : ObservableObject
                             (svc.Count > 0 ? "\n" + string.Join("\n", svc.Select(s => $"Dienst „{s.Display}“ ({s.Name}), Start: {s.StartMode}")) : "")
             };
             if (prog.Id == "wallpaperengine") AddWallpaperLedAction(f);
+            if (prog.Id == "gigabyte") AddGigabyteRemoval(f);
             AddProgramActions(f, prog, hits.Select(h => h.Name).Distinct().ToList(), svc, hits.Select(h => h.Path).FirstOrDefault(p => p.Length > 0));
             res.Add(f);
         }
@@ -439,6 +440,22 @@ public sealed class DiagnosticsService : ObservableObject
             });
 
         return res;
+    }
+
+    /// <summary>
+    /// Gigabyte: der Update-Dienst kommt nach Abschalten/Deinstallieren oft wieder, weil das BIOS ihn bei jedem Start
+    /// neu installiert („GIGABYTE Utilities Downloader“ über die Windows-Plattform-Tabelle). Deshalb: alles auf einmal entfernen + BIOS-Hinweis.
+    /// </summary>
+    private static void AddGigabyteRemoval(Finding f)
+    {
+        f.Detail += "\n\nKommt nach einem Neustart immer wieder? Dann installiert dein Mainboard-BIOS die Gigabyte-Software bei jedem Start neu. " +
+                    "Abschalten im BIOS (beim Start Entf drücken): Settings → Miscellaneous → „GIGABYTE Utilities Downloader Configuration“ (bei manchen Boards „APP Center Download & Install“) → Disabled, dann F10 zum Speichern.";
+        f.Actions.Insert(0, new FixAction
+        {
+            Label = "Komplett entfernen", Icon = "", Primary = true,
+            Confirm = "Beendet und löscht die Gigabyte-Dienste (Update Service, Control Center), entfernt ihre geplanten Aufgaben und startet die Deinstallation aller gefundenen Gigabyte-Programme. Die Beleuchtung steuert danach nur noch das Control Center.\n\nDamit es nach dem Neustart nicht wiederkommt, zusätzlich im BIOS den „GIGABYTE Utilities Downloader“ ausschalten (steht im Hinweis).",
+            Run = () => Task.Run(SystemActions.RemoveGigabyte)
+        });
     }
 
     /// <summary>Wallpaper Engine: LED-Plugin direkt hier schalten statt in Wallpaper Engine.</summary>
@@ -665,6 +682,78 @@ public static class SystemActions
     }
 
     public sealed record UninstallEntry(string Display, string Command);
+
+    /// <summary>Alle Deinstallations-Einträge, deren Name eines der Wörter enthält.</summary>
+    public static List<UninstallEntry> FindAllUninstall(params string[] names)
+    {
+        var res = new List<UninstallEntry>();
+        foreach (var (root, path) in new[]
+                 {
+                     (Registry.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"),
+                     (Registry.LocalMachine, @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Uninstall"),
+                     (Registry.CurrentUser, @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall")
+                 })
+            try
+            {
+                using var k = root.OpenSubKey(path);
+                if (k == null) continue;
+                foreach (var sub in k.GetSubKeyNames())
+                {
+                    using var e = k.OpenSubKey(sub);
+                    var dn = e?.GetValue("DisplayName") as string;
+                    var cmd = e?.GetValue("UninstallString") as string;
+                    if (dn != null && cmd != null && names.Any(n => dn.Contains(n, StringComparison.OrdinalIgnoreCase)) && res.All(r => r.Display != dn))
+                        res.Add(new UninstallEntry(dn, cmd));
+                }
+            }
+            catch { }
+        return res;
+    }
+
+    public static string RemoveGigabyte()
+    {
+        var msgs = new List<string>();
+        // 1) Dienste: beenden, deaktivieren, löschen
+        var services = new List<string>();
+        try
+        {
+            foreach (var sc in ServiceController.GetServices())
+                using (sc)
+                    if (sc.ServiceName.Contains("Gigabyte", StringComparison.OrdinalIgnoreCase) || sc.DisplayName.Contains("GIGABYTE", StringComparison.OrdinalIgnoreCase) ||
+                        sc.ServiceName.StartsWith("GCC", StringComparison.OrdinalIgnoreCase) || sc.ServiceName.Contains("RGBFusion", StringComparison.OrdinalIgnoreCase) ||
+                        sc.ServiceName.Contains("EasyTune", StringComparison.OrdinalIgnoreCase))
+                        services.Add(sc.ServiceName);
+        }
+        catch { }
+        foreach (var n in services)
+        {
+            Env.Run("sc.exe", $"stop \"{n}\"");
+            Env.Run("sc.exe", $"config \"{n}\" start= disabled");
+            var r = Env.Run("sc.exe", $"delete \"{n}\"");
+            msgs.Add($"Dienst {n}: {(r.Code == 0 ? "entfernt" : "deaktiviert")}");
+        }
+        // 2) Programme beenden
+        CloseProcesses(new[] { "GigabyteControlCenter", "GCC", "RGBFusion", "RGBFusion2", "AorusEngine", "GigabyteUpdateService", "EasyTuneEngineService", "GraphicsCardEngine" });
+        // 3) geplante Aufgaben
+        var tasks = Env.Run("schtasks.exe", "/Query /FO CSV /NH");
+        foreach (var line in tasks.Output.Split('\n'))
+        {
+            var name = line.Split(',').FirstOrDefault()?.Trim().Trim('"') ?? "";
+            if (name.Length > 1 && (name.Contains("Gigabyte", StringComparison.OrdinalIgnoreCase) || name.Contains("GCC", StringComparison.Ordinal)))
+            {
+                var r = Env.Run("schtasks.exe", $"/Delete /TN \"{name}\" /F");
+                if (r.Code == 0) msgs.Add($"Aufgabe {name}: entfernt");
+            }
+        }
+        // 4) Deinstallieren
+        foreach (var u in FindAllUninstall("GIGABYTE Control Center", "GIGABYTE Update", "RGB Fusion", "APP Center", "EasyTune", "AORUS Engine"))
+        {
+            try { Uninstall(u); msgs.Add($"Deinstallation „{u.Display}“ gestartet"); } catch (Exception ex) { msgs.Add($"„{u.Display}“: {ex.Message}"); }
+        }
+        if (msgs.Count == 0) msgs.Add("Nichts von Gigabyte gefunden.");
+        Log.Ok(LogModule.Diagnose, "Gigabyte entfernen: " + string.Join(" · ", msgs));
+        return string.Join("\n", msgs) + "\n\nWichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es nach dem Neustart wieder.";
+    }
 
     public static UninstallEntry? FindUninstall(string nameContains)
     {

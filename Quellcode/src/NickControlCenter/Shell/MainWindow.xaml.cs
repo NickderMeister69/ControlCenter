@@ -155,6 +155,17 @@ public partial class MainWindow : Window
         return IntPtr.Zero;
     }
 
+    private async void Update_Click(object sender, RoutedEventArgs e)
+    {
+        var u = AppUpdater.Instance;
+        if (u.Busy) return;
+        var notes = string.IsNullOrWhiteSpace(u.Notes) ? "" : "\n\nNeu in dieser Version:\n" + (u.Notes.Length > 900 ? u.Notes[..900] + " …" : u.Notes);
+        if (!Dialogs.Confirm($"Update auf {u.LatestText}?",
+                $"Installiert: {AppUpdater.CurrentText} → neu: {u.LatestText}\nGröße: {Fmt.Bytes(u.Size)} · Dauer {InstallEstimate.DurationText(InstallEstimate.Duration(u.Size, 10))}{notes}\n\nDie App lädt die neue Version, startet kurz neu – alle Einstellungen bleiben erhalten.",
+                "Jetzt aktualisieren", "Später")) return;
+        if (!await u.DownloadAsync()) Ui.Toast(u.Status, true);
+    }
+
     private void Max_Click(object sender, RoutedEventArgs e) => WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
     private void Close_Click(object sender, RoutedEventArgs e) => Close(); // App fängt das ab → läuft im Tray weiter
     private void Exit_Click(object sender, RoutedEventArgs e) => App.Instance.ExitApp(ask: true);

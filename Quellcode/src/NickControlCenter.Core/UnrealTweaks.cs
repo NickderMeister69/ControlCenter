@@ -67,27 +67,9 @@ public static class UnrealTweaks
         new("bloom", "Leuchten/Bloom reduzieren", "Weniger Überstrahlen heller Flächen.", "+1–2 %", 0, "both",
             new[] { ("r.BloomQuality", "1") }),
 
-        // ---- günstiger statt aus: Effekt bleibt, kostet weniger
-        new("vsmcheap", "Virtuelle Schatten günstiger", "Nur wenn „Virtuelle Schatten aus“ AUS ist: behält die schönen UE5-Schatten, rechnet sie aber eine Stufe gröber.", "+5–10 %", 0, "UE5",
-            new[] { ("r.Shadow.Virtual.ResolutionLodBiasDirectional", "1.5") }),
-        new("cloudcheap", "Wolken günstiger berechnen", "Volumen-Wolken bleiben, werden aber mit weniger Rechenschritten gezeichnet. Fast kein Unterschied.", "+3–8 %", 0, "UE5",
-            new[] { ("r.VolumetricCloud.ViewRaySampleMaxCount", "256"), ("r.VolumetricCloud.ReflectionRaySampleMaxCount", "24") }),
-        new("fogcheap", "Nebel günstiger berechnen", "Volumen-Nebel bleibt, wird aber gröber aufgelöst. Kaum sichtbar.", "+2–5 %", 0, "both",
-            new[] { ("r.VolumetricFog.GridPixelSize", "16"), ("r.VolumetricFog.GridSizeZ", "64") }),
-        new("lumencheap", "Lumen-Licht gröber", "Globale Beleuchtung bleibt an, nutzt aber nur noch die grobe Szenen-Darstellung. Licht in Innenräumen etwas ungenauer.", "+5–10 %", 1, "UE5",
-            new[] { ("r.Lumen.TraceMeshSDFs", "0") }),
-        new("shadowres", "Schatten-Auflösung senken", "Klassische Schatten mit 1024 statt 2048 Pixeln – Schattenkanten etwas weicher.", "+3–6 %", 1, "both",
-            new[] { ("r.Shadow.MaxResolution", "1024"), ("r.Shadow.MaxCSMResolution", "1024") }),
-        new("foliagelod", "Pflanzen in der Ferne vereinfachen", "Bäume und Büsche wechseln früher auf einfachere Modelle.", "+3–6 %", 1, "both",
-            new[] { ("foliage.LODDistanceScale", "0.7") }),
-        new("grassfar", "Gras in der Ferne ausblenden", "Gras wird nur noch im näheren Umkreis gezeichnet.", "+3–6 %", 1, "both",
-            new[] { ("grass.CullDistanceScale", "0.6") }, PvpNote: true),
-
         // ---- schöner (kostet nichts oder wenig)
         new("aniso", "Texturen in der Ferne schärfer", "16-fache anisotrope Filterung – Böden und Wege bleiben auch schräg und weit weg scharf. Kostet praktisch nichts.", "±0", -1, "both",
             new[] { ("r.MaxAnisotropy", "16") }),
-        new("texpool", "Mehr Grafikspeicher für Texturen", "Größerer Textur-Speicher (3 GB) – weniger matschige oder nachladende Texturen. Passend für 8-GB-Karten wie die RTX 4060.", "±0", -1, "both",
-            new[] { ("r.Streaming.PoolSize", "3000") }),
         new("chromab", "Farbsäume aus", "Chromatische Aberration (bunte Ränder an Kanten) aus – Bild wirkt klarer.", "±0", -1, "both",
             new[] { ("r.SceneColorFringeQuality", "0") }),
         new("filmgrain", "Filmkorn aus", "Kein künstliches Bildrauschen – sauberes Bild.", "±0", -1, "UE5",
@@ -100,7 +82,15 @@ public static class UnrealTweaks
         All.Where(t => t.Engine == "both" || t.Engine == engine || (engine is not ("UE4" or "UE5")));
 
     /// <summary>Alle Konsolenvariablen, die von der App verwaltet werden (zum Entfernen abgewählter Einstellungen).</summary>
-    public static IEnumerable<string> ManagedCvars => All.SelectMany(t => t.Lines.Select(l => l.Cvar)).Distinct();
+    public static IEnumerable<string> ManagedCvars => All.SelectMany(t => t.Lines.Select(l => l.Cvar)).Concat(Retired).Distinct();
+
+    /// <summary>Früher angebotene Einstellungen (sahen schlechter aus) – werden aus der Engine.ini wieder entfernt.</summary>
+    private static readonly string[] Retired =
+    {
+        "r.Shadow.Virtual.ResolutionLodBiasDirectional", "r.VolumetricCloud.ViewRaySampleMaxCount", "r.VolumetricCloud.ReflectionRaySampleMaxCount",
+        "r.VolumetricFog.GridPixelSize", "r.VolumetricFog.GridSizeZ", "r.Lumen.TraceMeshSDFs", "r.Shadow.MaxResolution", "r.Shadow.MaxCSMResolution",
+        "foliage.LODDistanceScale", "grass.CullDistanceScale", "r.Streaming.PoolSize"
+    };
 
     // Stufen: Niedrig=0, Mittel=1, Hoch=2, Episch=3 (UI: 1…4)
     private static Dictionary<string, int> Sg(int view, int tex, int aa, int shadow, int gi, int refl, int pp, int fx, int foliage, int shading) => new()
@@ -117,11 +107,11 @@ public static class UnrealTweaks
             return new[]
             {
                 new LookPreset("Schön & flüssig", "Texturen, Sichtweite und Kantenglättung hoch (das sieht man am meisten), teure Schatten-/Licht-Technik vereinfacht, Bild geschärft. Dazu im Spiel: DLSS „Qualität“ (+ Frame Generation bei RTX 40).",
-                    Sg(3, 3, 3, 1, 2, 1, 2, 2, 1, 2), new[] { "vsm", "contact", "nanite", "sharpen", "cloudcheap", "fogcheap", "aniso", "texpool", "chromab", "filmgrain" }, true, false),
+                    Sg(3, 3, 3, 1, 2, 1, 2, 2, 1, 2), new[] { "vsm", "contact", "nanite", "sharpen", "aniso", "chromab", "filmgrain" }, true, false),
                 new LookPreset("Ausgewogen", "Mittlere Details, Wolken bleiben, Schatten und Spiegelungen vereinfacht.",
-                    Sg(2, 2, 2, 1, 1, 1, 1, 1, 1, 1), new[] { "vsm", "contact", "dfshadow", "lumenrefl", "waterrefl", "nanite", "sharpen", "cloudcheap", "fogcheap", "lumencheap", "foliagelod", "aniso", "texpool", "chromab", "filmgrain" }, true, false),
+                    Sg(2, 2, 2, 1, 1, 1, 1, 1, 1, 1), new[] { "vsm", "contact", "dfshadow", "lumenrefl", "waterrefl", "nanite", "sharpen", "aniso", "chromab", "filmgrain" }, true, false),
                 new LookPreset("Max-FPS", "Alles für Bildrate: niedrige Details, keine Volumen-Wolken/-Nebel, einfache Beleuchtung. Sieht deutlich schlichter aus.",
-                    Sg(1, 2, 1, 0, 0, 0, 0, 0, 0, 0), new[] { "vsm", "contact", "ao", "dfshadow", "vcloud", "vfog", "lumenrefl", "waterrefl", "ssr", "nanite", "gi", "grass", "sharpen", "shadowres", "foliagelod", "grassfar", "aniso", "chromab", "filmgrain" }, true, true),
+                    Sg(1, 2, 1, 0, 0, 0, 0, 0, 0, 0), new[] { "vsm", "contact", "ao", "dfshadow", "vcloud", "vfog", "lumenrefl", "waterrefl", "ssr", "nanite", "gi", "grass", "sharpen", "aniso", "chromab", "filmgrain" }, true, true),
             };
         if (knownId == "ase")
             return new[]

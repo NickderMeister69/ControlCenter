@@ -1,21 +1,21 @@
-Control Center – Sensorliste vom 15.11.2026 16:56:44
-Angezeigt: CPU 49,8 °C, GPU 44,7 °C
+Control Center – Sensorliste vom 20.11.2026 16:34:38
+Angezeigt: CPU 41,2 °C, GPU 39,0 °C
 
 [Motherboard] Gigabyte B760 DS3H AX DDR4
 
 [SuperIO] ITE IT8689E
-   Temperature  Temperature #1                       33,0    /lpc/it8689e/0/temperature/0
-   Temperature  Temperature #2                       37,0    /lpc/it8689e/0/temperature/1
-   Temperature  Temperature #3                       58,0    /lpc/it8689e/0/temperature/2
-   Temperature  Temperature #4                       34,0    /lpc/it8689e/0/temperature/3
-   Temperature  Temperature #5                       63,0    /lpc/it8689e/0/temperature/4
-   Temperature  Temperature #6                       33,0    /lpc/it8689e/0/temperature/5
-   Fan          Fan #1                             1194,7    /lpc/it8689e/0/fan/0
-   Fan          Fan #2                              464,6    /lpc/it8689e/0/fan/1
-   Fan          Fan #3                              539,6    /lpc/it8689e/0/fan/2
-   Fan          Fan #4                              474,4    /lpc/it8689e/0/fan/3
+   Temperature  Temperature #1                       32,0    /lpc/it8689e/0/temperature/0
+   Temperature  Temperature #2                       38,0    /lpc/it8689e/0/temperature/1
+   Temperature  Temperature #3                       45,0    /lpc/it8689e/0/temperature/2
+   Temperature  Temperature #4                       33,0    /lpc/it8689e/0/temperature/3
+   Temperature  Temperature #5                       52,0    /lpc/it8689e/0/temperature/4
+   Temperature  Temperature #6                       32,0    /lpc/it8689e/0/temperature/5
+   Fan          Fan #1                              498,2    /lpc/it8689e/0/fan/0
+   Fan          Fan #2                              483,9    /lpc/it8689e/0/fan/1
+   Fan          Fan #3                              537,8    /lpc/it8689e/0/fan/2
+   Fan          Fan #4                              722,7    /lpc/it8689e/0/fan/3
    Fan          Fan #5                             1513,5    /lpc/it8689e/0/fan/4
-   Control      Fan #1                               58,0    /lpc/it8689e/0/control/0
+   Control      Fan #1                               14,0    /lpc/it8689e/0/control/0
    Control      Fan #2                               20,0    /lpc/it8689e/0/control/1
    Control      Fan #3                               10,0    /lpc/it8689e/0/control/2
    Control      Fan #4                               20,0    /lpc/it8689e/0/control/3
@@ -23,29 +23,29 @@ Angezeigt: CPU 49,8 °C, GPU 44,7 °C
    Control      Fan #6                                  –    /lpc/it8689e/0/control/5
 
 [Cpu] 13th Gen Intel Core i5-13400F
-   Temperature  Core Max                             52,0    /intelcpu/0/temperature/0
-   Temperature  Core Average                         49,6    /intelcpu/0/temperature/1
+   Temperature  Core Max                             47,0    /intelcpu/0/temperature/0
+   Temperature  Core Average                         43,7    /intelcpu/0/temperature/1
    Temperature  P-Core #1                            47,0    /intelcpu/0/temperature/2
-   Temperature  P-Core #2                            49,0    /intelcpu/0/temperature/3
-   Temperature  P-Core #3                            46,0    /intelcpu/0/temperature/4
-   Temperature  P-Core #4                            49,0    /intelcpu/0/temperature/5
-   Temperature  P-Core #5                            49,0    /intelcpu/0/temperature/6
-   Temperature  P-Core #6                            48,0    /intelcpu/0/temperature/7
-   Temperature  E-Core #1                            52,0    /intelcpu/0/temperature/8
-   Temperature  E-Core #2                            52,0    /intelcpu/0/temperature/9
-   Temperature  E-Core #3                            52,0    /intelcpu/0/temperature/10
-   Temperature  E-Core #4                            52,0    /intelcpu/0/temperature/11
-   Temperature  CPU Package                          52,0    /intelcpu/0/temperature/12
+   Temperature  P-Core #2                            44,0    /intelcpu/0/temperature/3
+   Temperature  P-Core #3                            45,0    /intelcpu/0/temperature/4
+   Temperature  P-Core #4                            45,0    /intelcpu/0/temperature/5
+   Temperature  P-Core #5                            42,0    /intelcpu/0/temperature/6
+   Temperature  P-Core #6                            41,0    /intelcpu/0/temperature/7
+   Temperature  E-Core #1                            43,0    /intelcpu/0/temperature/8
+   Temperature  E-Core #2                            43,0    /intelcpu/0/temperature/9
+   Temperature  E-Core #3                            43,0    /intelcpu/0/temperature/10
+   Temperature  E-Core #4                            44,0    /intelcpu/0/temperature/11
+   Temperature  CPU Package                          45,0    /intelcpu/0/temperature/12
    Temperature  P-Core #1 Distance to TjMax          53,0    /intelcpu/0/temperature/13
-   Temperature  P-Core #2 Distance to TjMax          51,0    /intelcpu/0/temperature/14
-   Temperature  P-Core #3 Distance to TjMax          54,0    /intelcpu/0/temperature/15
-   Temperature  P-Core #4 Distance to TjMax          51,0    /intelcpu/0/temperature/16
-   Temperature  P-Core #5 Distance to TjMax          51,0    /intelcpu/0/temperature/17
-   Temperature  P-Core #6 Distance to TjMax          52,0    /intelcpu/0/temperature/18
-   Temperature  E-Core #1 Distance to TjMax          48,0    /intelcpu/0/temperature/19
-   Temperature  E-Core #2 Distance to TjMax          48,0    /intelcpu/0/temperature/20
-   Temperature  E-Core #3 Distance to TjMax          48,0    /intelcpu/0/temperature/21
-   Temperature  E-Core #4 Distance to TjMax          48,0    /intelcpu/0/temperature/22
+   Temperature  P-Core #2 Distance to TjMax          56,0    /intelcpu/0/temperature/14
+   Temperature  P-Core #3 Distance to TjMax          55,0    /intelcpu/0/temperature/15
+   Temperature  P-Core #4 Distance to TjMax          55,0    /intelcpu/0/temperature/16
+   Temperature  P-Core #5 Distance to TjMax          58,0    /intelcpu/0/temperature/17
+   Temperature  P-Core #6 Distance to TjMax          59,0    /intelcpu/0/temperature/18
+   Temperature  E-Core #1 Distance to TjMax          57,0    /intelcpu/0/temperature/19
+   Temperature  E-Core #2 Distance to TjMax          57,0    /intelcpu/0/temperature/20
+   Temperature  E-Core #3 Distance to TjMax          57,0    /intelcpu/0/temperature/21
+   Temperature  E-Core #4 Distance to TjMax          56,0    /intelcpu/0/temperature/22
 
 [Memory] Virtual Memory
 
@@ -56,19 +56,16 @@ Angezeigt: CPU 49,8 °C, GPU 44,7 °C
 [Memory] Team Group Inc - TEAMGROUP-UD4-3200 (#3)
 
 [GpuNvidia] NVIDIA GeForce RTX 4060
-   Temperature  GPU Core                             37,0    /gpu-nvidia/0/temperature/0
-   Temperature  GPU Hot Spot                         44,7    /gpu-nvidia/0/temperature/2
-   Fan          GPU Fan                            1126,0    /gpu-nvidia/0/fan/1
+   Temperature  GPU Core                             39,0    /gpu-nvidia/0/temperature/0
+   Temperature  GPU Hot Spot                         46,5    /gpu-nvidia/0/temperature/2
+   Fan          GPU Fan                            1136,0    /gpu-nvidia/0/fan/1
    Control      GPU Fan                              30,0    /gpu-nvidia/0/control/1
 
 [Storage] Intenso SSD SATAIII 
    Temperature  Temperature                          40,0    /ssd/2/temperature/0
 
-[Storage] Intenso SSD Sata III
-   Temperature  Temperature                          47,0    /ssd/3/temperature/0
-
 [Storage] SOLIDIGM SSDPFKNU010TZ
-   Temperature  Composite Temperature                54,0    /nvme/1/temperature/0
+   Temperature  Composite Temperature                44,0    /nvme/1/temperature/0
    Temperature  Warning Temperature                  76,0    /nvme/1/temperature/10
    Temperature  Critical Temperature                 79,0    /nvme/1/temperature/11
 

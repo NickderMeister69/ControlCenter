@@ -17,6 +17,7 @@
                             <StackPanel Margin="10,0,0,0">
                                 <TextBlock Text="Control Center mit Windows starten" FontWeight="SemiBold"/>
                                 <TextBlock x:Name="SelfAutoText" Style="{StaticResource Muted}" FontSize="11.5"/>
+                                <CheckBox x:Name="ShowOnBoot" Content="Beim Hochfahren das Fenster öffnen (sonst nur Symbol unten rechts)" Click="ShowOnBoot_Click" Margin="0,6,0,0" FontSize="12"/>
                             </StackPanel>
                         </StackPanel>
                     </Border>

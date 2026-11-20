@@ -74,7 +74,7 @@ public partial class App : Application
         AppSettings.Load();
         var s = AppSettings.Current;
         AppSettings.ApplyAccent(s.Accent);
-        Log.Info(LogModule.App, $"Start Control Center {typeof(App).Assembly.GetName().Version} – Windows-Build {Env.WindowsBuild}, Admin: {Env.IsAdmin}, Tray-Start: {startInTray}, Ordner: {Env.ExeDir}");
+        Log.Info(LogModule.App, $"Start Control Center {AppUpdater.CurrentText} – Windows-Build {Env.WindowsBuild}, Admin: {Env.IsAdmin}, Tray-Start: {startInTray}, Ordner: {Env.ExeDir}");
 
         // Sensoren zuerst (Lüfter, Monitor, Kacheln, Stresstest hängen daran)
         Services.Hub.Preference = s.SensorSource;
@@ -128,6 +128,7 @@ public partial class App : Application
 
         FirstRun();
         try { SettingsBackup.Daily(); } catch { }
+        AppUpdater.Instance.StartAutoCheck();
         // Update sofort einspielen, sobald eine „ControlCenter.update.exe“ neben der exe auftaucht (Ordner wird überwacht, Timer als Reserve)
         var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
         void TryUpdate()
@@ -149,7 +150,9 @@ public partial class App : Application
             _updWatch.EnableRaisingEvents = true;
         }
         catch { }
-        if (!startInTray) ShowWindow();
+        // Start mit Windows (--tray): Fenster öffnen, wenn gewünscht – nicht nach einem Update-Neustart im Tray
+        bool restarted = e.Args.Any(a => a.Equals("--restart", StringComparison.OrdinalIgnoreCase));
+        if (!startInTray || (AppSettings.Current.ShowWindowOnAutostart && !restarted)) ShowWindow();
     }
 
     private static Finding RgbProblem(string device, string msg)

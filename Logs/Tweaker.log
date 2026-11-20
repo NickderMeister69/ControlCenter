@@ -159,3 +159,40 @@
 2026-11-15 16:56:32  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
 2026-11-15 16:56:40  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
 2026-11-15 16:56:40  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 17:55:52  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 17:55:52  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 17:56:01  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 17:56:01  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 22:12:00  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 22:12:00  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 22:12:25  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 22:12:25  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-17 17:25:04  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-17 17:25:04  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-17 17:25:29  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-17 17:25:29  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-19 17:16:58  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-19 17:16:59  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-19 17:17:23  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-19 17:17:23  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-19 19:59:46  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-19 19:59:46  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-19 20:00:11  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-19 20:00:11  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-19 20:00:44  INFO     [Tweaker] Gemessener Turbo-Takt: 4089 MHz (bisher höchster: 4089 MHz)
+2026-11-19 20:31:52  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-19 20:31:52  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-19 20:32:16  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-19 20:32:16  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-19 21:39:58  WARNUNG  [Tweaker] ARK: Survival Ascended ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +80 → +30 MHz, Speicher +150 → +50 MHz.
+2026-11-19 21:40:13  WARNUNG  [Tweaker] BattlEye Launcher ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +30 → 0 MHz, Speicher +50 → 0 MHz.
+2026-11-20 16:14:10  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:14:10  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:19:04  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:19:04  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:21:29  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:21:29  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:27:43  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:27:43  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:34:28  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:34:28  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz

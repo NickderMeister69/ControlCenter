@@ -2343,3 +2343,344 @@
 2026-11-15 16:57:25  OK       [Boost] Shader-Cache: Fertig – 836 MB frei, 148 Dateien gelöscht, 9 übersprungen (0,1 s)
 2026-11-15 16:57:27  OK       [Boost] DNS-Cache geleert
 2026-11-15 16:57:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 1341 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)
+2026-11-15 17:21:46  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 17:21:46  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 17:22:06  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 17:22:06  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 17:22:06  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 17:22:06  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 17:22:06  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 17:22:06  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 17:22:06  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 17:22:06  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 17:22:06  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 17:22:07  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 17:22:07  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 17:22:07  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 17:22:07  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 17:22:07  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 17:22:07  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 17:22:07  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 17:22:07  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-15 17:22:07  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:22:07  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 11 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 17:22:07  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:22:07  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 17:22:07  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:22:07  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:22:07  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:22:10  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-15 17:22:12  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-15 17:22:13  OK       [Boost] EA App: geschlossen
+2026-11-15 17:22:15  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 17:22:16  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-15 17:22:18  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 17:22:19  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 17:22:19  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 70 übersprungen (0,0 s)
+2026-11-15 17:22:22  OK       [Boost] Arbeitsspeicher aufgeräumt – 1168 MB frei geworden (jetzt 7,7 von 15,8 GB belegt)
+2026-11-15 17:22:22  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 17:22:38  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-15 17:22:38  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 11 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 17:22:45  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-15 17:22:45  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:22:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 345 MB frei geworden (jetzt 7,7 von 15,8 GB belegt)
+2026-11-15 17:23:03  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert
+2026-11-15 17:23:03  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:23:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 32 MB frei geworden (jetzt 8,0 von 15,8 GB belegt)
+2026-11-15 17:24:11  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 17:24:11  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 17:24:58  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 17:24:58  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 17:24:58  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 17:24:58  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 17:24:58  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 17:24:58  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 17:24:58  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 17:24:58  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 17:24:58  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 17:24:59  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 17:24:59  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 17:24:59  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 17:24:59  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 17:24:59  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 17:24:59  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 17:24:59  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 17:24:59  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-15 17:24:59  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:24:59  WARNUNG  [Boost] ARK: Survival Ascended läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:24:59  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:24:59  WARNUNG  [Boost] BattlEye Launcher läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:24:59  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:24:59  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:24:59  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:25:07  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-15 17:25:09  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-15 17:25:10  OK       [Boost] EA App: geschlossen
+2026-11-15 17:25:12  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 17:25:13  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-15 17:25:15  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 17:25:16  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 17:25:16  OK       [Boost] Temp-Dateien: Fertig – 4 MB frei, 8 Dateien gelöscht, 62 übersprungen (0,0 s)
+2026-11-15 17:25:19  OK       [Boost] Arbeitsspeicher aufgeräumt (jetzt 12,5 von 15,8 GB belegt)
+2026-11-15 17:25:20  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 17:25:30  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:25:33  OK       [Boost] Arbeitsspeicher aufgeräumt (jetzt 14,3 von 15,8 GB belegt)
+2026-11-15 17:27:44  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 17:27:44  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 17:28:10  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 17:28:11  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 17:28:11  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 17:28:11  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 17:28:11  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 17:28:11  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 17:28:11  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 17:28:11  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 17:28:11  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 17:28:12  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 17:28:12  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 17:28:12  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 17:28:12  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 17:28:12  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 17:28:12  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 17:28:12  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 17:28:12  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-15 17:28:12  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:28:12  WARNUNG  [Boost] ARK: Survival Ascended läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:28:12  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:28:12  WARNUNG  [Boost] BattlEye Launcher läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:28:12  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:28:12  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:28:12  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:28:20  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-15 17:28:21  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-15 17:28:23  OK       [Boost] EA App: geschlossen
+2026-11-15 17:28:24  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 17:28:26  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-15 17:28:27  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 17:28:29  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 17:28:29  OK       [Boost] Temp-Dateien: Fertig – 167 KB frei, 5 Dateien gelöscht, 57 übersprungen (0,0 s)
+2026-11-15 17:28:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 2054 MB frei geworden (jetzt 11,8 von 15,8 GB belegt)
+2026-11-15 17:28:31  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 17:30:27  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:30:29  OK       [Boost] Arbeitsspeicher aufgeräumt – 388 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 17:39:51  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:39:53  OK       [Boost] Arbeitsspeicher aufgeräumt – 561 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-15 17:53:24  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:53:26  OK       [Boost] Arbeitsspeicher aufgeräumt – 475 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 17:55:55  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 17:55:56  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 17:55:58  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert
+2026-11-15 17:55:58  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:55:58  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-15 17:55:58  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:56:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 281 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 17:56:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 372 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 17:56:31  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:56:34  OK       [Boost] Arbeitsspeicher aufgeräumt – 409 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 17:59:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:59:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 591 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-15 18:02:50  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:02:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 602 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-15 18:07:26  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:07:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 733 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-15 18:10:26  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:10:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 521 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:13:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:13:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 431 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:16:26  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:16:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 437 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-15 18:19:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:19:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 402 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:23:53  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:23:55  OK       [Boost] Arbeitsspeicher aufgeräumt – 261 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-15 18:28:29  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:28:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 532 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 18:34:03  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:34:05  OK       [Boost] Arbeitsspeicher aufgeräumt – 278 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 18:37:04  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:37:06  OK       [Boost] Arbeitsspeicher aufgeräumt – 301 MB frei geworden (jetzt 13,6 von 15,8 GB belegt)
+2026-11-15 18:40:28  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:40:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 289 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 18:43:28  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:43:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 278 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-15 18:48:55  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:48:57  OK       [Boost] Arbeitsspeicher aufgeräumt – 296 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:51:55  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:51:57  OK       [Boost] Arbeitsspeicher aufgeräumt – 292 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 18:54:58  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:55:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 305 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-15 18:57:58  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:57:59  OK       [Boost] Arbeitsspeicher aufgeräumt – 387 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 19:01:13  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:01:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 307 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 19:04:16  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:04:17  OK       [Boost] Arbeitsspeicher aufgeräumt – 241 MB frei geworden (jetzt 13,6 von 15,8 GB belegt)
+2026-11-15 19:07:16  INFO     [Boost] RAM zu 88 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:07:17  OK       [Boost] Arbeitsspeicher aufgeräumt – 472 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-15 19:13:16  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:13:18  OK       [Boost] Arbeitsspeicher aufgeräumt – 511 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-15 19:17:28  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:17:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 330 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 19:22:58  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:22:59  OK       [Boost] Arbeitsspeicher aufgeräumt – 199 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 19:25:58  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:26:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 762 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 19:29:04  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-15 19:29:04  OK       [Boost] ARK: Survival Ascended: Sitzung 15.11. 17:55 · 1 h 33 min · Ø 99 FPS · schlechteste 1 % 55 FPS · CPU max. 69 °C · GPU max. 70 °C · 0,40 kWh ≈ 0,12 €
+2026-11-15 22:12:03  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 22:12:04  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-17 17:25:06  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-17 17:25:07  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-17 20:13:57  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-17 20:13:57  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-17 20:14:06  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-17 20:14:06  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 20:14:12  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-17 20:14:12  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-17 20:14:12  OK       [Boost] Windows-Spielmodus an: an
+2026-11-17 20:14:12  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-17 20:14:12  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-17 20:14:12  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-17 20:14:12  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-17 20:14:12  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-17 20:14:12  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-17 20:14:12  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-17 20:14:12  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-17 20:14:12  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-17 20:14:12  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-17 20:14:12  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-17 20:14:12  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-17 20:14:12  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-17 20:14:12  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-17 20:14:12  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:12  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 20:14:12  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 20:14:12  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 20:14:12  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 20:14:12  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:12  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:25  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-17 20:14:25  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 20:14:27  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 2060 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)
+2026-11-17 20:14:28  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:30  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:31  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-17 20:14:33  WARNUNG  [Boost] OneDrive.Sync.Service: läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:34  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-17 20:14:36  OK       [Boost] RazerCortex: geschlossen
+2026-11-17 20:14:36  OK       [Boost] Temp-Dateien: Fertig – 181 MB frei, 142 Dateien gelöscht, 19 übersprungen (0,1 s)
+2026-11-17 20:14:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 90 MB frei geworden (jetzt 7,9 von 15,8 GB belegt)
+2026-11-17 20:14:37  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-17 20:14:46  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 1 Hintergrund-Programme ausgebremst
+2026-11-17 20:14:46  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:48  OK       [Boost] Arbeitsspeicher aufgeräumt – 89 MB frei geworden (jetzt 8,4 von 15,8 GB belegt)
+2026-11-17 20:15:40  INFO     [Boost] RAM zu 90 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:15:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 1007 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-17 20:18:41  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:18:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 524 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-17 20:21:41  INFO     [Boost] RAM zu 89 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:21:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 943 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-17 20:24:41  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:24:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 482 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-17 20:35:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:35:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 437 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-17 20:48:29  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:48:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 617 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 20:56:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:56:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 571 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 20:59:45  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:59:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 306 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:15:36  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:15:39  OK       [Boost] Arbeitsspeicher aufgeräumt – 360 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:21:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:21:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 558 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 21:24:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:24:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 399 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-17 21:28:13  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:28:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 369 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-17 21:31:13  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:31:14  OK       [Boost] Arbeitsspeicher aufgeräumt – 217 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:34:13  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:34:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 248 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:39:40  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:39:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 277 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-17 22:19:54  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 22:19:56  OK       [Boost] Arbeitsspeicher aufgeräumt – 600 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 22:30:06  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 22:30:08  OK       [Boost] Arbeitsspeicher aufgeräumt – 535 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-17 22:34:09  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-17 22:34:09  OK       [Boost] ARK: Survival Ascended: Sitzung 17.11. 20:14 · 2 h 19 min · Ø 116 FPS · schlechteste 1 % 57 FPS · CPU max. 71 °C · GPU max. 71 °C · 0,60 kWh ≈ 0,17 €
+2026-11-17 22:34:24  INFO     [Boost] BattlEye Launcher beendet
+2026-11-17 22:34:24  OK       [Boost] BattlEye Launcher: Sitzung 17.11. 20:14 · 2 h 19 min · CPU max. 71 °C · GPU max. 71 °C · 0,60 kWh ≈ 0,17 €
+2026-11-17 22:34:36  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-17 22:34:36  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-17 22:34:47  OK       [Boost] Temp-Dateien: Fertig – 696 KB frei, 16 Dateien gelöscht, 14 übersprungen (0,0 s)
+2026-11-17 22:34:49  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-17 22:34:49  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-17 22:34:49  OK       [Boost] Windows-Spielmodus an: an
+2026-11-17 22:34:49  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-17 22:34:49  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-17 22:34:49  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-17 22:34:49  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-17 22:34:49  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-17 22:34:49  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-17 22:34:49  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-17 22:34:49  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-17 22:34:49  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-17 22:34:49  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-17 22:34:49  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-17 22:34:49  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-17 22:34:49  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-17 22:34:49  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-17 22:34:49  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 22:34:49  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 22:34:49  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 22:34:49  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 22:34:49  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 22:34:49  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 22:34:49  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 22:34:53  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-17 22:34:53  OK       [Boost] Arbeitsspeicher aufgeräumt – 939 MB frei geworden (jetzt 5,6 von 15,8 GB belegt)
+2026-11-17 22:34:53  OK       [Boost] Arbeitsspeicher aufgeräumt – 410 MB frei geworden (jetzt 5,6 von 15,8 GB belegt)
+2026-11-17 22:34:54  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-17 22:34:56  OK       [Boost] EA App: geschlossen
+2026-11-17 22:34:57  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-17 22:34:59  WARNUNG  [Boost] OneDrive.Sync.Service: läuft noch (ungespeicherte Daten?)
+2026-11-17 22:35:00  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-17 22:35:02  OK       [Boost] RazerCortex: geschlossen
+2026-11-17 22:35:02  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 14 übersprungen (0,0 s)
+2026-11-17 22:35:03  OK       [Boost] Arbeitsspeicher aufgeräumt – 57 MB frei geworden (jetzt 5,4 von 15,8 GB belegt)
+2026-11-17 22:35:03  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-19 17:17:01  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-19 17:17:02  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-19 19:59:49  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-19 19:59:50  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-19 20:31:54  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-19 20:31:55  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-19 21:33:39  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-19 21:33:39  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-19 21:33:50  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-19 21:33:50  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-19 21:33:52  OK       [Boost] Arbeitsspeicher aufgeräumt – 2767 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)
+2026-11-19 21:34:11  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 3 Hintergrund-Programme ausgebremst
+2026-11-19 21:34:11  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-19 21:34:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 485 MB frei geworden (jetzt 7,1 von 15,8 GB belegt)
+2026-11-19 21:36:30  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-19 21:36:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 470 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-19 21:39:58  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-19 21:39:58  OK       [Boost] ARK: Survival Ascended: Sitzung 19.11. 21:34 · 5 min · Ø 125 FPS · schlechteste 1 % 14 FPS · CPU max. 58 °C · GPU max. 70 °C · 0,02 kWh ≈ 0,01 €
+2026-11-19 21:39:58  WARNUNG  [Boost] ARK: Survival Ascended ist offenbar abgestürzt: Absturzmeldung des Spiels
+2026-11-19 21:40:13  INFO     [Boost] BattlEye Launcher beendet
+2026-11-19 21:40:13  OK       [Boost] BattlEye Launcher: Sitzung 19.11. 21:33 · 6 min · CPU max. 58 °C · GPU max. 70 °C · 0,02 kWh ≈ 0,01 €
+2026-11-19 21:40:13  WARNUNG  [Boost] BattlEye Launcher ist offenbar abgestürzt: Absturzmeldung des Spiels
+2026-11-20 16:14:12  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:14:13  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:19:05  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:19:06  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:21:31  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:21:31  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:27:47  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:27:47  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:34:29  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:34:30  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)

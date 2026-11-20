@@ -3830,3 +3830,1256 @@
 2026-11-15 16:57:25  OK       [Boost] Shader-Cache: Fertig – 836 MB frei, 148 Dateien gelöscht, 9 übersprungen (0,1 s)
 2026-11-15 16:57:27  OK       [Boost] DNS-Cache geleert
 2026-11-15 16:57:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 1341 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)
+2026-11-15 17:01:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 17:06:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 17:07:11  INFO     [Monitor] Messwerte: CPU 48,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-15 17:11:40  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 17:16:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 17:17:11  INFO     [Monitor] Messwerte: CPU 49,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 45,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 45,0 °C · HWiNFO aktiv, GPU 45,0 °C · Quelle HWiNFO
+2026-11-15 17:21:46  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 17:21:46  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 17:22:06  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 17:22:06  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 17:22:06  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 17:22:06  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 17:22:06  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 17:22:06  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 17:22:06  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 17:22:06  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 17:22:06  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 17:22:07  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 17:22:07  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 17:22:07  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 17:22:07  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 17:22:07  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 17:22:07  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 17:22:07  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 17:22:07  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-15 17:22:07  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:22:07  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 11 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 17:22:07  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:22:07  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 17:22:07  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:22:07  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:22:07  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:22:10  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-15 17:22:12  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-15 17:22:13  OK       [Boost] EA App: geschlossen
+2026-11-15 17:22:13  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 17:22:15  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 17:22:16  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-15 17:22:18  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 17:22:19  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 17:22:19  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 70 übersprungen (0,0 s)
+2026-11-15 17:22:22  OK       [Boost] Arbeitsspeicher aufgeräumt – 1168 MB frei geworden (jetzt 7,7 von 15,8 GB belegt)
+2026-11-15 17:22:22  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 17:22:38  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-15 17:22:38  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 11 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-15 17:22:45  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-15 17:22:45  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:22:45  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-15 17:22:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 345 MB frei geworden (jetzt 7,7 von 15,8 GB belegt)
+2026-11-15 17:23:03  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-15 17:23:03  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert
+2026-11-15 17:23:03  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:23:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 32 MB frei geworden (jetzt 8,0 von 15,8 GB belegt)
+2026-11-15 17:24:11  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 17:24:11  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 17:24:58  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 17:24:58  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 17:24:58  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 17:24:58  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 17:24:58  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 17:24:58  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 17:24:58  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 17:24:58  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 17:24:58  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 17:24:59  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 17:24:59  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 17:24:59  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 17:24:59  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 17:24:59  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 17:24:59  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 17:24:59  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 17:24:59  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-15 17:24:59  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:24:59  WARNUNG  [Boost] ARK: Survival Ascended läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:24:59  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:24:59  WARNUNG  [Boost] BattlEye Launcher läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:24:59  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:24:59  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:24:59  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:25:07  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-15 17:25:09  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-15 17:25:10  OK       [Boost] EA App: geschlossen
+2026-11-15 17:25:12  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 17:25:13  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-15 17:25:15  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 17:25:16  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 17:25:16  OK       [Boost] Temp-Dateien: Fertig – 4 MB frei, 8 Dateien gelöscht, 62 übersprungen (0,0 s)
+2026-11-15 17:25:19  OK       [Boost] Arbeitsspeicher aufgeräumt (jetzt 12,5 von 15,8 GB belegt)
+2026-11-15 17:25:20  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 17:25:30  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:25:33  OK       [Boost] Arbeitsspeicher aufgeräumt (jetzt 14,3 von 15,8 GB belegt)
+2026-11-15 17:27:12  INFO     [Monitor] Messwerte: CPU 68,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 89 %, 103,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 17:27:44  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-15 17:27:44  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-15 17:28:10  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-15 17:28:11  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-15 17:28:11  OK       [Boost] Windows-Spielmodus an: an
+2026-11-15 17:28:11  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-15 17:28:11  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-15 17:28:11  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-15 17:28:11  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-15 17:28:11  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-15 17:28:11  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-15 17:28:12  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-15 17:28:12  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-15 17:28:12  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-15 17:28:12  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-15 17:28:12  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-15 17:28:12  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-15 17:28:12  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-15 17:28:12  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-15 17:28:12  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:28:12  WARNUNG  [Boost] ARK: Survival Ascended läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:28:12  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:28:12  WARNUNG  [Boost] BattlEye Launcher läuft gerade – Grafik-Config wird beim nächsten Mal geschrieben (Spiel vorher schließen).
+2026-11-15 17:28:12  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:28:12  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:28:12  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:28:20  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-15 17:28:21  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-15 17:28:23  OK       [Boost] EA App: geschlossen
+2026-11-15 17:28:24  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-15 17:28:26  OK       [Boost] OneDrive.Sync.Service: geschlossen
+2026-11-15 17:28:27  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-15 17:28:29  OK       [Boost] RazerCortex: geschlossen
+2026-11-15 17:28:29  OK       [Boost] Temp-Dateien: Fertig – 167 KB frei, 5 Dateien gelöscht, 57 übersprungen (0,0 s)
+2026-11-15 17:28:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 2054 MB frei geworden (jetzt 11,8 von 15,8 GB belegt)
+2026-11-15 17:28:31  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-15 17:30:27  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:30:29  OK       [Boost] Arbeitsspeicher aufgeräumt – 388 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 17:37:13  INFO     [Monitor] Messwerte: CPU 56,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 17:39:51  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:39:53  OK       [Boost] Arbeitsspeicher aufgeräumt – 561 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-15 17:47:13  INFO     [Monitor] Messwerte: CPU 58,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 17:53:24  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:53:26  OK       [Boost] Arbeitsspeicher aufgeräumt – 475 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 17:55:47  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-15 17:55:47  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-15 17:55:47  INFO     [Allgemein] Beenden …
+2026-11-15 17:55:47  INFO     [Monitor] FPS-Messung beendet
+2026-11-15 17:55:47  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-15 17:55:48  INFO     [Allgemein] Beendet.
+2026-11-15 17:55:52  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-15 17:55:52  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-15 17:55:52  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 17:55:52  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 17:55:52  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-15 17:55:55  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-15 17:55:55  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-15 17:55:55  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-15 17:55:55  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-15 17:55:55  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-15 17:55:55  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 17:55:55  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 17:55:56  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 17:55:57  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-15 17:55:58  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-15 17:55:58  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert
+2026-11-15 17:55:58  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-15 17:55:58  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-15 17:55:58  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-15 17:55:59  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-15 17:56:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 281 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 17:56:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 372 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 17:56:01  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 17:56:01  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 17:56:12  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-15 17:56:30  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-15 17:56:30  INFO     [Monitor] Messwerte: CPU 54,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 17:56:31  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:56:34  OK       [Boost] Arbeitsspeicher aufgeräumt – 409 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 17:59:32  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 17:59:33  OK       [Boost] Arbeitsspeicher aufgeräumt – 591 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-15 18:02:50  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:02:51  OK       [Boost] Arbeitsspeicher aufgeräumt – 602 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-15 18:06:30  INFO     [Monitor] Messwerte: CPU 49,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 94 %, 108,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 18:07:26  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:07:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 733 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-15 18:10:26  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:10:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 521 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:13:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:13:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 431 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:16:26  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:16:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 437 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-15 18:16:31  INFO     [Monitor] Messwerte: CPU 51,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-15 18:19:26  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:19:27  OK       [Boost] Arbeitsspeicher aufgeräumt – 402 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:23:53  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:23:55  OK       [Boost] Arbeitsspeicher aufgeräumt – 261 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-15 18:26:32  INFO     [Monitor] Messwerte: CPU 58,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 18:28:29  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:28:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 532 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 18:34:03  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:34:05  OK       [Boost] Arbeitsspeicher aufgeräumt – 278 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 18:36:33  INFO     [Monitor] Messwerte: CPU 57,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 95 %, 109,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-15 18:37:04  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:37:06  OK       [Boost] Arbeitsspeicher aufgeräumt – 301 MB frei geworden (jetzt 13,6 von 15,8 GB belegt)
+2026-11-15 18:40:28  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:40:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 289 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 18:43:28  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:43:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 278 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-15 18:46:33  INFO     [Monitor] Messwerte: CPU 54,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-15 18:48:55  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:48:57  OK       [Boost] Arbeitsspeicher aufgeräumt – 296 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 18:51:55  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:51:57  OK       [Boost] Arbeitsspeicher aufgeräumt – 292 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 18:54:58  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:55:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 305 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-15 18:56:33  INFO     [Monitor] Messwerte: CPU 55,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 18:57:58  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 18:57:59  OK       [Boost] Arbeitsspeicher aufgeräumt – 387 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 19:01:13  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:01:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 307 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 19:04:16  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:04:17  OK       [Boost] Arbeitsspeicher aufgeräumt – 241 MB frei geworden (jetzt 13,6 von 15,8 GB belegt)
+2026-11-15 19:06:33  INFO     [Monitor] Messwerte: CPU 56,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 95 %, 109,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-15 19:07:16  INFO     [Boost] RAM zu 88 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:07:17  OK       [Boost] Arbeitsspeicher aufgeräumt – 472 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-15 19:12:59  INFO     [Monitor] HWiNFO-Status: HWiNFO liefert keine neuen Werte (Shared Memory nach 12 h abgelaufen?) – nutze LibreHardwareMonitor
+2026-11-15 19:12:59  INFO     [Monitor] HWiNFO liefert keine Werte mehr (12-Stunden-Grenze?) – starte HWiNFO neu
+2026-11-15 19:13:00  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 19:13:03  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-15 19:13:06  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-15 19:13:10  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 19:13:16  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:13:18  OK       [Boost] Arbeitsspeicher aufgeräumt – 511 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-15 19:16:34  INFO     [Monitor] Messwerte: CPU 55,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-15 19:17:28  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:17:30  OK       [Boost] Arbeitsspeicher aufgeräumt – 330 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-15 19:22:58  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:22:59  OK       [Boost] Arbeitsspeicher aufgeräumt – 199 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-15 19:25:58  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-15 19:26:00  OK       [Boost] Arbeitsspeicher aufgeräumt – 762 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-15 19:26:34  INFO     [Monitor] Messwerte: CPU 56,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-15 19:29:04  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-15 19:29:04  OK       [Boost] ARK: Survival Ascended: Sitzung 15.11. 17:55 · 1 h 33 min · Ø 99 FPS · schlechteste 1 % 55 FPS · CPU max. 69 °C · GPU max. 70 °C · 0,40 kWh ≈ 0,12 €
+2026-11-15 19:29:15  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-15 22:12:00  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-15 22:12:00  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-15 22:12:00  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-15 22:12:00  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-15 22:12:00  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-15 22:12:01  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-15 22:12:03  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-15 22:12:03  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-15 22:12:03  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-15 22:12:03  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-15 22:12:03  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-15 22:12:03  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-15 22:12:04  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-15 22:12:04  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-15 22:12:04  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-15 22:12:06  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-15 22:12:06  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-15 22:12:18  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-15 22:12:25  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-15 22:12:25  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-15 22:12:34  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-15 22:12:39  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-15 22:12:39  INFO     [Monitor] Messwerte: CPU 48,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-15 22:17:07  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-15 22:17:43  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-15 22:17:43  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-17 17:25:03  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-17 17:25:03  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-17 17:25:04  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-17 17:25:04  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-17 17:25:04  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-17 17:25:05  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-17 17:25:06  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-17 17:25:06  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-17 17:25:06  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-17 17:25:06  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-17 17:25:06  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-17 17:25:06  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-17 17:25:07  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-17 17:25:07  INFO     [Allgemein] Einstellungen gesichert (täglich): 15 Dateien
+2026-11-17 17:25:07  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-17 17:25:07  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-17 17:25:07  INFO     [Allgemein] Downloads sortiert: 3 Dateien verschoben
+2026-11-17 17:25:08  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-17 17:25:10  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-17 17:25:29  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-17 17:25:29  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-17 17:25:37  INFO     [Problemloeser] Gefunden: Overwolf läuft – Overlay-Programm mit spürbarer Hintergrundlast.
+2026-11-17 17:25:43  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-17 17:25:43  INFO     [Monitor] Messwerte: CPU 41,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 32,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 32,0 °C · HWiNFO aktiv, GPU 32,0 °C · Quelle HWiNFO
+2026-11-17 17:25:49  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 1 Update bereit (online geprüft)
+2026-11-17 17:30:10  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 2 Updates bereit (lokal geprüft)
+2026-11-17 17:35:10  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 2 Updates bereit (lokal geprüft)
+2026-11-17 17:35:43  INFO     [Monitor] Messwerte: CPU 53,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 40,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 40,0 °C · HWiNFO aktiv, GPU 40,0 °C · Quelle HWiNFO
+2026-11-17 17:40:10  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 17:42:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-17 17:45:44  INFO     [Monitor] Messwerte: CPU 42,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 19 %, 29,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-17 17:47:35  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 17:52:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 17:55:44  INFO     [Monitor] Messwerte: CPU 46,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 16 %, 26,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-17 17:57:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:02:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:05:45  INFO     [Monitor] Messwerte: CPU 50,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 26 %, 36,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aktiv, GPU 46,0 °C · Quelle HWiNFO
+2026-11-17 18:07:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:12:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:15:46  INFO     [Monitor] Messwerte: CPU 42,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 34 %, 45,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aktiv, GPU 46,0 °C · Quelle HWiNFO
+2026-11-17 18:17:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:22:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:25:46  INFO     [Monitor] Messwerte: CPU 44,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 18 %, 28,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-17 18:27:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:32:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:35:46  INFO     [Monitor] Messwerte: CPU 46,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 14 %, 24,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aktiv, GPU 41,0 °C · Quelle HWiNFO
+2026-11-17 18:35:51  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-17 18:36:03  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 23 Mbit/s
+2026-11-17 18:36:16  INFO     [Allgemein] winget: 5 Updates verfügbar
+2026-11-17 18:37:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:42:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:45:47  INFO     [Monitor] Messwerte: CPU 45,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 40 %, 51,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-17 18:47:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-17 18:52:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:55:47  INFO     [Monitor] Messwerte: CPU 52,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 6 %, 15,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-17 18:57:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 18:59:10  OK       [Problemloeser] Erledigt: prog:overwolf
+2026-11-17 19:02:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:05:48  INFO     [Monitor] Messwerte: CPU 48,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 58 %, 70,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aktiv, GPU 46,0 °C · Quelle HWiNFO
+2026-11-17 19:07:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:12:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:15:48  INFO     [Monitor] Messwerte: CPU 46,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 52,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 52,0 °C · HWiNFO aktiv, GPU 52,0 °C · Quelle HWiNFO
+2026-11-17 19:17:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:22:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:25:49  INFO     [Monitor] Messwerte: CPU 43,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 14 %, 24,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-17 19:27:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:32:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:35:49  INFO     [Monitor] Messwerte: CPU 44,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 35 %, 46,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aktiv, GPU 44,0 °C · Quelle HWiNFO
+2026-11-17 19:37:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:42:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:45:49  INFO     [Monitor] Messwerte: CPU 46,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 6 %, 15,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-17 19:47:48  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 19:52:50  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-17 19:55:49  INFO     [Monitor] Messwerte: CPU 44,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aktiv, GPU 39,0 °C · Quelle HWiNFO
+2026-11-17 19:57:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 20:02:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 20:05:50  INFO     [Monitor] Messwerte: CPU 44,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 33 %, 44,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-17 20:07:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 20:11:43  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-17 20:11:44  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-17 20:11:46  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-17 20:11:46  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-17 20:11:46  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-17 20:12:35  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 20:13:57  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-17 20:13:57  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-17 20:14:06  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-17 20:14:06  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 20:14:12  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-17 20:14:12  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-17 20:14:12  OK       [Boost] Windows-Spielmodus an: an
+2026-11-17 20:14:12  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-17 20:14:12  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-17 20:14:12  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-17 20:14:12  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-17 20:14:12  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-17 20:14:12  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-17 20:14:12  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-17 20:14:12  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-17 20:14:12  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-17 20:14:12  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-17 20:14:12  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-17 20:14:12  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-17 20:14:12  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-17 20:14:12  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-17 20:14:12  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:12  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 20:14:12  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 20:14:12  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 20:14:12  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 20:14:12  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:12  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:25  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-17 20:14:25  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 20:14:27  WARNUNG  [Boost] EA (EACefSubProcess): läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:28  OK       [Boost] Arbeitsspeicher aufgeräumt – 2060 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)
+2026-11-17 20:14:28  WARNUNG  [Boost] OneDrive (Synchronisierung): läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:30  WARNUNG  [Boost] EA App: läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:31  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-17 20:14:33  WARNUNG  [Boost] OneDrive.Sync.Service: läuft noch (ungespeicherte Daten?)
+2026-11-17 20:14:34  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-17 20:14:36  OK       [Boost] RazerCortex: geschlossen
+2026-11-17 20:14:36  OK       [Boost] Temp-Dateien: Fertig – 181 MB frei, 142 Dateien gelöscht, 19 übersprungen (0,1 s)
+2026-11-17 20:14:37  OK       [Boost] Arbeitsspeicher aufgeräumt – 90 MB frei geworden (jetzt 7,9 von 15,8 GB belegt)
+2026-11-17 20:14:37  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-17 20:14:46  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-17 20:14:46  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 1 Hintergrund-Programme ausgebremst
+2026-11-17 20:14:46  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 20:14:48  OK       [Boost] Arbeitsspeicher aufgeräumt – 89 MB frei geworden (jetzt 8,4 von 15,8 GB belegt)
+2026-11-17 20:15:40  INFO     [Boost] RAM zu 90 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:15:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 1007 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-17 20:15:50  INFO     [Monitor] Messwerte: CPU 51,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 43,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 43,0 °C · HWiNFO aktiv, GPU 43,0 °C · Quelle HWiNFO
+2026-11-17 20:18:41  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:18:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 524 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-17 20:21:41  INFO     [Boost] RAM zu 89 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:21:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 943 MB frei geworden (jetzt 13,3 von 15,8 GB belegt)
+2026-11-17 20:24:41  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:24:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 482 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-17 20:25:50  INFO     [Monitor] Messwerte: CPU 57,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 65,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 65,0 °C · HWiNFO aktiv, GPU 65,0 °C · Quelle HWiNFO
+2026-11-17 20:35:02  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:35:04  OK       [Boost] Arbeitsspeicher aufgeräumt – 437 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-17 20:35:51  INFO     [Monitor] Messwerte: CPU 55,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-17 20:45:51  INFO     [Monitor] Messwerte: CPU 58,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-17 20:48:29  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:48:31  OK       [Boost] Arbeitsspeicher aufgeräumt – 617 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 20:55:51  INFO     [Monitor] Messwerte: CPU 55,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-17 20:56:45  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:56:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 571 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 20:59:45  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 20:59:46  OK       [Boost] Arbeitsspeicher aufgeräumt – 306 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:05:51  INFO     [Monitor] Messwerte: CPU 53,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-17 21:15:36  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:15:39  OK       [Boost] Arbeitsspeicher aufgeräumt – 360 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:15:51  INFO     [Monitor] Messwerte: CPU 53,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 65,0 °C, Last 95 %, 109,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 65,0 °C · HWiNFO aktiv, GPU 65,0 °C · Quelle HWiNFO
+2026-11-17 21:21:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:21:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 558 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 21:24:31  INFO     [Luefter] Sicherheitsmodus: 91 °C
+2026-11-17 21:24:32  INFO     [Luefter] Sicherheitsmodus beendet: 78 °C
+2026-11-17 21:24:49  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:24:50  OK       [Boost] Arbeitsspeicher aufgeräumt – 399 MB frei geworden (jetzt 13,1 von 15,8 GB belegt)
+2026-11-17 21:25:52  INFO     [Monitor] Messwerte: CPU 58,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 65,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 65,0 °C · HWiNFO aktiv, GPU 65,0 °C · Quelle HWiNFO
+2026-11-17 21:28:13  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:28:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 369 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-17 21:31:13  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:31:14  OK       [Boost] Arbeitsspeicher aufgeräumt – 217 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:34:13  INFO     [Boost] RAM zu 86 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:34:15  OK       [Boost] Arbeitsspeicher aufgeräumt – 248 MB frei geworden (jetzt 13,5 von 15,8 GB belegt)
+2026-11-17 21:35:52  INFO     [Monitor] Messwerte: CPU 57,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 66,0 °C, Last 94 %, 108,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 66,0 °C · HWiNFO aktiv, GPU 66,0 °C · Quelle HWiNFO
+2026-11-17 21:39:40  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 21:39:42  OK       [Boost] Arbeitsspeicher aufgeräumt – 277 MB frei geworden (jetzt 13,2 von 15,8 GB belegt)
+2026-11-17 21:45:53  INFO     [Monitor] Messwerte: CPU 57,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-17 21:55:53  INFO     [Monitor] Messwerte: CPU 55,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 95 %, 109,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-17 22:05:53  INFO     [Monitor] Messwerte: CPU 55,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 65,0 °C, Last 79 %, 92,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 65,0 °C · HWiNFO aktiv, GPU 65,0 °C · Quelle HWiNFO
+2026-11-17 22:15:53  INFO     [Monitor] Messwerte: CPU 51,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-17 22:19:54  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 22:19:56  OK       [Boost] Arbeitsspeicher aufgeräumt – 600 MB frei geworden (jetzt 12,9 von 15,8 GB belegt)
+2026-11-17 22:25:53  INFO     [Monitor] Messwerte: CPU 56,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aktiv, GPU 67,0 °C · Quelle HWiNFO
+2026-11-17 22:30:06  INFO     [Boost] RAM zu 85 % voll – gebe Arbeitsspeicher frei
+2026-11-17 22:30:08  OK       [Boost] Arbeitsspeicher aufgeräumt – 535 MB frei geworden (jetzt 13,0 von 15,8 GB belegt)
+2026-11-17 22:34:09  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-17 22:34:09  OK       [Boost] ARK: Survival Ascended: Sitzung 17.11. 20:14 · 2 h 19 min · Ø 116 FPS · schlechteste 1 % 57 FPS · CPU max. 71 °C · GPU max. 71 °C · 0,60 kWh ≈ 0,17 €
+2026-11-17 22:34:24  INFO     [Boost] BattlEye Launcher beendet
+2026-11-17 22:34:24  OK       [Boost] BattlEye Launcher: Sitzung 17.11. 20:14 · 2 h 19 min · CPU max. 71 °C · GPU max. 71 °C · 0,60 kWh ≈ 0,17 €
+2026-11-17 22:34:25  INFO     [Allgemein] Desktop-Kacheln wieder eingeblendet
+2026-11-17 22:34:35  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-17 22:34:36  INFO     [Boost] 1-Klick-Boost gestartet
+2026-11-17 22:34:36  INFO     [Boost] Erstelle Wiederherstellungspunkt (kann etwas dauern) …
+2026-11-17 22:34:47  OK       [Boost] Temp-Dateien: Fertig – 696 KB frei, 16 Dateien gelöscht, 14 übersprungen (0,0 s)
+2026-11-17 22:34:49  OK       [Boost] Wiederherstellungspunkt erstellt (oder Windows erlaubt nur einen pro Tag)
+2026-11-17 22:34:49  OK       [Boost] Energieplan: Höchstleistung: an
+2026-11-17 22:34:49  OK       [Boost] Windows-Spielmodus an: an
+2026-11-17 22:34:49  OK       [Boost] Xbox-Hintergrundaufnahme (Game DVR) aus: an
+2026-11-17 22:34:49  OK       [Boost] Hardwarebeschleunigte GPU-Planung: an
+2026-11-17 22:34:49  OK       [Boost] Spiele-Priorität (CPU & GPU): an
+2026-11-17 22:34:49  OK       [Boost] Energiedrosselung (Power Throttling) aus: an
+2026-11-17 22:34:49  OK       [Boost] Netzwerk-Drosselung aus: an
+2026-11-17 22:34:49  OK       [Boost] Niedriger Ping (Nagle-Algorithmus aus): an
+2026-11-17 22:34:49  OK       [Boost] Mausbeschleunigung aus: an
+2026-11-17 22:34:49  OK       [Boost] Einrastfunktion-Popups aus: an
+2026-11-17 22:34:49  OK       [Boost] Hintergrund-Apps blockieren: an
+2026-11-17 22:34:49  OK       [Boost] Timer-Auflösung 0,5 ms beim Zocken: an
+2026-11-17 22:34:49  OK       [Boost] Timer-Auflösung systemweit erlauben (Windows 11): an
+2026-11-17 22:34:49  OK       [Boost] Autostart-Verzögerung aus: an
+2026-11-17 22:34:49  OK       [Boost] Update-Verteilung an andere PCs aus: an
+2026-11-17 22:34:49  OK       [Boost] Multimedia-Planer: Spiele zuerst: an
+2026-11-17 22:34:49  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 22:34:49  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 22:34:49  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 22:34:49  OK       [Boost] BattlEye Launcher: Grafik-Config angepasst (V-Sync aus, Qualität Ausgewogen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-17 22:34:49  OK       [Boost] Epic Games Updater: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-17 22:34:49  OK       [Boost] Find The Needle Demo: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 22:34:49  OK       [Boost] Schedule I: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-17 22:34:53  OK       [Boost] EACefSubProcess: geschlossen
+2026-11-17 22:34:53  OK       [Boost] Arbeitsspeicher aufgeräumt – 939 MB frei geworden (jetzt 5,6 von 15,8 GB belegt)
+2026-11-17 22:34:53  OK       [Boost] Arbeitsspeicher aufgeräumt – 410 MB frei geworden (jetzt 5,6 von 15,8 GB belegt)
+2026-11-17 22:34:54  OK       [Boost] OneDrive (Synchronisierung): geschlossen
+2026-11-17 22:34:56  OK       [Boost] EA App: geschlossen
+2026-11-17 22:34:57  OK       [Boost] Razer.InGameOverlay: geschlossen
+2026-11-17 22:34:59  WARNUNG  [Boost] OneDrive.Sync.Service: läuft noch (ungespeicherte Daten?)
+2026-11-17 22:35:00  OK       [Boost] CefSharp.BrowserSubprocess: geschlossen
+2026-11-17 22:35:02  OK       [Boost] RazerCortex: geschlossen
+2026-11-17 22:35:02  OK       [Boost] Temp-Dateien: Fertig – 0 KB frei, 0 Dateien gelöscht, 14 übersprungen (0,0 s)
+2026-11-17 22:35:03  OK       [Boost] Arbeitsspeicher aufgeräumt – 57 MB frei geworden (jetzt 5,4 von 15,8 GB belegt)
+2026-11-17 22:35:03  OK       [Boost] Fertig – einige Punkte wirken nach einem Neustart
+2026-11-17 22:35:53  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-17 22:39:27  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 22:44:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 22:45:31  INFO     [Luefter] Lüfterprofil „Normal“: schneller ab 70 °C, Sicherheit ab 85 °C
+2026-11-17 22:45:31  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:45:35  INFO     [Luefter] Lüfterprofil „Leise“: schneller ab 78 °C, Sicherheit ab 88 °C
+2026-11-17 22:45:35  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:45:37  INFO     [Luefter] Lüfterprofil „Normal“: schneller ab 70 °C, Sicherheit ab 85 °C
+2026-11-17 22:45:37  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:45:37  INFO     [Luefter] Lüfterprofil „Leise“: schneller ab 78 °C, Sicherheit ab 88 °C
+2026-11-17 22:45:37  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:45:54  INFO     [Monitor] Messwerte: CPU 50,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-17 22:45:58  INFO     [Luefter] Lüfterprofil „Normal“: schneller ab 70 °C, Sicherheit ab 85 °C
+2026-11-17 22:45:59  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:46:00  INFO     [Luefter] Lüfterprofil „Leise“: schneller ab 78 °C, Sicherheit ab 88 °C
+2026-11-17 22:46:00  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:46:01  INFO     [Luefter] Lüfterprofil „Normal“: schneller ab 70 °C, Sicherheit ab 85 °C
+2026-11-17 22:46:01  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:46:03  INFO     [Luefter] Lüfterprofil „Leise“: schneller ab 78 °C, Sicherheit ab 88 °C
+2026-11-17 22:46:03  INFO     [Allgemein] Tastenkürzel: fans
+2026-11-17 22:46:38  INFO     [Problemloeser] Autostart „Overwolf – Overwolf Launcher“: aus
+2026-11-17 22:46:44  INFO     [Problemloeser] Autostart „Opera GX Browser Assistant“: aus
+2026-11-17 22:46:47  INFO     [Problemloeser] Autostart „Discord – Update“: aus
+2026-11-17 22:47:03  INFO     [Problemloeser] Autostart „EADM“: aus
+2026-11-17 22:47:10  INFO     [Problemloeser] Autostart „Ollama“: aus
+2026-11-17 22:47:32  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 156 Mbit/s
+2026-11-17 22:48:02  INFO     [Allgemein] Speicherplatz: c:\windows\softwaredistribution\download geleert – 961 MB frei
+2026-11-17 22:48:03  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\d3dscache geleert – 714 MB frei
+2026-11-17 22:48:04  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\nvidia\dxcache geleert – 262 MB frei
+2026-11-17 22:48:08  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\roaming\discord\cache geleert – 146 MB frei
+2026-11-17 22:48:09  INFO     [Allgemein] Speicherplatz: C:\Users\nickg\AppData\Local\Temp\ geleert – 13 KB frei
+2026-11-17 22:48:09  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\crashdumps geleert – 36 MB frei
+2026-11-17 22:48:10  INFO     [Allgemein] Speicherplatz: c:\windows\temp geleert – 0 KB frei
+2026-11-17 22:48:12  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\roaming\discord\code cache geleert – 1014 KB frei
+2026-11-17 22:48:13  INFO     [Allgemein] Speicherplatz: c:\users\nickg\appdata\local\nvidia\glcache geleert – 0 KB frei
+2026-11-17 22:49:27  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 22:54:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 22:55:34  INFO     [Allgemein] Installer braucht ungewöhnlich lange – Fenster wird angezeigt
+2026-11-17 22:55:55  INFO     [Monitor] Messwerte: CPU 39,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 35 %, 46,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-17 22:59:29  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:04:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:05:55  INFO     [Monitor] Messwerte: CPU 60,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 41 %, 52,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-17 23:09:29  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:14:29  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:14:45  OK       [Allgemein] winget: GitHub Copilot 1.3.0 → 1.4.2: ✔ Aktualisiert
+2026-11-17 23:15:56  INFO     [Monitor] Messwerte: CPU 62,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 41 %, 52,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-17 23:16:04  OK       [Allgemein] winget: Microsoft Visual Studio Code (User) 1.145.3 → 1.146.0: ✔ Aktualisiert
+2026-11-17 23:16:51  OK       [Allgemein] winget: Obsidian 1.15.0 → 1.15.1: ✔ Aktualisiert
+2026-11-17 23:17:48  OK       [Allgemein] winget: PDF24 Creator 11.33.0 11.33.0 → 11.34.0: ✔ Aktualisiert
+2026-11-17 23:17:50  WARNUNG  [Allgemein] winget: Tailscale 1.104.6 → 1.104.7: Fehlgeschlagen (Code -1978335189)
+2026-11-17 23:19:27  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:24:27  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:25:57  INFO     [Monitor] Messwerte: CPU 48,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 34 %, 45,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-17 23:29:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:34:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:35:57  INFO     [Monitor] Messwerte: CPU 50,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 33 %, 44,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aktiv, GPU 39,0 °C · Quelle HWiNFO
+2026-11-17 23:39:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-17 23:44:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:45:58  INFO     [Monitor] Messwerte: CPU 46,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 45,0 °C, Last 24 %, 34,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 45,0 °C · HWiNFO aktiv, GPU 45,0 °C · Quelle HWiNFO
+2026-11-17 23:48:44  INFO     [Luefter] Sicherheitsmodus: 89 °C
+2026-11-17 23:49:11  INFO     [Luefter] Sicherheitsmodus beendet: 82 °C
+2026-11-17 23:49:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:54:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-17 23:55:59  INFO     [Monitor] Messwerte: CPU 45,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 26 %, 36,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-17 23:59:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 00:04:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 00:05:59  INFO     [Monitor] Messwerte: CPU 55,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 70,0 °C, Last 100 %, 115,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 70,0 °C · HWiNFO aktiv, GPU 70,0 °C · Quelle HWiNFO
+2026-11-18 00:09:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 00:14:29  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 00:15:59  INFO     [Monitor] Messwerte: CPU 52,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 71,0 °C, Last 100 %, 115,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 71,0 °C · HWiNFO aktiv, GPU 71,0 °C · Quelle HWiNFO
+2026-11-18 00:19:28  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 00:24:29  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 00:26:00  INFO     [Monitor] Messwerte: CPU 48,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 68,0 °C, Last 91 %, 105,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 68,0 °C · HWiNFO aktiv, GPU 68,0 °C · Quelle HWiNFO
+2026-11-18 00:27:01  INFO     [Beleuchtung] Beleuchtung aus (alle Geräte dunkel)
+2026-11-18 00:28:38  INFO     [Luefter] Aus Standby aufgewacht – Werte werden neu gesetzt.
+2026-11-18 00:28:38  INFO     [Monitor] HWiNFO-Status: HWiNFO liefert keine neuen Werte (Shared Memory nach 12 h abgelaufen?) – nutze LibreHardwareMonitor
+2026-11-18 00:28:38  INFO     [Monitor] HWiNFO liefert keine Werte mehr (12-Stunden-Grenze?) – starte HWiNFO neu
+2026-11-18 00:28:40  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-18 00:28:42  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-18 00:28:43  INFO     [Problemloeser] Gefunden: Optional: HWiNFO für noch genauere Temperaturen – Die App misst selbst (LibreHardwareMonitor). Läuft HWiNFO mit „Shared Memory Support“, übernimmt sie automatisch dessen Werte – z. B. für neue Hardware, die LibreHardwareMonitor noch nicht kennt.
+2026-11-18 00:28:43  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-18 00:28:47  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-18 00:28:48  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 06:40:51  OK       [Problemloeser] Erledigt: hw:missing
+2026-11-18 06:40:51  INFO     [Luefter] Aus Standby aufgewacht – Werte werden neu gesetzt.
+2026-11-18 06:40:51  INFO     [Monitor] Messwerte: CPU 45,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 26,0 °C, Last 5 %, 14,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 26,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 06:40:51  INFO     [Monitor] HWiNFO-Status: HWiNFO liefert keine neuen Werte (Shared Memory nach 12 h abgelaufen?) – nutze LibreHardwareMonitor
+2026-11-18 06:40:51  INFO     [Monitor] HWiNFO liefert keine Werte mehr (12-Stunden-Grenze?) – starte HWiNFO neu
+2026-11-18 06:40:53  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-18 06:40:55  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-18 06:40:56  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-18 06:41:01  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-18 06:41:19  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 06:45:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 06:50:52  INFO     [Monitor] Messwerte: CPU 38,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-18 06:50:53  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 06:55:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:00:53  INFO     [Monitor] Messwerte: CPU 41,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 25 %, 35,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aktiv, GPU 42,0 °C · Quelle HWiNFO
+2026-11-18 07:00:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:05:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:10:53  INFO     [Monitor] Messwerte: CPU 40,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 51,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 51,0 °C · HWiNFO aktiv, GPU 51,0 °C · Quelle HWiNFO
+2026-11-18 07:10:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:15:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:20:53  INFO     [Monitor] Messwerte: CPU 46,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 07:20:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:25:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:30:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:30:54  INFO     [Monitor] Messwerte: CPU 48,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aktiv, GPU 42,0 °C · Quelle HWiNFO
+2026-11-18 07:35:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:40:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:40:54  INFO     [Monitor] Messwerte: CPU 48,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aktiv, GPU 42,0 °C · Quelle HWiNFO
+2026-11-18 07:46:26  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 07:50:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 07:50:55  INFO     [Monitor] Messwerte: CPU 43,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-18 07:55:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:00:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:00:55  INFO     [Monitor] Messwerte: CPU 41,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aktiv, GPU 42,0 °C · Quelle HWiNFO
+2026-11-18 08:05:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:10:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:10:56  INFO     [Monitor] Messwerte: CPU 43,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aktiv, GPU 38,0 °C · Quelle HWiNFO
+2026-11-18 08:15:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:20:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:20:56  INFO     [Monitor] Messwerte: CPU 41,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-18 08:25:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:30:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:30:56  INFO     [Monitor] Messwerte: CPU 39,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aktiv, GPU 44,0 °C · Quelle HWiNFO
+2026-11-18 08:35:54  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:40:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:40:57  INFO     [Monitor] Messwerte: CPU 46,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 33,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 33,0 °C · HWiNFO aktiv, GPU 33,0 °C · Quelle HWiNFO
+2026-11-18 08:45:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 08:50:57  INFO     [Monitor] Messwerte: CPU 41,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 44 %, 55,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 08:51:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 08:55:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:00:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:00:57  INFO     [Monitor] Messwerte: CPU 39,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aktiv, GPU 46,0 °C · Quelle HWiNFO
+2026-11-18 09:05:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:10:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:10:58  INFO     [Monitor] Messwerte: CPU 40,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-18 09:15:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:20:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:20:58  INFO     [Monitor] Messwerte: CPU 40,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 51,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 51,0 °C · HWiNFO aktiv, GPU 51,0 °C · Quelle HWiNFO
+2026-11-18 09:25:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:30:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:30:59  INFO     [Monitor] Messwerte: CPU 43,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 47 %, 58,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 09:35:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:40:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:40:59  INFO     [Monitor] Messwerte: CPU 41,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 43 %, 54,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aktiv, GPU 42,0 °C · Quelle HWiNFO
+2026-11-18 09:45:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:50:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 09:50:59  INFO     [Monitor] Messwerte: CPU 45,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 33,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 33,0 °C · HWiNFO aktiv, GPU 33,0 °C · Quelle HWiNFO
+2026-11-18 09:55:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 10:00:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:01:00  INFO     [Monitor] Messwerte: CPU 42,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 46 %, 57,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 10:05:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:10:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:11:00  INFO     [Monitor] Messwerte: CPU 40,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 47 %, 58,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-18 10:15:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:20:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:21:00  INFO     [Monitor] Messwerte: CPU 44,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 25 %, 35,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aktiv, GPU 41,0 °C · Quelle HWiNFO
+2026-11-18 10:25:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:30:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:31:01  INFO     [Monitor] Messwerte: CPU 41,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-18 10:35:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:40:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:41:01  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 10:45:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:50:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 10:51:01  INFO     [Monitor] Messwerte: CPU 40,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-18 10:55:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:01:02  INFO     [Monitor] Messwerte: CPU 43,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aktiv, GPU 39,0 °C · Quelle HWiNFO
+2026-11-18 11:01:03  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 11:05:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:10:55  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:11:02  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aktiv, GPU 39,0 °C · Quelle HWiNFO
+2026-11-18 11:15:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:20:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:21:03  INFO     [Monitor] Messwerte: CPU 42,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 11:25:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:30:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:31:03  INFO     [Monitor] Messwerte: CPU 42,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 19 %, 29,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aktiv, GPU 46,0 °C · Quelle HWiNFO
+2026-11-18 11:35:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:40:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:41:04  INFO     [Monitor] Messwerte: CPU 41,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 45 %, 56,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aktiv, GPU 38,0 °C · Quelle HWiNFO
+2026-11-18 11:45:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:50:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 11:51:04  INFO     [Monitor] Messwerte: CPU 40,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aktiv, GPU 39,0 °C · Quelle HWiNFO
+2026-11-18 11:55:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:00:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:01:04  INFO     [Monitor] Messwerte: CPU 40,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 12:06:14  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 12:10:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:11:05  INFO     [Monitor] Messwerte: CPU 42,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 44 %, 55,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aktiv, GPU 46,0 °C · Quelle HWiNFO
+2026-11-18 12:15:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:20:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:21:05  INFO     [Monitor] Messwerte: CPU 42,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 40,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 40,0 °C · HWiNFO aktiv, GPU 40,0 °C · Quelle HWiNFO
+2026-11-18 12:25:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:30:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:31:06  INFO     [Monitor] Messwerte: CPU 42,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-18 12:35:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:40:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:41:06  INFO     [Monitor] Messwerte: CPU 42,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 46 %, 57,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 12:45:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:50:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 12:51:07  INFO     [Monitor] Messwerte: CPU 42,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 12:55:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:00:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:01:07  INFO     [Monitor] Messwerte: CPU 44,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 26 %, 36,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aktiv, GPU 44,0 °C · Quelle HWiNFO
+2026-11-18 13:05:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:11:08  INFO     [Monitor] Messwerte: CPU 40,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-18 13:11:30  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 13:15:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:20:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:21:08  INFO     [Monitor] Messwerte: CPU 42,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aktiv, GPU 39,0 °C · Quelle HWiNFO
+2026-11-18 13:25:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:30:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:31:08  INFO     [Monitor] Messwerte: CPU 42,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 13:35:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:40:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:41:09  INFO     [Monitor] Messwerte: CPU 40,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-18 13:45:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:50:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 13:51:09  INFO     [Monitor] Messwerte: CPU 48,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 43,0 °C, Last 24 %, 34,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 43,0 °C · HWiNFO aktiv, GPU 43,0 °C · Quelle HWiNFO
+2026-11-18 13:55:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:00:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:01:09  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 48 %, 60,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-18 14:05:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:10:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:11:10  INFO     [Monitor] Messwerte: CPU 41,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aktiv, GPU 38,0 °C · Quelle HWiNFO
+2026-11-18 14:16:03  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 14:20:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:21:10  INFO     [Monitor] Messwerte: CPU 42,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 14:25:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:30:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:31:11  INFO     [Monitor] Messwerte: CPU 41,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 14:35:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:40:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:41:11  INFO     [Monitor] Messwerte: CPU 40,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 43,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 43,0 °C · HWiNFO aktiv, GPU 43,0 °C · Quelle HWiNFO
+2026-11-18 14:45:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:50:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 14:51:11  INFO     [Monitor] Messwerte: CPU 42,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-18 14:55:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:00:57  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:01:12  INFO     [Monitor] Messwerte: CPU 41,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 24 %, 34,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-18 15:05:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:10:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:11:12  INFO     [Monitor] Messwerte: CPU 42,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 15:15:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:21:08  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 15:21:12  INFO     [Monitor] Messwerte: CPU 41,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 15:25:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:30:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:31:13  INFO     [Monitor] Messwerte: CPU 56,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 46 %, 57,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aktiv, GPU 44,0 °C · Quelle HWiNFO
+2026-11-18 15:35:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:40:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:41:13  INFO     [Monitor] Messwerte: CPU 42,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-18 15:45:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:50:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 15:51:13  INFO     [Monitor] Messwerte: CPU 41,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-18 15:55:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:00:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:01:14  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 51,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 51,0 °C · HWiNFO aktiv, GPU 51,0 °C · Quelle HWiNFO
+2026-11-18 16:05:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:10:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:11:14  INFO     [Monitor] Messwerte: CPU 39,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 44 %, 55,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 16:15:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:20:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:21:15  INFO     [Monitor] Messwerte: CPU 45,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 41 %, 52,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aktiv, GPU 46,0 °C · Quelle HWiNFO
+2026-11-18 16:26:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 16:30:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:31:15  INFO     [Monitor] Messwerte: CPU 46,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 27 %, 37,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 16:36:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:40:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:41:16  INFO     [Monitor] Messwerte: CPU 41,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 32 %, 43,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-18 16:45:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:50:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 16:51:16  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-18 16:55:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:01:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:01:16  INFO     [Monitor] Messwerte: CPU 41,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 51,0 °C, Last 45 %, 56,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 51,0 °C · HWiNFO aktiv, GPU 51,0 °C · Quelle HWiNFO
+2026-11-18 17:05:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:11:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:11:17  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-18 17:15:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:21:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:21:17  INFO     [Monitor] Messwerte: CPU 40,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aktiv, GPU 44,0 °C · Quelle HWiNFO
+2026-11-18 17:26:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:31:18  INFO     [Monitor] Messwerte: CPU 42,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-18 17:31:24  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 17:36:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:41:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:41:18  INFO     [Monitor] Messwerte: CPU 40,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 40,0 °C, Last 27 %, 37,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 40,0 °C · HWiNFO aktiv, GPU 40,0 °C · Quelle HWiNFO
+2026-11-18 17:46:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:51:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 17:51:19  INFO     [Monitor] Messwerte: CPU 42,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 49 %, 61,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO
+2026-11-18 17:56:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:01:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:01:19  INFO     [Monitor] Messwerte: CPU 43,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-18 18:06:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:11:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:11:19  INFO     [Monitor] Messwerte: CPU 42,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aktiv, GPU 41,0 °C · Quelle HWiNFO
+2026-11-18 18:16:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:21:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:21:20  INFO     [Monitor] Messwerte: CPU 42,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 24 %, 34,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-18 18:26:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:31:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:31:20  INFO     [Monitor] Messwerte: CPU 42,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 51,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 51,0 °C · HWiNFO aktiv, GPU 51,0 °C · Quelle HWiNFO
+2026-11-18 18:36:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 18:41:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:41:05  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-18 18:41:21  INFO     [Monitor] Messwerte: CPU 40,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 44 %, 55,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 18:46:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:51:01  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 18:51:21  INFO     [Monitor] Messwerte: CPU 43,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 45,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 45,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 18:56:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:01:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:01:21  INFO     [Monitor] Messwerte: CPU 42,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 24 %, 34,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 19:06:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:11:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:11:22  INFO     [Monitor] Messwerte: CPU 39,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 40,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 40,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 19:16:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:21:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:21:22  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 19:26:25  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:31:23  INFO     [Monitor] Messwerte: CPU 42,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 19:31:26  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:36:21  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:41:23  INFO     [Monitor] Messwerte: CPU 48,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 67,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 67,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 19:41:56  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 19:46:27  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:51:23  INFO     [Monitor] Messwerte: CPU 44,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 44 %, 55,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 19:51:30  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 19:56:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:01:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:01:24  INFO     [Monitor] Messwerte: CPU 44,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 20:06:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:11:04  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:11:24  INFO     [Monitor] Messwerte: CPU 49,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 17 %, 27,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 20:16:04  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:21:04  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:21:25  INFO     [Monitor] Messwerte: CPU 47,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 43 %, 54,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 20:26:04  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:31:04  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:31:25  INFO     [Monitor] Messwerte: CPU 59,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 31 %, 42,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 20:36:04  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:41:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:41:26  INFO     [Monitor] Messwerte: CPU 46,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 69,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 69,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 20:46:10  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 20:51:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 20:51:26  INFO     [Monitor] Messwerte: CPU 46,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 71,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 71,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 20:56:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:01:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:01:27  INFO     [Monitor] Messwerte: CPU 47,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 70,0 °C, Last 96 %, 110,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 70,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 21:06:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:11:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:11:27  INFO     [Monitor] Messwerte: CPU 50,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 70,0 °C, Last 97 %, 111,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 70,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 21:16:04  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:21:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:21:27  INFO     [Monitor] Messwerte: CPU 52,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 70,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 70,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 21:26:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:31:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:31:28  INFO     [Monitor] Messwerte: CPU 47,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 71,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 71,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 21:36:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:41:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:41:28  INFO     [Monitor] Messwerte: CPU 42,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 21:46:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 21:51:11  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 21:51:29  INFO     [Monitor] Messwerte: CPU 45,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 21:56:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 22:01:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 22:01:29  INFO     [Monitor] Messwerte: CPU 50,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 53,0 °C, Last 47 %, 58,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 53,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 22:06:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 22:11:07  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 22:11:30  INFO     [Monitor] Messwerte: CPU 51,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 70,0 °C, Last 99 %, 113,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 70,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 22:16:27  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-18 22:20:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-18 22:21:31  INFO     [Monitor] Messwerte: CPU 46,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 43,0 °C, Last 21 %, 31,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 43,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-18 22:24:36  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-19 17:16:58  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-19 17:16:58  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-19 17:16:58  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-19 17:16:59  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-19 17:16:59  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-19 17:16:59  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-19 17:17:01  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "Intenso SSD Sata III", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-19 17:17:01  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-19 17:17:01  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-19 17:17:01  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-19 17:17:01  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-19 17:17:01  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-19 17:17:02  INFO     [Allgemein] Einstellungen gesichert (täglich): 15 Dateien
+2026-11-19 17:17:02  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-19 17:17:02  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-19 17:17:02  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-19 17:17:04  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-19 17:17:04  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-19 17:17:23  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-19 17:17:23  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-19 17:17:23  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 1 Update bereit (online geprüft)
+2026-11-19 17:17:38  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-19 17:17:38  INFO     [Monitor] Messwerte: CPU 34,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 28 %, 38,8 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-19 17:22:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:24:25  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 17:24:26  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-19 17:24:27  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 17:24:27  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-19 17:24:28  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-19 17:24:33  INFO     [Beleuchtung] Beleuchtung an
+2026-11-19 17:27:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:27:39  INFO     [Monitor] Messwerte: CPU 44,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 52,0 °C, Last 13 %, 23,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 52,0 °C · HWiNFO aktiv, GPU 52,0 °C · Quelle HWiNFO
+2026-11-19 17:32:09  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:37:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:37:39  INFO     [Monitor] Messwerte: CPU 46,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 35 %, 46,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-19 17:42:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:47:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:47:40  INFO     [Monitor] Messwerte: CPU 46,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 53 %, 65,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-19 17:52:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:57:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 17:57:40  INFO     [Monitor] Messwerte: CPU 56,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 54,0 °C, Last 40 %, 51,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 54,0 °C · HWiNFO aktiv, GPU 54,0 °C · Quelle HWiNFO
+2026-11-19 18:02:07  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:07:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:07:41  INFO     [Monitor] Messwerte: CPU 46,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 40 %, 51,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-19 18:12:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:17:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:17:42  INFO     [Monitor] Messwerte: CPU 46,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 41 %, 52,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-19 18:22:12  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-19 18:27:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:27:42  INFO     [Monitor] Messwerte: CPU 46,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 40,0 °C, Last 42 %, 53,6 W · LHM-GPU "NVIDIA GeForce RTX 4060" 40,0 °C · HWiNFO aktiv, GPU 40,0 °C · Quelle HWiNFO
+2026-11-19 18:32:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:37:11  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:37:43  INFO     [Monitor] Messwerte: CPU 45,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 35 %, 46,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-19 18:42:07  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:47:06  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 18:47:43  INFO     [Monitor] Messwerte: CPU 46,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 45,0 °C, Last 23 %, 33,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 45,0 °C · HWiNFO aktiv, GPU 45,0 °C · Quelle HWiNFO
+2026-11-19 19:59:45  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-19 19:59:46  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-19 19:59:46  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-19 19:59:46  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-19 19:59:46  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-19 19:59:47  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-19 19:59:47  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-19 19:59:48  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-19 19:59:48  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-19 19:59:48  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-19 19:59:49  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-19 19:59:49  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-19 19:59:50  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-19 19:59:50  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-19 19:59:50  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-19 19:59:50  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-19 19:59:51  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-19 19:59:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-19 20:00:11  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-19 20:00:11  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-19 20:00:22  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 20:00:23  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-19 20:00:25  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-19 20:00:25  INFO     [Monitor] Messwerte: CPU 35,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 22 %, 32,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aktiv, GPU 38,0 °C · Quelle HWiNFO
+2026-11-19 20:00:25  WARNUNG  [Problemloeser] Gefunden: Dienst „GIGABYTE Update Service“ startet automatisch – Dieser Hersteller-Dienst läuft gerade nicht, startet aber mit Windows und übernimmt dann die Beleuchtung/Lüfter. Häufige Ursache für Flackern nach dem Hochfahren.
+2026-11-19 20:00:25  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-19 20:00:28  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-19 20:00:28  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-19 20:00:29  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Dienst „GIGABYTE Update Service“ startet automatisch“ …
+2026-11-19 20:00:29  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: beendet
+2026-11-19 20:00:30  OK       [Problemloeser] Erledigt: svc:GigabyteUpdateService
+2026-11-19 20:00:44  INFO     [Tweaker] Gemessener Turbo-Takt: 4089 MHz (bisher höchster: 4089 MHz)
+2026-11-19 20:01:06  INFO     [Stresstest] Stresstest gestartet: CPU (AVX/Vektor, 16 Threads) · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-19 20:01:20  INFO     [Monitor] HWiNFO-Status: HWiNFO liefert keine neuen Werte (Shared Memory nach 12 h abgelaufen?) – nutze LibreHardwareMonitor
+2026-11-19 20:01:20  INFO     [Monitor] HWiNFO liefert keine Werte mehr (12-Stunden-Grenze?) – starte HWiNFO neu
+2026-11-19 20:01:23  WARNUNG  [Problemloeser] Gefunden: HWiNFO liefert keine neuen Werte mehr – In der kostenlosen HWiNFO-Version schaltet sich „Shared Memory“ nach 12 Stunden ab. Die App ist automatisch auf die eigenen Sensoren umgestiegen.
+2026-11-19 20:01:24  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-19 20:01:27  INFO     [Problemloeser] Aktion „HWiNFO neu starten“ für „HWiNFO liefert keine neuen Werte mehr“ …
+2026-11-19 20:01:27  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-19 20:01:29  OK       [Problemloeser] „HWiNFO neu starten“: HWiNFO neu gestartet.
+2026-11-19 20:01:37  OK       [Problemloeser] Erledigt: hw:stale
+2026-11-19 20:02:02  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-19 20:02:35  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 1 min 29 s | CPU: Intel Core i5-13400F · Ø 109.850 Punkte/s · max. 59 °C · max. 80 W · Fehler 0 | Vergleich CPU: Platz 24 von 38 in der Liste. | Vergleich Grafikkarte: Platz 34 von 43 in der Liste.
+2026-11-19 20:04:20  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-19 20:31:52  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-19 20:31:52  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-19 20:31:52  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-19 20:31:52  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-19 20:31:52  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-19 20:31:53  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-19 20:31:54  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-19 20:31:54  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-19 20:31:54  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-19 20:31:54  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-19 20:31:54  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-19 20:31:54  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-19 20:31:55  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-19 20:31:55  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-19 20:31:55  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-19 20:31:56  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-19 20:31:58  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-19 20:32:05  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-19 20:32:16  INFO     [Tweaker] Angewendet – CPU: Turbo Aggressiv, min. 1 %, EPP 0, Kerne min. 100 % · GPU: Limit 100 %, Kern +80 MHz, Speicher +150 MHz
+2026-11-19 20:32:16  INFO     [Tweaker] Gespeicherte Werte beim Start angewendet.
+2026-11-19 20:32:31  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-19 20:32:31  INFO     [Monitor] Messwerte: CPU 31,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 39,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 39,0 °C · HWiNFO aktiv, GPU 39,0 °C · Quelle HWiNFO
+2026-11-19 20:36:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 20:41:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 20:42:32  INFO     [Monitor] Messwerte: CPU 44,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 60,0 °C, Last 47 %, 58,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 60,0 °C · HWiNFO aktiv, GPU 60,0 °C · Quelle HWiNFO
+2026-11-19 20:42:59  INFO     [Problemloeser] Aktion „Dienst deaktivieren“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 20:42:59  OK       [Problemloeser] „Dienst deaktivieren“: GigabyteUpdateService: beendet und deaktiviert
+2026-11-19 20:43:00  INFO     [Problemloeser] Aktion „Programm schließen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-19 20:43:01  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-19 20:43:02  OK       [Problemloeser] „Programm schließen“: 0 Prozess(e) beendet.
+2026-11-19 20:43:07  INFO     [Stresstest] Stresstest gestartet: CPU (AVX/Vektor, 16 Threads), Grafikkarte · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-19 20:43:07  INFO     [Stresstest] GPU-Last läuft auf „NVIDIA GeForce RTX 4060“ (Intensität 100 %)
+2026-11-19 20:43:09  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 0 min 1 s | CPU: Intel Core i5-13400F · Ø 0 Punkte/s · max. 42 °C · max. 22 W · Fehler 0 | Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 0 Punkte/s · max. 52 °C · max. 114 W · Fehler 0 | Für den Vergleich mit anderen Systemen mindestens 30 Sekunden laufen lassen (alle Threads, GPU-Intensität 100 %).
+2026-11-19 20:43:11  INFO     [Stresstest] RAM-Test: 3,5 GB werden geschrieben und geprüft
+2026-11-19 20:43:11  INFO     [Stresstest] Stresstest gestartet: CPU (AVX/Vektor, 16 Threads), Grafikkarte, RAM (50 % frei) · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-19 20:43:11  INFO     [Stresstest] GPU-Last läuft auf „NVIDIA GeForce RTX 4060“ (Intensität 100 %)
+2026-11-19 20:45:19  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 2 min 7 s | CPU: Intel Core i5-13400F · Ø 86.999 Punkte/s · max. 54 °C · max. 63 W · Fehler 0 | Grafikkarte: NVIDIA GeForce RTX 4060 · Ø 304 Punkte/s · max. 68 °C · max. 115 W · Fehler 0 | RAM: 61 Durchläufe · Fehler 0 | Vergleich CPU: Platz 24 von 38 in der Liste. | Vergleich Grafikkarte: Platz 34 von 43 in der Liste.
+2026-11-19 20:46:59  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 20:50:26  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 177 Mbit/s
+2026-11-19 20:50:31  INFO     [Stresstest] Stresstest gestartet: CPU (AVX/Vektor, 16 Threads) · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-19 20:51:11  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 0 min 40 s | CPU: Intel Core i5-13400F · Ø 31.005 Punkte/s · max. 53 °C · max. 45 W · Fehler 0 | Vergleich CPU: Platz 24 von 38 in der Liste. | Vergleich Grafikkarte: Platz 34 von 43 in der Liste.
+2026-11-19 20:51:17  INFO     [Stresstest] Stresstest gestartet: CPU (Gemischt, 16 Threads) · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-19 20:52:22  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 1 min 4 s | CPU: Intel Core i5-13400F · Ø 7.530 Punkte/s · max. 58 °C · max. 69 W · Fehler 0 | Vergleich CPU: Platz 24 von 38 in der Liste. | Vergleich Grafikkarte: Platz 34 von 43 in der Liste.
+2026-11-19 20:52:24  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 20:52:26  INFO     [Stresstest] Stresstest gestartet: CPU (AVX/Vektor, 16 Threads) · Dauer: 10 min · Abbruch bei CPU 95 °C / GPU 90 °C
+2026-11-19 20:52:36  INFO     [Monitor] Messwerte: CPU 41,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 13 %, 23,0 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-19 20:52:39  WARNUNG  [Stresstest] Ergebnis: ■ Gestoppt. | Dauer: 0 min 12 s | CPU: Intel Core i5-13400F · Ø 95.507 Punkte/s · max. 42 °C · max. 29 W · Fehler 0 | Für den Vergleich mit anderen Systemen mindestens 30 Sekunden laufen lassen (alle Threads, GPU-Intensität 100 %).
+2026-11-19 21:02:03  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 21:02:07  INFO     [Monitor] HWiNFO-Status: HWiNFO läuft nicht – nutze LibreHardwareMonitor
+2026-11-19 21:02:09  INFO     [Problemloeser] Gefunden: Optional: HWiNFO für noch genauere Temperaturen – Die App misst selbst (LibreHardwareMonitor). Läuft HWiNFO mit „Shared Memory Support“, übernimmt sie automatisch dessen Werte – z. B. für neue Hardware, die LibreHardwareMonitor noch nicht kennt.
+2026-11-19 21:02:36  INFO     [Monitor] Messwerte: CPU 39,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 33 %, 44,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-19 21:07:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 21:12:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 21:12:37  INFO     [Monitor] Messwerte: CPU 44,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 70,0 °C, Last 98 %, 112,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 70,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-19 21:17:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 21:22:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 21:22:37  INFO     [Monitor] Messwerte: CPU 42,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-19 21:27:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 21:32:00  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-19 21:32:37  INFO     [Monitor] Messwerte: CPU 43,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 46,0 °C, Last 30 %, 40,9 W · LHM-GPU "NVIDIA GeForce RTX 4060" 46,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-19 21:33:39  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-19 21:33:39  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-19 21:33:50  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-19 21:33:50  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-19 21:33:52  OK       [Boost] Arbeitsspeicher aufgeräumt – 2767 MB frei geworden (jetzt 8,3 von 15,8 GB belegt)
+2026-11-19 21:34:11  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-19 21:34:11  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 3 Hintergrund-Programme ausgebremst
+2026-11-19 21:34:11  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-19 21:34:12  OK       [Boost] Arbeitsspeicher aufgeräumt – 485 MB frei geworden (jetzt 7,1 von 15,8 GB belegt)
+2026-11-19 21:36:30  INFO     [Boost] RAM zu 87 % voll – gebe Arbeitsspeicher frei
+2026-11-19 21:36:36  OK       [Boost] Arbeitsspeicher aufgeräumt – 470 MB frei geworden (jetzt 13,4 von 15,8 GB belegt)
+2026-11-19 21:39:58  INFO     [Boost] ARK: Survival Ascended beendet
+2026-11-19 21:39:58  OK       [Boost] ARK: Survival Ascended: Sitzung 19.11. 21:34 · 5 min · Ø 125 FPS · schlechteste 1 % 14 FPS · CPU max. 58 °C · GPU max. 70 °C · 0,02 kWh ≈ 0,01 €
+2026-11-19 21:39:58  WARNUNG  [Boost] ARK: Survival Ascended ist offenbar abgestürzt: Absturzmeldung des Spiels
+2026-11-19 21:39:58  WARNUNG  [Tweaker] ARK: Survival Ascended ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +80 → +30 MHz, Speicher +150 → +50 MHz.
+2026-11-19 21:40:13  INFO     [Boost] BattlEye Launcher beendet
+2026-11-19 21:40:13  OK       [Boost] BattlEye Launcher: Sitzung 19.11. 21:33 · 6 min · CPU max. 58 °C · GPU max. 70 °C · 0,02 kWh ≈ 0,01 €
+2026-11-19 21:40:13  INFO     [Allgemein] Desktop-Kacheln wieder eingeblendet
+2026-11-19 21:40:13  WARNUNG  [Boost] BattlEye Launcher ist offenbar abgestürzt: Absturzmeldung des Spiels
+2026-11-19 21:40:13  WARNUNG  [Tweaker] BattlEye Launcher ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +30 → 0 MHz, Speicher +50 → 0 MHz.
+2026-11-19 21:40:21  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-19 21:40:39  WARNUNG  [Problemloeser] Gefunden: BattlEye Launcher ist abgestürzt – Erkannt: Absturzmeldung des Spiels. BattlEye Launcher ist abgestürzt, während die Grafikkarte übertaktet war. Übertaktung automatisch gesenkt: Kern +30 → 0 MHz, Speicher +50 → 0 MHz.
+2026-11-19 21:41:45  INFO     [Problemloeser] Aktion „Zum Tweaker“ für „BattlEye Launcher ist abgestürzt“ …
+2026-11-19 21:41:45  OK       [Problemloeser] „Zum Tweaker“: Geöffnet.
+2026-11-19 21:42:10  INFO     [Problemloeser] Ignoriert: BattlEye Launcher ist abgestürzt
+2026-11-19 21:42:38  INFO     [Monitor] Messwerte: CPU 41,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aus · Quelle LibreHardwareMonitor
+2026-11-19 21:42:39  OK       [Problemloeser] Erledigt: crash:arkascended_be
+2026-11-19 21:42:47  INFO     [Beleuchtung] Beleuchtung aus (alle Geräte dunkel)
+2026-11-19 21:43:20  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 216 Mbit/s
+2026-11-19 21:43:25  INFO     [Allgemein] winget: 4 Updates verfügbar
+2026-11-19 21:43:42  OK       [Allgemein] winget: cloudflared 2026.11.0 → 2026.11.1: ✔ Aktualisiert
+2026-11-19 21:43:47  OK       [Allgemein] winget: EA app 13.827.2.6342 → 13.832.0.6345: ✔ Aktualisiert
+2026-11-19 21:44:10  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-20 16:14:10  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-20 16:14:10  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-20 16:14:10  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:14:10  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:14:10  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-20 16:14:11  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-20 16:14:12  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-20 16:14:12  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-20 16:14:12  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-20 16:14:12  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-20 16:14:12  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-20 16:14:12  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:14:13  INFO     [Allgemein] Einstellungen gesichert (täglich): 15 Dateien
+2026-11-20 16:14:13  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:14:13  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-20 16:14:13  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+2026-11-20 16:14:15  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-20 16:14:15  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-20 16:14:20  INFO     [Allgemein] Internet-Geschwindigkeit für Schätzungen: 234 Mbit/s
+2026-11-20 16:14:48  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-20 16:14:48  INFO     [Monitor] Messwerte: CPU 29,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 18 %, 28,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-20 16:14:50  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 1 Update bereit (online geprüft)
+2026-11-20 16:16:23  INFO     [Beleuchtung] Beleuchtung an
+2026-11-20 16:19:00  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-20 16:19:00  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-20 16:19:00  INFO     [Allgemein] Beenden …
+2026-11-20 16:19:00  INFO     [Monitor] FPS-Messung beendet
+2026-11-20 16:19:00  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-20 16:19:00  INFO     [Allgemein] Beendet.
+2026-11-20 16:19:03  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-20 16:19:04  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-20 16:19:04  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:19:04  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:19:04  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-20 16:19:05  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-20 16:19:05  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-20 16:19:05  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-20 16:19:05  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-20 16:19:05  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-20 16:19:05  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-20 16:19:05  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:19:06  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:19:06  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-20 16:19:06  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+
+Kommt nach einem Neustart immer wieder? Dann installiert dein Mainboard-BIOS die Gigabyte-Software bei jedem Start neu. Abschalten im BIOS (beim Start Entf drücken): Settings → Miscellaneous → „GIGABYTE Utilities Downloader Configuration“ (bei manchen Boards „APP Center Download & Install“) → Disabled, dann F10 zum Speichern.
+2026-11-20 16:19:06  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-20 16:19:15  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 1 Update bereit (online geprüft)
+2026-11-20 16:19:29  INFO     [Problemloeser] Aktion „Komplett entfernen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-20 16:19:32  OK       [Problemloeser] Gigabyte entfernen: Dienst GigabyteUpdateService: entfernt
+2026-11-20 16:19:32  OK       [Problemloeser] „Komplett entfernen“: Dienst GigabyteUpdateService: entfernt
+
+Wichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es nach dem Neustart wieder.
+2026-11-20 16:19:34  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-20 16:19:42  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-20 16:19:42  INFO     [Monitor] Messwerte: CPU 31,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-20 16:21:25  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-20 16:21:25  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-20 16:21:25  INFO     [Allgemein] Beenden …
+2026-11-20 16:21:26  INFO     [Monitor] FPS-Messung beendet
+2026-11-20 16:21:26  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-20 16:21:26  INFO     [Allgemein] Beendet.
+2026-11-20 16:21:29  INFO     [Allgemein] Start Control Center 1.0.0.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-20 16:21:29  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-20 16:21:29  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:21:29  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:21:29  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-20 16:21:31  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-20 16:21:31  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-20 16:21:31  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-20 16:21:31  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-20 16:21:31  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-20 16:21:31  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-20 16:21:31  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:21:31  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:21:32  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-20 16:21:34  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-20 16:21:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von gestern, 1 Update bereit (online geprüft)
+2026-11-20 16:22:08  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-20 16:22:08  INFO     [Monitor] Messwerte: CPU 34,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 40 %, 51,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-20 16:26:02  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 16:27:39  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-20 16:27:39  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-20 16:27:39  INFO     [Allgemein] Beenden …
+2026-11-20 16:27:39  INFO     [Monitor] FPS-Messung beendet
+2026-11-20 16:27:39  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-20 16:27:39  INFO     [Allgemein] Beendet.
+2026-11-20 16:27:43  INFO     [Allgemein] Start Control Center v2.0 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-20 16:27:43  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-20 16:27:43  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:27:43  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:27:43  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-20 16:27:45  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-20 16:27:45  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-20 16:27:45  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-20 16:27:45  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-20 16:27:45  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-20 16:27:45  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-20 16:27:47  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:27:47  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:27:47  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-20 16:27:48  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-20 16:28:12  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 16:28:22  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-20 16:28:22  INFO     [Monitor] Messwerte: CPU 39,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-20 16:32:51  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 16:34:24  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-20 16:34:24  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-20 16:34:24  INFO     [Allgemein] Beenden …
+2026-11-20 16:34:24  INFO     [Monitor] FPS-Messung beendet
+2026-11-20 16:34:24  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-20 16:34:24  INFO     [Allgemein] Beendet.
+2026-11-20 16:34:27  INFO     [Allgemein] Start Control Center v2.1.10 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-20 16:34:28  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-20 16:34:28  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 16:34:28  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 16:34:28  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-20 16:34:29  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-20 16:34:29  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-20 16:34:29  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-20 16:34:29  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-20 16:34:29  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-20 16:34:29  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-20 16:34:29  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 16:34:30  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 16:34:30  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-20 16:34:31  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-20 16:34:38  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 16:35:06  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-20 16:35:06  INFO     [Monitor] Messwerte: CPU 40,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 38,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 38,0 °C · HWiNFO aktiv, GPU 38,0 °C · Quelle HWiNFO
+2026-11-20 16:39:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 16:44:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 16:45:07  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-20 16:49:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 16:54:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 16:55:07  INFO     [Monitor] Messwerte: CPU 41,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 42,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 42,0 °C · HWiNFO aktiv, GPU 42,0 °C · Quelle HWiNFO
+2026-11-20 16:59:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:04:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:05:07  INFO     [Monitor] Messwerte: CPU 41,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-20 17:09:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:14:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:15:08  INFO     [Monitor] Messwerte: CPU 40,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 49,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 49,0 °C · HWiNFO aktiv, GPU 49,0 °C · Quelle HWiNFO
+2026-11-20 17:19:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:24:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:25:08  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-20 17:29:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:34:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:35:08  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 35,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 35,0 °C · HWiNFO aktiv, GPU 35,0 °C · Quelle HWiNFO
+2026-11-20 17:39:52  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 17:44:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:45:09  INFO     [Monitor] Messwerte: CPU 42,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aktiv, GPU 41,0 °C · Quelle HWiNFO
+2026-11-20 17:49:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:54:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 17:55:09  INFO     [Monitor] Messwerte: CPU 40,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-20 17:59:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:04:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:05:09  INFO     [Monitor] Messwerte: CPU 41,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 52,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 52,0 °C · HWiNFO aktiv, GPU 52,0 °C · Quelle HWiNFO
+2026-11-20 18:09:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:14:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:15:10  INFO     [Monitor] Messwerte: CPU 41,2 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-20 18:19:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:24:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:25:10  INFO     [Monitor] Messwerte: CPU 41,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-20 18:29:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:34:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:35:10  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 40,0 °C, Last 40 %, 51,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 40,0 °C · HWiNFO aktiv, GPU 40,0 °C · Quelle HWiNFO
+2026-11-20 18:39:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:44:38  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 18:45:11  INFO     [Monitor] Messwerte: CPU 40,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-20 18:49:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:54:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 18:55:11  INFO     [Monitor] Messwerte: CPU 40,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 52,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 52,0 °C · HWiNFO aktiv, GPU 52,0 °C · Quelle HWiNFO
+2026-11-20 18:59:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:04:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:05:11  INFO     [Monitor] Messwerte: CPU 41,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 37,0 °C, Last 38 %, 49,4 W · LHM-GPU "NVIDIA GeForce RTX 4060" 37,0 °C · HWiNFO aktiv, GPU 37,0 °C · Quelle HWiNFO
+2026-11-20 19:09:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:14:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:15:12  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 34,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 34,0 °C · HWiNFO aktiv, GPU 34,0 °C · Quelle HWiNFO
+2026-11-20 19:19:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:24:33  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:25:12  INFO     [Monitor] Messwerte: CPU 41,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aktiv, GPU 41,0 °C · Quelle HWiNFO
+2026-11-20 19:29:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:34:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:35:12  INFO     [Monitor] Messwerte: CPU 41,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-20 19:39:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:44:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:45:13  INFO     [Monitor] Messwerte: CPU 41,0 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 47,0 °C, Last 43 %, 54,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 47,0 °C · HWiNFO aktiv, GPU 47,0 °C · Quelle HWiNFO
+2026-11-20 19:49:39  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 19:54:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 19:55:13  INFO     [Monitor] Messwerte: CPU 40,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-20 19:59:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 20:04:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 20:05:13  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-20 20:09:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 20:14:34  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 20:15:14  INFO     [Monitor] Messwerte: CPU 41,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 50,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 50,0 °C · HWiNFO aktiv, GPU 50,0 °C · Quelle HWiNFO

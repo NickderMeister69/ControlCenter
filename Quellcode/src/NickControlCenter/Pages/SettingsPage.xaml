@@ -1,6 +1,7 @@
 <UserControl x:Class="NickControlCenter.SettingsPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter">
     <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="28,0,16,20">
         <Grid Margin="0,0,12,0" MaxWidth="1150" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
@@ -38,6 +39,21 @@
                         <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="ToTray" Content="X schließt nicht, sondern läuft im Hintergrund weiter" Click="Tray_Click"/>
                         <TextBlock Style="{StaticResource Muted}" Margin="52,2,0,10" Text="Ganz beenden: „App beenden“ unten links oder Rechtsklick auf das Symbol unten rechts → Beenden."/>
                         <Button Style="{StaticResource DangerButton}" Content="App jetzt komplett beenden" HorizontalAlignment="Left" Click="Exit_Click"/>
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource Card}" DataContext="{x:Static local:AppUpdater.Instance}">
+                    <StackPanel>
+                        <TextBlock Text="APP-VERSION &amp; UPDATES" Style="{StaticResource Kicker}"/>
+                        <TextBlock x:Name="VersionText" Style="{StaticResource H2}" FontSize="15"/>
+                        <TextBlock Text="{Binding Status}" Style="{StaticResource Caption}" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                        <WrapPanel Margin="0,8,0,0">
+                            <Button Content="Nach Updates suchen" Click="CheckUpdate_Click" Margin="0,0,8,6" Padding="12,5"/>
+                            <Button Content="{Binding ButtonText}" Style="{StaticResource AccentButton}" Click="DoUpdate_Click" Margin="0,0,8,6" Padding="12,5"
+                                    Visibility="{Binding Available, Converter={StaticResource BoolToVis}}"/>
+                        </WrapPanel>
+                        <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="AutoUpd" Content="Automatisch nach neuen Versionen suchen" Click="AutoUpd_Click" Margin="0,4,0,0"/>
+                        <TextBlock Style="{StaticResource Muted}" Margin="0,6,0,0" TextWrapping="Wrap" FontSize="11.5"
+                                   Text="Neue Versionen kommen aus den GitHub-Releases von NickderMeister69/ControlCenter. Einstellungen bleiben beim Update erhalten."/>
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Card}">

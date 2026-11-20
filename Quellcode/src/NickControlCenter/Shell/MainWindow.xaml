@@ -78,6 +78,14 @@
 
                     <!-- Mini-Status + Beenden -->
                     <StackPanel Grid.Row="2" Margin="16,8,16,14">
+                        <Button Style="{StaticResource AccentButton}" Margin="0,0,0,10" Padding="10,8" Click="Update_Click" HorizontalAlignment="Stretch"
+                                DataContext="{x:Static local:AppUpdater.Instance}" Visibility="{Binding Available, Converter={StaticResource BoolToVis}}"
+                                ToolTip="{Binding Status}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE896;" Style="{StaticResource Icon}" Margin="0,0,8,0"/>
+                                <TextBlock Text="{Binding ButtonText}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </Button>
                         <Border Style="{StaticResource SubCard}" Padding="10,8" Margin="0,0,0,10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
