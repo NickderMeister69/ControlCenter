@@ -60,57 +60,83 @@ public sealed class AppUpdater : ObservableObject
 
     public string ButtonText => _busy ? $"Lädt {LatestText} … {_progress:0} %" : $"Neue Version {LatestText} verfügbar";
 
-    /// <summary>Neuestes Release abfragen. true = es gibt eine neuere Version.</summary>
+    private const string RawBase = "https://raw.githubusercontent.com/" + Repo + "/main/";
+
+    /// <summary>
+    /// Neueste Version suchen – an zwei Stellen, die höhere gewinnt:
+    ///  1) GitHub-Release mit angehängter exe
+    ///  2) direkt im Repo: version.txt + ControlCenter.exe (die App schreibt version.txt selbst neben die exe →
+    ///     ein normales „git add / commit / push“ des App-Ordners veröffentlicht die neue Version)
+    /// </summary>
     public async Task<bool> CheckAsync(bool silent = true)
     {
+        Status = "Suche nach Updates …";
+        Version? relV = null; string? relUrl = null; long relSize = 0; string relNotes = "";
+        Version? repoV = null;
+        string? error = null;
         try
         {
-            Status = "Suche nach Updates …";
             var json = await Http.GetStringAsync($"https://api.github.com/repos/{Repo}/releases/latest");
             using var d = JsonDocument.Parse(json);
             var r = d.RootElement;
-            var tag = r.TryGetProperty("tag_name", out var t) ? t.GetString() : null;
-            var v = Parse(tag) ?? Parse(r.TryGetProperty("name", out var n) ? n.GetString() : null);
-            string? url = null; long size = 0;
+            relV = Parse(r.TryGetProperty("tag_name", out var t) ? t.GetString() : null) ?? Parse(r.TryGetProperty("name", out var n) ? n.GetString() : null);
             if (r.TryGetProperty("assets", out var assets))
                 foreach (var a in assets.EnumerateArray())
                 {
                     var name = a.GetProperty("name").GetString() ?? "";
                     if (!name.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)) continue;
-                    url = a.GetProperty("browser_download_url").GetString();
-                    size = a.TryGetProperty("size", out var sz) ? sz.GetInt64() : 0;
+                    relUrl = a.GetProperty("browser_download_url").GetString();
+                    relSize = a.TryGetProperty("size", out var sz) ? sz.GetInt64() : 0;
                     if (name.Contains("ControlCenter", StringComparison.OrdinalIgnoreCase)) break;
                 }
-            LastCheck = DateTime.Now;
-            if (v == null || url == null) { Status = "Kein gültiges Release gefunden (Tag wie „v2.1“ + angehängte ControlCenter.exe nötig)"; Available = false; return false; }
-            _latest = v; _url = url; Size = size;
-            Notes = r.TryGetProperty("body", out var b) ? b.GetString() ?? "" : "";
-            bool newer = v > Current;
-            var st = AppSettings.Current;
-            // Release wurde schon geladen, aber die App ist danach immer noch die alte Version → angehängte exe passt nicht zur Versionsnummer
-            if (newer && st.UpdateAttemptTag == Text(v) && st.UpdateAttemptFrom == CurrentText)
-            {
-                Available = false; _latest = v;
-                Status = $"Das Release {Text(v)} enthält eine ältere exe ({CurrentText}) – im Release die richtige ControlCenter.exe anhängen";
-                Log.Warn(LogModule.App, Status);
-                return false;
-            }
-            Available = newer;
-            Status = newer ? $"Neue Version {Text(v)} verfügbar ({Fmt.Bytes(size)})" : $"Du hast die neueste Version ({CurrentText})";
-            if (newer) Log.Info(LogModule.App, $"Update verfügbar: {Text(v)} (installiert {CurrentText})");
-            return newer;
+            relNotes = r.TryGetProperty("body", out var b) ? b.GetString() ?? "" : "";
+            if (relUrl == null) relV = null;
         }
-        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound)
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound) { }
+        catch (Exception ex) { error = ex.Message; }
+        try { repoV = Parse((await Http.GetStringAsync(RawBase + "version.txt")).Trim()); }
+        catch (HttpRequestException ex) when (ex.StatusCode == System.Net.HttpStatusCode.NotFound) { }
+        catch (Exception ex) { error ??= ex.Message; }
+
+        LastCheck = DateTime.Now;
+        Version? v; string? url; long size; string notes;
+        if (repoV != null && (relV == null || repoV > relV)) { v = repoV; url = RawBase + "ControlCenter.exe"; size = 0; notes = ""; }
+        else { v = relV; url = relUrl; size = relSize; notes = relNotes; }
+        if (v == null || url == null)
         {
-            Status = "Noch kein Release veröffentlicht (oder das Repo ist privat)";
+            Available = false;
+            Status = error != null ? "Update-Suche fehlgeschlagen: " + error : "Keine Version auf GitHub gefunden (Repo öffentlich? version.txt bzw. Release vorhanden?)";
+            if (!silent && error != null) Log.Warn(LogModule.App, Status);
             return false;
         }
-        catch (Exception ex)
+        if (size <= 0) size = await InstallEstimate.SizeOfAsync(url);
+        _latest = v; _url = url; Size = size; Notes = notes;
+        bool newer = v > Current;
+        var st = AppSettings.Current;
+        // schon einmal geladen, App ist danach aber immer noch alt → die exe auf GitHub passt nicht zur Versionsnummer
+        if (newer && st.UpdateAttemptTag == Text(v) && st.UpdateAttemptFrom == CurrentText)
         {
-            Status = "Update-Suche fehlgeschlagen: " + ex.Message;
-            if (!silent) Log.Warn(LogModule.App, Status);
+            Available = false;
+            Status = $"Auf GitHub steht {Text(v)}, die exe dort ist aber noch {CurrentText} – richtige ControlCenter.exe hochladen";
+            Log.Warn(LogModule.App, Status);
             return false;
         }
+        Available = newer;
+        Status = newer ? $"Neue Version {Text(v)} verfügbar ({Fmt.Bytes(size)})" : $"Du hast die neueste Version ({CurrentText})";
+        if (newer) Log.Info(LogModule.App, $"Update verfügbar: {Text(v)} (installiert {CurrentText})");
+        return newer;
+    }
+
+    /// <summary>version.txt neben die exe schreiben – liegt der App-Ordner in Git, wird sie mit committet.</summary>
+    public static void WriteVersionFile()
+    {
+        try
+        {
+            var f = Path.Combine(Env.ExeDir, "version.txt");
+            var txt = $"{Current.Major}.{Current.Minor}.{Current.Build}";
+            if (!File.Exists(f) || File.ReadAllText(f).Trim() != txt) File.WriteAllText(f, txt);
+        }
+        catch { }
     }
 
     /// <summary>Neue Version laden und als ControlCenter.update.exe ablegen – die App spielt sie dann von selbst ein.</summary>

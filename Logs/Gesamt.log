@@ -5294,3 +5294,37 @@ Wichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es
 2026-11-22 19:06:44  INFO     [Monitor] GPU-Leistungssensoren: 
 2026-11-22 19:06:44  INFO     [Monitor] Messwerte: CPU 43,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 45,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 45,0 °C · HWiNFO aktiv, GPU 45,0 °C · Quelle HWiNFO
 2026-11-22 19:06:47  INFO     [Monitor] HWiNFO-Startfenster ausgeblendet (1)
+2026-11-22 19:11:21  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (lokal geprüft)
+2026-11-22 19:11:41  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-22 19:11:41  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-22 19:11:41  INFO     [Allgemein] Beenden …
+2026-11-22 19:11:41  INFO     [Monitor] FPS-Messung beendet
+2026-11-22 19:11:41  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-22 19:11:42  INFO     [Allgemein] Beendet.
+2026-11-22 19:11:45  INFO     [Allgemein] Start Control Center v2.1.12 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-22 19:11:45  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-22 19:11:45  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-22 19:11:45  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-22 19:11:45  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-22 19:11:47  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-22 19:11:47  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-22 19:11:47  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-22 19:11:47  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-22 19:11:47  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-22 19:11:47  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-22 19:11:47  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-22 19:11:47  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-22 19:11:48  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-22 19:11:49  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-22 19:11:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)
+2026-11-22 19:12:24  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-22 19:12:24  INFO     [Monitor] Messwerte: CPU 42,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 41,0 °C, Last 35 %, 46,2 W · LHM-GPU "NVIDIA GeForce RTX 4060" 41,0 °C · HWiNFO aktiv, GPU 41,0 °C · Quelle HWiNFO
+2026-11-22 19:13:14  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-22 19:13:14  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-22 19:13:20  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-22 19:13:20  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-22 19:13:23  OK       [Boost] Arbeitsspeicher aufgeräumt – 2057 MB frei geworden (jetzt 9,1 von 15,8 GB belegt)
+2026-11-22 19:13:41  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert
+2026-11-22 19:13:41  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 3 Hintergrund-Programme ausgebremst
+2026-11-22 19:13:41  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-22 19:13:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 223 MB frei geworden (jetzt 7,7 von 15,8 GB belegt)

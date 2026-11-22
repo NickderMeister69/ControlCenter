@@ -898,3 +898,12 @@
 2026-11-22 19:06:05  INFO     [Allgemein] Start Control Center v2.1.11 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
 2026-11-22 19:06:11  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
 2026-11-22 19:06:25  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)
+2026-11-22 19:11:21  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (lokal geprüft)
+2026-11-22 19:11:41  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-22 19:11:41  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-22 19:11:41  INFO     [Allgemein] Beenden …
+2026-11-22 19:11:42  INFO     [Allgemein] Beendet.
+2026-11-22 19:11:45  INFO     [Allgemein] Start Control Center v2.1.12 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-22 19:11:49  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-22 19:11:58  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)
+2026-11-22 19:13:41  INFO     [Allgemein] Desktop-Kacheln während des Spiels pausiert

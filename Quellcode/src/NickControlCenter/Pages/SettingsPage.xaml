@@ -53,7 +53,7 @@
                         </WrapPanel>
                         <CheckBox Style="{StaticResource ToggleSwitch}" x:Name="AutoUpd" Content="Automatisch nach neuen Versionen suchen" Click="AutoUpd_Click" Margin="0,4,0,0"/>
                         <TextBlock Style="{StaticResource Muted}" Margin="0,6,0,0" TextWrapping="Wrap" FontSize="11.5"
-                                   Text="Neue Versionen kommen aus den GitHub-Releases von NickderMeister69/ControlCenter. Einstellungen bleiben beim Update erhalten."/>
+                                   Text="Neue Versionen kommen von GitHub (NickderMeister69/ControlCenter) – aus einem Release oder direkt aus dem Repo (ControlCenter.exe + version.txt nach git push). Einstellungen bleiben beim Update erhalten."/>
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Card}">

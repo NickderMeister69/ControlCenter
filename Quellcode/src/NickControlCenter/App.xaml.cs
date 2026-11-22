@@ -128,6 +128,7 @@ public partial class App : Application
 
         FirstRun();
         try { SettingsBackup.Daily(); } catch { }
+        AppUpdater.WriteVersionFile();
         AppUpdater.Instance.StartAutoCheck();
         // Update sofort einspielen, sobald eine „ControlCenter.update.exe“ neben der exe auftaucht (Ordner wird überwacht, Timer als Reserve)
         var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };

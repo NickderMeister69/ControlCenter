@@ -2794,3 +2794,13 @@
 2026-11-22 18:29:02  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
 2026-11-22 19:06:09  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
 2026-11-22 19:06:10  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-22 19:11:47  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-22 19:11:47  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-22 19:13:14  INFO     [Boost] Starte ARK: Survival Ascended
+2026-11-22 19:13:14  OK       [Boost] ARK: Survival Ascended: Grafik-Config angepasst (V-Sync aus, FPS unbegrenzt, 10 Kategorien einzeln, Auflösung 100 %, 8 Feineinstellungen, Bewegungs-/Tiefenunschärfe aus)
+2026-11-22 19:13:20  OK       [Boost] 🎮 BattlEye Launcher gestartet → Priorität erhöht, Timer 0,5 ms, Höchstleistung, RAM freigeben
+2026-11-22 19:13:20  OK       [Boost] BattlEye Launcher: Vollbild-Optimierung aus, starke Grafikkarte, Priorität erhöht
+2026-11-22 19:13:23  OK       [Boost] Arbeitsspeicher aufgeräumt – 2057 MB frei geworden (jetzt 9,1 von 15,8 GB belegt)
+2026-11-22 19:13:41  OK       [Boost] 🎮 ARK: Survival Ascended gestartet → Priorität hoch, Timer 0,5 ms, Höchstleistung, RAM freigeben, Kacheln pausiert, 3 Hintergrund-Programme ausgebremst
+2026-11-22 19:13:41  OK       [Boost] ARK: Survival Ascended: Vollbild-Optimierung aus, starke Grafikkarte, Priorität hoch
+2026-11-22 19:13:43  OK       [Boost] Arbeitsspeicher aufgeräumt – 223 MB frei geworden (jetzt 7,7 von 15,8 GB belegt)
