@@ -2788,3 +2788,9 @@
 2026-11-20 23:20:47  INFO     [Boost] BattlEye Launcher beendet
 2026-11-20 23:20:47  OK       [Boost] BattlEye Launcher: Sitzung 20.11. 20:19 · 3 h 1 min · CPU max. 55 °C · GPU max. 71 °C · 0,68 kWh ≈ 0,20 €
 2026-11-20 23:20:47  WARNUNG  [Boost] BattlEye Launcher ist offenbar abgestürzt: Absturzmeldung des Spiels
+2026-11-20 23:26:56  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 23:26:56  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-22 18:29:02  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-22 18:29:02  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-22 19:06:09  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-22 19:06:10  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)

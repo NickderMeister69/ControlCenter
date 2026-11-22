@@ -219,3 +219,14 @@ Kommt nach einem Neustart immer wieder? Dann installiert dein Mainboard-BIOS die
 
 Wichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es nach dem Neustart wieder.
 2026-11-20 16:19:34  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-22 18:29:03  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+
+Kommt nach einem Neustart immer wieder? Dann installiert dein Mainboard-BIOS die Gigabyte-Software bei jedem Start neu. Abschalten im BIOS (beim Start Entf drücken): Settings → Miscellaneous → „GIGABYTE Utilities Downloader Configuration“ (bei manchen Boards „APP Center Download & Install“) → Disabled, dann F10 zum Speichern.
+2026-11-22 18:30:25  INFO     [Problemloeser] Aktion „Komplett entfernen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-22 18:30:29  OK       [Problemloeser] Gigabyte entfernen: Dienst GigabyteUpdateService: entfernt
+2026-11-22 18:30:29  OK       [Problemloeser] „Komplett entfernen“: Dienst GigabyteUpdateService: entfernt
+
+Wichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es nach dem Neustart wieder.
+2026-11-22 18:30:30  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-22 18:30:30  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: Service 'GigabyteUpdateService' was not found on computer '.'.
+2026-11-22 18:30:31  OK       [Problemloeser] Erledigt: prog:gigabyte

@@ -5209,3 +5209,88 @@ Wichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es
 2026-11-20 23:20:47  INFO     [Allgemein] Desktop-Kacheln wieder eingeblendet
 2026-11-20 23:20:47  WARNUNG  [Boost] BattlEye Launcher ist offenbar abgestürzt: Absturzmeldung des Spiels
 2026-11-20 23:21:16  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 23:25:19  INFO     [Monitor] Messwerte: CPU 41,7 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 36,0 °C, Last 33 %, 44,1 W · LHM-GPU "NVIDIA GeForce RTX 4060" 36,0 °C · HWiNFO aktiv, GPU 36,0 °C · Quelle HWiNFO
+2026-11-20 23:26:34  INFO     [Allgemein] Update verfügbar: v2.1.11 (installiert v2.1.10)
+2026-11-20 23:26:40  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 2 Updates bereit (lokal geprüft)
+2026-11-20 23:26:41  OK       [Allgemein] Update v2.1.11 heruntergeladen – wird eingespielt
+2026-11-20 23:26:50  INFO     [Allgemein] Einstellungen gesichert (vor dem Update): 15 Dateien
+2026-11-20 23:26:50  OK       [Allgemein] Neue Version eingespielt – App startet neu
+2026-11-20 23:26:50  INFO     [Allgemein] Beenden …
+2026-11-20 23:26:50  INFO     [Monitor] FPS-Messung beendet
+2026-11-20 23:26:50  INFO     [Luefter] Beendet, Lüfter an BIOS zurückgegeben.
+2026-11-20 23:26:50  INFO     [Allgemein] Beendet.
+2026-11-20 23:26:54  INFO     [Allgemein] Start Control Center v2.1.11 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-20 23:26:54  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-20 23:26:54  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-20 23:26:54  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-20 23:26:54  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-20 23:26:56  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-20 23:26:56  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-20 23:26:56  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-20 23:26:56  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-20 23:26:56  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-20 23:26:56  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-20 23:26:56  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-20 23:26:56  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-20 23:26:57  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-20 23:26:58  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-20 23:27:09  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, 1 Update bereit (online geprüft)
+2026-11-20 23:27:34  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-20 23:27:34  INFO     [Monitor] Messwerte: CPU 40,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 48,0 °C, Last 36 %, 47,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 48,0 °C · HWiNFO aktiv, GPU 48,0 °C · Quelle HWiNFO
+2026-11-20 23:29:18  INFO     [Luefter] Lüfter an BIOS zurückgegeben: Abmelden/Herunterfahren
+2026-11-22 18:28:58  INFO     [Allgemein] Start Control Center v2.1.11 – Windows-Build 26300, Admin: True, Tray-Start: True, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-22 18:28:58  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-22 18:28:58  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-22 18:28:58  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-22 18:28:58  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-22 18:28:59  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-22 18:29:01  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-22 18:29:02  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-22 18:29:02  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-22 18:29:02  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-22 18:29:02  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-22 18:29:02  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-22 18:29:02  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-22 18:29:02  INFO     [Allgemein] Einstellungen gesichert (täglich): 15 Dateien
+2026-11-22 18:29:03  WARNUNG  [Problemloeser] Gefunden: Gigabyte Control Center / RGB Fusion läuft – Gigabyte-Software greift auf den gleichen ITE-RGB-Controller (048D:5702) zu wie das Control Center. Läuft beides, flackern einzelne Anschlüsse.
+
+Kommt nach einem Neustart immer wieder? Dann installiert dein Mainboard-BIOS die Gigabyte-Software bei jedem Start neu. Abschalten im BIOS (beim Start Entf drücken): Settings → Miscellaneous → „GIGABYTE Utilities Downloader Configuration“ (bei manchen Boards „APP Center Download & Install“) → Disabled, dann F10 zum Speichern.
+2026-11-22 18:29:03  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-22 18:29:04  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-22 18:29:05  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-22 18:29:38  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-22 18:29:38  INFO     [Monitor] Messwerte: CPU 23,8 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 32,0 °C, Last 37 %, 48,3 W · LHM-GPU "NVIDIA GeForce RTX 4060" 32,0 °C · HWiNFO aktiv, GPU 32,0 °C · Quelle HWiNFO
+2026-11-22 18:29:40  INFO     [Monitor] HWiNFO-Startfenster ausgeblendet (1)
+2026-11-22 18:29:50  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 1 Update bereit (online geprüft)
+2026-11-22 18:30:25  INFO     [Problemloeser] Aktion „Komplett entfernen“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-22 18:30:29  OK       [Problemloeser] Gigabyte entfernen: Dienst GigabyteUpdateService: entfernt
+2026-11-22 18:30:29  OK       [Problemloeser] „Komplett entfernen“: Dienst GigabyteUpdateService: entfernt
+
+Wichtig: Im BIOS „GIGABYTE Utilities Downloader“ ausschalten, sonst kommt es nach dem Neustart wieder.
+2026-11-22 18:30:30  INFO     [Problemloeser] Aktion „Dienst beenden“ für „Gigabyte Control Center / RGB Fusion läuft“ …
+2026-11-22 18:30:30  OK       [Problemloeser] „Dienst beenden“: GigabyteUpdateService: Service 'GigabyteUpdateService' was not found on computer '.'.
+2026-11-22 18:30:31  OK       [Problemloeser] Erledigt: prog:gigabyte
+2026-11-22 18:31:29  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 1 Update bereit (online geprüft)
+2026-11-22 18:36:18  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen 2 Tage alt, 2 Updates bereit (lokal geprüft)
+2026-11-22 18:39:38  INFO     [Monitor] Messwerte: CPU 33,5 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 44,0 °C, Last 25 %, 35,7 W · LHM-GPU "NVIDIA GeForce RTX 4060" 44,0 °C · HWiNFO aktiv, GPU 44,0 °C · Quelle HWiNFO
+2026-11-22 18:41:17  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (lokal geprüft)
+2026-11-22 19:06:05  INFO     [Allgemein] Start Control Center v2.1.11 – Windows-Build 26300, Admin: True, Tray-Start: False, Ordner: C:\Users\nickg\Desktop\GitHubProjekte\alles in allem\Nick Control Center\ControlCenter
+2026-11-22 19:06:06  INFO     [Stresstest] Grafikkarten: NVIDIA GeForce RTX 4060 (NVIDIA, 7,8 GB)
+2026-11-22 19:06:06  INFO     [Beleuchtung] RGB: Gigabyte B760 DS3H AX DDR4 erkannt (4 Zonen)
+2026-11-22 19:06:06  INFO     [Tweaker] CPU: 13th Gen Intel(R) Core(TM) i5-13400F (10 Kerne/16 Threads, Basis 2500 MHz)
+2026-11-22 19:06:06  INFO     [Tweaker] Grafikkarte: NVIDIA GeForce RTX 4060 (NVIDIA) – RTX 40 (Ada Lovelace) · Leistungslimit 79–100 % · Takt-Offset bis +200 MHz
+2026-11-22 19:06:07  OK       [Monitor] HWiNFO im Hintergrund gestartet: C:\Program Files\HWiNFO64\HWiNFO64.EXE
+2026-11-22 19:06:09  INFO     [Monitor] Sensoren geöffnet: Motherboard "Gigabyte B760 DS3H AX DDR4", Cpu "13th Gen Intel Core i5-13400F", Memory "Virtual Memory", Memory "Total Memory", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#1)", Memory "Team Group Inc - TEAMGROUP-UD4-3200 (#3)", GpuNvidia "NVIDIA GeForce RTX 4060", Storage "Intenso SSD SATAIII ", Storage "SOLIDIGM SSDPFKNU010TZ", Storage "HGST HTS545050A7E380", Network "Bluetooth-Netzwerkverbindung 2", Network "Ethernet", Network "Ethernet 2", Network "LAN-Verbindung* 10", Network "LAN-Verbindung* 9", Network "Tailscale", Network "WLAN"
+2026-11-22 19:06:09  INFO     [Luefter] Hardware geöffnet, 6 steuerbare Lüfter gefunden.
+2026-11-22 19:06:09  WARNUNG  [Monitor] NVML-Leistung nicht lesbar (Not Supported), Energiezähler: Not Supported
+2026-11-22 19:06:09  WARNUNG  [Monitor] Grafikkarte meldet keine Watt-Werte – schätze aus Auslastung und Leistungslimit (115 W)
+2026-11-22 19:06:09  INFO     [Monitor] Fehlende GPU-Werte kommen direkt vom NVIDIA-Treiber (NVML): NVIDIA GeForce RTX 4060
+2026-11-22 19:06:09  OK       [Boost] Timer-Auflösung aktiv: 0,50 ms
+2026-11-22 19:06:10  INFO     [Boost] Spielesuche: 4 Spiele gefunden (Steam verbunden, 1 Bibliotheken, Epic, Riot)
+2026-11-22 19:06:10  INFO     [Monitor] FPS-Messung gestartet (ETW, DirectX 9–12)
+2026-11-22 19:06:11  INFO     [Allgemein] Treiberprüfung: NVIDIA GeForce RTX 4060 · installiert 621.24 · GeForce Game Ready-Treiber: 621.24 (Aktuell), NVIDIA Studio-Treiber: 621.24 (Aktuell)
+2026-11-22 19:06:13  INFO     [Monitor] HWiNFO-Status: aktiv – Temperaturen kommen von HWiNFO
+2026-11-22 19:06:25  INFO     [Allgemein] Sicherheit: Defender aktiv, Virendefinitionen von heute, Neustart für Updates nötig (online geprüft)
+2026-11-22 19:06:44  INFO     [Monitor] GPU-Leistungssensoren: 
+2026-11-22 19:06:44  INFO     [Monitor] Messwerte: CPU 43,3 °C (Ø P-Kerne) · GPU "NVIDIA GeForce RTX 4060" 45,0 °C, Last 39 %, 50,5 W · LHM-GPU "NVIDIA GeForce RTX 4060" 45,0 °C · HWiNFO aktiv, GPU 45,0 °C · Quelle HWiNFO
+2026-11-22 19:06:47  INFO     [Monitor] HWiNFO-Startfenster ausgeblendet (1)
