@@ -1,0 +1,5 @@
+Logs/
+*.update.exe
+*.update.exe.part
+*.exe.old
+Quellcode-update.zip
