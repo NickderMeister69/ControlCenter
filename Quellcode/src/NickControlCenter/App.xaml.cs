@@ -24,6 +24,32 @@ public static class Services
 public partial class App : Application
 {
     private const string ShowEventName = "NickControlCenter_ShowWindow_Event";
+    private const string ExitEventName = "NickControlCenter_Exit_Event";
+    private EventWaitHandle? _exitEvent;
+
+    /// <summary>Andere, ältere Control-Center-Instanz beenden. true = es lief eine ältere, sie wurde beendet.</summary>
+    private static bool TakeOverOlderInstance()
+    {
+        bool any = false;
+        var me = Environment.ProcessId;
+        foreach (var p in System.Diagnostics.Process.GetProcesses())
+        {
+            try
+            {
+                if (p.Id == me || !(p.ProcessName is "ControlCenter" or "NickControlCenter" or "ControlCenter.update")) continue;
+                var fv = p.MainModule?.FileVersionInfo;
+                var other = fv == null ? null : new Version(fv.FileMajorPart, fv.FileMinorPart, Math.Max(0, fv.FileBuildPart));
+                if (other == null || other >= AppUpdater.Current) continue;
+                // neuere Versionen hören auf das Beenden-Signal, ganz alte nicht → dann hart beenden
+                try { using var ev = EventWaitHandle.OpenExisting(ExitEventName); ev.Set(); } catch { }
+                if (!p.WaitForExit(8000)) { p.Kill(true); p.WaitForExit(5000); }
+                any = true;
+            }
+            catch { }
+            finally { p.Dispose(); }
+        }
+        return any;
+    }
 
     private Mutex? _mutex;
     private EventWaitHandle? _showEvent;
@@ -58,6 +84,11 @@ public partial class App : Application
         if (!isFirst && e.Args.Any(a => a.Equals("--restart", StringComparison.OrdinalIgnoreCase)))
         {
             try { isFirst = _mutex.WaitOne(TimeSpan.FromSeconds(30)); } catch (AbandonedMutexException) { isFirst = true; }
+        }
+        // Läuft noch eine ÄLTERE Version? → die beenden und selbst übernehmen (sonst sieht man nach dem Ersetzen der exe weiter die alte)
+        if (!isFirst && TakeOverOlderInstance())
+        {
+            try { isFirst = _mutex.WaitOne(TimeSpan.FromSeconds(20)); } catch (AbandonedMutexException) { isFirst = true; }
         }
         if (!isFirst)
         {
@@ -101,6 +132,15 @@ public partial class App : Application
         BuildTray();
         Services.Fans.Notify += (title, text, warn) => _tray?.ShowBalloonTip(4000, title, text, warn ? WF.ToolTipIcon.Warning : WF.ToolTipIcon.Info);
 
+        _exitEvent = new EventWaitHandle(false, EventResetMode.AutoReset, ExitEventName);
+        new Thread(() =>
+        {
+            while (!_exiting)
+            {
+                try { if (_exitEvent.WaitOne(1000)) { Dispatcher.BeginInvoke(() => { Log.Info(LogModule.App, "Neuere Version wurde gestartet – diese beendet sich"); ExitApp(ask: false); }); break; } }
+                catch { break; }
+            }
+        }) { IsBackground = true, Name = "ExitEventListener" }.Start();
         _showEvent = new EventWaitHandle(false, EventResetMode.AutoReset, ShowEventName);
         new Thread(() =>
         {
