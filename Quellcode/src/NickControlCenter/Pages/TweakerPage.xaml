@@ -140,6 +140,8 @@
                     <StackPanel>
                         <TextBlock Text="{Binding Svc.Status}" Style="{StaticResource Caption}" FontSize="13"/>
                         <CheckBox Style="{StaticResource ToggleSwitch}" Content="Werte beim Windows-Start anwenden (mit Absturz-Schutz)" IsChecked="{Binding ApplyOnStart}" Margin="0,10,0,0"/>
+                        <CheckBox x:Name="CrashOc" Style="{StaticResource ToggleSwitch}" Content="Bei echtem Spiel-Absturz die Übertaktung automatisch senken" Click="CrashOc_Click" Margin="0,8,0,0"
+                                  ToolTip="Nur bei echten Abstürzen (Windows-Fehlerbericht oder Grafiktreiber-Reset) – normales Beenden zählt nicht."/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                         <Button Content="Werkseinstellung" Click="Reset_Click" Margin="0,0,8,0"/>

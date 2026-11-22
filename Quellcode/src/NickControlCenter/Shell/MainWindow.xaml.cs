@@ -51,6 +51,11 @@ public partial class MainWindow : Window
         _mini.Tick += (_, _) => UpdateMini();
         _mini.Start();
 
+        VersionRun.Text = "Control Center " + AppUpdater.CurrentText;
+        PreviewKeyDown += (_, e) =>
+        {
+            if (e.Key == System.Windows.Input.Key.F && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control) { SearchBox.Focus(); SearchBox.SelectAll(); e.Handled = true; }
+        };
         Loaded += (_, _) => Navigate(_defs.ContainsKey(s.LastPage) ? s.LastPage : "Dashboard");
     }
 
@@ -153,6 +158,138 @@ public partial class MainWindow : Window
         System.Runtime.InteropServices.Marshal.StructureToPtr(mmi, lParam, true);
         return IntPtr.Zero;
     }
+
+    // ================= Suche
+    private sealed record SearchHit(string Page, string Title, string Hint, int Score);
+
+    /// <summary>Zusätzliche Suchwörter je Seite (was man dort findet).</summary>
+    private static readonly Dictionary<string, string> Keywords = new()
+    {
+        ["Dashboard"] = "übersicht start home strom kosten kwh stromverbrauch stromkosten euro watt schnellaktionen",
+        ["Monitor"] = "overlay fps bilder pro sekunde frames temperatur temp grad hitze heiß warm sensoren cpu prozessor gpu grafikkarte auslastung last aufzeichnung csv hz hertz monitor bildwiederholrate frametime watt verlauf ram arbeitsspeicher spannung",
+        ["FPS-Boost"] = "boost schneller ruckeln lag laggy performance leistung spiele game gaming zocken ark spielprofil grafik grafikeinstellungen unreal konsole konsolenbefehle befehle startoptionen ram arbeitsspeicher tweaks timer valorant fortnite cs2 steam epic feineinstellungen auto-boost schatten wolken nebel texturen",
+        ["Zielen & Maus"] = "maus sensitivity empfindlichkeit dpi input lag aim abtastrate polling",
+        ["Lüfter"] = "lüfter luefter fans ventilator kurve lüfterkurve leise laut lautstärke geräusch drehzahl rpm pumpe aio wasserkühlung kühlung kühler",
+        ["Beleuchtung"] = "rgb licht lichter led leds farbe farben bunt razer corsair argb effekt regenbogen helligkeit dunkel beleuchtung aus nachtmodus",
+        ["Tweaker"] = "übertakten übertaktung overclock overclocking oc undervolt undervolting takt mhz ghz grafikkarte cpu prozessor leistungslimit powerlimit spannung absturz",
+        ["Stresstest"] = "stabilität test belastung stresstest cpu gpu ram speicher",
+        ["Design & Farben"] = "design farbe akzent dunkel hell hintergrund wallpaper taskleiste startmenü explorer",
+        ["Desktop-Kacheln"] = "widgets kacheln uhr notizen desktop",
+        ["Werkzeuge"] = "updates update winget programme apps aktualisieren steam spiele spieleupdates downloads download ordner aufräumen sortieren speicherplatz speicher voll platz festplatte ssd hdd laufwerk gesundheit smart verschleiß lebensdauer speedtest internet langsam schnell wlan geschwindigkeit mbit ping jitter herunterfahren ausschalten shutdown timer tastenkürzel hotkeys tastenkombination löschen temp müll papierkorb",
+        ["VPN & Werbeblocker"] = "vpn werbung werbeblocker adblock adblocker ads reklame dns wireguard proton ip adresse standort datenschutz privat tracker youtube",
+        ["Autostart"] = "autostart hochfahren windows start programme langsam",
+        ["Problemlöser"] = "probleme fehler konflikt flackern gigabyte wallpaper engine dienst diagnose",
+        ["Treiber"] = "treiber driver nvidia geforce amd radeon intel chipsatz audio sound ton netzwerk lan wlan bluetooth usb windows update installieren aktuell",
+        ["Protokoll"] = "log logs protokoll fehler",
+        ["Einstellungen"] = "einstellungen optionen version appversion update neue version sicherung backup wiederherstellen zurücksetzen hwinfo autostart tray verknüpfung desktop fahrenheit",
+    };
+
+    /// <summary>Kleinschreibung, Umlaute vereinheitlichen (ü = ue), Satzzeichen raus.</summary>
+    private static string Norm(string t)
+    {
+        t = t.ToLowerInvariant().Replace("ä", "ae").Replace("ö", "oe").Replace("ü", "ue").Replace("ß", "ss");
+        var sb = new System.Text.StringBuilder(t.Length);
+        foreach (var c in t) sb.Append(char.IsLetterOrDigit(c) ? c : ' ');
+        return sb.ToString();
+    }
+
+    private static int Distance(string a, string b)
+    {
+        if (Math.Abs(a.Length - b.Length) > 2) return 99;
+        var d = new int[a.Length + 1, b.Length + 1];
+        for (int i = 0; i <= a.Length; i++) d[i, 0] = i;
+        for (int k = 0; k <= b.Length; k++) d[0, k] = k;
+        for (int i = 1; i <= a.Length; i++)
+            for (int k = 1; k <= b.Length; k++)
+                d[i, k] = Math.Min(Math.Min(d[i - 1, k] + 1, d[i, k - 1] + 1), d[i - 1, k - 1] + (a[i - 1] == b[k - 1] ? 0 : 1));
+        return d[a.Length, b.Length];
+    }
+
+    /// <summary>Wie gut passt ein Suchwort zu einem Wort? 0 = gar nicht. Tippfehler und Wortteile zählen auch.</summary>
+    private static int Match(string w, string t)
+    {
+        if (t == w) return 10;
+        if (w.Length >= 2 && t.StartsWith(w)) return 8;                 // „luef“ → „luefter“
+        if (w.Length >= 4 && t.Length >= 3 && w.StartsWith(t)) return 6; // „luefterkurve“ → „luefter“
+        if (w.Length >= 3 && t.Contains(w)) return 6;                    // „kurve“ in „temperaturkurve“
+        if (w.Length >= 4 && t.Length >= 4)
+        {
+            int dist = Distance(w, t.Length > w.Length + 2 ? t[..(w.Length + 1)] : t);
+            if (dist <= (w.Length >= 7 ? 2 : 1)) return 4;               // Tippfehler: „luefer“, „belauchtung“
+        }
+        return 0;
+    }
+
+    private List<SearchHit> Search(string q)
+    {
+        var words = Norm(q).Split(' ', StringSplitOptions.RemoveEmptyEntries).Where(w => w.Length >= 2).ToArray();
+        var hits = new List<SearchHit>();
+        if (words.Length == 0) return hits;
+        foreach (var (key, def) in _defs)
+        {
+            var titleWords = Norm(def.Title).Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            var textWords = Norm(def.Sub + " " + (Keywords.TryGetValue(key, out var k) ? k : "")).Split(' ', StringSplitOptions.RemoveEmptyEntries).Distinct().ToArray();
+            int score = 0, matched = 0;
+            var why = new List<string>();
+            foreach (var w in words)
+            {
+                int best = titleWords.Select(t => Match(w, t) * 2).DefaultIfEmpty(0).Max();
+                string? bestWord = null;
+                foreach (var t in textWords)
+                {
+                    int m = Match(w, t);
+                    if (m > best) { best = m; bestWord = t; }
+                }
+                if (best > 0) { matched++; score += best; if (bestWord != null && why.Count < 3 && !why.Contains(bestWord)) why.Add(bestWord); }
+            }
+            if (matched == 0) continue;
+            // mehr passende Wörter schlagen höhere Einzelwertung
+            score += matched * 100;
+            var hint = why.Count > 0 ? "passt zu: " + string.Join(", ", why) + " · " + def.Sub : def.Sub;
+            hits.Add(new SearchHit(key, def.Title, hint, score));
+        }
+        return hits.OrderByDescending(h => h.Score).ThenBy(h => h.Title).Take(8).ToList();
+    }
+
+    private void Search_Changed(object sender, TextChangedEventArgs e)
+    {
+        var q = SearchBox.Text.Trim();
+        SearchHint.Visibility = SearchBox.Text.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+        if (q.Length < 2) { SearchPopup.IsOpen = false; return; }
+        var hits = Search(q);
+        SearchResults.ItemsSource = hits.Count > 0 ? hits : new List<SearchHit> { new("", "Nichts gefunden", "Anderes Wort versuchen, z. B. „Lüfter“, „RGB“, „Update“", 0) };
+        SearchResults.SelectedIndex = hits.Count > 0 ? 0 : -1;
+        SearchPopup.IsOpen = true;
+    }
+
+    private void GoToHit(SearchHit? h)
+    {
+        if (h == null || h.Page.Length == 0) return;
+        SearchPopup.IsOpen = false;
+        SearchBox.Text = "";
+        Navigate(h.Page);
+    }
+
+    private void Search_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Enter) { GoToHit(SearchResults.SelectedItem as SearchHit); e.Handled = true; }
+        else if (e.Key == System.Windows.Input.Key.Escape) { SearchBox.Text = ""; SearchPopup.IsOpen = false; e.Handled = true; }
+        else if (e.Key == System.Windows.Input.Key.Down && SearchPopup.IsOpen)
+        {
+            if (SearchResults.SelectedIndex < SearchResults.Items.Count - 1) SearchResults.SelectedIndex++;
+            e.Handled = true;
+        }
+        else if (e.Key == System.Windows.Input.Key.Up && SearchPopup.IsOpen)
+        {
+            if (SearchResults.SelectedIndex > 0) SearchResults.SelectedIndex--;
+            e.Handled = true;
+        }
+    }
+
+    private void SearchResult_Click(object sender, System.Windows.Input.MouseButtonEventArgs e) => GoToHit(SearchResults.SelectedItem as SearchHit);
+    private void SearchResults_KeyDown(object sender, System.Windows.Input.KeyEventArgs e) { if (e.Key == System.Windows.Input.Key.Enter) GoToHit(SearchResults.SelectedItem as SearchHit); }
+
+    private void GitHub_Click(object sender, System.Windows.Navigation.RequestNavigateEventArgs e) { Env.Open(e.Uri.AbsoluteUri); e.Handled = true; }
 
     private async void Update_Click(object sender, RoutedEventArgs e)
     {

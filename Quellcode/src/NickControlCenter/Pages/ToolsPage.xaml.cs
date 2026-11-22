@@ -20,6 +20,7 @@ public partial class ToolsPage : UserControl, IPage
         Keys.ItemsSource = HotkeyService.Instance.Items;
         var st = AppSettings.Current;
         DlWeekly.IsChecked = st.DownloadsAutoSort;
+        SteamNotify.IsChecked = st.SteamUpdateNotify; SteamAuto.IsChecked = st.SteamUpdateAuto; SteamClose.IsChecked = st.SteamCloseAfterUpdate;
         foreach (ComboBoxItem i in DlDays.Items) if ((string)i.Tag == st.DownloadsOldDays.ToString()) i.IsSelected = true;
         _init = true;
         if (!AppUpdates.Available) { UpdSearch.IsEnabled = false; UpdSummary.Text = "winget fehlt – im Microsoft Store „App Installer“ installieren"; }
@@ -30,6 +31,8 @@ public partial class ToolsPage : UserControl, IPage
         if (!visible) { _gamesTimer?.Stop(); if (_recording != null) { _recording.Recording = false; HotkeyService.Instance.Apply(); } _recording = null; return; }
         RefreshDownloads();
         RefreshDrives();
+        ShowSpeedHistory();
+        if (HealthList.ItemsSource == null) _ = RefreshHealth();
         RefreshGames();
         _ = InstallEstimate.MeasureAsync();
         if (_gamesTimer == null)
@@ -118,13 +121,20 @@ public partial class ToolsPage : UserControl, IPage
         catch (Exception ex) { GamesSummary.Text = "Steam konnte nicht gelesen werden: " + ex.Message; }
     }
 
+    private void SteamOpt_Click(object s, RoutedEventArgs e)
+    {
+        var st = AppSettings.Current;
+        st.SteamUpdateNotify = SteamNotify.IsChecked == true; st.SteamUpdateAuto = SteamAuto.IsChecked == true; st.SteamCloseAfterUpdate = SteamClose.IsChecked == true;
+        st.Save();
+    }
+
     private void GamesRefresh_Click(object s, RoutedEventArgs e) => RefreshGames();
 
-    private void GamesAll_Click(object s, RoutedEventArgs e) => StartGameUpdates(_games.Where(g => g.NeedsUpdate && !g.S.Updating).ToList());
+    private void GamesAll_Click(object s, RoutedEventArgs e) => GameUpdateWatcher.Instance.StartUpdates(_games.Where(g => g.NeedsUpdate && !g.S.Updating).Select(g => g.S).ToList());
 
     private void GameOne_Click(object s, RoutedEventArgs e)
     {
-        if ((s as FrameworkElement)?.DataContext is SteamGameVM g) StartGameUpdates(new() { g });
+        if ((s as FrameworkElement)?.DataContext is SteamGameVM g) { g.RequestedAt = DateTime.Now; g.Tick(); GameUpdateWatcher.Instance.StartUpdates(new() { g.S }); }
     }
 
     private void GameSteam_Click(object s, RoutedEventArgs e)
@@ -161,6 +171,56 @@ public partial class ToolsPage : UserControl, IPage
         UpdSearch.IsEnabled = true; UpdAll.IsEnabled = ok < todo.Count; UpdBusy.Visibility = Visibility.Collapsed;
         UpdateUpdTotal();
     }
+
+    // ---------------- Laufwerks-Gesundheit
+    private async void Health_Click(object s, RoutedEventArgs e) => await RefreshHealth();
+
+    private async Task RefreshHealth()
+    {
+        HealthBtn.IsEnabled = false; HealthSummary.Text = "Lese Laufwerke …";
+        try
+        {
+            var list = await Task.Run(DiskHealth.Read);
+            HealthList.ItemsSource = list;
+            int bad = list.Count(d => d.Level == 2), warn = list.Count(d => d.Level == 1);
+            HealthSummary.Text = list.Count == 0 ? "Keine Laufwerksdaten erhalten" :
+                bad > 0 ? $"⚠ {bad} Laufwerk(e) kritisch – Daten sichern!" :
+                warn > 0 ? $"{list.Count} Laufwerke · {warn} zum Beobachten" : $"Alle {list.Count} Laufwerke gesund ✔";
+        }
+        catch (Exception ex) { HealthSummary.Text = "Fehler: " + ex.Message; }
+        finally { HealthBtn.IsEnabled = true; }
+    }
+
+    // ---------------- Speedtest
+    private CancellationTokenSource? _speedCts;
+
+    private void ShowSpeedHistory() => SpHistory.ItemsSource = SpeedTest.History.Results.Take(10).ToList();
+
+    private async void Speed_Click(object s, RoutedEventArgs e)
+    {
+        SpeedBtn.IsEnabled = false; SpeedStop.Visibility = SpBusy.Visibility = Visibility.Visible;
+        SpDown.Text = SpUp.Text = SpPing.Text = SpJitter.Text = "–";
+        _speedCts = new CancellationTokenSource();
+        var prog = new Progress<(string Phase, double Value)>(p =>
+        {
+            SpStatus.Text = p.Phase switch { "Ping" => "Messe Ping …", "Download" => "Messe Download …", _ => "Messe Upload …" };
+            if (double.IsNaN(p.Value)) return;
+            var t = p.Phase == "Ping" ? $"{p.Value:0}" : $"{p.Value:0}";
+            if (p.Phase == "Ping") SpPing.Text = t; else if (p.Phase == "Download") SpDown.Text = t; else SpUp.Text = t;
+        });
+        try
+        {
+            var r = await SpeedTest.RunAsync(prog, _speedCts.Token);
+            SpDown.Text = $"{r.DownMbit:0}"; SpUp.Text = $"{r.UpMbit:0}"; SpPing.Text = $"{r.PingMs:0}"; SpJitter.Text = $"{r.JitterMs:0.0}";
+            SpStatus.Text = r.PingMs > 60 ? "Fertig – der Ping ist recht hoch, für Shooter nicht ideal." : r.DownMbit < 16 ? "Fertig – eher langsame Leitung." : "Fertig ✔";
+            ShowSpeedHistory();
+        }
+        catch (OperationCanceledException) { SpStatus.Text = "Abgebrochen"; }
+        catch (Exception ex) { SpStatus.Text = "Fehler: " + ex.Message; Log.Warn(LogModule.App, "Speedtest: " + ex.Message); }
+        finally { SpeedBtn.IsEnabled = true; SpeedStop.Visibility = SpBusy.Visibility = Visibility.Collapsed; }
+    }
+
+    private void SpeedStop_Click(object s, RoutedEventArgs e) => _speedCts?.Cancel();
 
     // ---------------- Downloads
     private int OldDays => int.TryParse((DlDays.SelectedItem as ComboBoxItem)?.Tag as string, out var d) ? d : 30;

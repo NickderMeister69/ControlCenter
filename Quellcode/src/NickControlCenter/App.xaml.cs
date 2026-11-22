@@ -169,7 +169,32 @@ public partial class App : Application
         FirstRun();
         try { SettingsBackup.Daily(); } catch { }
         AppUpdater.WriteVersionFile();
+        // Laufwerks-Gesundheit: beim Start und dann täglich im Hintergrund prüfen, bei Problemen im Problemlöser melden
+        async void CheckDisks()
+        {
+            try
+            {
+                var disks = await Task.Run(DiskHealth.Read);
+                foreach (var d in disks)
+                {
+                    var id = "disk:" + d.Name;
+                    if (d.Level == 0 || (d.Level == 1 && !(d.Wear >= 70) && d.WindowsHealth != "Warning")) { Services.Diagnose.Clear(id); continue; }
+                    var f = new Finding
+                    {
+                        Id = id, Title = $"Laufwerk „{d.Name}“: {d.LevelText}", Severity = d.Level == 2 ? Severity.Problem : Severity.Warning, Areas = Area.System,
+                        Detail = d.Details + "\n" + d.Life, Advice = d.Advice
+                    };
+                    f.Actions.Add(new FixAction { Label = "Details ansehen", Icon = "", Primary = true, Run = () => { Ui.Go("Werkzeuge"); return Task.FromResult("Geöffnet."); } });
+                    Services.Diagnose.Report(f);
+                }
+            }
+            catch { }
+        }
+        var diskTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(45) };
+        diskTimer.Tick += (_, _) => { diskTimer.Interval = TimeSpan.FromHours(24); CheckDisks(); };
+        diskTimer.Start();
         AppUpdater.Instance.StartAutoCheck();
+        GameUpdateWatcher.Instance.Start();
         // Update sofort einspielen, sobald eine „ControlCenter.update.exe“ neben der exe auftaucht (Ordner wird überwacht, Timer als Reserve)
         var upd = new DispatcherTimer { Interval = TimeSpan.FromSeconds(5) };
         void TryUpdate()

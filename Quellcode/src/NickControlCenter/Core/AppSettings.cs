@@ -32,6 +32,16 @@ public sealed class AppSettings
     public bool ShowWindowOnAutostart { get; set; } = true;
     /// <summary>Automatisch nach neuen Versionen (GitHub-Releases) suchen.</summary>
     public bool AutoUpdateCheck { get; set; } = true;
+    /// <summary>Beim Start/alle 2 h nach Steam-Spiele-Updates schauen und Bescheid geben.</summary>
+    public bool SteamUpdateNotify { get; set; } = true;
+    /// <summary>Spiele-Updates ohne Nachfrage im Hintergrund laden.</summary>
+    public bool SteamUpdateAuto { get; set; }
+    /// <summary>Steam nach dem Update wieder schließen (nur wenn die App es gestartet hat).</summary>
+    public bool SteamCloseAfterUpdate { get; set; } = true;
+    /// <summary>Bei einem echten Spiel-Absturz die GPU-Übertaktung automatisch senken.</summary>
+    public bool CrashLowersOc { get; set; } = true;
+    /// <summary>„Später“ gedrückt: diese Versionen nicht nochmal melden (AppId:Build).</summary>
+    public List<string> SteamUpdateDismissed { get; set; } = new();
     /// <summary>Zuletzt per Knopf geladenes Release und die Version, von der aus es geladen wurde (Schutz vor Endlosschleife).</summary>
     public string? UpdateAttemptTag { get; set; }
     public string? UpdateAttemptFrom { get; set; }

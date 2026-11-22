@@ -53,6 +53,7 @@ public partial class TweakerPage : UserControl
     public TweakerPage()
     {
         InitializeComponent();
+        CrashOc.IsChecked = AppSettings.Current.CrashLowersOc;
         DataContext = _vm;
         var s = _vm.Svc;
         CpuMeta.Text = $"{s.Cores} Kerne · {s.Threads} Threads · Basis {s.BaseClock} MHz · gemessen bis {Math.Max(s.MaxSeen, s.TurboClock)} MHz · Sicherheitsgrenze {s.SafetyTemp} °C";
@@ -128,4 +129,5 @@ public partial class TweakerPage : UserControl
     {
         if ((sender as FrameworkElement)?.DataContext is TweakProfile p) { _vm.Load(p.Cpu, p.Gpu); Ui.Toast($"Profil „{p.Name}“ geladen – „Anwenden“ drücken"); }
     }
+    private void CrashOc_Click(object s, System.Windows.RoutedEventArgs e) { AppSettings.Current.CrashLowersOc = CrashOc.IsChecked == true; AppSettings.Current.Save(); }
 }

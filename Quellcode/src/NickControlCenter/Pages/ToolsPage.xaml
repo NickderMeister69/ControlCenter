@@ -59,6 +59,11 @@
                     </Grid>
                     <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,6,0,0"
                                Text="Liest direkt aus Steam, welche Spiele ein Update haben und wie groß es ist – mit Live-Fortschritt. Neue Versionen werden auch online nachgeschaut – das klappt also auch, wenn Steam gerade nicht läuft. Laden kann ein Spiel-Update nur Steam selbst: „Aktualisieren“ startet Steam unsichtbar im Hintergrund (ohne Fenster), Steam lädt das Update von selbst und hier siehst du Fortschritt, Mbit/s und Restzeit."/>
+                    <WrapPanel Margin="0,8,0,0">
+                        <CheckBox x:Name="SteamNotify" Style="{StaticResource ToggleSwitch}" Content="Beim Start nach Spiele-Updates schauen und Bescheid geben" Click="SteamOpt_Click" Margin="0,0,20,6"/>
+                        <CheckBox x:Name="SteamAuto" Style="{StaticResource ToggleSwitch}" Content="Ohne Nachfrage im Hintergrund laden" Click="SteamOpt_Click" Margin="0,0,20,6"/>
+                        <CheckBox x:Name="SteamClose" Style="{StaticResource ToggleSwitch}" Content="Steam danach wieder schließen" Click="SteamOpt_Click" Margin="0,0,0,6"/>
+                    </WrapPanel>
                     <ItemsControl x:Name="GamesList" Margin="0,8,0,0">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type local:SteamGameVM}">
@@ -192,6 +197,73 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <!-- Laufwerks-Gesundheit -->
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="LAUFWERKS-GESUNDHEIT (SSD &amp; FESTPLATTE)" Style="{StaticResource Kicker}"/>
+                            <TextBlock x:Name="HealthSummary" Text="Noch nicht geprüft" Style="{StaticResource H2}" FontSize="15" TextWrapping="Wrap"/>
+                        </StackPanel>
+                        <Button x:Name="HealthBtn" Content="Jetzt prüfen" Click="Health_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="12,5"/>
+                    </Grid>
+                    <ItemsControl x:Name="HealthList" Margin="0,8,0,0">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:DiskHealthInfo}">
+                                <Border Style="{StaticResource SubCard}" Margin="0,0,0,6" Padding="10,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="6"/><ColumnDefinition/><ColumnDefinition Width="200"/></Grid.ColumnDefinitions>
+                                        <Border Background="{Binding LevelBrush}" CornerRadius="2"/>
+                                        <StackPanel Grid.Column="1" Margin="10,0">
+                                            <TextBlock FontWeight="SemiBold" TextTrimming="CharacterEllipsis"><Run Text="{Binding Name, Mode=OneWay}"/><Run Text="  ·  "/><Run Text="{Binding LevelText, Mode=OneWay}" Foreground="{Binding LevelBrush, Mode=OneWay}"/></TextBlock>
+                                            <TextBlock Text="{Binding Details}" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap"/>
+                                            <TextBlock Text="{Binding Advice}" FontSize="12" Foreground="{Binding LevelBrush}" TextWrapping="Wrap" Visibility="{Binding HasAdvice, Converter={StaticResource BoolToVis}}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Life}" FontSize="12" TextWrapping="Wrap"/>
+                                            <ProgressBar Value="{Binding LifeShare, Mode=OneWay}" Maximum="1" Height="6" Margin="0,4,0,0" Foreground="{Binding LevelBrush}" Visibility="{Binding HasLife, Converter={StaticResource BoolToVis}}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,0"
+                               Text="Liest die Selbstdiagnose (SMART) der Laufwerke über Windows: Verschleiß, Temperatur, Betriebsstunden und Fehler. Manche (vor allem ältere SATA-SSDs und USB-Platten) melden nicht alles. Die App prüft beim Start und danach täglich von selbst und warnt im Problemlöser, wenn eine Platte schwächelt."/>
+                </StackPanel>
+            </Border>
+
+            <!-- Speedtest -->
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="INTERNET-SPEEDTEST" Style="{StaticResource Kicker}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="SpeedStop" Content="Abbrechen" Click="SpeedStop_Click" Padding="10,5" Margin="0,0,8,0" Visibility="Collapsed"/>
+                            <Button x:Name="SpeedBtn" Style="{StaticResource AccentButton}" Content="Test starten" Click="Speed_Click" Padding="14,5"/>
+                        </StackPanel>
+                    </Grid>
+                    <UniformGrid Columns="4" Margin="0,10,0,0">
+                        <StackPanel><TextBlock Text="DOWNLOAD" Style="{StaticResource Muted}" FontSize="10.5"/><TextBlock x:Name="SpDown" Text="–" Style="{StaticResource BigNum}" FontSize="26"/><TextBlock Text="Mbit/s" Style="{StaticResource Muted}" FontSize="11"/></StackPanel>
+                        <StackPanel><TextBlock Text="UPLOAD" Style="{StaticResource Muted}" FontSize="10.5"/><TextBlock x:Name="SpUp" Text="–" Style="{StaticResource BigNum}" FontSize="26"/><TextBlock Text="Mbit/s" Style="{StaticResource Muted}" FontSize="11"/></StackPanel>
+                        <StackPanel><TextBlock Text="PING" Style="{StaticResource Muted}" FontSize="10.5"/><TextBlock x:Name="SpPing" Text="–" Style="{StaticResource BigNum}" FontSize="26"/><TextBlock Text="ms" Style="{StaticResource Muted}" FontSize="11"/></StackPanel>
+                        <StackPanel><TextBlock Text="JITTER" Style="{StaticResource Muted}" FontSize="10.5"/><TextBlock x:Name="SpJitter" Text="–" Style="{StaticResource BigNum}" FontSize="26"/><TextBlock Text="ms" Style="{StaticResource Muted}" FontSize="11"/></StackPanel>
+                    </UniformGrid>
+                    <TextBlock x:Name="SpStatus" Style="{StaticResource Caption}" Margin="0,8,0,0" TextWrapping="Wrap"/>
+                    <ProgressBar x:Name="SpBusy" IsIndeterminate="True" Margin="0,6,0,0" Visibility="Collapsed"/>
+                    <TextBlock Text="VERLAUF" Style="{StaticResource Muted}" FontSize="10.5" Margin="0,12,0,4"/>
+                    <ItemsControl x:Name="SpHistory">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:SpeedResult}">
+                                <TextBlock Text="{Binding Line}" FontFamily="{StaticResource MonoFont}" FontSize="12" Margin="0,1"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,8,0,0"
+                               Text="Misst mit den Servern von Cloudflare (wie speed.cloudflare.com), mehrere Verbindungen gleichzeitig. Am genauesten per LAN-Kabel und ohne laufende Downloads. Ein aktives VPN senkt das Ergebnis."/>
                 </StackPanel>
             </Border>
 

@@ -266,7 +266,7 @@ public sealed partial class BoostService
         }
         Games.Clear();
         // fälschlich als Spiel erkannte Programme (z. B. Wallpaper Engine) wieder entfernen
-        Settings.Games.RemoveAll(p => NoGame.Contains(p.Process) || p.SteamAppId == 431960);
+        Settings.Games.RemoveAll(p => NoGame.Contains(p.Process) || p.SteamAppId == 431960 || IsHelperName(p.Name) || IsHelperName(p.Process));
         foreach (var p in Settings.Games.OrderBy(p => p.Name)) Games.Add(new GameVM(this, p));
         Raise(nameof(GamesText));
     }
@@ -1059,6 +1059,11 @@ public sealed partial class BoostService
     };
     private string? _fsCandidate; private DateTime _fsSince;
 
+    /// <summary>Anti-Cheat, Launcher, Updater – laufen mit Spielen, sind aber selbst keine.</summary>
+    public static bool IsHelperName(string? n) => !string.IsNullOrEmpty(n) &&
+        (n.Contains("BattlEye", StringComparison.OrdinalIgnoreCase) || n.EndsWith("_BE", StringComparison.OrdinalIgnoreCase) || n.Contains("EasyAntiCheat", StringComparison.OrdinalIgnoreCase) ||
+         n.Contains("Updater", StringComparison.OrdinalIgnoreCase) || n.Contains("Launcher", StringComparison.OrdinalIgnoreCase) || n.Contains("CrashReport", StringComparison.OrdinalIgnoreCase));
+
     /// <summary>Kein Spiel (Browser, Launcher, Windows-Teile …)?</summary>
     public static bool IsNonGame(string processName) =>
         NoGame.Contains(processName) || SystemProcs.Contains(processName) ||
@@ -1084,7 +1089,7 @@ public sealed partial class BoostService
             Native.GetWindowThreadProcessId(fg, out uint pid);
             Process? p = null;
             foreach (var l in running.Values) { p = l.FirstOrDefault(x => x.Id == pid); if (p != null) break; }
-            if (p == null || NoGame.Contains(p.ProcessName) || SystemProcs.Contains(p.ProcessName)) return;
+            if (p == null || NoGame.Contains(p.ProcessName) || SystemProcs.Contains(p.ProcessName) || IsHelperName(p.ProcessName)) return;
             var key = p.ProcessName.ToLowerInvariant();
             if (Games.Any(g => g.Key == key || (g.Known?.Processes.Any(x => x.Equals(p.ProcessName, StringComparison.OrdinalIgnoreCase)) ?? false))) return;
             string? exe = null;
@@ -1101,6 +1106,7 @@ public sealed partial class BoostService
             string name;
             try { name = p.MainModule?.FileVersionInfo.ProductName?.Trim() ?? ""; } catch { name = ""; }
             if (name.Length < 2 || name.Contains("Unreal", StringComparison.OrdinalIgnoreCase)) name = p.MainWindowTitle is { Length: > 1 } t ? t : p.ProcessName;
+            if (IsHelperName(name)) return;
             var root = exe == null ? null : Path.GetDirectoryName(exe);
             var bi = exe?.IndexOf(@"\Binaries\", StringComparison.OrdinalIgnoreCase) ?? -1;
             if (bi > 0) root = Path.GetDirectoryName(exe![..bi]);
@@ -1129,8 +1135,8 @@ public sealed partial class BoostService
     private void TrackSession(Dictionary<string, List<Process>> running)
     {
         var snap = HardwareHub.Instance.Latest;
-        bool crashUi = running.ContainsKey("CrashReportClient") || running.ContainsKey("UnrealCEFSubProcess") && running.ContainsKey("CrashReportClient")
-                       || running.Keys.Any(k => k.Contains("CrashReport", StringComparison.OrdinalIgnoreCase) || k.Equals("WerFault", StringComparison.OrdinalIgnoreCase));
+        // „CrashReportClient“/WerFault laufen bei Unreal-Spielen auch beim normalen Beenden mit → kein Absturz-Beweis mehr
+        bool crashUi = false;
         foreach (var (key, se) in _sessions)
         {
             if (!_activeGames.TryGetValue(key, out var pids)) continue;
@@ -1194,8 +1200,9 @@ public sealed partial class BoostService
             {
                 var from = since.ToUniversalTime().ToString("o");
                 // Grafiktreiber hat sich zurückgesetzt (TDR) oder ist abgestürzt
+                // nur echte Treiber-Resets: Display 4101 (TDR), nvlddmkm 13/14/153 (Grafikkarte hängt/zurückgesetzt), AMD-Treiberfehler
                 var qSys = new System.Diagnostics.Eventing.Reader.EventLogQuery("System", System.Diagnostics.Eventing.Reader.PathType.LogName,
-                    $"*[System[(Provider[@Name='nvlddmkm'] or Provider[@Name='Display'] or Provider[@Name='amdkmdag'] or Provider[@Name='amdwddmg']) and (Level=1 or Level=2 or Level=3) and TimeCreated[@SystemTime>='{from}']]]");
+                    $"*[System[((Provider[@Name='Display'] and EventID=4101) or (Provider[@Name='nvlddmkm'] and (EventID=13 or EventID=14 or EventID=153)) or ((Provider[@Name='amdkmdag'] or Provider[@Name='amdwddmg']) and (Level=1 or Level=2))) and TimeCreated[@SystemTime>='{from}']]]");
                 using (var r = new System.Diagnostics.Eventing.Reader.EventLogReader(qSys))
                     if (r.ReadEvent() is { } ev) { why ??= $"Grafiktreiber-Fehler (Ereignis {ev.Id})"; ev.Dispose(); }
                 // Windows-Fehlerbericht für die Spiel-exe
@@ -1207,15 +1214,18 @@ public sealed partial class BoostService
                     {
                         string text = "";
                         try { text = string.Join(" ", ev.Properties.Select(x => x.Value?.ToString())); } catch { }
-                        if (text.Contains(proc, StringComparison.OrdinalIgnoreCase)) { why ??= ev.Id == 1002 ? "Spiel hat nicht mehr reagiert" : "Windows-Fehlerbericht (Absturz)"; break; }
+                        // nur echte Abstürze (1000). 1002 = „reagiert nicht“ passiert bei ARK oft beim normalen Beenden → ignorieren
+                        if (ev.Id == 1000 && text.Contains(proc + ".exe", StringComparison.OrdinalIgnoreCase)) { why ??= "Windows-Fehlerbericht (Absturz)"; break; }
                     }
             }
             catch (Exception ex) { Log.Write(LogModule.Boost, "Absturz-Prüfung: " + ex.Message); }
             if (why == null) return;
+            // Absturz nur werten, wenn das Spiel eine Weile lief (Beenden im Startbildschirm/Launcher zählt nicht)
+            if (dur.TotalMinutes < 1) return;
             Log.Warn(LogModule.Boost, $"{g.Name} ist offenbar abgestürzt: {why}");
             App.Current?.Dispatcher.BeginInvoke(() =>
             {
-                var change = Services.Tweaker.StepDownAfterCrash(g.Name);
+                var change = AppSettings.Current.CrashLowersOc ? Services.Tweaker.StepDownAfterCrash(g.Name) : null;
                 var f = new Finding
                 {
                     Id = "crash:" + g.Key, Severity = change != null ? Severity.Warning : Severity.Hint, Areas = Area.Boost | Area.Tweaker,

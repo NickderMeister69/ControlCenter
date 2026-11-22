@@ -42,6 +42,27 @@
                     </StackPanel>
 
                     <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <StackPanel>
+                        <!-- Suche -->
+                        <Grid Margin="16,0,16,12">
+                            <TextBox x:Name="SearchBox" Padding="28,6,8,6" TextChanged="Search_Changed" PreviewKeyDown="Search_KeyDown" ToolTip="Suchen (Strg+F)"/>
+                            <TextBlock Text="&#xE721;" Style="{StaticResource Icon}" FontSize="12" Margin="9,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False" Foreground="{StaticResource MutedBrush}"/>
+                            <TextBlock x:Name="SearchHint" Text="Suchen …" Margin="30,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False" Foreground="{StaticResource MutedBrush}" FontSize="12.5"/>
+                            <Popup x:Name="SearchPopup" PlacementTarget="{Binding ElementName=SearchBox}" Placement="Bottom" StaysOpen="False" AllowsTransparency="True" Width="320">
+                                <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource LineStrongBrush}" BorderThickness="1" CornerRadius="6" Padding="4" Margin="0,4,0,0">
+                                    <ListBox x:Name="SearchResults" Background="Transparent" BorderThickness="0" MaxHeight="380" MouseLeftButtonUp="SearchResult_Click" KeyDown="SearchResults_KeyDown">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="4,3">
+                                                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}"/>
+                                                    <TextBlock Text="{Binding Hint}" FontSize="11.5" Foreground="{StaticResource MutedBrush}" TextTrimming="CharacterEllipsis"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Border>
+                            </Popup>
+                        </Grid>
                         <StackPanel x:Name="NavPanel">
                             <TextBlock Text="ÜBERSICHT" Style="{StaticResource Muted}" FontSize="10" Margin="24,0,0,4"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE80F;" Content="Dashboard" x:Name="NavDashboard" Checked="Nav_Checked"/>
@@ -72,6 +93,7 @@
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE7C3;" Content="Treiber" x:Name="NavDrivers" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE9F9;" Content="Protokoll" x:Name="NavLogs" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE713;" Content="Einstellungen" x:Name="NavSettings" Checked="Nav_Checked"/>
+                        </StackPanel>
                         </StackPanel>
                     </ScrollViewer>
 
@@ -109,6 +131,10 @@
                                 <TextBlock Text="App beenden"/>
                             </StackPanel>
                         </Button>
+                        <TextBlock HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="10.5" Foreground="{StaticResource MutedBrush}">
+                            <Run x:Name="VersionRun"/><Run Text="  ·  "/><Hyperlink NavigateUri="https://github.com/NickderMeister69/ControlCenter" RequestNavigate="GitHub_Click"
+                                Foreground="{StaticResource MutedBrush}" TextDecorations="{x:Null}" ToolTip="github.com/NickderMeister69/ControlCenter"><Run Text="GitHub"/></Hyperlink>
+                        </TextBlock>
                     </StackPanel>
                 </Grid>
             </Border>
