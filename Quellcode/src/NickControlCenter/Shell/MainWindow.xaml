@@ -67,7 +67,6 @@
                                 </Border>
                             </Grid>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xEC7A;" Content="Werkzeuge" x:Name="NavTools" Checked="Nav_Checked"/>
-                            <RadioButton Style="{StaticResource NavItem}" Tag="&#xE8D7;" Content="Passwort-Tresor" x:Name="NavVault" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE774;" Content="VPN &amp; Werbeblocker" x:Name="NavPrivacy" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE7E8;" Content="Autostart" x:Name="NavStartup" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE7C3;" Content="Treiber" x:Name="NavDrivers" Checked="Nav_Checked"/>

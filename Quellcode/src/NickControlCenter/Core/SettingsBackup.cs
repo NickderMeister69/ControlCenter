@@ -4,7 +4,7 @@ namespace NickControlCenter;
 
 /// <summary>
 /// Sicherung aller Einstellungen (Lüfter, RGB, Boost, Spielprofile, Overlay, Tweaker …) aus %AppData%\NickControlCenter.
-/// Automatisch einmal am Tag und vor jedem Update, die letzten 15 Sicherungen bleiben. Der Passwort-Tresor wird mitgesichert (bleibt verschlüsselt).
+/// Automatisch einmal am Tag und vor jedem Update, die letzten 15 Sicherungen bleiben.
 /// </summary>
 public static class SettingsBackup
 {

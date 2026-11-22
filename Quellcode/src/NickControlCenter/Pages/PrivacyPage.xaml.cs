@@ -34,8 +34,27 @@ public partial class PrivacyPage : UserControl, IPage
         if (on)
         {
             var t = await AdBlocker.TestAsync();
-            AdTest.Text = t == true ? "✔ Test: Werbe-Adresse (doubleclick.net) wird geblockt" : t == false ? "Test: Werbe-Adresse wird noch erreicht – evtl. „Sicheres DNS“ im Browser oder ein VPN umgeht den Filter" : "";
+            AdTest.Text = t == true ? "✔ Test: Werbe-Adressen werden für Windows und Apps geblockt" : t == false ? "✖ Test: Werbe-Adresse wird noch erreicht – ein VPN (z. B. Tailscale mit eigenem DNS) oder ein anderes Programm umgeht den Filter" : "";
+            Log.Info(LogModule.App, "Werbeblocker-Test: " + (t == true ? "geblockt" : t == false ? "NICHT geblockt" : "unklar"));
         }
+        RefreshBrowsers();
+    }
+
+    private async void RefreshBrowsers()
+    {
+        var list = await Task.Run(BrowserDnsFix.Scan);
+        if (list.Count == 0) { BrowserText.Text = "Keine bekannten Browser gefunden."; BrowserFix.Visibility = Visibility.Collapsed; return; }
+        BrowserText.Text = string.Join("\n", list.Select(b => $"{(b.Bypasses ? "✖" : "✔")} {b.Name}: Sicheres DNS {b.Mode}"));
+        bool bad = list.Any(b => b.Bypasses);
+        BrowserFix.Visibility = bad ? Visibility.Visible : Visibility.Collapsed;
+        if (bad) BrowserText.Text += "\n→ Diese Browser fragen an Windows vorbei – dort wirkt der Werbeblocker nicht.";
+    }
+
+    private async void BrowserFix_Click(object s, RoutedEventArgs e)
+    {
+        var msg = await Task.Run(BrowserDnsFix.DisableAll);
+        Ui.Toast(msg);
+        RefreshBrowsers();
     }
 
     private async void AdToggle_Click(object s, RoutedEventArgs e)

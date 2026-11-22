@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.ServiceProcess;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using Microsoft.Win32;
 
 namespace NickControlCenter;
@@ -111,6 +112,8 @@ public static class AdBlocker
         foreach (var ip in p.V4.Concat(p.V6))
             Ps($"Add-DnsClientDohServerAddress -ServerAddress '{ip}' -DohTemplate '{p.DohTemplate}' -AllowFallbackToUdp $true -AutoUpgrade $true -ErrorAction SilentlyContinue");
         Env.Run("ipconfig.exe", "/flushdns");
+        // Browser mit eigenem „Sicheren DNS“ würden den Filter umgehen
+        try { BrowserDnsFix.DisableAll(); } catch { }
         Settings.AdBlockOn = true; Save();
         Log.Ok(LogModule.App, $"Werbeblocker an ({p.Name}) auf {ad.Count} Adapter(n)");
         return $"Werbeblocker an – {p.Name}";
@@ -126,6 +129,7 @@ public static class AdBlocker
         }
         Env.Run("ipconfig.exe", "/flushdns");
         Settings.PreviousDns.Clear();
+        try { BrowserDnsFix.RemovePolicies(); } catch { }
         Settings.AdBlockOn = false; Save();
         Log.Info(LogModule.App, "Werbeblocker aus – vorherige DNS-Einstellung wiederhergestellt");
         return "Werbeblocker aus – Internet wie vorher";
@@ -270,5 +274,117 @@ public static class VpnManager
         {
             try { return (await Http.GetStringAsync("https://api.ipify.org")).Trim(); } catch { return "nicht ermittelbar"; }
         }
+    }
+}
+
+// ======================================================================
+
+public sealed record BrowserDns(string Name, string Mode, bool Bypasses, bool Running);
+
+/// <summary>
+/// Browser mit eigenem „Sicheren DNS“ (DNS-over-HTTPS) fragen direkt bei Google/Cloudflare nach und umgehen damit den
+/// Werbeblocker. Chrome/Edge/Brave/Firefox: per Richtlinie abschalten (wirkt sofort nach Browser-Neustart, wird beim
+/// Ausschalten des Werbeblockers wieder entfernt). Opera/Opera GX: Einstellung in „Local State“ (Browser muss zu sein).
+/// </summary>
+public static class BrowserDnsFix
+{
+    private static readonly (string Name, string Proc, string LocalState, string? PolicyKey)[] Browsers =
+    {
+        ("Google Chrome", "chrome", @"%LOCALAPPDATA%\Google\Chrome\User Data\Local State", @"SOFTWARE\Policies\Google\Chrome"),
+        ("Microsoft Edge", "msedge", @"%LOCALAPPDATA%\Microsoft\Edge\User Data\Local State", @"SOFTWARE\Policies\Microsoft\Edge"),
+        ("Brave", "brave", @"%LOCALAPPDATA%\BraveSoftware\Brave-Browser\User Data\Local State", @"SOFTWARE\Policies\BraveSoftware\Brave"),
+        ("Opera GX", "opera", @"%APPDATA%\Opera Software\Opera GX Stable\Local State", null),
+        ("Opera", "opera", @"%APPDATA%\Opera Software\Opera Stable\Local State", null),
+        ("Vivaldi", "vivaldi", @"%LOCALAPPDATA%\Vivaldi\User Data\Local State", null),
+    };
+
+    private static string Expand(string p) => Environment.ExpandEnvironmentVariables(p);
+
+    /// <summary>Welche installierten Browser umgehen den Filter gerade?</summary>
+    public static List<BrowserDns> Scan()
+    {
+        var list = new List<BrowserDns>();
+        foreach (var b in Browsers)
+        {
+            var ls = Expand(b.LocalState);
+            if (!File.Exists(ls)) continue;
+            string mode = "automatic"; // Chromium-Standard: nutzt DoH, wenn der System-DNS-Anbieter es kann
+            try
+            {
+                var root = JsonNode.Parse(File.ReadAllText(ls));
+                mode = root?["dns_over_https"]?["mode"]?.GetValue<string>() ?? mode;
+            }
+            catch { }
+            bool policyOff = false;
+            if (b.PolicyKey != null)
+                try { policyOff = (Registry.LocalMachine.OpenSubKey(b.PolicyKey)?.GetValue("DnsOverHttpsMode") as string) == "off"; } catch { }
+            // „automatic“ ist harmlos, solange ein eigener Anbieter (z. B. Google) nicht fest eingestellt ist – Opera GX stellt oft „secure“ + Cloudflare ein
+            bool bypass = !policyOff && mode == "secure";
+            list.Add(new BrowserDns(b.Name, policyOff ? "aus (vom Control Center)" : mode switch { "secure" => "eigener DNS-Anbieter (umgeht den Filter)", "off" => "aus", _ => "automatisch (ok)" },
+                                    bypass, Process.GetProcessesByName(b.Proc).Length > 0));
+        }
+        // Firefox
+        var ff = Expand(@"%APPDATA%\Mozilla\Firefox\Profiles");
+        if (Directory.Exists(ff))
+        {
+            bool policyOff = false;
+            try { policyOff = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Policies\Mozilla\Firefox\DNSOverHTTPS")?.GetValue("Enabled") is int i && i == 0; } catch { }
+            bool trr = Directory.GetDirectories(ff).Any(d => { try { var p = Path.Combine(d, "prefs.js"); return File.Exists(p) && File.ReadAllText(p).Contains("\"network.trr.mode\", 3"); } catch { return false; } });
+            list.Add(new BrowserDns("Firefox", policyOff ? "aus (vom Control Center)" : trr ? "eigener DNS-Anbieter (umgeht den Filter)" : "automatisch (ok)", trr && !policyOff, Process.GetProcessesByName("firefox").Length > 0));
+        }
+        return list;
+    }
+
+    /// <summary>Sicheres DNS in allen Browsern abschalten, damit der Werbeblocker greift. Gibt eine kurze Meldung zurück.</summary>
+    public static string DisableAll()
+    {
+        var done = new List<string>();
+        foreach (var b in Browsers)
+        {
+            var ls = Expand(b.LocalState);
+            if (!File.Exists(ls)) continue;
+            if (b.PolicyKey != null)
+            {
+                try
+                {
+                    using var k = Registry.LocalMachine.CreateSubKey(b.PolicyKey, true);
+                    k.SetValue("DnsOverHttpsMode", "off", RegistryValueKind.String);
+                    done.Add(b.Name);
+                }
+                catch { }
+                continue;
+            }
+            // Opera & Co.: Einstellung direkt ändern – geht nur, wenn der Browser zu ist (sonst überschreibt er sie)
+            if (Process.GetProcessesByName(b.Proc).Length > 0) { done.Add(b.Name + " (erst schließen, dann nochmal)"); continue; }
+            try
+            {
+                var root = JsonNode.Parse(File.ReadAllText(ls))?.AsObject();
+                if (root == null) continue;
+                File.Copy(ls, ls + ".controlcenter-sicherung", true);
+                var dns = root["dns_over_https"] as JsonObject ?? (JsonObject)(root["dns_over_https"] = new JsonObject());
+                dns["mode"] = "off";
+                File.WriteAllText(ls, root.ToJsonString());
+                done.Add(b.Name);
+            }
+            catch { }
+        }
+        if (Directory.Exists(Expand(@"%APPDATA%\Mozilla\Firefox\Profiles")))
+            try
+            {
+                using var k = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Policies\Mozilla\Firefox\DNSOverHTTPS", true);
+                k.SetValue("Enabled", 0, RegistryValueKind.DWord);
+                done.Add("Firefox");
+            }
+            catch { }
+        Log.Ok(LogModule.App, "Sicheres DNS in Browsern ausgeschaltet: " + string.Join(", ", done));
+        return done.Count == 0 ? "Keine Browser gefunden" : "Sicheres DNS aus in: " + string.Join(", ", done) + ". Browser einmal neu starten.";
+    }
+
+    /// <summary>Beim Ausschalten des Werbeblockers die Richtlinien wieder entfernen.</summary>
+    public static void RemovePolicies()
+    {
+        foreach (var b in Browsers.Where(b => b.PolicyKey != null))
+            try { using var k = Registry.LocalMachine.OpenSubKey(b.PolicyKey!, true); k?.DeleteValue("DnsOverHttpsMode", false); } catch { }
+        try { Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Policies\Mozilla\Firefox\DNSOverHTTPS", false); } catch { }
     }
 }

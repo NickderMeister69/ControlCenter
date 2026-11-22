@@ -30,7 +30,6 @@ public partial class MainWindow : Window
             ["Design & Farben"] = new("Design & Farben", "Akzentfarbe, Hell/Dunkel, Hintergrundbild, Taskleiste, Startmenü und Explorer anpassen.", () => new CustomizePage()),
             ["Desktop-Kacheln"] = new("Desktop-Kacheln", "Live-Widgets auf dem Desktop: Uhr, Systemwerte, Netzwerk, Apps, Notizen und mehr.", () => new TilesPage()),
             ["Werkzeuge"] = new("Werkzeuge", "Programme aktualisieren, Downloads aufräumen, Speicherplatz finden, automatisch ausschalten und Tastenkürzel.", () => new ToolsPage()),
-            ["Passwort-Tresor"] = new("Passwort-Tresor", "Alle Passwörter an einem Ort – AES-256-verschlüsselt, mit Master-Passwort, nur auf deinem PC.", () => new PasswordPage()),
             ["VPN & Werbeblocker"] = new("VPN & Werbeblocker", "Werbung und Tracker für den ganzen PC blocken – und ein VPN mit einem Klick verbinden.", () => new PrivacyPage()),
             ["Autostart"] = new("Autostart", "Programme, die mit Windows starten – mit Einschätzung, was den Start bremst. Abschalten wie im Task-Manager, alles umkehrbar.", () => new StartupPage()),
             ["Problemlöser"] = new("Problemlöser", "Findet Programme und Einstellungen, die stören – und behebt sie mit einem Klick.", () => new DiagnosePage()),
