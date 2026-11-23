@@ -74,6 +74,7 @@
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE781;" Content="Beleuchtung" x:Name="NavRgb" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE945;" Content="Tweaker" x:Name="NavTweaker" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE7BA;" Content="Stresstest" x:Name="NavStress" Checked="Nav_Checked"/>
+                            <RadioButton Style="{StaticResource NavItem}" Tag="&#xE909;" Content="ARK" x:Name="NavArk" Checked="Nav_Checked"/>
                             <TextBlock Text="WINDOWS" Style="{StaticResource Muted}" FontSize="10" Margin="24,12,0,4"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE790;" Content="Design &amp; Farben" x:Name="NavCustomize" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xF0E2;" Content="Desktop-Kacheln" x:Name="NavTiles" Checked="Nav_Checked"/>

@@ -1,0 +1,204 @@
+<UserControl x:Class="NickControlCenter.ArkPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:NickControlCenter"
+             xmlns:core="clr-namespace:NickControlCenter;assembly=NickControlCenter.Core"
+             xmlns:wv="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf">
+    <Grid Margin="28,0,16,16">
+        <!-- rechts Platz für Knopf -->
+        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/></Grid.RowDefinitions>
+        <Border Style="{StaticResource AccentCard}" Margin="0,0,12,10">
+            <Grid>
+                <StackPanel Margin="0,0,300,0">
+                    <TextBlock Text="ARK: SURVIVAL ASCENDED · ASTRAEOS" Style="{StaticResource Kicker}"/>
+                    <TextBlock Text="Karte, Höhlen, Bosse, Ressourcen, Wiki und KI an einem Ort" FontSize="18" FontWeight="SemiBold"/>
+                    <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,0"
+                               Text="Im Spiel: ARK auf „Vollbild-Fenster“ (Windowed Fullscreen) stellen, dann Strg+Alt+K – die Karte mit KI-Frage liegt über dem Spiel. Die App liest nichts aus dem Spiel aus (BattlEye-sicher)."/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button x:Name="OverlayBtn" Style="{StaticResource AccentButton}" Padding="16,8" Click="Overlay_Click">
+                        <StackPanel Orientation="Horizontal"><TextBlock Text="&#xE707;" Style="{StaticResource Icon}" Margin="0,0,8,0"/><TextBlock Text="Karte über dem Spiel (Strg+Alt+K)" FontWeight="SemiBold"/></StackPanel>
+                    </Button>
+                    <CheckBox x:Name="InGameBox" Style="{StaticResource ToggleSwitch}" Content="Spiel-Anbindung" Margin="0,8,0,0" HorizontalAlignment="Right"
+                              Click="InGame_Click" ToolTip="Aus = nichts erscheint im Spiel, Strg+Alt+K/J tun nichts"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="2,0,0,8">
+            <RadioButton Style="{StaticResource Tab}" Content="Karte" GroupName="AT" IsChecked="True" Checked="Tab_Checked" Tag="Map"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Höhlen &amp; Artefakte" GroupName="AT" Checked="Tab_Checked" Tag="Caves"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Bosse" GroupName="AT" Checked="Tab_Checked" Tag="Bosses"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Ressourcen &amp; Orte" GroupName="AT" Checked="Tab_Checked" Tag="Res"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Wiki" GroupName="AT" Checked="Tab_Checked" Tag="Wiki"/>
+            <RadioButton Style="{StaticResource Tab}" Content="KI-Assistent" GroupName="AT" Checked="Tab_Checked" Tag="Ai"/>
+        </StackPanel>
+
+        <!-- Karte -->
+        <Grid x:Name="TabMap" Grid.Row="2" Margin="0,0,12,0">
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="290"/></Grid.ColumnDefinitions>
+            <Border BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="6">
+                <wv:WebView2 x:Name="MapView"/>
+            </Border>
+            <Border Grid.Column="1" Style="{StaticResource Card}" Margin="10,0,0,0" VerticalAlignment="Stretch">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top">
+                        <TextBlock Text="MEINE MARKIERUNGEN" Style="{StaticResource Kicker}"/>
+                        <TextBlock Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap" Text="Eigene Orte (Basis, Tames, Höhlen …) – erscheinen auch im Spiel-Overlay. Koordinaten wie im Spiel: Breite / Länge."/>
+                        <TextBox x:Name="MName" Margin="0,8,0,4" Padding="6,4" ToolTip="Name"/>
+                        <Grid Margin="0,0,0,4">
+                            <TextBox x:Name="MCoords" Padding="6,4" Margin="0,0,90,0" ToolTip="Koordinaten, z. B. 48.6 / 49.8"/>
+                            <Button Content="Hinzufügen" HorizontalAlignment="Right" Width="84" Click="AddMarker_Click"/>
+                        </Grid>
+                        <TextBox x:Name="MNote" Padding="6,4" ToolTip="Notiz (optional)"/>
+                    </StackPanel>
+                    <ListBox x:Name="MarkerList" Margin="0,8,0,0" Background="Transparent" BorderThickness="0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:ArkMarker}">
+                                <Grid>
+                                    <TextBlock Text="{Binding Line}" TextWrapping="Wrap" FontSize="12" Margin="0,0,24,0"/>
+                                    <Button Content="✕" HorizontalAlignment="Right" Width="20" Padding="0" Click="DelMarker_Click" Background="Transparent" BorderThickness="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- Höhlen -->
+        <ScrollViewer x:Name="TabCaves" Grid.Row="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,12,0">
+                <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,0,0,8" x:Name="CaveSource"/>
+                <ItemsControl x:Name="CaveList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type core:ArkCave}">
+                            <Border Style="{StaticResource SubCard}" Margin="0,0,0,6" Padding="12,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <StackPanel>
+                                        <TextBlock FontWeight="SemiBold"><Run Text="{Binding Name, Mode=OneWay}"/><Run Text="  ·  "/><Run Text="{Binding Difficulty, Mode=OneWay}" Foreground="{DynamicResource AccentBrush}"/></TextBlock>
+                                        <TextBlock FontSize="12"><Run Text="{Binding Artifact, Mode=OneWay}"/><Run Text=" → für "/><Run Text="{Binding Boss, Mode=OneWay}" FontWeight="SemiBold"/></TextBlock>
+                                        <TextBlock Text="{Binding Notes}" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Coords}" FontFamily="{StaticResource NumFont}" FontSize="18" HorizontalAlignment="Right"/>
+                                        <Button Content="Als Markierung" Padding="8,2" FontSize="11.5" Margin="0,4,0,0" Click="CaveMark_Click"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Bosse -->
+        <ScrollViewer x:Name="TabBosses" Grid.Row="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,12,0">
+                <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,0,0,8"
+                           Text="Benötigte Tribute je Schwierigkeit (Gamma/Beta/Alpha) stehen in keiner geprüften Quelle – dafür „Im Wiki öffnen“ oder den KI-Assistenten fragen."/>
+                <ItemsControl x:Name="BossList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type core:ArkBoss}">
+                            <Border Style="{StaticResource Card}" Margin="0,0,0,8">
+                                <StackPanel>
+                                    <Grid>
+                                        <TextBlock FontWeight="Bold" FontSize="16"><Run Text="{Binding Name, Mode=OneWay}"/><Run Text="  "/><Run Text="{Binding Type, Mode=OneWay}" FontSize="12" FontWeight="Normal" Foreground="{StaticResource MutedBrush}"/></TextBlock>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Content="Im Wiki öffnen" Padding="8,2" FontSize="11.5" Click="BossWiki_Click"/>
+                                            <Button Content="KI fragen" Padding="8,2" FontSize="11.5" Margin="6,0,0,0" Click="BossAsk_Click"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <TextBlock FontSize="12.5" Margin="0,6,0,0" TextWrapping="Wrap"><Run Text="Artefakte: " Foreground="{StaticResource MutedBrush}"/><Run Text="{Binding Artifacts, Mode=OneWay, Converter={x:Static local:JoinConverter.Instance}}"/></TextBlock>
+                                    <TextBlock FontSize="12.5" TextWrapping="Wrap"><Run Text="Ort: " Foreground="{StaticResource MutedBrush}"/><Run Text="{Binding Location, Mode=OneWay}"/></TextBlock>
+                                    <TextBlock FontSize="12.5" TextWrapping="Wrap"><Run Text="Tipps: " Foreground="{StaticResource MutedBrush}"/><Run Text="{Binding Tips, Mode=OneWay}"/></TextBlock>
+                                    <TextBlock FontSize="12.5" TextWrapping="Wrap"><Run Text="Belohnung: " Foreground="{StaticResource MutedBrush}"/><Run Text="{Binding Reward, Mode=OneWay}"/></TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Ressourcen -->
+        <ScrollViewer x:Name="TabRes" Grid.Row="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,12,0">
+                <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,0,0,8" Text="Aus einem Community-Guide – die Reihenfolge der Koordinaten ist dort nicht angegeben (vermutlich Breite / Länge). Vollständige Ressourcen-Karte: Tab „Karte“."/>
+                <ItemsControl x:Name="ResList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type core:ArkResource}">
+                            <Border Style="{StaticResource SubCard}" Margin="0,0,0,5" Padding="12,6">
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="200"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                                    <StackPanel Grid.Column="1"><TextBlock Text="{Binding Where}" FontSize="12"/><TextBlock Text="{Binding Notes}" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap"/></StackPanel>
+                                    <TextBlock Grid.Column="2" Text="{Binding Coords}" FontFamily="{StaticResource NumFont}" FontSize="16"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="ORTE &amp; TIPPS" Style="{StaticResource Kicker}" Margin="0,12,0,4"/>
+                <ItemsControl x:Name="PlaceList">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type core:ArkPlace}">
+                            <Border Style="{StaticResource SubCard}" Margin="0,0,0,5" Padding="12,6">
+                                <Grid>
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="260"/><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Notes}" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap" Margin="8,0"/>
+                                    <TextBlock Grid.Column="2" Text="{Binding Coords}" FontFamily="{StaticResource NumFont}" FontSize="16"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Wiki -->
+        <Grid x:Name="TabWiki" Grid.Row="2" Visibility="Collapsed" Margin="0,0,12,0">
+            <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/></Grid.RowDefinitions>
+            <Grid Margin="0,0,0,8">
+                <TextBox x:Name="WikiSearch" Padding="6,5" Margin="0,0,210,0" KeyDown="WikiSearch_KeyDown" ToolTip="Im ARK-Wiki suchen (englisch), Enter"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Suchen" Click="WikiGo_Click" Padding="12,4"/>
+                    <Button Content="Astraeos-Seite" Click="WikiHome_Click" Padding="10,4" Margin="6,0,0,0"/>
+                </StackPanel>
+            </Grid>
+            <Border Grid.Row="1" BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="6">
+                <wv:WebView2 x:Name="WikiView"/>
+            </Border>
+        </Grid>
+
+        <!-- KI -->
+        <Grid x:Name="TabAi" Grid.Row="2" Visibility="Collapsed" Margin="0,0,12,0">
+            <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="LOKALE KI (OLLAMA)" Style="{StaticResource Kicker}"/>
+                    <TextBlock x:Name="AiState" Text="Prüfe …" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                    <WrapPanel Margin="0,8,0,0">
+                        <TextBlock Text="Modell:" VerticalAlignment="Center" Margin="0,0,8,6"/>
+                        <ComboBox x:Name="ModelBox" Width="220" Margin="0,0,8,6" SelectionChanged="Model_Changed"/>
+                        <Button x:Name="PullBtn" Content="Empfohlenes Modell laden (qwen2.5:7b, ≈ 4,7 GB)" Click="Pull_Click" Padding="10,4" Margin="0,0,8,6"/>
+                        <Button x:Name="StartOllama" Content="Ollama starten" Click="StartOllama_Click" Padding="10,4" Margin="0,0,8,6"/>
+                    </WrapPanel>
+                    <ProgressBar x:Name="PullBar" Height="6" Maximum="100" Visibility="Collapsed"/>
+                    <TextBlock Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap" Margin="0,4,0,0"
+                               Text="Läuft komplett auf deinem PC (RTX 4060: Antworten in wenigen Sekunden). Für jede Frage sucht die App passende Seiten im ARK-Wiki und gibt sie der KI mit – die Quellen stehen unter der Antwort. KI kann sich irren: wichtige Dinge über die Quellen prüfen."/>
+                </StackPanel>
+            </Border>
+            <Grid Grid.Row="1" Margin="0,0,0,8">
+                <TextBox x:Name="Question" Padding="8,6" Margin="0,0,100,0" FontSize="13.5" KeyDown="Question_KeyDown" ToolTip="z. B. „Was brauche ich für Thodes Gamma?“ – Enter zum Senden"/>
+                <Button x:Name="AskBtn" Style="{StaticResource AccentButton}" Content="Fragen" HorizontalAlignment="Right" Width="92" Click="Ask_Click"/>
+            </Grid>
+            <Border Grid.Row="2" Style="{StaticResource SubCard}" Padding="12">
+                <TextBox x:Name="Answer" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="Transparent" BorderThickness="0" FontSize="13.5"
+                         Foreground="{StaticResource TextBrush}" Text="Frag etwas zu ARK – z. B. „Wo finde ich auf Astraeos Metall?“, „Welche Dinos für Natrix?“, „Wie zähme ich einen Maeguana?“"/>
+            </Border>
+            <WrapPanel x:Name="Sources" Grid.Row="3" Margin="0,6,0,0"/>
+        </Grid>
+    </Grid>
+</UserControl>
