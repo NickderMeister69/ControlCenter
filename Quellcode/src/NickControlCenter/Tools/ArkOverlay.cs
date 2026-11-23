@@ -97,6 +97,10 @@ public static class ArkWeb
         "e-planning.net", "smilewanted.com", "adagio.io", "improvedigital.com", "yieldlab.net", "stroeer", "adition.com", "a-mo.net", "unrulymedia.com",
     };
 
+    /// <summary>Gehört die Adresse zur Karte/zum Wiki selbst (Videos von dort sind erlaubt)?</summary>
+    private static bool IsOwn(string uri) =>
+        Uri.TryCreate(uri, UriKind.Absolute, out var u) && (u.Host.EndsWith("wikily.gg") || u.Host.EndsWith("wiki.gg") || u.Scheme is "blob" or "data");
+
     /// <summary>Ist die Adresse ein bekannter Werbe-/Tracking-Server?</summary>
     public static bool IsAd(string uri)
     {
@@ -124,6 +128,13 @@ public static class ArkWeb
               if (host && own.test(host)) continue;
               hide(floating(f) || f);
             }
+            // schwebende Video-Werbung (z. B. kleiner „Live“-Player unten links) – Karte selbst hat kein Video
+            for (const v of document.querySelectorAll('video')) {
+              let src = v.currentSrc || v.src || ''; let host = ''; try { host = src ? new URL(src, location.href).host : ''; } catch {}
+              if (host && own.test(host)) continue;
+              try { v.pause(); v.muted = true; } catch {}
+              hide(floating(v) || v.parentElement || v);
+            }
             // „ADVERTISEMENT“-Beschriftung → nur den kleinen schwebenden Kasten drumherum ausblenden
             for (const el of document.querySelectorAll('div,span,p,small')) {
               if (el.children.length > 0) continue;
@@ -147,7 +158,7 @@ public static class ArkWeb
             view.CoreWebView2.AddWebResourceRequestedFilter("*", CoreWebView2WebResourceContext.All);
             view.CoreWebView2.WebResourceRequested += (_, e) =>
             {
-                if (Settings.BlockAds && IsAd(e.Request.Uri)) e.Response = view.CoreWebView2.Environment.CreateWebResourceResponse(null, 403, "Blocked", "");
+                if (Settings.BlockAds && (IsAd(e.Request.Uri) || e.ResourceContext == CoreWebView2WebResourceContext.Media && !IsOwn(e.Request.Uri))) e.Response = view.CoreWebView2.Environment.CreateWebResourceResponse(null, 403, "Blocked", "");
             };
             if (Settings.BlockAds) await view.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(HideAdsJs);
             view.CoreWebView2.Navigate(url);

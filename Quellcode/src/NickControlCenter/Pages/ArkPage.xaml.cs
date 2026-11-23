@@ -41,6 +41,9 @@ public partial class ArkPage : UserControl
         Loaded += async (_, _) => { if (!_mapInit) { _mapInit = true; if (!await ArkWeb.InitAsync(MapView, st.CurrentMapUrl)) Ui.Toast("Eingebetteter Browser (WebView2) fehlt – Karte im Browser öffnen", true); } };
         Unloaded += (_, _) => { _cts?.Cancel(); ArkWeb.Save(); ArkWeb.Changed -= OnOverlayChanged; };
         ArkWeb.Changed += OnOverlayChanged;
+        Action share = () => Dispatcher.BeginInvoke(() => { if (_aiInit) UpdateCode(); });
+        AiShare.StateChanged += share;
+        Unloaded += (_, _) => AiShare.StateChanged -= share;
     }
 
     // ---------- Tabs ----------
@@ -263,7 +266,7 @@ public partial class ArkPage : UserControl
         var models = await ArkAi.ModelsAsync();
         if (models == null)
         {
-            if (friend) AiState.Text = $"Die KI von {st.FriendName} ist gerade nicht erreichbar – sein PC oder das Control Center ist aus, oder ihr seid nicht im selben Netz/Tailscale.";
+            if (friend) AiState.Text = $"Die KI von {st.FriendName} ist gerade nicht erreichbar – sein PC oder sein Control Center ist gerade aus. Versuch es später nochmal.";
             else
             {
                 var exe = ArkAi.OllamaExe();
@@ -327,23 +330,17 @@ public partial class ArkPage : UserControl
         SharePanel.IsEnabled = st.ShareEnabled;
         SharePanel.Opacity = st.ShareEnabled ? 1 : 0.5;
         ShareNameBox.Text = AiShare.ShareName();
-        var addrs = AiShare.Addresses();
-        AddrBox.ItemsSource = addrs.Select(a => $"{a.Ip}  ({a.Kind})").ToList();
-        AddrBox.SelectedIndex = addrs.Count > 0 ? 0 : -1;
         UpdateCode();
     }
 
     private void UpdateCode()
     {
         var st = ArkWeb.Settings;
-        var ip = (AddrBox.SelectedItem as string)?.Split(' ')[0];
-        CodeBox.Text = st.ShareEnabled && ip != null ? AiShare.InviteCode(ip) : "";
-        var hasTs = AiShare.Addresses().Any(a => a.Kind == "Tailscale");
+        CodeBox.Text = st.ShareEnabled ? AiShare.InviteCode() : "";
+        TunnelState.Text = st.ShareEnabled ? (AiShare.TunnelState.Length > 0 ? AiShare.TunnelState : "Starte …") : "";
         ShareState.Text = !st.ShareEnabled ? "Aus."
             : !AiShare.Running ? "Konnte nicht starten: " + AiShare.LastError
-            : ip == null ? "Keine Netzwerk-Adresse gefunden."
-            : $"Aktiv · {AiShare.Requests} Fragen seit dem Start." + (hasTs ? " Code an Freunde schicken – sie brauchen auch Tailscale im selben Tailnet."
-                : " Funktioniert so nur im selben WLAN/Heimnetz. Für Freunde woanders: Tailscale (kostenlos) auf beiden PCs installieren, dann erscheint hier eine Tailscale-Adresse.");
+            : $"Aktiv · {AiShare.Requests} Fragen von Freunden seit dem Start. Der Code bleibt gültig, auch wenn sich die Internet-Adresse ändert.";
     }
 
     private void Share_Click(object sender, RoutedEventArgs e)
@@ -361,7 +358,6 @@ public partial class ArkPage : UserControl
         ArkWeb.Settings.ShareName = ShareNameBox.Text.Trim(); ArkWeb.Save(); UpdateCode();
     }
 
-    private void Addr_Changed(object sender, SelectionChangedEventArgs e) => UpdateCode();
 
     private void CopyCode_Click(object sender, RoutedEventArgs e)
     {

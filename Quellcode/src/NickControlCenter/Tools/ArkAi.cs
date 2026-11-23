@@ -18,8 +18,17 @@ public static class ArkAi
 {
     public const string LocalOllama = "http://localhost:11434";
     /// <summary>true = die KI eines Freundes wird benutzt (Einladungs-Code).</summary>
-    public static bool UsesFriend => ArkWeb.Settings.AiMode == "friend" && !string.IsNullOrEmpty(ArkWeb.Settings.FriendUrl);
-    private static string Ollama => UsesFriend ? ArkWeb.Settings.FriendUrl!.TrimEnd('/') : LocalOllama;
+    public static bool UsesFriend => ArkWeb.Settings.AiMode == "friend" && !string.IsNullOrEmpty(ArkWeb.Settings.FriendToken);
+    private static string? _friendBase;
+    private static string Ollama => UsesFriend ? (_friendBase ?? ArkWeb.Settings.FriendUrl ?? "").TrimEnd('/') : LocalOllama;
+
+    /// <summary>Aktuelle Adresse der Freundes-KI holen (Tunnel-Adresse aus dem Repo, sonst die aus dem Code).</summary>
+    private static async Task ResolveFriendAsync(bool force)
+    {
+        if (!UsesFriend) return;
+        var pub = await AiShare.PublishedAddressAsync(force);
+        _friendBase = pub ?? ArkWeb.Settings.FriendUrl;
+    }
     /// <summary>Wo die KI läuft – für die Anzeige.</summary>
     public static string WhereText => UsesFriend ? $"KI läuft auf dem PC von {ArkWeb.Settings.FriendName}" : "KI läuft auf deinem PC";
 
@@ -42,6 +51,19 @@ public static class ArkAi
     /// <summary>Installierte Modelle (leer = Ollama läuft nicht).</summary>
     public static async Task<List<string>?> ModelsAsync()
     {
+        if (UsesFriend)
+        {
+            await ResolveFriendAsync(false);
+            var r = await TryModelsAsync();
+            if (r != null) return r;
+            await ResolveFriendAsync(true);   // Adresse evtl. neu (PC des Freundes neu gestartet)
+        }
+        return await TryModelsAsync();
+    }
+
+    private static async Task<List<string>?> TryModelsAsync()
+    {
+        if (UsesFriend && string.IsNullOrEmpty(Ollama)) return null;
         try
         {
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(UsesFriend ? 8 : 4));
@@ -150,6 +172,7 @@ public static class ArkAi
     /// <summary>Frage stellen – Antwort kommt Stück für Stück (onToken). Gibt die verwendeten Quellen zurück.</summary>
     public static async Task<List<Source>> AskAsync(string model, string question, Action<string> onToken, Action<string> onStatus, CancellationToken ct)
     {
+        if (UsesFriend && _friendBase == null) await ResolveFriendAsync(false);
         onStatus("Suche im ARK-Wiki …");
         // deutsche Frage → englische Suchbegriffe (das Wiki ist englisch)
         string search = question;

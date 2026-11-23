@@ -301,7 +301,7 @@ public static class InfoTips
         {
             sp.Children.Add(new TextBlock { Text = info.Examples.Length == 1 ? "BEISPIEL" : "BEISPIELE", FontSize = 10.5, FontWeight = FontWeights.Bold, Margin = new Thickness(0, 10, 0, 3),
                                             Foreground = (Brush)Application.Current.Resources["AccentBrush"] });
-            foreach (var ex in info.Examples)
+            foreach (var ex in HardwareHints.For(key, info.Examples))
                 sp.Children.Add(new TextBlock { Text = "•  " + ex, TextWrapping = TextWrapping.Wrap, FontSize = 12.5, Margin = new Thickness(0, 2, 0, 0), Foreground = new SolidColorBrush(Color.FromRgb(190, 198, 210)) });
         }
         var popup = new Popup

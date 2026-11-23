@@ -314,16 +314,14 @@
                             <CheckBox x:Name="ShareToggle" Style="{StaticResource ToggleSwitch}" HorizontalAlignment="Right" Click="Share_Click"/>
                         </Grid>
                         <TextBlock Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap"
-                                   Text="Freunde ohne starke Grafikkarte nutzen dann deine KI. Bei ihnen steht „KI läuft auf dem PC von …“. Dein PC und die App müssen dafür an sein."/>
+                                   Text="Deine Freunde geben einmal deinen Einladungs-Code ein und sind dann dauerhaft mit deiner KI verbunden – auch übers Internet (Cloudflare-Tunnel, keine Router-Einstellung). Bei ihnen steht „KI läuft auf dem PC von …“. Dein PC und die App müssen dafür an sein."/>
                         <StackPanel x:Name="SharePanel" Margin="0,8,0,0">
                             <Grid Margin="0,0,0,6">
                                 <TextBlock Text="Angezeigter Name" VerticalAlignment="Center"/>
                                 <TextBox x:Name="ShareNameBox" Padding="6,3" Margin="120,0,0,0" LostFocus="ShareName_LostFocus"/>
                             </Grid>
-                            <Grid Margin="0,0,0,6">
-                                <TextBlock Text="Erreichbar über" VerticalAlignment="Center"/>
-                                <ComboBox x:Name="AddrBox" Margin="120,0,0,0" SelectionChanged="Addr_Changed"/>
-                            </Grid>
+                            <TextBlock x:Name="TunnelState" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                            <TextBlock Text="Einladungs-Code (an Freunde schicken):" FontSize="12" Margin="0,0,0,3"/>
                             <Grid>
                                 <TextBox x:Name="CodeBox" IsReadOnly="True" Padding="6,3" Margin="0,0,78,0" FontFamily="{StaticResource MonoFont}" FontSize="11"/>
                                 <Button Content="Kopieren" HorizontalAlignment="Right" Width="72" Click="CopyCode_Click"/>
