@@ -120,6 +120,16 @@ public static class ArkWeb
           const own = /(^|\.)(wikily\.gg|wiki\.gg|cloudflare\.com|youtube\.com|youtube-nocookie\.com)$/i;
           const small = el => { const r = el.getBoundingClientRect(); return r.width * r.height < innerWidth * innerHeight * 0.45; };
           const hide = el => { if (el && small(el)) el.style.setProperty('display', 'none', 'important'); };
+          // Umgebenden Kasten nur ausblenden, wenn er wie ein reiner Werbekasten aussieht (klein, kaum Text) –
+          // sonst würden Menüs/Seitenleisten mit einem Werbeplatz darin komplett verschwinden
+          const adBox = (el, inner) => {
+            const box = floating(inner);
+            if (!box) return inner;
+            const r = box.getBoundingClientRect();
+            const txt = (box.innerText || '').trim();
+            const links = box.querySelectorAll('a,button,input').length;
+            return (r.width * r.height < innerWidth * innerHeight * 0.15 && txt.length < 60 && links < 4) ? box : inner;
+          };
           const floating = el => { let b = el, n = 0; while (b && n < 8) { const p = getComputedStyle(b).position; if (p === 'fixed' || p === 'sticky') return b; b = b.parentElement; n++; } return null; };
           const sweep = () => {
             if (document.head && !document.getElementById('ncc-noads')) { const s = document.createElement('style'); s.id = 'ncc-noads'; s.textContent = css; document.head.appendChild(s); }
@@ -127,26 +137,36 @@ public static class ArkWeb
             for (const f of document.querySelectorAll('iframe')) {
               let host = ''; try { host = new URL(f.src, location.href).host; } catch {}
               if (host && own.test(host)) continue;
-              hide(floating(f) || f);
+              hide(adBox(f, f));
             }
             // schwebende Video-Werbung (z. B. kleiner „Live“-Player unten links) – Karte selbst hat kein Video
             for (const v of document.querySelectorAll('video')) {
               let src = v.currentSrc || v.src || ''; let host = ''; try { host = src ? new URL(src, location.href).host : ''; } catch {}
               if (host && own.test(host)) continue;
               try { v.pause(); v.muted = true; } catch {}
-              hide(floating(v) || v.parentElement || v);
+              hide(adBox(v, v.parentElement || v));
             }
             // „ADVERTISEMENT“-Beschriftung → nur den kleinen schwebenden Kasten drumherum ausblenden
             for (const el of document.querySelectorAll('div,span,p,small')) {
               if (el.children.length > 0) continue;
               if (!/^(advertisement|anzeige|werbung)$/i.test((el.textContent || '').trim())) continue;
-              hide(floating(el) || el.parentElement);
+              hide(adBox(el, el.parentElement || el));
             }
           };
           document.addEventListener('DOMContentLoaded', sweep);
           setInterval(sweep, 1500);
         })();
         """;
+
+    private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<WebView2, string> AdScripts = new();
+
+    /// <summary>Werbe-Ausblender je nach Einstellung ein-/ausschalten (wirkt ab dem nächsten Laden der Seite).</summary>
+    public static async Task ApplyAdsAsync(WebView2 view)
+    {
+        if (view.CoreWebView2 == null) return;
+        if (AdScripts.TryGetValue(view, out var id)) { view.CoreWebView2.RemoveScriptToExecuteOnDocumentCreated(id); AdScripts.Remove(view); }
+        if (Settings.BlockAds) AdScripts.AddOrUpdate(view, await view.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(HideAdsJs));
+    }
 
     public static async Task<bool> InitAsync(WebView2 view, string url)
     {
@@ -161,7 +181,7 @@ public static class ArkWeb
             {
                 if (Settings.BlockAds && (IsAd(e.Request.Uri) || e.ResourceContext == CoreWebView2WebResourceContext.Media && !IsOwn(e.Request.Uri))) e.Response = view.CoreWebView2.Environment.CreateWebResourceResponse(null, 403, "Blocked", "");
             };
-            if (Settings.BlockAds) await view.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(HideAdsJs);
+            await ApplyAdsAsync(view);
             view.CoreWebView2.Navigate(url);
             return true;
         }

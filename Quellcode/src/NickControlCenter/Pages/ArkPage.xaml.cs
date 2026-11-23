@@ -38,6 +38,7 @@ public partial class ArkPage : UserControl
         foreach (var m in ArkWeb.Maps) MapBox.Items.Add(m.Name);
         MapBox.SelectedItem = ArkWeb.Maps.Any(m => m.Name == st.Map) ? st.Map : ArkData.MapName;
         ApplyMapUi();
+        MapAds.IsChecked = st.BlockAds;
         Loaded += async (_, _) => { if (!_mapInit) { _mapInit = true; if (!await ArkWeb.InitAsync(MapView, st.CurrentMapUrl)) Ui.Toast("Eingebetteter Browser (WebView2) fehlt – Karte im Browser öffnen", true); } };
         Unloaded += (_, _) => { _cts?.Cancel(); ArkWeb.Save(); ArkWeb.Changed -= OnOverlayChanged; };
         ArkWeb.Changed += OnOverlayChanged;
@@ -78,6 +79,24 @@ public partial class ArkPage : UserControl
         if (!ArkWeb.Settings.InGame) ArkOverlayWindow.HideIfOpen();
         ArkWeb.Save();
         Ui.Toast(ArkWeb.Settings.InGame ? "Spiel-Anbindung an – Strg+Alt+A zeigt die Karte im Spiel" : "Spiel-Anbindung aus – im Spiel erscheint nichts");
+    }
+
+    // ---------- Karten-Leiste ----------
+    private void MapBack_Click(object sender, RoutedEventArgs e) { if (MapView.CoreWebView2?.CanGoBack == true) MapView.CoreWebView2.GoBack(); }
+    private void MapReload_Click(object sender, RoutedEventArgs e) => MapView.CoreWebView2?.Reload();
+    private void MapHome_Click(object sender, RoutedEventArgs e) => MapView.CoreWebView2?.Navigate(ArkWeb.Settings.CurrentMapUrl);
+    private void MapBrowser_Click(object sender, RoutedEventArgs e)
+    {
+        var url = MapView.CoreWebView2?.Source ?? ArkWeb.Settings.CurrentMapUrl;
+        try { Process.Start(new ProcessStartInfo(url) { UseShellExecute = true }); } catch { }
+    }
+    private async void MapAds_Click(object sender, RoutedEventArgs e)
+    {
+        ArkWeb.Settings.BlockAds = MapAds.IsChecked == true; ArkWeb.Save();
+        await ArkWeb.ApplyAdsAsync(MapView);
+        if (OvAds != null) OvAds.IsChecked = ArkWeb.Settings.BlockAds;
+        MapView.CoreWebView2?.Reload();
+        Ui.Toast(ArkWeb.Settings.BlockAds ? "Werbefilter an" : "Werbefilter aus – Seite lädt neu");
     }
 
     // ---------- Map-Auswahl ----------

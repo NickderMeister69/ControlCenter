@@ -40,9 +40,20 @@
         <!-- Karte -->
         <Grid x:Name="TabMap" Grid.Row="2" Margin="0,0,12,0">
             <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="290"/></Grid.ColumnDefinitions>
-            <Border BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="6">
-                <wv:WebView2 x:Name="MapView"/>
-            </Border>
+            <DockPanel>
+                <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                    <Button Content="‹ Zurück" Click="MapBack_Click" Padding="10,3" Margin="0,0,6,0"/>
+                    <Button Content="Neu laden" Click="MapReload_Click" Padding="10,3" Margin="0,0,6,0"/>
+                    <Button Content="Karte zurücksetzen" Click="MapHome_Click" Padding="10,3" Margin="0,0,6,0"/>
+                    <Button Content="Im Browser öffnen" Click="MapBrowser_Click" Padding="10,3" Margin="0,0,12,0"
+                            ToolTip="Aktuelle Seite in deinem normalen Browser öffnen (dort bist du evtl. schon bei Wikily angemeldet)"/>
+                    <CheckBox x:Name="MapAds" Style="{StaticResource ToggleSwitch}" Content="Werbefilter" Click="MapAds_Click" VerticalAlignment="Center"
+                              ToolTip="Falls auf der Karte etwas nicht aufgeht (Menü, Anmelden): kurz ausschalten"/>
+                </WrapPanel>
+                <Border BorderBrush="{StaticResource LineBrush}" BorderThickness="1" CornerRadius="6">
+                    <wv:WebView2 x:Name="MapView"/>
+                </Border>
+            </DockPanel>
             <Border Grid.Column="1" Style="{StaticResource Card}" Margin="10,0,0,0" VerticalAlignment="Stretch">
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top">
