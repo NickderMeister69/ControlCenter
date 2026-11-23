@@ -2,6 +2,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -182,7 +183,8 @@ public sealed class ArkOverlayWindow : Window
     private static ArkOverlayWindow? _instance;
     private readonly WebView2 _web = new();
     private readonly TextBox _ask = new() { Padding = new Thickness(6, 4, 6, 4), FontSize = 12.5, ToolTip = "Frage an die KI, Enter zum Senden" };
-    private readonly TextBox _answer = new() { IsReadOnly = true, TextWrapping = TextWrapping.Wrap, MaxHeight = 160, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, FontSize = 12.5, BorderThickness = new Thickness(0), Background = Brushes.Transparent, Foreground = Brushes.White };
+    private readonly FlowDocumentScrollViewer _answer = new() { MaxHeight = 220, IsToolBarVisible = false, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, Background = Brushes.Transparent, Margin = new Thickness(0, 4, 0, 0) };
+    private void SetAnswer(string md) => _answer.Document = MiniMarkdown.Build(md, 12.5);
     private bool _clickThrough;
     private CancellationTokenSource? _cts;
 
@@ -296,7 +298,7 @@ public sealed class ArkOverlayWindow : Window
         Content = new Border { BorderBrush = accent, BorderThickness = new Thickness(1), Child = grid };
 
         SourceInitialized += (_, _) => ApplyAlpha();
-        Loaded += async (_, _) => { Layout(); if (!await ArkWeb.InitAsync(_web, st.CurrentMapUrl)) _answer.Text = "Eingebetteter Browser (WebView2) fehlt – bitte „Microsoft Edge WebView2 Runtime“ installieren."; };
+        Loaded += async (_, _) => { Layout(); if (!await ArkWeb.InitAsync(_web, st.CurrentMapUrl)) SetAnswer("Eingebetteter Browser (WebView2) fehlt – bitte „Microsoft Edge WebView2 Runtime“ installieren."); };
         Closing += (_, e) => { e.Cancel = true; Hide(); };
         IsVisibleChanged += (_, _) => { if (!IsVisible) { if (st.Corner == "Frei") { st.OverlayLeft = Left; st.OverlayTop = Top; } ArkWeb.Save(); } ArkWeb.RaiseChanged(); };
     }
@@ -306,14 +308,16 @@ public sealed class ArkOverlayWindow : Window
         var q = _ask.Text.Trim();
         if (q.Length == 0) return;
         var model = ArkWeb.Settings.Model;
-        if (string.IsNullOrEmpty(model)) { _answer.Text = "Erst in der App unter ARK → KI-Assistent ein Modell wählen."; return; }
+        if (string.IsNullOrEmpty(model)) { SetAnswer("Erst in der App unter ARK → KI-Assistent ein Modell wählen."); return; }
         _cts?.Cancel(); _cts = new CancellationTokenSource();
-        _answer.Text = "";
+        var sb = new System.Text.StringBuilder();
+        SetAnswer("");
         try
         {
-            await ArkAi.AskAsync(model, q, t => Dispatcher.Invoke(() => { _answer.AppendText(t); _answer.ScrollToEnd(); }), s => Dispatcher.Invoke(() => { if (_answer.Text.Length == 0) _answer.Text = s + "\n"; }), _cts.Token);
+            await ArkAi.AskAsync(model, q, t => Dispatcher.Invoke(() => { sb.Append(t); SetAnswer(sb.ToString()); }), s => Dispatcher.Invoke(() => { if (sb.Length == 0) SetAnswer("*" + s + "*"); }), _cts.Token);
         }
-        catch (Exception ex) { _answer.Text = "KI nicht erreichbar: " + ex.Message; }
+        catch (OperationCanceledException) { }
+        catch (Exception ex) { SetAnswer("**KI nicht erreichbar:** " + ex.Message); }
     }
 
     private void ApplyAlpha()

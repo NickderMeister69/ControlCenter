@@ -301,6 +301,8 @@
                             <ComboBox x:Name="ModelBox" Width="200" Margin="0,0,8,6" SelectionChanged="Model_Changed"/>
                             <Button x:Name="PullBtn" Content="Empfohlenes Modell laden (qwen2.5:7b, ≈ 4,7 GB)" Click="Pull_Click" Padding="10,4" Margin="0,0,8,6"/>
                             <Button x:Name="StartOllama" Content="Ollama starten" Click="StartOllama_Click" Padding="10,4" Margin="0,0,8,6"/>
+                            <Button x:Name="StopOllamaBtn" Content="KI ausschalten" Click="StopOllama_Click" Padding="10,4" Margin="0,0,8,6" Visibility="Collapsed"
+                                    ToolTip="Beendet Ollama komplett – Grafikkarte und RAM sind sofort wieder frei. Freigabe für Freunde geht dabei auch aus."/>
                             <Button x:Name="GetOllama" Content="Ollama herunterladen" Click="GetOllama_Click" Padding="10,4" Margin="0,0,8,6" Visibility="Collapsed"/>
                         </WrapPanel>
                         <ProgressBar x:Name="PullBar" Height="6" Maximum="100" Visibility="Collapsed"/>
@@ -337,8 +339,11 @@
                 <Button x:Name="AskBtn" Style="{StaticResource AccentButton}" Content="Fragen" HorizontalAlignment="Right" Width="92" Click="Ask_Click"/>
             </Grid>
             <Border Grid.Row="2" Style="{StaticResource SubCard}" Padding="12">
-                <TextBox x:Name="Answer" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="Transparent" BorderThickness="0" FontSize="13.5"
-                         Foreground="{StaticResource TextBrush}" Text="Frag etwas zu ARK – z. B. „Wo finde ich Metall?“, „Was brauche ich für den Broodmother-Kampf?“, „Wie zähme ich einen Rex?“"/>
+                <Grid>
+                    <FlowDocumentScrollViewer x:Name="AnswerView" IsToolBarVisible="False" VerticalScrollBarVisibility="Auto" Background="Transparent" Foreground="{StaticResource TextBrush}"/>
+                    <TextBlock x:Name="AnswerStatus" Style="{StaticResource Muted}" FontSize="13" TextWrapping="Wrap" VerticalAlignment="Top"
+                               Text="Frag etwas zu ARK – z. B. „Welcher Dino farmt am besten Metall?“, „Wie zähme ich einen Rex?“, „Was brauche ich für die Broodmother?“"/>
+                </Grid>
             </Border>
             <WrapPanel x:Name="Sources" Grid.Row="3" Margin="0,6,0,0"/>
         </Grid>

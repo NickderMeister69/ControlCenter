@@ -98,6 +98,17 @@ public static class ArkAi
         return false;
     }
 
+    /// <summary>Ollama komplett beenden – gibt Grafikkarten-Speicher und RAM sofort frei.</summary>
+    public static int StopOllama()
+    {
+        if (ArkWeb.Settings.ShareEnabled) { ArkWeb.Settings.ShareEnabled = false; ArkWeb.Save(); AiShare.Stop(); }
+        int n = 0;
+        foreach (var name in new[] { "ollama app", "ollama", "ollama_llama_server" })
+            foreach (var p in Process.GetProcessesByName(name))
+                try { p.Kill(true); n++; } catch { } finally { p.Dispose(); }
+        return n;
+    }
+
     public static async Task<bool> InstallOllamaAsync()
     {
         var r = await Task.Run(() => Env.Run("cmd.exe", "/d /c winget install --id Ollama.Ollama --exact --silent --accept-source-agreements --accept-package-agreements --disable-interactivity", 15 * 60_000));
@@ -132,41 +143,101 @@ public static class ArkAi
 
     public sealed record Source(string Title, string Url);
 
-    /// <summary>Wiki-Seiten zur Frage suchen und als Text holen (englisches ARK-Wiki).</summary>
-    private static async Task<List<(Source Src, string Text)>> WikiAsync(string query, CancellationToken ct)
+    // Deutsche ARK-Begriffe → englische Wiki-Begriffe (das Wiki ist englisch). Hilft, auch wenn die KI schlechte Suchbegriffe liefert.
+    private static readonly (string De, string En)[] Glossary =
     {
-        var res = new List<(Source, string)>();
+        ("metall", "Metal"), ("kristall", "Crystal"), ("obsidian", "Obsidian"), ("öl", "Oil"), ("oel", "Oil"), ("schwefel", "Sulfur"),
+        ("perle", "Black Pearl"), ("silica", "Silica Pearls"), ("polymer", "Organic Polymer"), ("zement", "Cement Paste"), ("chitin", "Chitin"),
+        ("stein", "Stone"), ("holz", "Wood"), ("stroh", "Thatch"), ("faser", "Fiber"), ("beeren", "Berry"), ("fleisch", "Raw Meat"),
+        ("leder", "Hide"), ("fell", "Pelt"), ("feuerstein", "Flint"), ("element", "Element"), ("honig", "Giant Bee Honey"), ("salz", "Salt"),
+        ("zähm", "Taming"), ("zaehm", "Taming"), ("betäub", "Narcotic"), ("kibble", "Kibble"), ("züchte", "Breeding"), ("zucht", "Breeding"), ("ei", "Egg"),
+        ("sattel", "Saddle"), ("höhle", "Caves"), ("artefakt", "Artifact"), ("boss", "Bosses"), ("tribut", "Tribute"), ("obelisk", "Obelisk"),
+        ("schmiede", "Refining Forge"), ("industrie", "Industrial Forge"), ("waffe", "Weapons"), ("rüstung", "Armor"), ("tek", "TEK Tier"),
+    };
+
+    private static readonly HashSet<string> Stop = new(StringComparer.OrdinalIgnoreCase)
+    { "the","a","an","of","for","in","on","to","and","or","is","best","ark","survival","ascended","how","what","where","which","dino","creature","good" };
+
+    private static async Task<List<(string Title, int Size)>> SearchAsync(string q, int limit, CancellationToken ct)
+    {
         try
         {
-            var url = "https://ark.wiki.gg/api.php?action=query&list=search&format=json&srlimit=3&srsearch=" + Uri.EscapeDataString(query);
+            var url = $"https://ark.wiki.gg/api.php?action=query&list=search&format=json&srlimit={limit}&srsearch=" + Uri.EscapeDataString(q);
             using var d = JsonDocument.Parse(await Web.GetStringAsync(url, ct));
-            var titles = d.RootElement.GetProperty("query").GetProperty("search").EnumerateArray().Select(x => x.GetProperty("title").GetString()!).ToList();
-            foreach (var t in titles)
+            return d.RootElement.GetProperty("query").GetProperty("search").EnumerateArray()
+                    .Select(x => (x.GetProperty("title").GetString()!, x.TryGetProperty("size", out var z) ? z.GetInt32() : 0)).ToList();
+        }
+        catch (OperationCanceledException) { throw; }
+        catch (Exception ex) { Log.Warn(LogModule.App, "ARK-Wiki-Suche: " + ex.Message); return new(); }
+    }
+
+    /// <summary>Mehrere Suchen (KI-Begriffe + Wörterbuch), Treffer zusammenzählen, die besten 3 Seiten holen.</summary>
+    private static async Task<List<(Source Src, string Text)>> WikiAsync(IEnumerable<string> queries, string[] focus, CancellationToken ct)
+    {
+        var score = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+        foreach (var q in queries.Where(q => q.Length > 1).Distinct(StringComparer.OrdinalIgnoreCase).Take(6))
+        {
+            var hits = await SearchAsync(q, 4, ct);
+            for (int i = 0; i < hits.Count; i++)
             {
-                try
-                {
-                    var purl = "https://ark.wiki.gg/api.php?action=parse&format=json&formatversion=2&prop=wikitext&page=" + Uri.EscapeDataString(t);
-                    using var pd = JsonDocument.Parse(await Web.GetStringAsync(purl, ct));
-                    var wt = pd.RootElement.GetProperty("parse").GetProperty("wikitext").GetString() ?? "";
-                    res.Add((new Source(t, "https://ark.wiki.gg/wiki/" + Uri.EscapeDataString(t.Replace(' ', '_'))), CleanWikitext(wt)));
-                }
-                catch { }
+                var t = hits[i].Title;
+                if (t.Contains("(Mobile)") || t.Contains("(Survival Evolved)") || t.StartsWith("Mod:")) continue;
+                double sc = 4 - i;
+                if (string.Equals(t, q, StringComparison.OrdinalIgnoreCase)) sc += 6;   // Seite heißt genau wie der Begriff
+                score[t] = score.GetValueOrDefault(t) + sc;
             }
         }
-        catch { }
+        var res = new List<(Source, string)>();
+        foreach (var t in score.OrderByDescending(x => x.Value).Select(x => x.Key).Take(3))
+        {
+            try
+            {
+                var purl = "https://ark.wiki.gg/api.php?action=parse&format=json&formatversion=2&prop=wikitext&redirects=1&page=" + Uri.EscapeDataString(t);
+                using var pd = JsonDocument.Parse(await Web.GetStringAsync(purl, ct));
+                var wt = pd.RootElement.GetProperty("parse").GetProperty("wikitext").GetString() ?? "";
+                var text = Relevant(CleanWikitext(wt), focus.Where(f => !t.Contains(f, StringComparison.OrdinalIgnoreCase)).ToArray(), 2600);
+                if (text.Length > 80) res.Add((new Source(t, "https://ark.wiki.gg/wiki/" + Uri.EscapeDataString(t.Replace(' ', '_'))), text));
+            }
+            catch (OperationCanceledException) { throw; }
+            catch { }
+        }
         return res;
     }
 
-    /// <summary>Wikitext grob in lesbaren Text verwandeln und kürzen.</summary>
+    /// <summary>Wikitext lesbar machen: Vorlagen/Infoboxen, Tabellen, Bilder und Referenzen entfernen.</summary>
     public static string CleanWikitext(string wt)
     {
         var t = Regex.Replace(wt, @"<ref[^>]*>.*?</ref>|<ref[^>]*/>|<!--.*?-->", "", RegexOptions.Singleline);
+        // {{ItemLink|X}} / {{ItemLink|X|Text}} → Text behalten, danach alle übrigen Vorlagen (auch verschachtelt) entfernen
+        t = Regex.Replace(t, @"\{\{(?:ItemLink|Link|il)\|([^}|]*)(?:\|([^}|]*))?[^}]*\}\}", m => m.Groups[2].Success && m.Groups[2].Value.Length > 0 ? m.Groups[2].Value : m.Groups[1].Value, RegexOptions.IgnoreCase);
+        for (int i = 0; i < 6; i++) t = Regex.Replace(t, @"\{\{[^{}]*\}\}", "");
+        t = Regex.Replace(t, @"\{\|.*?\|\}", "", RegexOptions.Singleline);   // Tabellen
         t = Regex.Replace(t, @"\[\[(?:File|Datei|Image|Category):[^\]]*\]\]", "", RegexOptions.IgnoreCase);
         t = Regex.Replace(t, @"\[\[([^\]|]*\|)?([^\]]*)\]\]", "$2");
         t = Regex.Replace(t, @"'{2,}", "");
         t = Regex.Replace(t, @"<[^>]+>", "");
+        t = Regex.Replace(t, @"[ \t]+\n", "\n");
         t = Regex.Replace(t, @"\n{3,}", "\n\n");
-        return t.Length > 3500 ? t[..3500] : t;
+        return t.Trim();
+    }
+
+    /// <summary>Aus einem Artikel die Abschnitte nehmen, die am besten zur Frage passen (statt nur den Anfang).</summary>
+    private static string Relevant(string text, string[] focus, int max)
+    {
+        var parts = Regex.Split(text, @"\n(?===+[^=])");
+        if (parts.Length <= 1 || text.Length <= max) return text.Length > max ? text[..max] : text;
+        var intro = parts[0].Length > 700 ? parts[0][..700] : parts[0];
+        var ranked = parts.Skip(1)
+            .Select((p, i) => (p, i, sc: focus.Sum(f => Regex.Matches(p, Regex.Escape(f), RegexOptions.IgnoreCase).Count) * 3
+                                         + (Regex.IsMatch(p, @"^==+\s*(Gathering|Taming|Obtaining|Strategy|Combat|Utility|Roles|Basic Info|Location|Spawn)", RegexOptions.IgnoreCase) ? 4 : 0)))
+            .OrderByDescending(x => x.sc).ThenBy(x => x.i).ToList();
+        var sb = new StringBuilder(intro);
+        foreach (var x in ranked)
+        {
+            if (sb.Length + x.p.Length > max) { if (sb.Length < max - 300) sb.Append('\n').Append(x.p[..Math.Min(x.p.Length, max - sb.Length)]); break; }
+            sb.Append('\n').Append(x.p);
+        }
+        return sb.ToString();
     }
 
     /// <summary>Frage stellen – Antwort kommt Stück für Stück (onToken). Gibt die verwendeten Quellen zurück.</summary>
@@ -174,34 +245,56 @@ public static class ArkAi
     {
         if (UsesFriend && _friendBase == null) await ResolveFriendAsync(false);
         onStatus("Suche im ARK-Wiki …");
-        // deutsche Frage → englische Suchbegriffe (das Wiki ist englisch)
-        string search = question;
+        // 1) Suchbegriffe: KI liefert 2–3 kurze englische Begriffe (je Zeile einer), dazu das eingebaute Wörterbuch
+        var queries = new List<string>();
         try
         {
-            var q = await ChatAsync(model, new[] { ("system", "Gib NUR 2 bis 5 englische Suchbegriffe für das ARK: Survival Ascended Wiki zurück, ohne Erklärung."), ("user", question) }, null, ct);
-            if (!string.IsNullOrWhiteSpace(q) && q.Length < 120) search = q.Trim().Trim('"');
+            var q = await ChatAsync(model, new[]
+            {
+                ("system", "You turn ARK: Survival Ascended questions into wiki search terms. Reply with 2 to 3 lines, each 1 to 3 English words: " +
+                           "the exact wiki page names that answer it (creature, resource, item or mechanic names). No numbering, no explanation.\n" +
+                           "Example: 'welcher dino ist der beste metall farmer' → Metal\nAnkylosaurus\nGathering\n" +
+                           "Example: 'wie zähme ich einen rex' → Rex\nTaming"),
+                ("user", question)
+            }, null, ct, 0.1);
+            queries.AddRange(q.Split('\n', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                              .Select(l => Regex.Replace(l, @"^[\-\*\d\.\)\s""']+|[""'.]+$", "").Trim()).Where(l => l.Length is > 1 and < 40).Take(3));
         }
+        catch (OperationCanceledException) { throw; }
         catch { }
-        var wiki = await WikiAsync(search, ct);
-        if (wiki.Count == 0 && search != question) wiki = await WikiAsync(question, ct);
-        onStatus(wiki.Count > 0 ? $"{wiki.Count} Wiki-Seiten gefunden – KI antwortet …" : "Nichts im Wiki gefunden – KI antwortet mit eigenem Wissen …");
+        var lower = question.ToLowerInvariant();
+        foreach (var (de, en) in Glossary) if (lower.Contains(de)) queries.Add(en);
+        if (queries.Count == 0) queries.Add(question);
+        var focus = queries.SelectMany(x => x.Split(' ')).Where(w => w.Length > 2 && !Stop.Contains(w)).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+        var wiki = await WikiAsync(queries, focus, ct);
+        onStatus(wiki.Count > 0 ? $"Gefunden: {string.Join(", ", wiki.Select(w => w.Src.Title))} – KI antwortet …" : "Nichts Passendes im Wiki gefunden – KI antwortet mit eigenem Wissen …");
+
+        // 2) Antwort
         var ctx = new StringBuilder();
-        if (ArkWeb.Settings.Map == ArkData.MapName) ctx.AppendLine("EIGENE DATEN (Map Astraeos):").AppendLine(ArkData.AsContext());
-        foreach (var (src, text) in wiki) ctx.AppendLine($"WIKI-SEITE „{src.Title}“:").AppendLine(text).AppendLine();
-        var system = $"Du bist ein hilfreicher Experte für ARK: Survival Ascended. Der Spieler spielt gerade auf der Map {ArkWeb.Settings.Map}. " +
-                     "Antworte auf Deutsch, kurz und praktisch (Stichpunkte erlaubt). Nutze vor allem das folgende Wissen. Wenn etwas dort nicht steht und du unsicher bist, sag das ehrlich statt zu raten. " +
-                     "Koordinaten immer als Breite / Länge angeben.\n\n" + ctx;
+        foreach (var (src, text) in wiki) ctx.AppendLine($"### WIKI: {src.Title}").AppendLine(text).AppendLine();
+        var map = ArkWeb.Settings.Map;
+        if (map == ArkData.MapName && Regex.IsMatch(lower, @"wo |wo$|finde|koordinat|höhle|hoehle|boss|artefakt|ort|spawn|map|karte|astraeos|metall|kristall|öl|obsidian|silica|perle|zement|polymer|schwefel"))
+            ctx.AppendLine("### ORTE AUF ASTRAEOS (Community-Daten, Koordinaten Breite / Länge)").AppendLine(ArkData.AsContext());
+        var system =
+            $"Du bist ein erfahrener ARK: Survival Ascended Spieler und hilfst einem Mitspieler. Er spielt auf der Map {map}.\n" +
+            "Regeln:\n" +
+            "- Beantworte genau die gestellte Frage. Stütze dich vor allem auf die WIKI-Abschnitte unten; die sind verlässlicher als dein eigenes Wissen.\n" +
+            "- Bei „bester Dino für X“: nenne zuerst den Dino, den das Wiki als besten/effizientesten nennt, und warum (z. B. Sammel-Bonus, Gewichtsreduktion). Danach 1–2 Alternativen.\n" +
+            "- Orte/Koordinaten nur nennen, wenn danach gefragt wurde oder sie direkt helfen (dann als Breite / Länge).\n" +
+            "- Wenn die Infos unten nicht reichen und du unsicher bist: sag das ehrlich, statt zu raten.\n" +
+            "- Antworte auf Deutsch, kurz und übersichtlich in Markdown: eine Zeile mit der direkten Antwort in **fett**, dann 2–5 Stichpunkte mit „- “, optional eine Überschrift mit „### “. Keine Einleitung, kein Fazit-Absatz. Spielbegriffe (Dino-/Item-Namen) auf Englisch lassen.\n\n" +
+            (ctx.Length > 0 ? ctx.ToString() : "(Keine Wiki-Infos gefunden.)");
         await ChatAsync(model, new[] { ("system", system), ("user", question) }, onToken, ct);
         return wiki.Select(w => w.Src).ToList();
     }
 
-    private static async Task<string> ChatAsync(string model, (string Role, string Content)[] msgs, Action<string>? onToken, CancellationToken ct)
+    private static async Task<string> ChatAsync(string model, (string Role, string Content)[] msgs, Action<string>? onToken, CancellationToken ct, double temperature = 0.3)
     {
         var body = JsonSerializer.Serialize(new
         {
             model, stream = onToken != null,
             messages = msgs.Select(m => new { role = m.Role, content = m.Content }),
-            options = new { temperature = 0.3, num_ctx = 8192 }
+            options = new { temperature, num_ctx = 8192 }
         });
         using var req = Req(HttpMethod.Post, "/api/chat", new StringContent(body, Encoding.UTF8, "application/json"));
         using var resp = await Http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);

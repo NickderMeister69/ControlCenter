@@ -292,6 +292,7 @@ public partial class ArkPage : UserControl
         PullBtn.IsEnabled = true;
         AskBtn.IsEnabled = models is { Count: > 0 };
         if (models != null || friend) { StartOllama.Visibility = GetOllama.Visibility = Visibility.Collapsed; }
+        StopOllamaBtn.Visibility = !friend && models != null ? Visibility.Visible : Visibility.Collapsed;
         PullBtn.Visibility = !friend && models != null && !models.Any(x => x.StartsWith("qwen2.5:7b")) ? Visibility.Visible : Visibility.Collapsed;
         AiHint.Text = friend
             ? "Deine Frage wird an den PC deines Freundes geschickt und dort beantwortet – die Wiki-Suche macht deine App. Nichts geht an KI-Firmen. KI kann sich irren: wichtige Dinge über die Quellen prüfen."
@@ -314,6 +315,15 @@ public partial class ArkPage : UserControl
         st.AiMode = "friend"; st.FriendName = string.IsNullOrWhiteSpace(inv.n) ? "deinem Freund" : inv.n; st.FriendUrl = inv.u; st.FriendToken = inv.t; st.Model = null;
         ArkWeb.Save();
         InviteBox.Text = "";
+        await RefreshAi();
+    }
+
+    private async void StopOllama_Click(object sender, RoutedEventArgs e)
+    {
+        var n = ArkAi.StopOllama();
+        Ui.Toast(n > 0 ? "KI ausgeschaltet – Grafikkarte ist wieder frei" : "Ollama lief nicht");
+        await Task.Delay(800);
+        LoadShare();
         await RefreshAi();
     }
 
@@ -410,15 +420,22 @@ public partial class ArkPage : UserControl
         if (!_aiInit) { _aiInit = true; await RefreshAi(); }
         if (ArkWeb.Settings.Model is not { } model || ModelBox.SelectedItem == null) { Ui.Toast("Erst Ollama starten und ein Modell wählen", true); return; }
         _busy = true; AskBtn.Content = "Stopp";
-        Answer.Text = ""; Sources.Children.Clear();
+        Sources.Children.Clear();
+        AnswerView.Document = new FlowDocument();
+        AnswerStatus.Visibility = Visibility.Visible;
         _cts = new CancellationTokenSource();
-        var started = false;
+        var answer = new System.Text.StringBuilder();
+        var dirty = false;
+        var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromMilliseconds(120) };
+        timer.Tick += (_, _) => { if (dirty) { dirty = false; RenderAnswer(answer.ToString()); } };
+        timer.Start();
         try
         {
             var src = await ArkAi.AskAsync(model, q,
-                tok => Dispatcher.Invoke(() => { if (!started) { started = true; Answer.Text = ""; } Answer.AppendText(tok); Answer.ScrollToEnd(); }),
-                status => Dispatcher.Invoke(() => { if (!started) Answer.Text = status; }),
+                tok => Dispatcher.Invoke(() => { answer.Append(tok); dirty = true; }),
+                status => Dispatcher.Invoke(() => { if (answer.Length == 0) AnswerStatus.Text = status; }),
                 _cts.Token);
+            timer.Stop(); RenderAnswer(answer.ToString());
             if (src.Count > 0)
             {
                 Sources.Children.Add(new TextBlock { Text = "Quellen: ", Foreground = Palette.Muted, FontSize = 12, Margin = new Thickness(0, 0, 4, 0) });
@@ -430,12 +447,19 @@ public partial class ArkPage : UserControl
                 }
             }
         }
-        catch (OperationCanceledException) { Answer.AppendText("\n\n(abgebrochen)"); }
+        catch (OperationCanceledException) { RenderAnswer(answer + "\n\n*(abgebrochen)*"); }
         catch (Exception ex)
         {
-            Answer.Text = "Fehler: " + ex.Message + "\n\nLäuft Ollama? (Tab oben: „Ollama starten“)";
+            RenderAnswer("**Fehler:** " + ex.Message + "\n\n" + (ArkAi.UsesFriend ? "Der PC deines Freundes ist evtl. gerade aus." : "Läuft Ollama? (oben „Ollama starten“)"));
             Log.Warn(LogModule.App, "ARK-KI: " + ex.Message);
         }
-        finally { _busy = false; AskBtn.Content = "Fragen"; }
+        finally { timer.Stop(); _busy = false; AskBtn.Content = "Fragen"; }
+    }
+
+    private void RenderAnswer(string md)
+    {
+        AnswerStatus.Visibility = md.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+        AnswerView.Document = MiniMarkdown.Build(md);
+        if (AnswerView.Template?.FindName("PART_ContentHost", AnswerView) is ScrollViewer sv) sv.ScrollToEnd();
     }
 }
