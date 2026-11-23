@@ -16,7 +16,8 @@ namespace NickControlCenter;
 /// </summary>
 public static class ArkAi
 {
-    public const string LocalOllama = "http://localhost:11434";
+    public const int Port = 11436;
+    public const string LocalOllama = "http://127.0.0.1:11436";
     /// <summary>true = die KI eines Freundes wird benutzt (Einladungs-Code).</summary>
     public static bool UsesFriend => ArkWeb.Settings.AiMode == "friend" && !string.IsNullOrEmpty(ArkWeb.Settings.FriendToken);
     private static string? _friendBase;
@@ -86,27 +87,120 @@ public static class ArkAi
         return null;
     }
 
-    /// <summary>Ollama starten, falls installiert aber nicht aktiv.</summary>
+    /// <summary>Die eigentliche ollama.exe (Server), nicht die Taskleisten-App.</summary>
+    private static string? ServerExe()
+    {
+        foreach (var p in new[] { @"%LOCALAPPDATA%\Programs\Ollama\ollama.exe", @"%ProgramFiles%\Ollama\ollama.exe" })
+        {
+            var f = Environment.ExpandEnvironmentVariables(p);
+            if (File.Exists(f)) return f;
+        }
+        return null;
+    }
+
+    // ---------- Eigene, getrennte Ollama-Instanz nur für das Control Center ----------
+    // Läuft auf Port 11436 – dein normales Ollama (11434) für andere Projekte bleibt unberührt.
+    // Mehrere Fragen gleichzeitig (keiner muss warten), Modell bleibt 30 Minuten geladen (keine Ladezeit),
+    // normale Priorität. Passt etwas nicht mehr in die Grafikkarte, nimmt Ollama automatisch den Arbeitsspeicher dazu.
+    private static Process? _server;
+
+    /// <summary>Gehört die laufende Instanz uns (gestartet von dieser App)?</summary>
+    public static bool OwnServerRunning => _server is { HasExited: false };
+
+    private static bool StartServer()
+    {
+        if (OwnServerRunning) return true;
+        var exe = ServerExe();
+        if (exe == null) return false;
+        var psi = new ProcessStartInfo(exe, "serve") { UseShellExecute = false, CreateNoWindow = true, RedirectStandardError = true, RedirectStandardOutput = true };
+        psi.Environment["OLLAMA_HOST"] = "127.0.0.1:" + Port;
+        psi.Environment["OLLAMA_NUM_PARALLEL"] = "4";
+        psi.Environment["OLLAMA_MAX_LOADED_MODELS"] = "2";
+        psi.Environment["OLLAMA_KEEP_ALIVE"] = "5m";   // 5 Min ohne Frage → Modell raus aus Grafikkarte und RAM
+        psi.Environment["OLLAMA_MAX_QUEUE"] = "64";
+        var p = Process.Start(psi);
+        if (p == null) return false;
+        p.OutputDataReceived += (_, _) => { }; p.ErrorDataReceived += (_, _) => { };
+        p.BeginOutputReadLine(); p.BeginErrorReadLine();
+        _server = p;
+        AppDomain.CurrentDomain.ProcessExit += (_, _) => StopServer();
+        _lastUse = DateTime.Now;
+        _watch ??= new Timer(_ => _ = WatchGpuAsync(), null, 10_000, 10_000);
+        Log.Info(LogModule.App, $"Eigene KI-Instanz gestartet (Port {Port}, getrennt von deinem normalen Ollama)");
+        return true;
+    }
+
+    // ---------- Grafikkarte mit Lernwerk teilen ----------
+    // Solange jemand fragt, bleibt das Modell geladen. Ist das Control Center untätig und Lernwerks Ollama (ki-tor intern
+    // auf 11433, sonst 11434) hat ein Modell geladen, gibt das Control Center seine Grafikkarte sofort frei.
+    private static Timer? _watch;
+    private static int _active;
+    private static DateTime _lastUse = DateTime.MinValue;
+    internal static void BeginUse() { Interlocked.Increment(ref _active); _lastUse = DateTime.Now; }
+    internal static void EndUse() { Interlocked.Decrement(ref _active); _lastUse = DateTime.Now; }
+    private static readonly HttpClient Quick = new() { Timeout = TimeSpan.FromSeconds(3) };
+
+    private static async Task<List<string>?> LoadedAsync(string baseUrl)
+    {
+        try
+        {
+            using var d = JsonDocument.Parse(await Quick.GetStringAsync(baseUrl + "/api/ps"));
+            return d.RootElement.GetProperty("models").EnumerateArray().Select(m => m.GetProperty("name").GetString() ?? "").Where(n => n.Length > 0).ToList();
+        }
+        catch { return null; }
+    }
+
+    private static async Task WatchGpuAsync()
+    {
+        // Standby: 10 Minuten keine Frage (weder von dir noch von Freunden) → KI-Instanz ganz beenden, nichts belegt mehr Speicher.
+        // Bei der nächsten Frage in der App (oder von einem Freund) startet sie von selbst wieder.
+        if (OwnServerRunning && _active == 0 && _lastUse != DateTime.MinValue && DateTime.Now - _lastUse > TimeSpan.FromMinutes(10))
+        {
+            StopServer();
+            Log.Info(LogModule.App, "KI: 10 Minuten nicht benutzt – Standby (Speicher freigegeben)");
+            return;
+        }
+        if (!OwnServerRunning || _active > 0 || DateTime.Now - _lastUse < TimeSpan.FromSeconds(30)) return;
+        var mine = await LoadedAsync(LocalOllama);
+        if (mine is not { Count: > 0 }) return;
+        // Lernwerks echtes Ollama hinter dem ki-tor (11433); nur wenn es das nicht gibt, die normale Adresse fragen
+        var other = await LoadedAsync("http://127.0.0.1:11433") ?? await LoadedAsync("http://127.0.0.1:11434");
+        if (other is not { Count: > 0 }) return;
+        foreach (var m in mine)
+        {
+            try
+            {
+                using var c = new StringContent(JsonSerializer.Serialize(new { model = m, keep_alive = 0 }), Encoding.UTF8, "application/json");
+                await Quick.PostAsync(LocalOllama + "/api/generate", c);
+            }
+            catch { }
+        }
+        Log.Info(LogModule.App, "KI: Grafikkarte für Lernwerk freigegeben (Control Center war untätig)");
+    }
+
+    private static void StopServer()
+    {
+        var p = _server; _server = null;
+        try { if (p is { HasExited: false }) p.Kill(true); } catch { }
+    }
+
+    /// <summary>Eigene KI-Instanz starten, falls sie nicht läuft.</summary>
     public static async Task<bool> EnsureRunningAsync()
     {
         if (await ModelsAsync() != null) return true;
         if (UsesFriend) return false;
-        var exe = OllamaExe();
-        if (exe == null) return false;
-        Env.OpenAsUser(exe);
-        for (int i = 0; i < 20; i++) { await Task.Delay(1000); if (await ModelsAsync() != null) return true; }
+        if (!StartServer()) return false;
+        for (int i = 0; i < 20; i++) { await Task.Delay(700); if (await ModelsAsync() != null) return true; }
         return false;
     }
 
-    /// <summary>Ollama komplett beenden – gibt Grafikkarten-Speicher und RAM sofort frei.</summary>
+    /// <summary>Nur die KI-Instanz dieser App beenden – dein normales Ollama für andere Projekte läuft weiter.</summary>
     public static int StopOllama()
     {
         if (ArkWeb.Settings.ShareEnabled) { ArkWeb.Settings.ShareEnabled = false; ArkWeb.Save(); AiShare.Stop(); }
-        int n = 0;
-        foreach (var name in new[] { "ollama app", "ollama", "ollama_llama_server" })
-            foreach (var p in Process.GetProcessesByName(name))
-                try { p.Kill(true); n++; } catch { } finally { p.Dispose(); }
-        return n;
+        var was = OwnServerRunning;
+        StopServer();
+        return was ? 1 : 0;
     }
 
     public static async Task<bool> InstallOllamaAsync()
@@ -290,6 +384,15 @@ public static class ArkAi
 
     private static async Task<string> ChatAsync(string model, (string Role, string Content)[] msgs, Action<string>? onToken, CancellationToken ct, double temperature = 0.3)
     {
+        var mine = !UsesFriend;
+        if (mine && !OwnServerRunning && await ModelsAsync() == null) await EnsureRunningAsync();   // aus dem Standby aufwecken
+        if (mine) BeginUse();
+        try { return await ChatCoreAsync(model, msgs, onToken, ct, temperature); }
+        finally { if (mine) EndUse(); }
+    }
+
+    private static async Task<string> ChatCoreAsync(string model, (string Role, string Content)[] msgs, Action<string>? onToken, CancellationToken ct, double temperature = 0.3)
+    {
         var body = JsonSerializer.Serialize(new
         {
             model, stream = onToken != null,
@@ -298,7 +401,12 @@ public static class ArkAi
         });
         using var req = Req(HttpMethod.Post, "/api/chat", new StringContent(body, Encoding.UTF8, "application/json"));
         using var resp = await Http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);
-        resp.EnsureSuccessStatusCode();
+        if (!resp.IsSuccessStatusCode)
+        {
+            var err = await resp.Content.ReadAsStringAsync(ct);
+            try { err = JsonNode.Parse(err)?["error"]?.GetValue<string>() ?? err; } catch { }
+            throw new InvalidOperationException(string.IsNullOrWhiteSpace(err) ? $"KI antwortet nicht ({(int)resp.StatusCode})" : err);
+        }
         if (onToken == null)
         {
             var n = JsonNode.Parse(await resp.Content.ReadAsStringAsync(ct));

@@ -77,7 +77,7 @@ public partial class ArkPage : UserControl
         OverlayBtn.IsEnabled = ArkWeb.Settings.InGame;
         if (!ArkWeb.Settings.InGame) ArkOverlayWindow.HideIfOpen();
         ArkWeb.Save();
-        Ui.Toast(ArkWeb.Settings.InGame ? "Spiel-Anbindung an – Strg+Alt+K zeigt die Karte im Spiel" : "Spiel-Anbindung aus – im Spiel erscheint nichts");
+        Ui.Toast(ArkWeb.Settings.InGame ? "Spiel-Anbindung an – Strg+Alt+A zeigt die Karte im Spiel" : "Spiel-Anbindung aus – im Spiel erscheint nichts");
     }
 
     // ---------- Map-Auswahl ----------
@@ -264,13 +264,18 @@ public partial class ArkPage : UserControl
         if (st.AiMode == "friend" && !friend) { AiState.Text = "Einladungs-Code von deinem Freund einfügen und „Verbinden“."; SetAiButtons(null); return; }
         AiState.Text = friend ? $"Verbinde mit der KI von {st.FriendName} …" : "Prüfe Ollama …";
         var models = await ArkAi.ModelsAsync();
+        if (models == null && !friend)
+        {
+            AiState.Text = "Starte die KI-Instanz des Control Centers …";
+            if (await ArkAi.EnsureRunningAsync()) models = await ArkAi.ModelsAsync();
+        }
         if (models == null)
         {
             if (friend) AiState.Text = $"Die KI von {st.FriendName} ist gerade nicht erreichbar – sein PC oder sein Control Center ist gerade aus. Versuch es später nochmal.";
             else
             {
                 var exe = ArkAi.OllamaExe();
-                AiState.Text = exe != null ? "Ollama ist installiert, läuft aber gerade nicht." : "Ollama ist auf diesem PC nicht installiert – installieren oder die KI eines Freundes nutzen.";
+                AiState.Text = exe != null ? "Die KI-Instanz ließ sich nicht starten – siehe Protokoll." : "Ollama ist auf diesem PC nicht installiert – installieren oder die KI eines Freundes nutzen.";
                 StartOllama.Visibility = exe != null ? Visibility.Visible : Visibility.Collapsed;
                 GetOllama.Visibility = exe == null ? Visibility.Visible : Visibility.Collapsed;
             }
@@ -296,7 +301,7 @@ public partial class ArkPage : UserControl
         PullBtn.Visibility = !friend && models != null && !models.Any(x => x.StartsWith("qwen2.5:7b")) ? Visibility.Visible : Visibility.Collapsed;
         AiHint.Text = friend
             ? "Deine Frage wird an den PC deines Freundes geschickt und dort beantwortet – die Wiki-Suche macht deine App. Nichts geht an KI-Firmen. KI kann sich irren: wichtige Dinge über die Quellen prüfen."
-            : "Läuft komplett auf diesem PC. Mit einer Grafikkarte ab ca. 8 GB Speicher kommen Antworten in wenigen Sekunden, ohne starke Grafikkarte dauert es deutlich länger. Für jede Frage sucht die App passende Seiten im ARK-Wiki und gibt sie der KI mit – die Quellen stehen unter der Antwort. KI kann sich irren: wichtige Dinge über die Quellen prüfen.";
+            : "Läuft komplett auf diesem PC – in einer eigenen KI-Instanz nur fürs Control Center (getrennt von deinem normalen Ollama für andere Projekte): startet von selbst, beantwortet mehrere Fragen gleichzeitig und hält das Modell bereit – braucht Lernwerk die Grafikkarte, gibt das Control Center sie frei, sobald gerade niemand fragt. Nach 5 Minuten ohne Frage wird das Modell entladen, nach 10 Minuten geht die KI ganz in Standby – bei der nächsten Frage startet sie von selbst. Reicht der Grafikkarten-Speicher nicht, wird automatisch der Arbeitsspeicher mitbenutzt. Mit einer Grafikkarte ab ca. 8 GB Speicher kommen Antworten in wenigen Sekunden, ohne starke Grafikkarte dauert es deutlich länger. Für jede Frage sucht die App passende Seiten im ARK-Wiki und gibt sie der KI mit – die Quellen stehen unter der Antwort. KI kann sich irren: wichtige Dinge über die Quellen prüfen.";
     }
 
     private async void AiMode_Click(object sender, RoutedEventArgs e)
@@ -415,13 +420,21 @@ public partial class ArkPage : UserControl
     private async void Ask_Click(object sender, RoutedEventArgs e)
     {
         var q = Question.Text.Trim();
+        if (_busy)
+        {
+            _cts?.Cancel();                       // laufende Antwort abbrechen
+            if (q.Length == 0) return;            // nur „Stopp“ gedrückt
+            for (int i = 0; i < 50 && _busy; i++) await Task.Delay(100);
+        }
         if (q.Length == 0) return;
-        if (_busy) { _cts?.Cancel(); return; }
+        Question.Text = "";                       // Feld leeren – gleich die nächste Frage tippen
+        Question.Focus();
+        _lastQuestion = q;
         if (!_aiInit) { _aiInit = true; await RefreshAi(); }
         if (ArkWeb.Settings.Model is not { } model || ModelBox.SelectedItem == null) { Ui.Toast("Erst Ollama starten und ein Modell wählen", true); return; }
         _busy = true; AskBtn.Content = "Stopp";
         Sources.Children.Clear();
-        AnswerView.Document = new FlowDocument();
+        RenderAnswer("");
         AnswerStatus.Visibility = Visibility.Visible;
         _cts = new CancellationTokenSource();
         var answer = new System.Text.StringBuilder();
@@ -433,7 +446,7 @@ public partial class ArkPage : UserControl
         {
             var src = await ArkAi.AskAsync(model, q,
                 tok => Dispatcher.Invoke(() => { answer.Append(tok); dirty = true; }),
-                status => Dispatcher.Invoke(() => { if (answer.Length == 0) AnswerStatus.Text = status; }),
+                status => Dispatcher.Invoke(() => { if (answer.Length == 0) RenderAnswer("*" + status + "*"); }),
                 _cts.Token);
             timer.Stop(); RenderAnswer(answer.ToString());
             if (src.Count > 0)
@@ -456,10 +469,16 @@ public partial class ArkPage : UserControl
         finally { timer.Stop(); _busy = false; AskBtn.Content = "Fragen"; }
     }
 
+    private string _lastQuestion = "";
+
     private void RenderAnswer(string md)
     {
-        AnswerStatus.Visibility = md.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+        AnswerStatus.Visibility = md.Length == 0 && _lastQuestion.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
         AnswerView.Document = MiniMarkdown.Build(md);
+        // gestellte Frage oben drüber, weil das Eingabefeld schon wieder leer ist
+        if (_lastQuestion.Length > 0)
+            AnswerView.Document.Blocks.InsertBefore(AnswerView.Document.Blocks.FirstBlock ?? new Paragraph(),
+                new Paragraph(new Run("„" + _lastQuestion + "“")) { Foreground = Palette.Muted, FontStyle = FontStyles.Italic, Margin = new Thickness(0, 0, 0, 8) });
         if (AnswerView.Template?.FindName("PART_ContentHost", AnswerView) is ScrollViewer sv) sv.ScrollToEnd();
     }
 }

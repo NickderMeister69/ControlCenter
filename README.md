@@ -2,13 +2,13 @@
 
 # 🎛️ Control Center
 
-**Alles für deinen Gaming-PC in einer App** – Lüfter, RGB, FPS-Boost, Overlay, Monitoring, Treiber, Updates und mehr.
+**Alles für deinen Gaming-PC in einer App** – Lüfter, RGB, FPS-Boost, Overlay, Monitoring, Treiber, Updates, ARK-Begleiter mit KI und mehr.
 
 ![Windows](https://img.shields.io/badge/Windows-10%20%7C%2011-0078D6?logo=windows&logoColor=white)
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white)
 ![Version](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2FNickderMeister69%2FControlCenter%2Fmain%2Fversion.txt&search=(.%2B)&replace=v%241&label=Version&color=d000ff)
 
-[**⬇️ Download**](https://github.com/NickderMeister69/ControlCenter/raw/main/ControlCenter.exe) · [Funktionen](#-funktionen) · [Installation](#-installation) · [Updates](#-updates) · [FAQ](#-faq)
+[**⬇️ Download**](https://github.com/NickderMeister69/ControlCenter/raw/main/ControlCenter.exe) · [Funktionen](#-funktionen) · [ARK & KI](#-ark-begleiter--ki) · [Installation](#-installation) · [Updates](#-updates) · [FAQ](#-faq)
 
 </div>
 
@@ -22,6 +22,8 @@
 | 📈 | **Monitor & Overlay** | Live-Werte aller Sensoren mit Verlauf, FPS-Overlay im Spiel (auf Wunsch nur in Spielen), Aufzeichnung als CSV |
 | 🚀 | **FPS-Boost** | 1-Klick-Boost für Windows, eigenes Profil pro Spiel (Steam, Epic, Riot, jede exe), Auto-Boost beim Spielstart, RAM freigeben |
 | 🦖 | **Unreal-Engine-Feineinstellungen** | Jede Grafik-Kategorie einzeln, Profi-Einstellungen (z. B. für ARK: Survival Ascended) und alle Befehle mit einem Klick für die Ingame-Konsole kopieren |
+| 🗺️ | **ARK-Begleiter** | Interaktive Karte jeder ASA-Map, Höhlen & Artefakte, Bosse, Ressourcen, Wiki – und die Karte als Overlay im Spiel |
+| 🤖 | **KI-Assistent** | Fragen zu ARK auf Deutsch, die KI sucht selbst im Wiki und zeigt die Quellen. Läuft lokal (Ollama) oder über die KI eines Freundes |
 | 🎯 | **Zielen & Maus** | Input-Lag-Check, Empfindlichkeit zwischen Spielen umrechnen, Maus-Abtastrate messen |
 | 🌀 | **Lüfter** | Jeder Lüfter einzeln: Minimum, Temperaturkurve, fest oder BIOS – mit Sicherheitsmodus |
 | 🌈 | **Beleuchtung** | RGB für Mainboard, Lüfter-Hubs und Razer – ohne Zusatzprogramm, Farbabgleich pro Gerät, eigene Farbe beim Zocken |
@@ -33,6 +35,37 @@
 | 🖥️ | **Treiber** | Grafiktreiber (NVIDIA, AMD, Intel) und alle anderen Treiber prüfen und installieren |
 | 🎨 | **Design & Kacheln** | Akzentfarbe, Hell/Dunkel, Hintergrund, Live-Widgets auf dem Desktop |
 | 🚦 | **Autostart** | Zeigt bei jedem Programm, ob es aus kann oder an bleiben sollte |
+
+---
+
+## 🗺️ ARK-Begleiter & KI
+
+**Karte & Infos** – Seite *ARK*: Map oben auswählen (Astraeos, The Island, Scorched Earth, The Center, Aberration, Extinction, Ragnarok, Valguero, Lost Colony). Eigene Markierungen (Basis, Tames …) anlegen, Höhlen/Bosse/Ressourcen nachschlagen, Wiki direkt in der App – Werbung wird ausgeblendet.
+
+**Karte im Spiel** – ARK auf *Vollbild-Fenster* stellen, dann:
+
+| Taste | Funktion |
+|---|---|
+| `Strg + Alt + A` | Karte über dem Spiel ein/aus |
+| `Strg + Alt + J` | Karte durchklickbar ein/aus (Klicks gehen ans Spiel) |
+
+Position, Größe, Bildschirm, Durchsichtigkeit und Zoom stellst du im Tab *Karte im Spiel* ein (Schnellwahl: Minimap, Seitenleiste, groß). Die Karte ist ein normales Fenster – **es wird nichts aus dem Spiel gelesen oder eingeschleust** (BattlEye-sicher). Mit dem Schalter *Spiel-Anbindung* lässt sich alles abschalten.
+
+**KI-Assistent** – Tab *KI-Assistent*, zwei Möglichkeiten:
+
+- **Eigene KI:** [Ollama](https://ollama.com/download) installieren, in der App „Empfohlenes Modell laden“ (ca. 5 GB). Läuft komplett auf deinem PC, startet von selbst bei der ersten Frage und geht nach 10 Minuten ohne Frage in Standby (Grafikkarte & RAM wieder frei).
+- **KI eines Freundes:** *KI eines Freundes* wählen, den **Einladungs-Code** (`CCKI-…`) einfügen, *Verbinden* – fertig, dauerhaft. Kein Ollama, keine starke Grafikkarte nötig. Dort steht dann „KI läuft auf dem PC von …“.
+
+<details>
+<summary><b>Eigene KI für Freunde freigeben</b></summary>
+
+*KI-Assistent → Meine KI für Freunde freigeben* einschalten, Namen eintragen, Einladungs-Code kopieren und verschicken.
+
+- Verbindung übers Internet per **Cloudflare-Tunnel** (https, keine Router-Einstellung, deine IP bleibt verborgen). Die App lädt ihn beim ersten Mal selbst herunter.
+- Die aktuelle Tunnel-Adresse steht in [`ki-adresse.txt`](ki-adresse.txt) – die Apps der Freunde lesen sie dort automatisch, der Code bleibt also gültig.
+- Ohne den Schlüssel aus dem Code kommt niemand rein. Freunde können nur Fragen stellen – keine Modelle löschen, nichts ausschalten. *Neuen Code erzeugen* sperrt alle alten.
+- Die KI des Control Centers läuft als **eigene Ollama-Instanz** (Port 11436) – getrennt von einem Ollama, das du für andere Projekte nutzt.
+</details>
 
 ---
 
@@ -83,6 +116,12 @@ Meist läuft noch ein zweites RGB-Programm (Armoury Crate, iCUE, RGB Fusion / Gi
 <summary><b>Ist das Overlay / die FPS-Messung Anti-Cheat-sicher?</b></summary>
 
 Ja. Die FPS werden über eine offizielle Windows-Schnittstelle (ETW) gemessen – es wird nichts in Spiele eingeschleust. Es gibt in dieser App keine Cheats.
+</details>
+
+<details>
+<summary><b>Die KI findet nichts / antwortet falsch</b></summary>
+
+Die KI sucht zu jeder Frage passende Seiten im [ARK-Wiki](https://ark.wiki.gg) und zeigt sie unter der Antwort als Quellen. KI kann sich trotzdem irren – wichtige Dinge über die Quellen-Links prüfen. Frag möglichst konkret („Welcher Dino farmt am besten Metall?“ statt „Metall?“).
 </details>
 
 <details>

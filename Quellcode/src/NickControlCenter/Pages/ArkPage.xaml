@@ -16,14 +16,14 @@
                     </StackPanel>
                     <TextBlock Text="Karte, Höhlen, Bosse, Ressourcen, Wiki und KI an einem Ort" FontSize="18" FontWeight="SemiBold" Margin="0,6,0,0"/>
                     <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,0"
-                               Text="Im Spiel: ARK auf „Vollbild-Fenster“ (Windowed Fullscreen) stellen, dann Strg+Alt+K – die Karte mit KI-Frage liegt über dem Spiel. Die App liest nichts aus dem Spiel aus (BattlEye-sicher)."/>
+                               Text="Im Spiel: ARK auf „Vollbild-Fenster“ (Windowed Fullscreen) stellen, dann Strg+Alt+A – die Karte mit KI-Frage liegt über dem Spiel. Die App liest nichts aus dem Spiel aus (BattlEye-sicher)."/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top">
                     <Button x:Name="OverlayBtn" Style="{StaticResource AccentButton}" Padding="16,8" Click="Overlay_Click">
-                        <StackPanel Orientation="Horizontal"><TextBlock Text="&#xE707;" Style="{StaticResource Icon}" Margin="0,0,8,0"/><TextBlock Text="Karte über dem Spiel (Strg+Alt+K)" FontWeight="SemiBold"/></StackPanel>
+                        <StackPanel Orientation="Horizontal"><TextBlock Text="&#xE707;" Style="{StaticResource Icon}" Margin="0,0,8,0"/><TextBlock Text="Karte über dem Spiel (Strg+Alt+A)" FontWeight="SemiBold"/></StackPanel>
                     </Button>
                     <CheckBox x:Name="InGameBox" Style="{StaticResource ToggleSwitch}" Content="Spiel-Anbindung" Margin="0,8,0,0" HorizontalAlignment="Right"
-                              Click="InGame_Click" ToolTip="Aus = nichts erscheint im Spiel, Strg+Alt+K/J tun nichts"/>
+                              Click="InGame_Click" ToolTip="Aus = nichts erscheint im Spiel, Strg+Alt+A/J tun nichts"/>
                 </StackPanel>
             </Grid>
         </Border>
@@ -156,7 +156,7 @@
                                           ToolTip="Klicks gehen direkt ans Spiel – Strg+Alt+J schaltet um"/>
                             </WrapPanel>
                             <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,6,0,0"
-                                       Text="Kürzel: Strg+Alt+K Karte ein/aus · Strg+Alt+J durchklickbar ein/aus (änderbar unter Werkzeuge → Tastenkürzel)."/>
+                                       Text="Kürzel: Strg+Alt+A Karte ein/aus · Strg+Alt+J durchklickbar ein/aus (änderbar unter Werkzeuge → Tastenkürzel)."/>
                         </StackPanel>
                     </Border>
                 </Grid>

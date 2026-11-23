@@ -176,7 +176,7 @@ public static class ArkWeb
 /// <summary>
 /// ARK-Karte als Fenster über dem Spiel (Spiel im Modus „Vollbild-Fenster“ / „Windowed Fullscreen“). Liest nichts aus dem
 /// Spiel aus und schleust nichts ein – ist also für BattlEye nur ein normales Fenster. Durchsichtig, verschiebbar, auf Wunsch
-/// durchklickbar. Ein/aus: Strg+Alt+K, durchklickbar an/aus: Strg+Alt+J.
+/// durchklickbar. Ein/aus: Strg+Alt+A, durchklickbar an/aus: Strg+Alt+J.
 /// </summary>
 public sealed class ArkOverlayWindow : Window
 {
@@ -259,7 +259,7 @@ public sealed class ArkOverlayWindow : Window
 
         var accent = (Brush)Application.Current.FindResource("AccentBrush");
         var bar = new DockPanel { Background = new SolidColorBrush(Color.FromRgb(20, 24, 31)), Height = 30 };
-        var close = new Button { Content = "✕", Width = 30, Background = Brushes.Transparent, BorderThickness = new Thickness(0), Foreground = Brushes.White, ToolTip = "Ausblenden (Strg+Alt+K)" };
+        var close = new Button { Content = "✕", Width = 30, Background = Brushes.Transparent, BorderThickness = new Thickness(0), Foreground = Brushes.White, ToolTip = "Ausblenden (Strg+Alt+A)" };
         close.Click += (_, _) => Hide();
         DockPanel.SetDock(close, Dock.Right);
         var opacity = new Slider { Minimum = 0.3, Maximum = 1, Value = st.OverlayOpacity, Width = 90, VerticalAlignment = VerticalAlignment.Center, ToolTip = "Durchsichtigkeit", Margin = new Thickness(0, 0, 8, 0) };
@@ -270,7 +270,7 @@ public sealed class ArkOverlayWindow : Window
         ct.Click += (_, _) => SetClickThrough(ct.IsChecked == true);
         _ctBox = ct;
         DockPanel.SetDock(ct, Dock.Right);
-        var title = new TextBlock { Text = $"ARK · {st.Map}  (Strg+Alt+K)", Foreground = accent, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
+        var title = new TextBlock { Text = $"ARK · {st.Map}  (Strg+Alt+A)", Foreground = accent, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
         bar.Children.Add(close); bar.Children.Add(opacity); bar.Children.Add(ct); bar.Children.Add(title);
         bar.MouseLeftButtonDown += (_, e) =>
         {
@@ -307,14 +307,15 @@ public sealed class ArkOverlayWindow : Window
     {
         var q = _ask.Text.Trim();
         if (q.Length == 0) return;
+        _ask.Text = "";   // Feld leeren – gleich die nächste Frage tippen
         var model = ArkWeb.Settings.Model;
         if (string.IsNullOrEmpty(model)) { SetAnswer("Erst in der App unter ARK → KI-Assistent ein Modell wählen."); return; }
         _cts?.Cancel(); _cts = new CancellationTokenSource();
-        var sb = new System.Text.StringBuilder();
-        SetAnswer("");
+        var sb = new System.Text.StringBuilder($"*„{q}“*\n\n");
+        SetAnswer(sb.ToString());
         try
         {
-            await ArkAi.AskAsync(model, q, t => Dispatcher.Invoke(() => { sb.Append(t); SetAnswer(sb.ToString()); }), s => Dispatcher.Invoke(() => { if (sb.Length == 0) SetAnswer("*" + s + "*"); }), _cts.Token);
+            await ArkAi.AskAsync(model, q, t => Dispatcher.Invoke(() => { sb.Append(t); SetAnswer(sb.ToString()); }), s => Dispatcher.Invoke(() => SetAnswer(sb + "*" + s + "*")), _cts.Token);
         }
         catch (OperationCanceledException) { }
         catch (Exception ex) { SetAnswer("**KI nicht erreichbar:** " + ex.Message); }

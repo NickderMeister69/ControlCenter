@@ -27,7 +27,7 @@ public static class AiShare
     private const string RuleName = "ControlCenter KI-Freigabe";
     private static HttpListener? _listener;
     private static readonly HttpClient Ollama = new() { Timeout = TimeSpan.FromMinutes(10) };
-    private static readonly SemaphoreSlim Gate = new(2);
+    private static readonly SemaphoreSlim Gate = new(8);   // mehrere Freunde gleichzeitig – wer zuerst kommt, malt zuerst
     public static int Requests { get; private set; }
     public static string? LastError { get; private set; }
     public static bool Running => _listener?.IsListening == true;
@@ -107,7 +107,10 @@ public static class AiShare
             if (!allowed) { res.StatusCode = 403; res.Close(); return; }
             if (req.ContentLength64 > 512 * 1024) { res.StatusCode = 413; res.Close(); return; }
 
-            if (!await Gate.WaitAsync(TimeSpan.FromSeconds(60))) { res.StatusCode = 503; res.Close(); return; }
+            if (!ArkAi.OwnServerRunning && !await ArkAi.EnsureRunningAsync())
+            { await Reply(res, 503, $"Die KI auf dem PC von {ShareName()} ist gerade aus."); return; }
+            if (!await Gate.WaitAsync(TimeSpan.FromSeconds(90))) { await Reply(res, 503, "Gerade fragen zu viele gleichzeitig – kurz warten."); return; }
+            ArkAi.BeginUse();
             try
             {
                 using var fwd = new HttpRequestMessage(new HttpMethod(req.HttpMethod), ArkAi.LocalOllama + path);
@@ -127,7 +130,7 @@ public static class AiShare
                 var buf = new byte[8192]; int n;
                 while ((n = await src.ReadAsync(buf)) > 0) { await res.OutputStream.WriteAsync(buf.AsMemory(0, n)); await res.OutputStream.FlushAsync(); }
             }
-            finally { Gate.Release(); }
+            finally { Gate.Release(); ArkAi.EndUse(); }
             res.Close();
         }
         catch (Exception ex)
@@ -135,6 +138,13 @@ public static class AiShare
             try { res.StatusCode = 502; res.Close(); } catch { }
             LastError = ex.Message;
         }
+    }
+
+    private static async Task Reply(HttpListenerResponse res, int code, string message)
+    {
+        res.StatusCode = code; res.ContentType = "application/json";
+        var b = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(new { error = message }));
+        await res.OutputStream.WriteAsync(b); res.Close();
     }
 
     // ---------- Cloudflare-Tunnel ----------

@@ -62,7 +62,7 @@ public sealed class HotkeyService
         ("screenoff", "Bildschirm aus", "Schaltet die Monitore aus (Maus bewegen schaltet wieder ein) – z. B. bei langen Downloads.", 2 | 1, 0x4D, true),     // Strg+Alt+M
         ("open", "Control Center öffnen", "Holt das Fenster nach vorne.", 2 | 1, 0x43, true),                                                               // Strg+Alt+C
         ("shot", "Leistungswerte merken", "Schreibt die aktuellen Werte (FPS, Temperaturen, Takt, Watt) ins Protokoll – praktisch bei Rucklern.", 2 | 1, 0x4E, false), // Strg+Alt+N
-        ("arkmap", "ARK-Karte ein/aus", "Blendet die ARK-Karte mit KI-Frage über dem Spiel ein (Spiel im Vollbild-Fenster-Modus).", 2 | 1, 0x4B, true),       // Strg+Alt+K
+        ("arkmap", "ARK-Karte ein/aus", "Blendet die ARK-Karte mit KI-Frage über dem Spiel ein (Spiel im Vollbild-Fenster-Modus).", 2 | 1, 0x41, true),       // Strg+Alt+A (K ist bei Nick schon vom ki-tor belegt)
         ("arkclick", "ARK-Karte durchklickbar", "Klicks gehen durch die ARK-Karte ans Spiel – nochmal drücken zum Bedienen.", 2 | 1, 0x4A, true),            // Strg+Alt+J
     };
 
@@ -72,6 +72,7 @@ public sealed class HotkeyService
         {
             var def = Settings.Keys.FirstOrDefault(k => k.Action == d.Id);
             if (def == null) { def = new HotkeyDef { Action = d.Id, Enabled = d.On, Mods = d.Mods, Vk = d.Vk }; Settings.Keys.Add(def); }
+            else if (d.Id == "arkmap" && def.Mods == 3 && def.Vk == 0x4B) def.Vk = 0x41;   // alte Vorgabe Strg+Alt+A → Strg+Alt+A
             Items.Add(new HotkeyVM(def, d.Title, d.Desc));
         }
     }
