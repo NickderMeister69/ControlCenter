@@ -10,8 +10,11 @@
         <Border Style="{StaticResource AccentCard}" Margin="0,0,12,10">
             <Grid>
                 <StackPanel Margin="0,0,300,0">
-                    <TextBlock Text="ARK: SURVIVAL ASCENDED · ASTRAEOS" Style="{StaticResource Kicker}"/>
-                    <TextBlock Text="Karte, Höhlen, Bosse, Ressourcen, Wiki und KI an einem Ort" FontSize="18" FontWeight="SemiBold"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="ARK: SURVIVAL ASCENDED · MAP" Style="{StaticResource Kicker}" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="MapBox" Width="170" Margin="10,0,0,0" SelectionChanged="Map_Changed"/>
+                    </StackPanel>
+                    <TextBlock Text="Karte, Höhlen, Bosse, Ressourcen, Wiki und KI an einem Ort" FontSize="18" FontWeight="SemiBold" Margin="0,6,0,0"/>
                     <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,4,0,0"
                                Text="Im Spiel: ARK auf „Vollbild-Fenster“ (Windowed Fullscreen) stellen, dann Strg+Alt+K – die Karte mit KI-Frage liegt über dem Spiel. Die App liest nichts aus dem Spiel aus (BattlEye-sicher)."/>
                 </StackPanel>
@@ -26,6 +29,7 @@
         </Border>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="2,0,0,8">
             <RadioButton Style="{StaticResource Tab}" Content="Karte" GroupName="AT" IsChecked="True" Checked="Tab_Checked" Tag="Map"/>
+            <RadioButton Style="{StaticResource Tab}" Content="Karte im Spiel" GroupName="AT" Checked="Tab_Checked" Tag="Ov"/>
             <RadioButton Style="{StaticResource Tab}" Content="Höhlen &amp; Artefakte" GroupName="AT" Checked="Tab_Checked" Tag="Caves"/>
             <RadioButton Style="{StaticResource Tab}" Content="Bosse" GroupName="AT" Checked="Tab_Checked" Tag="Bosses"/>
             <RadioButton Style="{StaticResource Tab}" Content="Ressourcen &amp; Orte" GroupName="AT" Checked="Tab_Checked" Tag="Res"/>
@@ -65,9 +69,106 @@
             </Border>
         </Grid>
 
+
+        <!-- Karte im Spiel: Einstellungen -->
+        <ScrollViewer x:Name="TabOv" Grid.Row="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="0,0,12,0" MaxWidth="980" HorizontalAlignment="Left">
+                <Border Style="{StaticResource Card}" Margin="0,0,0,10">
+                    <Grid>
+                        <StackPanel Margin="0,0,280,0">
+                            <TextBlock Text="SCHNELLWAHL" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Muted}" FontSize="12" TextWrapping="Wrap" Text="Alles wirkt sofort auf die offene Karte – am besten „Anzeigen“ drücken und dabei einstellen. Ziehst du die Karte im Spiel an der Titelleiste woanders hin, merkt sie sich diese Stelle („Frei“)."/>
+                            <WrapPanel Margin="0,10,0,0">
+                                <Button Content="Minimap (klein, Ecke, durchklickbar)" Tag="mini" Click="Preset_Click" Padding="10,5" Margin="0,0,8,6"/>
+                                <Button Content="Seitenleiste (rechts, hoch)" Tag="side" Click="Preset_Click" Padding="10,5" Margin="0,0,8,6"/>
+                                <Button Content="Groß zum Planen (Mitte)" Tag="big" Click="Preset_Click" Padding="10,5" Margin="0,0,8,6"/>
+                                <Button Content="Zurücksetzen" Tag="reset" Click="Preset_Click" Padding="10,5" Margin="0,0,8,6"/>
+                            </WrapPanel>
+                        </StackPanel>
+                        <Button x:Name="OvShowBtn" Style="{StaticResource AccentButton}" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="16,8" Click="Overlay_Click" Content="Karte anzeigen"/>
+                    </Grid>
+                </Border>
+                <Grid>
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="300"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                    <Border Style="{StaticResource Card}" Margin="0,0,10,0">
+                        <StackPanel>
+                            <TextBlock Text="WO" Style="{StaticResource Kicker}"/>
+                            <TextBlock Style="{StaticResource Muted}" FontSize="12" Text="Stelle auf dem Bildschirm anklicken:" Margin="0,0,0,6"/>
+                            <Border BorderBrush="{StaticResource LineStrongBrush}" BorderThickness="2" CornerRadius="6" Padding="6" HorizontalAlignment="Left" Background="{StaticResource PanelAltBrush}">
+                                <Grid x:Name="SpotGrid" Width="220" Height="124">
+                                    <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition/><ColumnDefinition/></Grid.ColumnDefinitions>
+                                    <Button Grid.Row="0" Grid.Column="0" Tag="Oben links" Click="Spot_Click" Width="34" Height="22" Margin="4" Padding="0" ToolTip="Oben links"/>
+                                    <Button Grid.Row="0" Grid.Column="2" Tag="Oben rechts" Click="Spot_Click" Width="34" Height="22" Margin="4" Padding="0" ToolTip="Oben rechts"/>
+                                    <Button Grid.Row="1" Grid.Column="0" Tag="Mitte links" Click="Spot_Click" Width="34" Height="22" Margin="4" Padding="0" ToolTip="Mitte links"/>
+                                    <Button Grid.Row="1" Grid.Column="1" Tag="Mitte" Click="Spot_Click" Width="34" Height="22" Margin="4" Padding="0" ToolTip="Mitte"/>
+                                    <Button Grid.Row="1" Grid.Column="2" Tag="Mitte rechts" Click="Spot_Click" Width="34" Height="22" Margin="4" Padding="0" ToolTip="Mitte rechts"/>
+                                    <Button Grid.Row="2" Grid.Column="0" Tag="Unten links" Click="Spot_Click" Width="34" Height="22" Margin="4" Padding="0" ToolTip="Unten links"/>
+                                    <Button Grid.Row="2" Grid.Column="2" Tag="Unten rechts" Click="Spot_Click" Width="34" Height="22" Margin="4" Padding="0" ToolTip="Unten rechts"/>
+                                </Grid>
+                            </Border>
+                            <TextBlock x:Name="SpotText" Margin="0,6,0,10" FontWeight="SemiBold"/>
+                            <TextBlock Text="Bildschirm" Margin="0,0,0,4"/>
+                            <ComboBox x:Name="MonitorBox" SelectionChanged="Ov_Changed" Margin="0,0,0,10"/>
+                            <CheckBox x:Name="OvFree" Style="{StaticResource ToggleSwitch}" Content="Frei (wo ich sie hinziehe)" Click="OvFree_Click"/>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" Style="{StaticResource Card}">
+                        <StackPanel>
+                            <TextBlock Text="WIE" Style="{StaticResource Kicker}" Margin="0,0,0,8"/>
+                            <Grid Margin="0,0,0,10" ToolTip="">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Breite" VerticalAlignment="Center"/>
+                                <Slider x:Name="OvW" Grid.Column="1" Minimum="220" Maximum="1600" VerticalAlignment="Center" ValueChanged="Ov_Changed"/>
+                                <TextBlock x:Name="OvWVal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NumFont}"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,10" ToolTip="">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Höhe" VerticalAlignment="Center"/>
+                                <Slider x:Name="OvH" Grid.Column="1" Minimum="200" Maximum="1200" VerticalAlignment="Center" ValueChanged="Ov_Changed"/>
+                                <TextBlock x:Name="OvHVal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NumFont}"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,10" ToolTip="Nur bei fester Ecke">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Abstand zum Rand" VerticalAlignment="Center"/>
+                                <Slider x:Name="OvM" Grid.Column="1" Minimum="0" Maximum="200" VerticalAlignment="Center" ValueChanged="Ov_Changed"/>
+                                <TextBlock x:Name="OvMVal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NumFont}"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,10" ToolTip="Wie stark die Karte deckt – weniger = Spiel scheint durch">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Sichtbarkeit" VerticalAlignment="Center"/>
+                                <Slider x:Name="OvO" Grid.Column="1" Minimum="30" Maximum="100" VerticalAlignment="Center" ValueChanged="Ov_Changed"/>
+                                <TextBlock x:Name="OvOVal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NumFont}"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,10" ToolTip="Vergrößert/verkleinert die Karte im Fenster">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="150"/><ColumnDefinition/><ColumnDefinition Width="70"/></Grid.ColumnDefinitions>
+                                <TextBlock Text="Karten-Zoom" VerticalAlignment="Center"/>
+                                <Slider x:Name="OvZ" Grid.Column="1" Minimum="40" Maximum="200" VerticalAlignment="Center" ValueChanged="Ov_Changed"/>
+                                <TextBlock x:Name="OvZVal" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" FontFamily="{StaticResource NumFont}"/>
+                            </Grid>
+
+                            <WrapPanel Margin="0,4,0,0">
+                                <CheckBox x:Name="OvMarkers" Style="{StaticResource ToggleSwitch}" Content="Meine Markierungen zeigen" Click="Ov_Changed" Margin="0,0,24,8"/>
+                                <CheckBox x:Name="OvAsk" Style="{StaticResource ToggleSwitch}" Content="KI-Fragefeld zeigen" Click="Ov_Changed" Margin="0,0,24,8"/>
+                                <CheckBox x:Name="OvAds" Style="{StaticResource ToggleSwitch}" Content="Werbung auf Karte/Wiki ausblenden" Click="Ads_Click" Margin="0,0,24,8"
+                                          ToolTip="Falls eine Seite nicht richtig lädt: ausschalten"/>
+                                <CheckBox x:Name="OvClick" Style="{StaticResource ToggleSwitch}" Content="Beim Öffnen durchklickbar" Click="Ov_Changed" Margin="0,0,24,8"
+                                          ToolTip="Klicks gehen direkt ans Spiel – Strg+Alt+J schaltet um"/>
+                            </WrapPanel>
+                            <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,6,0,0"
+                                       Text="Kürzel: Strg+Alt+K Karte ein/aus · Strg+Alt+J durchklickbar ein/aus (änderbar unter Werkzeuge → Tastenkürzel)."/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+
         <!-- Höhlen -->
         <ScrollViewer x:Name="TabCaves" Grid.Row="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,12,0">
+                <Border x:Name="DataNote1" Background="{StaticResource WarnSoftBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,8" Visibility="Collapsed">
+                    <TextBlock TextWrapping="Wrap" FontSize="12.5" Text="Diese Liste gibt es bisher nur für Astraeos. Für deine Map: Tab „Karte“ (Höhlen, Ressourcen, Bosse sind dort eingezeichnet), „Wiki“ oder den KI-Assistenten fragen."/>
+                </Border>
                 <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,0,0,8" x:Name="CaveSource"/>
                 <ItemsControl x:Name="CaveList">
                     <ItemsControl.ItemTemplate>
@@ -95,6 +196,9 @@
         <!-- Bosse -->
         <ScrollViewer x:Name="TabBosses" Grid.Row="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,12,0">
+                <Border x:Name="DataNote2" Background="{StaticResource WarnSoftBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,8" Visibility="Collapsed">
+                    <TextBlock TextWrapping="Wrap" FontSize="12.5" Text="Diese Liste gibt es bisher nur für Astraeos. Für deine Map: Tab „Karte“ (Höhlen, Ressourcen, Bosse sind dort eingezeichnet), „Wiki“ oder den KI-Assistenten fragen."/>
+                </Border>
                 <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,0,0,8"
                            Text="Benötigte Tribute je Schwierigkeit (Gamma/Beta/Alpha) stehen in keiner geprüften Quelle – dafür „Im Wiki öffnen“ oder den KI-Assistenten fragen."/>
                 <ItemsControl x:Name="BossList">
@@ -124,6 +228,9 @@
         <!-- Ressourcen -->
         <ScrollViewer x:Name="TabRes" Grid.Row="2" Visibility="Collapsed" VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="0,0,12,0">
+                <Border x:Name="DataNote3" Background="{StaticResource WarnSoftBrush}" CornerRadius="6" Padding="10,6" Margin="0,0,0,8" Visibility="Collapsed">
+                    <TextBlock TextWrapping="Wrap" FontSize="12.5" Text="Diese Liste gibt es bisher nur für Astraeos. Für deine Map: Tab „Karte“ (Höhlen, Ressourcen, Bosse sind dort eingezeichnet), „Wiki“ oder den KI-Assistenten fragen."/>
+                </Border>
                 <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,0,0,8" Text="Aus einem Community-Guide – die Reihenfolge der Koordinaten ist dort nicht angegeben (vermutlich Breite / Länge). Vollständige Ressourcen-Karte: Tab „Karte“."/>
                 <ItemsControl x:Name="ResList">
                     <ItemsControl.ItemTemplate>
@@ -175,28 +282,65 @@
         <!-- KI -->
         <Grid x:Name="TabAi" Grid.Row="2" Visibility="Collapsed" Margin="0,0,12,0">
             <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-            <Border Style="{StaticResource Card}">
-                <StackPanel>
-                    <TextBlock Text="LOKALE KI (OLLAMA)" Style="{StaticResource Kicker}"/>
-                    <TextBlock x:Name="AiState" Text="Prüfe …" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"/>
-                    <WrapPanel Margin="0,8,0,0">
-                        <TextBlock Text="Modell:" VerticalAlignment="Center" Margin="0,0,8,6"/>
-                        <ComboBox x:Name="ModelBox" Width="220" Margin="0,0,8,6" SelectionChanged="Model_Changed"/>
-                        <Button x:Name="PullBtn" Content="Empfohlenes Modell laden (qwen2.5:7b, ≈ 4,7 GB)" Click="Pull_Click" Padding="10,4" Margin="0,0,8,6"/>
-                        <Button x:Name="StartOllama" Content="Ollama starten" Click="StartOllama_Click" Padding="10,4" Margin="0,0,8,6"/>
-                    </WrapPanel>
-                    <ProgressBar x:Name="PullBar" Height="6" Maximum="100" Visibility="Collapsed"/>
-                    <TextBlock Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap" Margin="0,4,0,0"
-                               Text="Läuft komplett auf deinem PC (RTX 4060: Antworten in wenigen Sekunden). Für jede Frage sucht die App passende Seiten im ARK-Wiki und gibt sie der KI mit – die Quellen stehen unter der Antwort. KI kann sich irren: wichtige Dinge über die Quellen prüfen."/>
-                </StackPanel>
-            </Border>
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="10"/><ColumnDefinition Width="380"/></Grid.ColumnDefinitions>
+                <Border Style="{StaticResource Card}">
+                    <StackPanel>
+                        <TextBlock Text="WOHER KOMMT DIE KI?" Style="{StaticResource Kicker}"/>
+                        <WrapPanel Margin="0,2,0,6">
+                            <RadioButton x:Name="AiLocal" GroupName="AiSrc" Content="Eigene KI (Ollama auf diesem PC)" Margin="0,0,18,4" Click="AiMode_Click" Foreground="{StaticResource TextBrush}"/>
+                            <RadioButton x:Name="AiFriend" GroupName="AiSrc" Content="KI eines Freundes (Einladungs-Code)" Margin="0,0,0,4" Click="AiMode_Click" Foreground="{StaticResource TextBrush}"/>
+                        </WrapPanel>
+                        <Grid x:Name="FriendRow" Margin="0,0,0,6" Visibility="Collapsed">
+                            <TextBox x:Name="InviteBox" Padding="6,4" Margin="0,0,100,0" ToolTip="Einladungs-Code vom Freund einfügen (beginnt mit CCKI-)"/>
+                            <Button Content="Verbinden" HorizontalAlignment="Right" Width="92" Click="Connect_Click"/>
+                        </Grid>
+                        <TextBlock x:Name="AiState" Text="Prüfe …" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                        <WrapPanel Margin="0,8,0,0">
+                            <TextBlock Text="Modell:" VerticalAlignment="Center" Margin="0,0,8,6"/>
+                            <ComboBox x:Name="ModelBox" Width="200" Margin="0,0,8,6" SelectionChanged="Model_Changed"/>
+                            <Button x:Name="PullBtn" Content="Empfohlenes Modell laden (qwen2.5:7b, ≈ 4,7 GB)" Click="Pull_Click" Padding="10,4" Margin="0,0,8,6"/>
+                            <Button x:Name="StartOllama" Content="Ollama starten" Click="StartOllama_Click" Padding="10,4" Margin="0,0,8,6"/>
+                            <Button x:Name="GetOllama" Content="Ollama herunterladen" Click="GetOllama_Click" Padding="10,4" Margin="0,0,8,6" Visibility="Collapsed"/>
+                        </WrapPanel>
+                        <ProgressBar x:Name="PullBar" Height="6" Maximum="100" Visibility="Collapsed"/>
+                        <TextBlock x:Name="AiHint" Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Style="{StaticResource Card}">
+                    <StackPanel>
+                        <Grid>
+                            <TextBlock Text="MEINE KI FÜR FREUNDE FREIGEBEN" Style="{StaticResource Kicker}"/>
+                            <CheckBox x:Name="ShareToggle" Style="{StaticResource ToggleSwitch}" HorizontalAlignment="Right" Click="Share_Click"/>
+                        </Grid>
+                        <TextBlock Style="{StaticResource Muted}" FontSize="11.5" TextWrapping="Wrap"
+                                   Text="Freunde ohne starke Grafikkarte nutzen dann deine KI. Bei ihnen steht „KI läuft auf dem PC von …“. Dein PC und die App müssen dafür an sein."/>
+                        <StackPanel x:Name="SharePanel" Margin="0,8,0,0">
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="Angezeigter Name" VerticalAlignment="Center"/>
+                                <TextBox x:Name="ShareNameBox" Padding="6,3" Margin="120,0,0,0" LostFocus="ShareName_LostFocus"/>
+                            </Grid>
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="Erreichbar über" VerticalAlignment="Center"/>
+                                <ComboBox x:Name="AddrBox" Margin="120,0,0,0" SelectionChanged="Addr_Changed"/>
+                            </Grid>
+                            <Grid>
+                                <TextBox x:Name="CodeBox" IsReadOnly="True" Padding="6,3" Margin="0,0,78,0" FontFamily="{StaticResource MonoFont}" FontSize="11"/>
+                                <Button Content="Kopieren" HorizontalAlignment="Right" Width="72" Click="CopyCode_Click"/>
+                            </Grid>
+                            <TextBlock x:Name="ShareState" Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,6,0,0"/>
+                            <Button Content="Neuen Code erzeugen (alte gelten nicht mehr)" Click="NewKey_Click" HorizontalAlignment="Left" Padding="8,2" FontSize="11.5" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
             <Grid Grid.Row="1" Margin="0,0,0,8">
                 <TextBox x:Name="Question" Padding="8,6" Margin="0,0,100,0" FontSize="13.5" KeyDown="Question_KeyDown" ToolTip="z. B. „Was brauche ich für Thodes Gamma?“ – Enter zum Senden"/>
                 <Button x:Name="AskBtn" Style="{StaticResource AccentButton}" Content="Fragen" HorizontalAlignment="Right" Width="92" Click="Ask_Click"/>
             </Grid>
             <Border Grid.Row="2" Style="{StaticResource SubCard}" Padding="12">
                 <TextBox x:Name="Answer" IsReadOnly="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Background="Transparent" BorderThickness="0" FontSize="13.5"
-                         Foreground="{StaticResource TextBrush}" Text="Frag etwas zu ARK – z. B. „Wo finde ich auf Astraeos Metall?“, „Welche Dinos für Natrix?“, „Wie zähme ich einen Maeguana?“"/>
+                         Foreground="{StaticResource TextBrush}" Text="Frag etwas zu ARK – z. B. „Wo finde ich Metall?“, „Was brauche ich für den Broodmother-Kampf?“, „Wie zähme ich einen Rex?“"/>
             </Border>
             <WrapPanel x:Name="Sources" Grid.Row="3" Margin="0,6,0,0"/>
         </Grid>

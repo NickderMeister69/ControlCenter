@@ -9,13 +9,26 @@ using System.Text.RegularExpressions;
 namespace NickControlCenter;
 
 /// <summary>
-/// Lokale KI für ARK-Fragen: Ollama (läuft auf deinem PC, nichts geht an fremde KI-Server). Für jede Frage sucht die App
+/// KI für ARK-Fragen über Ollama – entweder auf dem eigenen PC oder auf dem PC eines Freundes, der seine KI freigegeben hat
+/// (siehe <see cref="AiShare"/>). Nichts geht an fremde KI-Firmen. Für jede Frage sucht die App
 /// passende Seiten im ARK-Wiki (ark.wiki.gg) und gibt sie zusammen mit den Astraeos-Daten als Wissen mit – so antwortet
 /// das Modell mit echten Infos statt zu raten, und die Quellen werden angezeigt.
 /// </summary>
 public static class ArkAi
 {
-    public const string Ollama = "http://localhost:11434";
+    public const string LocalOllama = "http://localhost:11434";
+    /// <summary>true = die KI eines Freundes wird benutzt (Einladungs-Code).</summary>
+    public static bool UsesFriend => ArkWeb.Settings.AiMode == "friend" && !string.IsNullOrEmpty(ArkWeb.Settings.FriendUrl);
+    private static string Ollama => UsesFriend ? ArkWeb.Settings.FriendUrl!.TrimEnd('/') : LocalOllama;
+    /// <summary>Wo die KI läuft – für die Anzeige.</summary>
+    public static string WhereText => UsesFriend ? $"KI läuft auf dem PC von {ArkWeb.Settings.FriendName}" : "KI läuft auf deinem PC";
+
+    private static HttpRequestMessage Req(HttpMethod m, string path, HttpContent? body = null)
+    {
+        var r = new HttpRequestMessage(m, Ollama + path) { Content = body };
+        if (UsesFriend && !string.IsNullOrEmpty(ArkWeb.Settings.FriendToken)) r.Headers.Add(AiShare.TokenHeader, ArkWeb.Settings.FriendToken);
+        return r;
+    }
     public const string Recommended = "qwen2.5:7b";
     private static readonly HttpClient Http = new() { Timeout = TimeSpan.FromMinutes(10) };
     private static readonly HttpClient Web = Create();
@@ -31,7 +44,10 @@ public static class ArkAi
     {
         try
         {
-            var json = await Http.GetStringAsync(Ollama + "/api/tags");
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(UsesFriend ? 8 : 4));
+            using var resp = await Http.SendAsync(Req(HttpMethod.Get, "/api/tags"), cts.Token);
+            resp.EnsureSuccessStatusCode();
+            var json = await resp.Content.ReadAsStringAsync(cts.Token);
             using var d = JsonDocument.Parse(json);
             return d.RootElement.GetProperty("models").EnumerateArray().Select(m => m.GetProperty("name").GetString() ?? "").Where(n => n.Length > 0).ToList();
         }
@@ -52,6 +68,7 @@ public static class ArkAi
     public static async Task<bool> EnsureRunningAsync()
     {
         if (await ModelsAsync() != null) return true;
+        if (UsesFriend) return false;
         var exe = OllamaExe();
         if (exe == null) return false;
         Env.OpenAsUser(exe);
@@ -68,7 +85,8 @@ public static class ArkAi
     /// <summary>Modell herunterladen (Fortschritt 0–100).</summary>
     public static async Task<bool> PullAsync(string model, IProgress<(double Percent, string Text)> progress, CancellationToken ct)
     {
-        using var req = new HttpRequestMessage(HttpMethod.Post, Ollama + "/api/pull") { Content = new StringContent(JsonSerializer.Serialize(new { name = model, stream = true }), Encoding.UTF8, "application/json") };
+        if (UsesFriend) throw new InvalidOperationException("Modelle laden geht nur bei deiner eigenen KI.");
+        using var req = new HttpRequestMessage(HttpMethod.Post, LocalOllama + "/api/pull") { Content = new StringContent(JsonSerializer.Serialize(new { name = model, stream = true }), Encoding.UTF8, "application/json") };
         using var resp = await Http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);
         resp.EnsureSuccessStatusCode();
         using var sr = new StreamReader(await resp.Content.ReadAsStreamAsync(ct));
@@ -145,9 +163,9 @@ public static class ArkAi
         if (wiki.Count == 0 && search != question) wiki = await WikiAsync(question, ct);
         onStatus(wiki.Count > 0 ? $"{wiki.Count} Wiki-Seiten gefunden – KI antwortet …" : "Nichts im Wiki gefunden – KI antwortet mit eigenem Wissen …");
         var ctx = new StringBuilder();
-        ctx.AppendLine("EIGENE DATEN (Map Astraeos):").AppendLine(ArkData.AsContext());
+        if (ArkWeb.Settings.Map == ArkData.MapName) ctx.AppendLine("EIGENE DATEN (Map Astraeos):").AppendLine(ArkData.AsContext());
         foreach (var (src, text) in wiki) ctx.AppendLine($"WIKI-SEITE „{src.Title}“:").AppendLine(text).AppendLine();
-        var system = "Du bist ein hilfreicher Experte für ARK: Survival Ascended. Der Spieler spielt hauptsächlich auf der Map Astraeos (offizielle Server, bald eigener Server). " +
+        var system = $"Du bist ein hilfreicher Experte für ARK: Survival Ascended. Der Spieler spielt gerade auf der Map {ArkWeb.Settings.Map}. " +
                      "Antworte auf Deutsch, kurz und praktisch (Stichpunkte erlaubt). Nutze vor allem das folgende Wissen. Wenn etwas dort nicht steht und du unsicher bist, sag das ehrlich statt zu raten. " +
                      "Koordinaten immer als Breite / Länge angeben.\n\n" + ctx;
         await ChatAsync(model, new[] { ("system", system), ("user", question) }, onToken, ct);
@@ -162,7 +180,7 @@ public static class ArkAi
             messages = msgs.Select(m => new { role = m.Role, content = m.Content }),
             options = new { temperature = 0.3, num_ctx = 8192 }
         });
-        using var req = new HttpRequestMessage(HttpMethod.Post, Ollama + "/api/chat") { Content = new StringContent(body, Encoding.UTF8, "application/json") };
+        using var req = Req(HttpMethod.Post, "/api/chat", new StringContent(body, Encoding.UTF8, "application/json"));
         using var resp = await Http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead, ct);
         resp.EnsureSuccessStatusCode();
         if (onToken == null)

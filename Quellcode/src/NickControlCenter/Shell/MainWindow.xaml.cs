@@ -26,7 +26,7 @@ public partial class MainWindow : Window
             ["Lüfter"] = new("Lüfter", "Jeder Lüfter einzeln: Minimum, Temperaturkurve, fest oder BIOS. Mit Sicherheitsmodus.", () => new FansPage()),
             ["Beleuchtung"] = new("Beleuchtung", "RGB für Mainboard, Lüfter-Hubs und Razer – ohne Zusatzprogramm.", () => new RgbPage()),
             ["Tweaker"] = new("Tweaker", "CPU und Grafikkarte feinjustieren – Intel, AMD und NVIDIA, mit Sicherheitsrückfrage.", () => new TweakerPage()),
-            ["ARK"] = new("ARK", "ARK: Survival Ascended (Astraeos) – Karte, Höhlen, Bosse, Ressourcen, Wiki, lokale KI und Karte als Overlay im Spiel.", () => new ArkPage()),
+            ["ARK"] = new("ARK", "ARK: Survival Ascended – Karte jeder Map, Höhlen, Bosse, Ressourcen, Wiki, KI (eigene oder die eines Freundes) und Karte als Overlay im Spiel.", () => new ArkPage()),
             ["Stresstest"] = new("Stresstest", "CPU, Grafikkarte (jeder Hersteller) und Arbeitsspeicher auf Stabilität prüfen.", () => new StressPage()),
             ["Design & Farben"] = new("Design & Farben", "Akzentfarbe, Hell/Dunkel, Hintergrundbild, Taskleiste, Startmenü und Explorer anpassen.", () => new CustomizePage()),
             ["Desktop-Kacheln"] = new("Desktop-Kacheln", "Live-Widgets auf dem Desktop: Uhr, Systemwerte, Netzwerk, Apps, Notizen und mehr.", () => new TilesPage()),
@@ -166,7 +166,7 @@ public partial class MainWindow : Window
     /// <summary>Zusätzliche Suchwörter je Seite (was man dort findet).</summary>
     private static readonly Dictionary<string, string> Keywords = new()
     {
-        ["ARK"] = "ark survival ascended astraeos karte map minimap overlay höhle höhlen cave artefakt boss bosse thodes natrix hydraskos manticore dino dinos zähmen tame ressourcen metall kristall öl obsidian wiki ki ai ollama frage assistent",
+        ["ARK"] = "ark survival ascended astraeos karte map minimap overlay höhle höhlen cave artefakt boss bosse thodes natrix hydraskos manticore dino dinos zähmen tame ressourcen metall kristall öl obsidian wiki ki ai ollama frage assistent freund freigeben teilen einladung code tailscale island scorched center aberration extinction ragnarok valguero werbung",
         ["Dashboard"] = "übersicht start home strom kosten kwh stromverbrauch stromkosten euro watt schnellaktionen",
         ["Monitor"] = "overlay fps bilder pro sekunde frames temperatur temp grad hitze heiß warm sensoren cpu prozessor gpu grafikkarte auslastung last aufzeichnung csv hz hertz monitor bildwiederholrate frametime watt verlauf ram arbeitsspeicher spannung",
         ["FPS-Boost"] = "boost schneller ruckeln lag laggy performance leistung spiele game gaming zocken ark spielprofil grafik grafikeinstellungen unreal konsole konsolenbefehle befehle startoptionen ram arbeitsspeicher tweaks timer valorant fortnite cs2 steam epic feineinstellungen auto-boost schatten wolken nebel texturen",

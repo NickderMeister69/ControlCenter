@@ -161,6 +161,7 @@ public partial class App : Application
         Services.Tiles.Start();
         _ = Services.Drivers.CheckAsync(silent: true);
         try { HotkeyService.Instance.Start(); } catch (Exception ex) { Log.Warn(LogModule.App, "Tastenkürzel: " + ex.Message); }
+        try { AiShare.StartIfEnabled(); } catch (Exception ex) { Log.Warn(LogModule.App, "KI-Freigabe: " + ex.Message); }
         var weekly = new DispatcherTimer { Interval = TimeSpan.FromMinutes(30) };
         weekly.Tick += (_, _) => AutoSortDownloads();
         weekly.Start();

@@ -29,15 +29,55 @@ public sealed class ArkSettings
     public double OverlayTop { get; set; } = double.NaN;
     public double OverlayWidth { get; set; } = 520;
     public double OverlayHeight { get; set; } = 620;
+    /// <summary>Wo die Karte im Spiel erscheint: Frei, Oben links, Oben rechts, Unten links, Unten rechts, Mitte links, Mitte rechts, Mitte.</summary>
+    public string Corner { get; set; } = "Oben rechts";
+    /// <summary>-1 = Hauptbildschirm, sonst Index des Bildschirms.</summary>
+    public int MonitorIndex { get; set; } = -1;
+    public double EdgeMargin { get; set; } = 20;
+    public double MapZoom { get; set; } = 1.0;
+    public bool ShowMarkers { get; set; } = true;
+    public bool ShowAsk { get; set; } = true;
+    public bool ClickThroughOnOpen { get; set; }
+    public string Map { get; set; } = ArkData.MapName;
+    /// <summary>Werbung auf Karte/Wiki ausblenden (falls eine Seite dadurch nicht lädt: ausschalten).</summary>
+    public bool BlockAds { get; set; } = true;
+    // KI: "local" = eigenes Ollama, "friend" = KI eines Freundes über Einladungs-Code
+    public string AiMode { get; set; } = "local";
+    public string? FriendName { get; set; }
+    public string? FriendUrl { get; set; }
+    public string? FriendToken { get; set; }
+    // Eigene KI für Freunde freigeben
+    public bool ShareEnabled { get; set; }
+    public string? ShareName { get; set; }
+    public string? ShareToken { get; set; }
+    public int SharePort { get; set; } = 11435;
     public string MapUrl { get; set; } = ArkWeb.MapUrl;
+    public string CurrentMapUrl => ArkWeb.Maps.FirstOrDefault(m => m.Name == Map).Map ?? ArkWeb.MapUrl;
+    public string CurrentWikiUrl => ArkWeb.Maps.FirstOrDefault(m => m.Name == Map).Wiki ?? ArkWeb.WikiUrl;
 }
 
 public static class ArkWeb
 {
     public const string MapUrl = "https://wikily.gg/ark-survival-ascended/maps/astraeos";
     public const string WikiUrl = "https://ark.wiki.gg/wiki/Astraeos";
+    private const string W = "https://wikily.gg/ark-survival-ascended/maps/", K = "https://ark.wiki.gg/wiki/";
+    public static readonly (string Name, string Map, string Wiki)[] Maps =
+    {
+        ("Astraeos", W + "astraeos", K + "Astraeos"),
+        ("The Island", W + "the-island", K + "The_Island"),
+        ("Scorched Earth", W + "scorched-earth", K + "Scorched_Earth"),
+        ("The Center", W + "the-center", K + "The_Center"),
+        ("Aberration", W + "aberration", K + "Aberration"),
+        ("Extinction", W + "extinction", K + "Extinction"),
+        ("Ragnarok", W + "ragnarok", K + "Ragnarok"),
+        ("Valguero", W + "valguero", K + "Valguero"),
+        ("Lost Colony", W + "lost-colony", K + "Lost_Colony"),
+    };
     public static ArkSettings Settings { get; } = JsonStore.Load<ArkSettings>("ark.json");
     public static void Save() => JsonStore.Save("ark.json", Settings);
+    /// <summary>Overlay wurde verschoben/vergrößert/ein-/ausgeblendet – Seite aktualisiert ihre Regler.</summary>
+    public static event Action? Changed;
+    public static void RaiseChanged() => Changed?.Invoke();
 
     private static Task<CoreWebView2Environment>? _env;
     /// <summary>Gemeinsame WebView2-Umgebung (Browser-Teil von Edge, ist in Windows 10/11 enthalten).</summary>
@@ -64,29 +104,31 @@ public static class ArkWeb
         var host = u.Host.ToLowerInvariant();
         if (AdHosts.Any(h => host.Contains(h))) return true;
         var path = u.AbsolutePath.ToLowerInvariant();
-        return host.StartsWith("ads.") || host.StartsWith("ad.") || host.Contains("adserver") || path.Contains("/prebid") || path.Contains("/pagead/") || path.Contains("/adsbygoogle");
+        return host.StartsWith("ads.") || host.Contains("adserver") || path.Contains("/pagead/") || path.Contains("/adsbygoogle");
     }
 
     // Blendet Werbe-Kästen aus, die trotzdem übrig bleiben (z. B. „ADVERTISEMENT“-Rahmen mit Video unten links auf der Karte)
     private const string HideAdsJs = """
         (() => {
-          const css = `ins.adsbygoogle, [id^="google_ads"], [id*="div-gpt-ad"], [class*="adsbygoogle"], [class*="ad-container"], [class*="adContainer"],
-            [class*="ad-slot"], [class*="adslot"], [class*="ad-wrapper"], [class*="video-ad"], [class*="videoAd"], [class*="sticky-ad"], [class*="stickyAd"],
-            [id*="sticky-ad"], [data-ad], [data-ad-slot], [data-adunit], iframe[src*="ads"], iframe[id*="google_ads"] { display:none !important; }`;
-          const add = () => { if (document.head && !document.getElementById('ncc-noads')) { const s = document.createElement('style'); s.id = 'ncc-noads'; s.textContent = css; document.head.appendChild(s); } };
+          // Nur eindeutige Werbe-Elemente – keine „enthält ad“-Regeln, die sonst auch die Karte treffen (z. B. „load-container“)
+          const css = `ins.adsbygoogle, [id^="google_ads_iframe"], [id^="div-gpt-ad"] { display:none !important; }`;
+          const own = /(^|\.)(wikily\.gg|wiki\.gg|cloudflare\.com|youtube\.com|youtube-nocookie\.com)$/i;
+          const small = el => { const r = el.getBoundingClientRect(); return r.width * r.height < innerWidth * innerHeight * 0.45; };
+          const hide = el => { if (el && small(el)) el.style.setProperty('display', 'none', 'important'); };
+          const floating = el => { let b = el, n = 0; while (b && n < 8) { const p = getComputedStyle(b).position; if (p === 'fixed' || p === 'sticky') return b; b = b.parentElement; n++; } return null; };
           const sweep = () => {
-            add();
-            for (const el of document.querySelectorAll('div,span,p,small,header,aside')) {
-              if (el.children.length > 2) continue;
-              const t = (el.textContent || '').trim();
-              if (!/^(advertisement|anzeige|werbung|ad)$/i.test(t)) continue;
-              let box = el.parentElement, hops = 0;
-              while (box && hops < 6) {
-                const pos = getComputedStyle(box).position;
-                if (pos === 'fixed' || pos === 'sticky' || pos === 'absolute') break;
-                box = box.parentElement; hops++;
-              }
-              (box && hops < 6 ? box : el.parentElement || el).style.setProperty('display', 'none', 'important');
+            if (document.head && !document.getElementById('ncc-noads')) { const s = document.createElement('style'); s.id = 'ncc-noads'; s.textContent = css; document.head.appendChild(s); }
+            // fremde iframes (Werbebanner) ausblenden – die Karte selbst ist kein fremdes iframe
+            for (const f of document.querySelectorAll('iframe')) {
+              let host = ''; try { host = new URL(f.src, location.href).host; } catch {}
+              if (host && own.test(host)) continue;
+              hide(floating(f) || f);
+            }
+            // „ADVERTISEMENT“-Beschriftung → nur den kleinen schwebenden Kasten drumherum ausblenden
+            for (const el of document.querySelectorAll('div,span,p,small')) {
+              if (el.children.length > 0) continue;
+              if (!/^(advertisement|anzeige|werbung)$/i.test((el.textContent || '').trim())) continue;
+              hide(floating(el) || el.parentElement);
             }
           };
           document.addEventListener('DOMContentLoaded', sweep);
@@ -105,9 +147,9 @@ public static class ArkWeb
             view.CoreWebView2.AddWebResourceRequestedFilter("*", CoreWebView2WebResourceContext.All);
             view.CoreWebView2.WebResourceRequested += (_, e) =>
             {
-                if (IsAd(e.Request.Uri)) e.Response = view.CoreWebView2.Environment.CreateWebResourceResponse(null, 403, "Blocked", "");
+                if (Settings.BlockAds && IsAd(e.Request.Uri)) e.Response = view.CoreWebView2.Environment.CreateWebResourceResponse(null, 403, "Blocked", "");
             };
-            await view.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(HideAdsJs);
+            if (Settings.BlockAds) await view.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(HideAdsJs);
             view.CoreWebView2.Navigate(url);
             return true;
         }
@@ -136,9 +178,58 @@ public sealed class ArkOverlayWindow : Window
     public static void Toggle()
     {
         if (!ArkWeb.Settings.InGame) { if (_instance is { IsVisible: true }) _instance.Hide(); else Osd.Show("ARK-Spielanbindung ist aus (Seite ARK)"); return; }
-        if (_instance == null) { _instance = new ArkOverlayWindow(); _instance.Show(); }
+        if (_instance == null) { _instance = new ArkOverlayWindow(); _instance.Show(); _instance.OnOpened(); }
         else if (_instance.IsVisible) _instance.Hide();
-        else _instance.Show();
+        else { _instance.Show(); _instance.OnOpened(); }
+    }
+
+    public static bool IsOpen => _instance is { IsVisible: true };
+    /// <summary>Einstellungen sofort auf die offene Karte anwenden.</summary>
+    public static void ApplyLayout() { if (_instance is { IsVisible: true } w) w.Layout(); }
+
+    public static readonly string[] Corners = { "Oben links", "Oben rechts", "Unten links", "Unten rechts", "Mitte links", "Mitte rechts", "Mitte", "Frei" };
+
+    private void OnOpened()
+    {
+        Layout();
+        if (ArkWeb.Settings.ClickThroughOnOpen != _clickThrough) SetClickThrough(ArkWeb.Settings.ClickThroughOnOpen);
+    }
+
+    private TextBlock? _markers;
+    private StackPanel? _askPanel;
+    private Slider? _opacity;
+    private bool _layouting;
+    private CheckBox? _ctBox;
+
+    private void Layout()
+    {
+        var st = ArkWeb.Settings;
+        _layouting = true;
+        try
+        {
+            if (_markers != null) _markers.Text = st.Markers.Count == 0 ? "" : "📍 " + string.Join("   📍 ", st.Markers.Take(8).Select(m => $"{m.Name} {m.Coords}"));
+            if (_markers != null) _markers.Visibility = st.ShowMarkers && _markers.Text.Length > 0 ? Visibility.Visible : Visibility.Collapsed;
+            if (_askPanel != null) _askPanel.Visibility = st.ShowAsk ? Visibility.Visible : Visibility.Collapsed;
+            if (_opacity != null) _opacity.Value = st.OverlayOpacity;
+            try { _web.ZoomFactor = Math.Clamp(st.MapZoom, 0.25, 3); } catch { }
+            Width = Math.Max(MinWidth, st.OverlayWidth); Height = Math.Max(MinHeight, st.OverlayHeight);
+            ApplyAlpha();
+            if (st.Corner == "Frei")
+            {
+                if (!double.IsNaN(st.OverlayLeft)) { Left = st.OverlayLeft; Top = st.OverlayTop; }
+                return;
+            }
+            var screens = System.Windows.Forms.Screen.AllScreens;
+            var scr = st.MonitorIndex >= 0 && st.MonitorIndex < screens.Length ? screens[st.MonitorIndex] : System.Windows.Forms.Screen.PrimaryScreen ?? screens[0];
+            var wa = scr.Bounds; // ganzer Bildschirm – im Spiel gibt es keine Taskleiste
+            var dpi = VisualTreeHelper.GetDpi(this);
+            int w = (int)Math.Round(Width * dpi.DpiScaleX), h = (int)Math.Round(Height * dpi.DpiScaleY), m = (int)Math.Round(st.EdgeMargin * dpi.DpiScaleX);
+            int x = st.Corner.Contains("links") ? wa.Left + m : st.Corner.Contains("rechts") ? wa.Right - w - m : wa.Left + (wa.Width - w) / 2;
+            int y = st.Corner.StartsWith("Oben") ? wa.Top + m : st.Corner.StartsWith("Unten") ? wa.Bottom - h - m : wa.Top + (wa.Height - h) / 2;
+            var hwnd = new WindowInteropHelper(this).Handle;
+            if (hwnd != IntPtr.Zero) SetWindowPos(hwnd, new IntPtr(-1), x, y, w, h, 0x0010); // HWND_TOPMOST, SWP_NOACTIVATE
+        }
+        finally { _layouting = false; }
     }
 
     public static void HideIfOpen() { if (_instance is { IsVisible: true } w) w.Hide(); }
@@ -149,7 +240,7 @@ public sealed class ArkOverlayWindow : Window
         var st = ArkWeb.Settings;
         Title = "ARK-Karte"; WindowStyle = WindowStyle.None; Topmost = true; ShowInTaskbar = false; ResizeMode = ResizeMode.CanResizeWithGrip;
         Background = new SolidColorBrush(Color.FromRgb(12, 15, 20));
-        Width = st.OverlayWidth; Height = st.OverlayHeight;
+        Width = st.OverlayWidth; Height = st.OverlayHeight; MinWidth = 220; MinHeight = 200;
         if (!double.IsNaN(st.OverlayLeft)) { Left = st.OverlayLeft; Top = st.OverlayTop; WindowStartupLocation = WindowStartupLocation.Manual; }
         else WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
@@ -159,19 +250,29 @@ public sealed class ArkOverlayWindow : Window
         close.Click += (_, _) => Hide();
         DockPanel.SetDock(close, Dock.Right);
         var opacity = new Slider { Minimum = 0.3, Maximum = 1, Value = st.OverlayOpacity, Width = 90, VerticalAlignment = VerticalAlignment.Center, ToolTip = "Durchsichtigkeit", Margin = new Thickness(0, 0, 8, 0) };
-        opacity.ValueChanged += (_, e) => { st.OverlayOpacity = e.NewValue; ApplyAlpha(); };
+        opacity.ValueChanged += (_, e) => { if (_layouting) return; st.OverlayOpacity = e.NewValue; ApplyAlpha(); };
+        _opacity = opacity;
         DockPanel.SetDock(opacity, Dock.Right);
         var ct = new CheckBox { Content = "durchklickbar", Foreground = Brushes.White, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0), FontSize = 11.5, ToolTip = "Klicks gehen ans Spiel – zurück mit Strg+Alt+J" };
         ct.Click += (_, _) => SetClickThrough(ct.IsChecked == true);
+        _ctBox = ct;
         DockPanel.SetDock(ct, Dock.Right);
-        var title = new TextBlock { Text = $"ARK · {ArkData.MapName}  (Strg+Alt+K)", Foreground = accent, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
+        var title = new TextBlock { Text = $"ARK · {st.Map}  (Strg+Alt+K)", Foreground = accent, FontWeight = FontWeights.SemiBold, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
         bar.Children.Add(close); bar.Children.Add(opacity); bar.Children.Add(ct); bar.Children.Add(title);
-        bar.MouseLeftButtonDown += (_, e) => { if (e.ButtonState == MouseButtonState.Pressed) DragMove(); };
+        bar.MouseLeftButtonDown += (_, e) =>
+        {
+            if (e.ButtonState != MouseButtonState.Pressed) return;
+            DragMove();
+            // selbst verschoben → ab jetzt „Frei“ an dieser Stelle
+            st.Corner = "Frei"; st.OverlayLeft = Left; st.OverlayTop = Top; ArkWeb.Save(); ArkWeb.RaiseChanged();
+        };
+        SizeChanged += (_, _) => { if (_layouting || !IsLoaded) return; st.OverlayWidth = Width; st.OverlayHeight = Height; ArkWeb.RaiseChanged(); };
 
         var markers = new TextBlock { Foreground = new SolidColorBrush(Color.FromRgb(200, 206, 215)), FontSize = 11.5, TextWrapping = TextWrapping.Wrap, Margin = new Thickness(8, 4, 8, 0) };
         markers.Text = st.Markers.Count == 0 ? "" : "📍 " + string.Join("   📍 ", st.Markers.Take(8).Select(m => $"{m.Name} {m.Coords}"));
         _ask.KeyDown += async (_, e) => { if (e.Key == Key.Enter) await Ask(); };
         var askPanel = new StackPanel { Margin = new Thickness(8, 6, 8, 8) };
+        _markers = markers; _askPanel = askPanel;
         askPanel.Children.Add(_ask); askPanel.Children.Add(_answer);
 
         var grid = new Grid();
@@ -184,9 +285,9 @@ public sealed class ArkOverlayWindow : Window
         Content = new Border { BorderBrush = accent, BorderThickness = new Thickness(1), Child = grid };
 
         SourceInitialized += (_, _) => ApplyAlpha();
-        Loaded += async (_, _) => { if (!await ArkWeb.InitAsync(_web, st.MapUrl)) _answer.Text = "Eingebetteter Browser (WebView2) fehlt – bitte „Microsoft Edge WebView2 Runtime“ installieren."; };
+        Loaded += async (_, _) => { Layout(); if (!await ArkWeb.InitAsync(_web, st.CurrentMapUrl)) _answer.Text = "Eingebetteter Browser (WebView2) fehlt – bitte „Microsoft Edge WebView2 Runtime“ installieren."; };
         Closing += (_, e) => { e.Cancel = true; Hide(); };
-        IsVisibleChanged += (_, _) => { if (!IsVisible) { st.OverlayLeft = Left; st.OverlayTop = Top; st.OverlayWidth = Width; st.OverlayHeight = Height; ArkWeb.Save(); } };
+        IsVisibleChanged += (_, _) => { if (!IsVisible) { if (st.Corner == "Frei") { st.OverlayLeft = Left; st.OverlayTop = Top; } ArkWeb.Save(); } ArkWeb.RaiseChanged(); };
     }
 
     private async Task Ask()
@@ -217,11 +318,13 @@ public sealed class ArkOverlayWindow : Window
     private void SetClickThrough(bool on)
     {
         _clickThrough = on;
+        if (_ctBox != null) _ctBox.IsChecked = on;
         ApplyAlpha();
         Osd.Show(on ? "ARK-Karte: durchklickbar (Strg+Alt+J zum Bedienen)" : "ARK-Karte: bedienbar");
     }
 
     [DllImport("user32.dll", EntryPoint = "GetWindowLongPtr")] private static extern IntPtr GetWindowLongPtr(IntPtr h, int i);
     [DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")] private static extern IntPtr SetWindowLongPtr(IntPtr h, int i, IntPtr v);
+    [DllImport("user32.dll")] private static extern bool SetWindowPos(IntPtr h, IntPtr after, int x, int y, int cx, int cy, uint flags);
     [DllImport("user32.dll")] private static extern bool SetLayeredWindowAttributes(IntPtr h, uint key, byte alpha, uint flags);
 }

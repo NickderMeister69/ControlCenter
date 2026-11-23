@@ -35,8 +35,12 @@ public partial class ArkPage : UserControl
         PlaceList.ItemsSource = ArkData.Places;
         InGameBox.IsChecked = st.InGame;
         OverlayBtn.IsEnabled = st.InGame;
-        Loaded += async (_, _) => { if (!_mapInit) { _mapInit = true; if (!await ArkWeb.InitAsync(MapView, st.MapUrl)) Ui.Toast("Eingebetteter Browser (WebView2) fehlt – Karte im Browser öffnen", true); } };
-        Unloaded += (_, _) => { _cts?.Cancel(); ArkWeb.Save(); };
+        foreach (var m in ArkWeb.Maps) MapBox.Items.Add(m.Name);
+        MapBox.SelectedItem = ArkWeb.Maps.Any(m => m.Name == st.Map) ? st.Map : ArkData.MapName;
+        ApplyMapUi();
+        Loaded += async (_, _) => { if (!_mapInit) { _mapInit = true; if (!await ArkWeb.InitAsync(MapView, st.CurrentMapUrl)) Ui.Toast("Eingebetteter Browser (WebView2) fehlt – Karte im Browser öffnen", true); } };
+        Unloaded += (_, _) => { _cts?.Cancel(); ArkWeb.Save(); ArkWeb.Changed -= OnOverlayChanged; };
+        ArkWeb.Changed += OnOverlayChanged;
     }
 
     // ---------- Tabs ----------
@@ -49,8 +53,10 @@ public partial class ArkPage : UserControl
         TabRes.Visibility = tag == "Res" ? Visibility.Visible : Visibility.Collapsed;
         TabWiki.Visibility = tag == "Wiki" ? Visibility.Visible : Visibility.Collapsed;
         TabAi.Visibility = tag == "Ai" ? Visibility.Visible : Visibility.Collapsed;
-        if (tag == "Wiki" && !_wikiInit) { _wikiInit = true; await ArkWeb.InitAsync(WikiView, ArkWeb.WikiUrl); }
-        if (tag == "Ai" && !_aiInit) { _aiInit = true; await RefreshAi(); }
+        TabOv.Visibility = tag == "Ov" ? Visibility.Visible : Visibility.Collapsed;
+        if (tag == "Ov") LoadOv();
+        if (tag == "Wiki" && !_wikiInit) { _wikiInit = true; await ArkWeb.InitAsync(WikiView, ArkWeb.Settings.CurrentWikiUrl); }
+        if (tag == "Ai" && !_aiInit) { _aiInit = true; LoadShare(); await RefreshAi(); }
     }
 
     private void OpenTab(string tag)
@@ -60,7 +66,7 @@ public partial class ArkPage : UserControl
     }
 
     // ---------- Spiel-Anbindung ----------
-    private void Overlay_Click(object sender, RoutedEventArgs e) => ArkOverlayWindow.Toggle();
+    private void Overlay_Click(object sender, RoutedEventArgs e) { ArkOverlayWindow.Toggle(); UpdateOvButton(); }
 
     private void InGame_Click(object sender, RoutedEventArgs e)
     {
@@ -69,6 +75,115 @@ public partial class ArkPage : UserControl
         if (!ArkWeb.Settings.InGame) ArkOverlayWindow.HideIfOpen();
         ArkWeb.Save();
         Ui.Toast(ArkWeb.Settings.InGame ? "Spiel-Anbindung an – Strg+Alt+K zeigt die Karte im Spiel" : "Spiel-Anbindung aus – im Spiel erscheint nichts");
+    }
+
+    // ---------- Map-Auswahl ----------
+    private void Map_Changed(object sender, SelectionChangedEventArgs e)
+    {
+        if (MapBox.SelectedItem is not string map || map == ArkWeb.Settings.Map) return;
+        ArkWeb.Settings.Map = map; ArkWeb.Save();
+        ApplyMapUi();
+        MapView.CoreWebView2?.Navigate(ArkWeb.Settings.CurrentMapUrl);
+        if (_wikiInit) WikiView.CoreWebView2?.Navigate(ArkWeb.Settings.CurrentWikiUrl);
+        Ui.Toast($"Map: {map}" + (ArkOverlayWindow.IsOpen ? " – Karte im Spiel einmal aus- und einschalten" : ""));
+    }
+
+    private void ApplyMapUi()
+    {
+        var other = ArkWeb.Settings.Map != ArkData.MapName ? Visibility.Visible : Visibility.Collapsed;
+        DataNote1.Visibility = DataNote2.Visibility = DataNote3.Visibility = other;
+    }
+
+    // ---------- Karte im Spiel: Einstellungen ----------
+    private bool _ovLoading;
+
+    private void OnOverlayChanged() => Dispatcher.BeginInvoke(() => { if (TabOv.Visibility == Visibility.Visible) LoadOv(); else UpdateOvButton(); });
+
+    private void UpdateOvButton() => OvShowBtn.Content = ArkOverlayWindow.IsOpen ? "Karte ausblenden" : "Karte anzeigen";
+
+    private void LoadOv()
+    {
+        var st = ArkWeb.Settings;
+        _ovLoading = true;
+        try
+        {
+            if (MonitorBox.Items.Count == 0)
+            {
+                MonitorBox.Items.Add("Hauptbildschirm");
+                var screens = System.Windows.Forms.Screen.AllScreens;
+                for (int i = 0; i < screens.Length; i++)
+                    MonitorBox.Items.Add($"Bildschirm {i + 1}  ({screens[i].Bounds.Width}×{screens[i].Bounds.Height}{(screens[i].Primary ? ", Haupt" : "")})");
+            }
+            MonitorBox.SelectedIndex = Math.Clamp(st.MonitorIndex + 1, 0, MonitorBox.Items.Count - 1);
+            OvW.Value = st.OverlayWidth; OvH.Value = st.OverlayHeight; OvM.Value = st.EdgeMargin;
+            OvO.Value = st.OverlayOpacity * 100; OvZ.Value = st.MapZoom * 100;
+            OvMarkers.IsChecked = st.ShowMarkers; OvAsk.IsChecked = st.ShowAsk; OvClick.IsChecked = st.ClickThroughOnOpen;
+            OvFree.IsChecked = st.Corner == "Frei";
+            OvAds.IsChecked = st.BlockAds;
+            UpdateSpots(); UpdateOvVals(); UpdateOvButton();
+        }
+        finally { _ovLoading = false; }
+    }
+
+    private void UpdateSpots()
+    {
+        var corner = ArkWeb.Settings.Corner;
+        foreach (var b in SpotGrid.Children.OfType<Button>())
+            b.Background = (string)b.Tag == corner ? (System.Windows.Media.Brush)FindResource("AccentBrush") : (System.Windows.Media.Brush)FindResource("InputBrush");
+        SpotText.Text = corner == "Frei" ? "Frei – da, wo du sie hingezogen hast" : "Position: " + corner;
+        OvM.IsEnabled = MonitorBox.IsEnabled = corner != "Frei";
+    }
+
+    private void UpdateOvVals()
+    {
+        OvWVal.Text = $"{OvW.Value:0} px"; OvHVal.Text = $"{OvH.Value:0} px"; OvMVal.Text = $"{OvM.Value:0} px";
+        OvOVal.Text = $"{OvO.Value:0} %"; OvZVal.Text = $"{OvZ.Value:0} %";
+    }
+
+    private void Ov_Changed(object sender, RoutedEventArgs e)
+    {
+        if (_ovLoading || OvW == null || OvZVal == null) return;
+        var st = ArkWeb.Settings;
+        st.OverlayWidth = Math.Round(OvW.Value); st.OverlayHeight = Math.Round(OvH.Value); st.EdgeMargin = Math.Round(OvM.Value);
+        st.OverlayOpacity = Math.Round(OvO.Value) / 100; st.MapZoom = Math.Round(OvZ.Value / 10) / 10;
+        st.MonitorIndex = MonitorBox.SelectedIndex - 1;
+        st.ShowMarkers = OvMarkers.IsChecked == true; st.ShowAsk = OvAsk.IsChecked == true; st.ClickThroughOnOpen = OvClick.IsChecked == true;
+        UpdateOvVals();
+        ArkOverlayWindow.ApplyLayout();
+        ArkWeb.Save();
+    }
+
+    private void Ads_Click(object sender, RoutedEventArgs e)
+    {
+        ArkWeb.Settings.BlockAds = OvAds.IsChecked == true; ArkWeb.Save();
+        Ui.Toast("Gilt ab dem nächsten Öffnen der Seite bzw. nach Neustart der App");
+    }
+
+    private void Spot_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button { Tag: string corner }) return;
+        ArkWeb.Settings.Corner = corner; OvFree.IsChecked = false;
+        UpdateSpots(); ArkOverlayWindow.ApplyLayout(); ArkWeb.Save();
+    }
+
+    private void OvFree_Click(object sender, RoutedEventArgs e)
+    {
+        ArkWeb.Settings.Corner = OvFree.IsChecked == true ? "Frei" : "Oben rechts";
+        UpdateSpots(); ArkOverlayWindow.ApplyLayout(); ArkWeb.Save();
+    }
+
+    private void Preset_Click(object sender, RoutedEventArgs e)
+    {
+        var st = ArkWeb.Settings;
+        switch ((sender as FrameworkElement)?.Tag as string)
+        {
+            case "mini": st.Corner = "Oben rechts"; st.OverlayWidth = 320; st.OverlayHeight = 320; st.EdgeMargin = 16; st.OverlayOpacity = 0.8; st.MapZoom = 0.8; st.ShowMarkers = false; st.ShowAsk = false; st.ClickThroughOnOpen = true; break;
+            case "side": st.Corner = "Mitte rechts"; st.OverlayWidth = 460; st.OverlayHeight = 900; st.EdgeMargin = 10; st.OverlayOpacity = 0.9; st.MapZoom = 1.0; st.ShowMarkers = true; st.ShowAsk = true; st.ClickThroughOnOpen = false; break;
+            case "big": st.Corner = "Mitte"; st.OverlayWidth = 1100; st.OverlayHeight = 850; st.OverlayOpacity = 1.0; st.MapZoom = 1.0; st.ShowMarkers = true; st.ShowAsk = true; st.ClickThroughOnOpen = false; break;
+            default: st.Corner = "Oben rechts"; st.OverlayWidth = 520; st.OverlayHeight = 620; st.EdgeMargin = 20; st.OverlayOpacity = 0.85; st.MapZoom = 1.0; st.MonitorIndex = -1; st.ShowMarkers = true; st.ShowAsk = true; st.ClickThroughOnOpen = false; break;
+        }
+        ArkWeb.Save(); LoadOv(); ArkOverlayWindow.ApplyLayout();
+        Ui.Toast("Karten-Einstellung übernommen" + (ArkOverlayWindow.IsOpen ? "" : " – „Karte anzeigen“ zum Ansehen"));
     }
 
     // ---------- Markierungen ----------
@@ -85,7 +200,7 @@ public partial class ArkPage : UserControl
     {
         _markers.Add(m);
         ArkWeb.Settings.Markers = _markers.ToList();
-        ArkWeb.Save();
+        ArkWeb.Save(); ArkOverlayWindow.ApplyLayout();
     }
 
     private void DelMarker_Click(object sender, RoutedEventArgs e)
@@ -109,7 +224,7 @@ public partial class ArkPage : UserControl
     private void BossWiki_Click(object sender, RoutedEventArgs e)
     {
         if ((sender as FrameworkElement)?.DataContext is not ArkBoss b) return;
-        WikiSearch.Text = b.Name.Split(' ')[0] + " Astraeos";
+        WikiSearch.Text = b.Name.Split(' ')[0];
         OpenTab("Wiki");
         WikiGo_Click(sender, e);
     }
@@ -117,7 +232,7 @@ public partial class ArkPage : UserControl
     private void BossAsk_Click(object sender, RoutedEventArgs e)
     {
         if ((sender as FrameworkElement)?.DataContext is not ArkBoss b) return;
-        Question.Text = $"Was brauche ich für den Boss {b.Name.Split(' ')[0]} auf Astraeos (Tribute je Schwierigkeit, empfohlene Dinos, Taktik)?";
+        Question.Text = $"Was brauche ich für den Boss {b.Name.Split(' ')[0]} auf {ArkData.MapName} (Tribute je Schwierigkeit, empfohlene Dinos, Taktik)?";
         OpenTab("Ai");
         Ask_Click(sender, e);
     }
@@ -133,32 +248,131 @@ public partial class ArkPage : UserControl
     }
 
     private void WikiSearch_KeyDown(object sender, KeyEventArgs e) { if (e.Key == Key.Enter) WikiGo_Click(sender, e); }
-    private void WikiHome_Click(object sender, RoutedEventArgs e) => WikiView.CoreWebView2?.Navigate(ArkWeb.WikiUrl);
+    private void WikiHome_Click(object sender, RoutedEventArgs e) => WikiView.CoreWebView2?.Navigate(ArkWeb.Settings.CurrentWikiUrl);
 
     // ---------- KI ----------
     private async Task RefreshAi()
     {
-        AiState.Text = "Prüfe Ollama …";
+        var st = ArkWeb.Settings;
+        var friend = ArkAi.UsesFriend;
+        AiLocal.IsChecked = !friend && st.AiMode != "friend";
+        AiFriend.IsChecked = st.AiMode == "friend";
+        FriendRow.Visibility = st.AiMode == "friend" ? Visibility.Visible : Visibility.Collapsed;
+        if (st.AiMode == "friend" && !friend) { AiState.Text = "Einladungs-Code von deinem Freund einfügen und „Verbinden“."; SetAiButtons(null); return; }
+        AiState.Text = friend ? $"Verbinde mit der KI von {st.FriendName} …" : "Prüfe Ollama …";
         var models = await ArkAi.ModelsAsync();
         if (models == null)
         {
-            var exe = ArkAi.OllamaExe();
-            AiState.Text = exe != null ? "Ollama ist installiert, läuft aber gerade nicht." : "Ollama wurde nicht gefunden – bitte installieren (ollama.com).";
-            StartOllama.Visibility = exe != null ? Visibility.Visible : Visibility.Collapsed;
-            ModelBox.ItemsSource = null;
-            PullBtn.IsEnabled = AskBtn.IsEnabled = false;
+            if (friend) AiState.Text = $"Die KI von {st.FriendName} ist gerade nicht erreichbar – sein PC oder das Control Center ist aus, oder ihr seid nicht im selben Netz/Tailscale.";
+            else
+            {
+                var exe = ArkAi.OllamaExe();
+                AiState.Text = exe != null ? "Ollama ist installiert, läuft aber gerade nicht." : "Ollama ist auf diesem PC nicht installiert – installieren oder die KI eines Freundes nutzen.";
+                StartOllama.Visibility = exe != null ? Visibility.Visible : Visibility.Collapsed;
+                GetOllama.Visibility = exe == null ? Visibility.Visible : Visibility.Collapsed;
+            }
+            SetAiButtons(null);
             return;
         }
-        StartOllama.Visibility = Visibility.Collapsed;
-        PullBtn.IsEnabled = true;
-        ModelBox.ItemsSource = models;
-        var pick = ArkWeb.Settings.Model is { } m && models.Contains(m) ? m
+        SetAiButtons(models);
+        var pick = st.Model is { } m && models.Contains(m) ? m
                  : models.FirstOrDefault(x => x.StartsWith("qwen2.5")) ?? models.FirstOrDefault(x => !x.Contains("embed"));
         ModelBox.SelectedItem = pick;
-        PullBtn.Visibility = models.Any(x => x.StartsWith("qwen2.5:7b")) ? Visibility.Collapsed : Visibility.Visible;
-        AskBtn.IsEnabled = pick != null;
-        AiState.Text = models.Count == 0 ? "Ollama läuft – aber noch kein Modell installiert. Empfohlenes Modell laden?"
-                                         : $"Ollama läuft · {models.Count} Modell(e) installiert";
+        AiState.Text = models.Count == 0 ? (friend ? $"Bei {st.FriendName} ist noch kein Modell installiert." : "Ollama läuft – aber noch kein Modell installiert. Empfohlenes Modell laden?")
+                                         : ArkAi.WhereText + $" · {models.Count} Modell(e)";
+    }
+
+    private void SetAiButtons(List<string>? models)
+    {
+        var friend = ArkWeb.Settings.AiMode == "friend";
+        ModelBox.ItemsSource = models;
+        PullBtn.IsEnabled = true;
+        AskBtn.IsEnabled = models is { Count: > 0 };
+        if (models != null || friend) { StartOllama.Visibility = GetOllama.Visibility = Visibility.Collapsed; }
+        PullBtn.Visibility = !friend && models != null && !models.Any(x => x.StartsWith("qwen2.5:7b")) ? Visibility.Visible : Visibility.Collapsed;
+        AiHint.Text = friend
+            ? "Deine Frage wird an den PC deines Freundes geschickt und dort beantwortet – die Wiki-Suche macht deine App. Nichts geht an KI-Firmen. KI kann sich irren: wichtige Dinge über die Quellen prüfen."
+            : "Läuft komplett auf diesem PC. Mit einer Grafikkarte ab ca. 8 GB Speicher kommen Antworten in wenigen Sekunden, ohne starke Grafikkarte dauert es deutlich länger. Für jede Frage sucht die App passende Seiten im ARK-Wiki und gibt sie der KI mit – die Quellen stehen unter der Antwort. KI kann sich irren: wichtige Dinge über die Quellen prüfen.";
+    }
+
+    private async void AiMode_Click(object sender, RoutedEventArgs e)
+    {
+        ArkWeb.Settings.AiMode = AiFriend.IsChecked == true ? "friend" : "local";
+        ArkWeb.Settings.Model = null;
+        ArkWeb.Save();
+        await RefreshAi();
+    }
+
+    private async void Connect_Click(object sender, RoutedEventArgs e)
+    {
+        var inv = AiShare.ParseInvite(InviteBox.Text);
+        if (inv == null) { Ui.Toast("Das ist kein gültiger Einladungs-Code (beginnt mit CCKI-)", true); return; }
+        var st = ArkWeb.Settings;
+        st.AiMode = "friend"; st.FriendName = string.IsNullOrWhiteSpace(inv.n) ? "deinem Freund" : inv.n; st.FriendUrl = inv.u; st.FriendToken = inv.t; st.Model = null;
+        ArkWeb.Save();
+        InviteBox.Text = "";
+        await RefreshAi();
+    }
+
+    private void GetOllama_Click(object sender, RoutedEventArgs e)
+    {
+        try { Process.Start(new ProcessStartInfo("https://ollama.com/download") { UseShellExecute = true }); } catch { }
+    }
+
+    // ---------- Eigene KI freigeben ----------
+    private void LoadShare()
+    {
+        var st = ArkWeb.Settings;
+        ShareToggle.IsChecked = st.ShareEnabled;
+        SharePanel.IsEnabled = st.ShareEnabled;
+        SharePanel.Opacity = st.ShareEnabled ? 1 : 0.5;
+        ShareNameBox.Text = AiShare.ShareName();
+        var addrs = AiShare.Addresses();
+        AddrBox.ItemsSource = addrs.Select(a => $"{a.Ip}  ({a.Kind})").ToList();
+        AddrBox.SelectedIndex = addrs.Count > 0 ? 0 : -1;
+        UpdateCode();
+    }
+
+    private void UpdateCode()
+    {
+        var st = ArkWeb.Settings;
+        var ip = (AddrBox.SelectedItem as string)?.Split(' ')[0];
+        CodeBox.Text = st.ShareEnabled && ip != null ? AiShare.InviteCode(ip) : "";
+        var hasTs = AiShare.Addresses().Any(a => a.Kind == "Tailscale");
+        ShareState.Text = !st.ShareEnabled ? "Aus."
+            : !AiShare.Running ? "Konnte nicht starten: " + AiShare.LastError
+            : ip == null ? "Keine Netzwerk-Adresse gefunden."
+            : $"Aktiv · {AiShare.Requests} Fragen seit dem Start." + (hasTs ? " Code an Freunde schicken – sie brauchen auch Tailscale im selben Tailnet."
+                : " Funktioniert so nur im selben WLAN/Heimnetz. Für Freunde woanders: Tailscale (kostenlos) auf beiden PCs installieren, dann erscheint hier eine Tailscale-Adresse.");
+    }
+
+    private void Share_Click(object sender, RoutedEventArgs e)
+    {
+        var st = ArkWeb.Settings;
+        st.ShareEnabled = ShareToggle.IsChecked == true;
+        if (st.ShareEnabled) { if (!AiShare.Start()) Ui.Toast("Freigabe konnte nicht starten: " + AiShare.LastError, true); }
+        else AiShare.Stop();
+        ArkWeb.Save();
+        LoadShare();
+    }
+
+    private void ShareName_LostFocus(object sender, RoutedEventArgs e)
+    {
+        ArkWeb.Settings.ShareName = ShareNameBox.Text.Trim(); ArkWeb.Save(); UpdateCode();
+    }
+
+    private void Addr_Changed(object sender, SelectionChangedEventArgs e) => UpdateCode();
+
+    private void CopyCode_Click(object sender, RoutedEventArgs e)
+    {
+        if (CodeBox.Text.Length == 0) return;
+        try { Clipboard.SetText(CodeBox.Text); Ui.Toast("Einladungs-Code kopiert – an deinen Freund schicken"); } catch { }
+    }
+
+    private void NewKey_Click(object sender, RoutedEventArgs e)
+    {
+        AiShare.NewKey(); UpdateCode();
+        Ui.Toast("Neuer Code – Freunde mit dem alten Code kommen nicht mehr rein");
     }
 
     private void Model_Changed(object sender, SelectionChangedEventArgs e)
