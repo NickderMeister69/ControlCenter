@@ -100,14 +100,14 @@ public static class GameUpdates
 
     /// <summary>
     /// Neueste Version jedes Spiels im Internet nachschauen (öffentliche Steam-App-Infos über api.steamcmd.net) –
-    /// so sieht die App Updates auch, wenn Steam gerade nicht läuft. Ergebnis 30 min zwischengespeichert.
+    /// so sieht die App Updates auch, wenn Steam gerade nicht läuft. Ergebnis 4 min zwischengespeichert (Prüfung alle 5 min).
     /// </summary>
     public static async Task<List<SteamGameState>> CheckOnlineAsync(List<SteamGameState> games)
     {
         using var gate = new SemaphoreSlim(4);
         await Task.WhenAll(games.Where(g => g.BuildId > 0).Select(async g =>
         {
-            lock (_latest) if (_latest.TryGetValue(g.AppId, out var c) && (DateTime.Now - c.At).TotalMinutes < 30) return;
+            lock (_latest) if (_latest.TryGetValue(g.AppId, out var c) && (DateTime.Now - c.At).TotalMinutes < 4) return;
             await gate.WaitAsync();
             try
             {

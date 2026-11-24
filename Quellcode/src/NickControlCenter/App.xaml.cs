@@ -293,6 +293,8 @@ public partial class App : Application
         catch { icon = System.Drawing.SystemIcons.Application; }
 
         _tray = new WF.NotifyIcon { Icon = icon, Text = "Control Center", Visible = true };
+        _tray.BalloonTipClicked += (_, _) => { var a = _balloonClick; _balloonClick = null; if (a != null) Dispatcher.BeginInvoke(a); };
+        _tray.BalloonTipClosed += (_, _) => _balloonClick = null;
         var menu = new WF.ContextMenuStrip();
         menu.Items.Add("Öffnen", null, (_, _) => ShowWindow());
         menu.Items.Add("Gaming-Boost starten", null, async (_, _) => await Services.Boost.BoostAsync());
@@ -341,8 +343,17 @@ public partial class App : Application
         _win.Focus();
     }
 
+    private Action? _balloonClick;
+
     public void Balloon(string title, string text, bool warn = false) =>
         _tray?.ShowBalloonTip(4000, title, text, warn ? WF.ToolTipIcon.Warning : WF.ToolTipIcon.Info);
+
+    /// <summary>Windows-Benachrichtigung, Klick darauf führt <paramref name="onClick"/> aus.</summary>
+    public void Balloon(string title, string text, Action onClick)
+    {
+        _balloonClick = onClick;
+        _tray?.ShowBalloonTip(10000, title, text, WF.ToolTipIcon.Info);
+    }
 
     private void OnWindowClosing(object? sender, CancelEventArgs e)
     {

@@ -60,7 +60,7 @@
                     <TextBlock Style="{StaticResource Caption}" TextWrapping="Wrap" Margin="0,6,0,0"
                                Text="Liest direkt aus Steam, welche Spiele ein Update haben und wie groß es ist – mit Live-Fortschritt. Neue Versionen werden auch online nachgeschaut – das klappt also auch, wenn Steam gerade nicht läuft. Laden kann ein Spiel-Update nur Steam selbst: „Aktualisieren“ startet Steam unsichtbar im Hintergrund (ohne Fenster), Steam lädt das Update von selbst und hier siehst du Fortschritt, Mbit/s und Restzeit."/>
                     <WrapPanel Margin="0,8,0,0">
-                        <CheckBox x:Name="SteamNotify" Style="{StaticResource ToggleSwitch}" Content="Beim Start nach Spiele-Updates schauen und Bescheid geben" Click="SteamOpt_Click" Margin="0,0,20,6"/>
+                        <CheckBox x:Name="SteamNotify" Style="{StaticResource ToggleSwitch}" Content="Alle 5 Minuten nach Spiele-Updates schauen und Bescheid geben (App + Windows-Benachrichtigung)" Click="SteamOpt_Click" Margin="0,0,20,6"/>
                         <CheckBox x:Name="SteamAuto" Style="{StaticResource ToggleSwitch}" Content="Ohne Nachfrage im Hintergrund laden" Click="SteamOpt_Click" Margin="0,0,20,6"/>
                         <CheckBox x:Name="SteamClose" Style="{StaticResource ToggleSwitch}" Content="Steam danach wieder schließen" Click="SteamOpt_Click" Margin="0,0,0,6"/>
                     </WrapPanel>

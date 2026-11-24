@@ -24,10 +24,11 @@ public sealed class GameUpdateWatcher
     private bool _steamStartedByUs;
     private DateTime _requested;
     private UpdatePopup? _popup;
+    private readonly HashSet<string> _notified = new();
 
     private GameUpdateWatcher()
     {
-        _check.Tick += async (_, _) => { _check.Interval = TimeSpan.FromHours(2); await CheckAsync(); };
+        _check.Tick += async (_, _) => { _check.Interval = TimeSpan.FromMinutes(5); await CheckAsync(); };   // alle 5 Minuten
         _watch.Tick += (_, _) => Watch();
     }
 
@@ -43,13 +44,16 @@ public sealed class GameUpdateWatcher
         if (!st.SteamUpdateNotify && !manual) return;
         if (_active.Count > 0) return; // läuft gerade schon
         // nicht mitten ins Spiel platzen: Vollbild vorne → in 10 Minuten nochmal
-        if (!manual && Native.IsFullscreen(Native.GetForegroundWindow())) { _check.Interval = TimeSpan.FromMinutes(10); return; }
+        if (!manual && Native.IsFullscreen(Native.GetForegroundWindow())) return;   // beim nächsten Durchgang (5 Min) nochmal
         List<SteamGameState> games;
         try { games = await GameUpdates.CheckOnlineAsync(await Task.Run(GameUpdates.Scan)); }
         catch { return; }
         // nur echte Updates, die noch nicht laufen; bereits weggeklickte (gleiche Version) nicht nochmal melden
         var pending = games.Where(g => g.NeedsUpdate && !g.Updating && !st.SteamUpdateDismissed.Contains(Key(g))).ToList();
         if (pending.Count == 0) return;
+        // dieselbe Version nicht alle 5 Minuten erneut melden – nur neue Updates
+        if (!manual && pending.All(p => _notified.Contains(Key(p)))) return;
+        foreach (var p in pending) _notified.Add(Key(p));
         Log.Info(LogModule.Boost, "Spiele-Updates gefunden: " + string.Join(", ", pending.Select(p => p.Name)));
         if (st.SteamUpdateAuto) { StartUpdates(pending); return; }
 
@@ -58,6 +62,9 @@ public sealed class GameUpdateWatcher
         string text = pending.Count == 1
             ? (pending[0].Remaining > 0 ? $"{Fmt.Bytes(pending[0].Remaining)} · {InstallEstimate.DurationText(InstallEstimate.Duration(pending[0].Remaining, 30))}. " : "") + "Jetzt im Hintergrund laden, damit du nachher direkt loszocken kannst?"
             : string.Join(", ", names.Take(4)) + (names.Count > 4 ? " …" : "") + ". Jetzt im Hintergrund laden?";
+        // Windows-Benachrichtigung (Klick = installieren) + Hinweis in der App
+        (Application.Current as App)?.Balloon(title, "Klicken zum Installieren. " + text, () => { _popup?.Close(); StartUpdates(pending); });
+        if (Application.Current.MainWindow is MainWindow mw && mw.IsVisible) mw.Toast(title + " – unten rechts „Jetzt laden“");
         ShowPopup(title, text, "Jetzt laden", () => StartUpdates(pending), "Später", () =>
         {
             foreach (var p in pending) if (!st.SteamUpdateDismissed.Contains(Key(p))) st.SteamUpdateDismissed.Add(Key(p));
