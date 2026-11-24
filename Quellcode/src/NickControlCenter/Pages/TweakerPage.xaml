@@ -151,6 +151,45 @@
                 </Grid>
             </Border>
 
+            <!-- Arbeitsspeicher -->
+            <Border Style="{StaticResource Card}" Margin="0,0,0,12">
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="ARBEITSSPEICHER (RAM)" Style="{StaticResource Kicker}"/>
+                        <Button Content="Neu prüfen" Click="RamRefresh_Click" HorizontalAlignment="Right" Padding="10,3" FontSize="11.5"/>
+                    </Grid>
+                    <TextBlock x:Name="RamHead" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap" Text="Lese Arbeitsspeicher …"/>
+                    <TextBlock x:Name="RamSub" Style="{StaticResource Muted}" FontSize="12.5" TextWrapping="Wrap" Margin="0,2,0,8"/>
+                    <ItemsControl x:Name="RamMods" Margin="0,0,0,8">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource SubCard}" Padding="10,5" Margin="0,0,0,4">
+                                    <TextBlock FontSize="12.5" TextWrapping="Wrap" Text="{Binding}"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Border x:Name="RamGuide" Background="{StaticResource WarnSoftBrush}" CornerRadius="6" Padding="12,8" Visibility="Collapsed">
+                        <StackPanel>
+                            <TextBlock x:Name="RamGuideHead" FontWeight="SemiBold" TextWrapping="Wrap" Margin="0,0,0,4"/>
+                            <ItemsControl x:Name="RamSteps">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate><TextBlock Text="{Binding}" TextWrapping="Wrap" FontSize="12.5" Margin="0,1"/></DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+                    <Expander Header="Noch mehr rausholen (manuell übertakten)" Margin="0,8,0,0" Foreground="{StaticResource TextBrush}">
+                        <TextBlock Style="{StaticResource Muted}" FontSize="12.5" TextWrapping="Wrap" Margin="0,6,0,0"
+                                   Text="Takt und Timings über das Profil hinaus lassen sich nur im BIOS einstellen – Windows hat darauf keinen sicheren Zugriff, deshalb macht die App das nicht selbst. Vorgehen: 1) Profil (XMP/EXPO) an und stabil. 2) Takt eine Stufe höher (z. B. +133 bzw. +200 MT/s), Timings gleich lassen. 3) Neustart, dann RAM-Stresstest 30 Min. 4) Stabil → nächste Stufe; Fehler/Absturz → eine Stufe zurück. RAM-Fehler zeigen sich oft erst später als Abstürze oder kaputte Speicherstände – deshalb immer testen. Startet der PC nicht mehr: er setzt nach 3 Fehlstarts meist selbst zurück, sonst CMOS löschen (Anleitung im Mainboard-Handbuch). Spannung nur in kleinen Schritten und nicht über die Angabe deines RAM-Herstellers hinaus erhöhen."/>
+                    </Expander>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Content="Ins BIOS neu starten" Click="RamBios_Click" Margin="0,0,8,0" Padding="12,6"/>
+                        <Button Content="RAM-Stresstest öffnen" Click="RamStress_Click" Padding="12,6"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
             <Border Style="{StaticResource Card}">
                 <StackPanel>
                     <TextBlock Text="PROFILE" Style="{StaticResource Kicker}"/>

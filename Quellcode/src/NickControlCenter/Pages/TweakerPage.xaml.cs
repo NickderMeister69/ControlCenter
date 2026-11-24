@@ -58,6 +58,7 @@ public partial class TweakerPage : UserControl
         var s = _vm.Svc;
         CpuMeta.Text = $"{s.Cores} Kerne · {s.Threads} Threads · Basis {s.BaseClock} MHz · gemessen bis {Math.Max(s.MaxSeen, s.TurboClock)} MHz · Sicherheitsgrenze {s.SafetyTemp} °C";
         ProfList.ItemsSource = s.Settings.Profiles;
+        Loaded += async (_, _) => await LoadRam();
     }
 
     private void CpuPreset_Click(object sender, RoutedEventArgs e)
@@ -130,4 +131,36 @@ public partial class TweakerPage : UserControl
         if ((sender as FrameworkElement)?.DataContext is TweakProfile p) { _vm.Load(p.Cpu, p.Gpu); Ui.Toast($"Profil „{p.Name}“ geladen – „Anwenden“ drücken"); }
     }
     private void CrashOc_Click(object s, System.Windows.RoutedEventArgs e) { AppSettings.Current.CrashLowersOc = CrashOc.IsChecked == true; AppSettings.Current.Save(); }
+
+    // ---------- Arbeitsspeicher ----------
+    private async Task LoadRam()
+    {
+        RamHead.Text = "Lese Arbeitsspeicher …";
+        var i = await Task.Run(RamTuner.Read);
+        if (i.Modules.Count == 0) { RamHead.Text = "Arbeitsspeicher konnte nicht ausgelesen werden."; return; }
+        var total = i.Modules.Sum(m => m.SizeGb);
+        RamHead.Text = $"{total:0} GB {i.Type} · läuft mit {i.RunningMts} MT/s" + (i.TargetMts > 0 ? $" · Riegel können {i.TargetMts} MT/s" : "");
+        RamHead.Foreground = i.XmpOff ? Palette.Warn : Palette.Text;
+        RamSub.Text = (i.XmpOff
+            ? $"Dein RAM läuft unter seinem Nenntakt – das {i.Profile}-Profil ist im BIOS aus. Einschalten bringt oft spürbar mehr FPS (vor allem in CPU-lastigen Spielen wie ARK) und ist vom Hersteller freigegeben."
+            : i.TargetMts > 0 ? $"Läuft mit vollem Nenntakt – das {i.Profile}-Profil ist an. Mehr geht nur noch per Hand im BIOS (siehe unten)."
+                              : "Den Nenntakt der Riegel konnte die App nicht erkennen – steht auf dem Aufkleber am Riegel oder in der Typnummer.")
+            + (i.Board.Length > 0 ? $"  Mainboard: {i.BoardMaker} {i.Board}." : "");
+        RamMods.ItemsSource = i.Modules.Select(m => $"{m.Slot}: {m.SizeGb:0} GB {m.Maker} {m.Part} · läuft {m.RunningMts} MT/s" + (RamTuner.KitSpeed(m.Part) is > 0 and var k ? $" · Profil {k} MT/s" : m.RatedMts > 0 ? $" · max. {m.RatedMts} MT/s" : "")).ToList();
+        RamGuide.Visibility = i.XmpOff ? Visibility.Visible : Visibility.Collapsed;
+        RamGuideHead.Text = $"So schaltest du {i.Profile} ein ({(i.BoardMaker.Length > 0 ? i.BoardMaker : "dein Mainboard")}):";
+        RamSteps.ItemsSource = RamTuner.BiosSteps(i).Select((t, n) => $"{n + 1}. {t}").ToList();
+    }
+
+    private async void RamRefresh_Click(object sender, RoutedEventArgs e) => await LoadRam();
+
+    private void RamBios_Click(object sender, RoutedEventArgs e)
+    {
+        if (MessageBox.Show("Der PC startet in 5 Sekunden neu und öffnet direkt das BIOS.\n\nVorher alles speichern und Spiele schließen. Fortfahren?",
+                "Ins BIOS neu starten", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return;
+        var (ok, msg) = RamTuner.RebootToBios();
+        Ui.Toast(msg, !ok);
+    }
+
+    private void RamStress_Click(object sender, RoutedEventArgs e) => (Application.Current.MainWindow as MainWindow)?.Navigate("Stresstest");
 }
