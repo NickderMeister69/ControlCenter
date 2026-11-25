@@ -45,7 +45,7 @@ internal static class NvmlSensor
             try
             {
                 int r = Nvml.Call(() => Nvml.nvmlDeviceGetTemperature(_dev, Nvml.TEMP_GPU, out uint t) is var x && x == 0 ? (SensorSnapshot.Plausible(s.GpuTemp) ? 0 : Put(s, t)) : x);
-                if (r == Nvml.GPU_IS_LOST || r == 999) { _ok = false; return; }
+                if (r != 0 && r != Nvml.NOT_SUPPORTED) { Drop(); return; }   // z. B. Treiber neu installiert → neu verbinden
                 if (r != 0) return;
                 if (string.IsNullOrEmpty(s.GpuName) || DriverCheck.VendorFromName(s.GpuName) == GpuVendor.Intel) s.GpuName = Name;
                 if (double.IsNaN(s.GpuLoad) && Nvml.nvmlDeviceGetUtilizationRates(_dev, out var u) == 0) s.GpuLoad = u.Gpu;
@@ -104,7 +104,7 @@ internal static class NvmlSensor
             try
             {
                 int r = Nvml.Call(() => Nvml.nvmlDeviceGetTemperature(_dev, Nvml.TEMP_GPU, out uint t) is var x && x == 0 ? Store(t) : x);
-                if (r != 0) { if (r == Nvml.GPU_IS_LOST) _ok = false; return null; }
+                if (r != 0) { if (r != Nvml.NOT_SUPPORTED) Drop(); return null; }
                 return _last;
             }
             catch { _ok = false; return null; }
@@ -120,6 +120,16 @@ internal static class NvmlSensor
     private static int SetPower(SensorSnapshot s, double w) { s.GpuPower = w; return 0; }
     private static int Store(uint t) { _last = t; return 0; }
     private static int Put(SensorSnapshot s, uint t) { s.GpuTemp = t; return 0; }
+
+    /// <summary>Verbindung zum Treiber ist kaputt (Treiber neu installiert/zurückgesetzt) → in 5 s neu verbinden.</summary>
+    private static void Drop()
+    {
+        var was = _ok;
+        if (_ok) try { Nvml.nvmlShutdown(); } catch { }
+        _ok = false; _limitW = 0; _lastMj = 0;
+        _nextTry = DateTime.Now.AddSeconds(5);
+        if (was) Log.Info(LogModule.Monitor, "NVIDIA-Treiber hat gewechselt – verbinde neu");
+    }
 
     /// <summary>Vor einer Treiber-Installation loslassen, damit der Installer nvml.dll ersetzen kann.</summary>
     public static void Release()

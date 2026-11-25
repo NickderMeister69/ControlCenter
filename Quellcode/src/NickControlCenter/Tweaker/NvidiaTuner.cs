@@ -6,6 +6,7 @@ public sealed class NvidiaTuner : IGpuTuner
     enum OffsetApi { None, Legacy, New }
 
     IntPtr _dev;
+    DateTime _reattachAt;
     OffsetApi _api = OffsetApi.None;
     readonly object _lock = new();
 
@@ -277,6 +278,16 @@ public sealed class NvidiaTuner : IGpuTuner
         {
             int r = Nvml.Call(() => Nvml.nvmlDeviceGetTemperature(_dev, Nvml.TEMP_GPU, out uint t) is var x && x == 0 ? SetF(ref Temp, t) : x);
             if (r == Nvml.GPU_IS_LOST) { Lost = true; return; }
+            if (r != 0 && r != Nvml.NOT_SUPPORTED)
+            {
+                // Treiber wurde neu installiert → Handle ist ungültig: neu verbinden statt alte Werte stehen zu lassen
+                if (DateTime.Now < _reattachAt) return;
+                _reattachAt = DateTime.Now.AddSeconds(5);
+                try { Nvml.nvmlShutdown(); } catch { }
+                if (Nvml.Call(Nvml.nvmlInit_v2) == Nvml.SUCCESS && Nvml.Call(() => Nvml.nvmlDeviceGetHandleByIndex_v2(0, out _dev)) == Nvml.SUCCESS)
+                    Log.Info(LogModule.Tweaker, "NVIDIA-Treiber hat gewechselt – neu verbunden");
+                return;
+            }
             Nvml.Call(() => Nvml.nvmlDeviceGetClockInfo(_dev, Nvml.CLOCK_GRAPHICS, out uint c) is var x && x == 0 ? SetF(ref ClockGr, c) : x);
             Nvml.Call(() => Nvml.nvmlDeviceGetClockInfo(_dev, Nvml.CLOCK_MEM, out uint c) is var x && x == 0 ? SetF(ref ClockMem, c) : x);
             Nvml.Call(() => Nvml.nvmlDeviceGetPowerUsage(_dev, out uint p) is var x && x == 0 ? SetF(ref PowerW, p / 1000f) : x);
