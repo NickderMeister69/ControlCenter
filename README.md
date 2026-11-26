@@ -8,7 +8,7 @@
 ![.NET](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet&logoColor=white)
 ![Version](https://img.shields.io/badge/dynamic/regex?url=https%3A%2F%2Fraw.githubusercontent.com%2FNickderMeister69%2FControlCenter%2Fmain%2Fversion.txt&search=(.%2B)&replace=v%241&label=Version&color=d000ff)
 
-[**⬇️ Download**](https://github.com/NickderMeister69/ControlCenter/raw/main/ControlCenter.exe) · [Funktionen](#-funktionen) · [ARK & KI](#-ark-begleiter--ki) · [Installation](#-installation) · [Updates](#-updates) · [FAQ](#-faq)
+[**⬇️ Download**](https://github.com/NickderMeister69/ControlCenter/raw/main/ControlCenter.exe) · [Funktionen](#-funktionen) · [ARK & KI](#-ark-begleiter--ki) · [Dateifreigabe](#-dateifreigabe-download-center) · [Installation](#-installation) · [Updates](#-updates) · [FAQ](#-faq)
 
 </div>
 
@@ -31,7 +31,7 @@
 | 🔥 | **Stresstest** | CPU, Grafikkarte und Arbeitsspeicher auf Stabilität prüfen |
 | 🧰 | **Werkzeuge** | Programme & Steam-Spiele aktualisieren, Downloads aufräumen, „Was kann weg?“ für volle Laufwerke, automatisch ausschalten, globale Tastenkürzel |
 | 🛡️ | **VPN & Werbeblocker** | Werbung und Tracker für den ganzen PC blocken, VPN (WireGuard) mit einem Klick verbinden |
-| 📤 | **Dateifreigabe** | Eigenes Download Center für Freunde: Dateien bis 100 GB direkt im Control Center (oder im Browser) hoch- und herunterladen – übers Internet (Cloudflare-Tunnel), Tailscale oder Heimnetz, fortsetzbar |
+| 📤 | **Dateifreigabe** | Eigener File Share für Freunde: Dateien und Ordner bis 100 GB direkt in der App hoch- und herunterladen – Freunde verbinden sich per Anfrage, ohne Code. Mit Tempo-Anzeige, fortsetzbar |
 | 🩺 | **Problemlöser** | Findet Programme, die sich in die Quere kommen (RGB-Software, Wallpaper Engine …), und behebt sie per Knopfdruck |
 | 🖥️ | **Treiber** | Grafiktreiber (NVIDIA, AMD, Intel) und alle anderen Treiber prüfen und installieren |
 | 🎨 | **Design & Kacheln** | Akzentfarbe, Hell/Dunkel, Hintergrund, Live-Widgets auf dem Desktop |
@@ -72,22 +72,39 @@ Position, Größe, Bildschirm, Durchsichtigkeit und Zoom stellst du im Tab *Kart
 
 ## 📤 Dateifreigabe (Download Center)
 
-Seite *Dateifreigabe*: zwei Passwörter festlegen (eins für Freunde, eins nur für dich als Admin – darf löschen), *Speichern* – fertig.
-**Freunde mit Control Center:** Sie brauchen nichts von dir. Sie öffnen *Dateifreigabe → Bei einem Freund* – dein Download Center
-wird automatisch gefunden (die wechselnde Internet-Adresse steht in [`datei-adresse.txt`](datei-adresse.txt)). Sie klicken auf *Verbinden*,
-du bekommst eine Windows-Benachrichtigung und klickst auf *Erlauben* – ab dann sind sie dauerhaft verbunden und laden direkt in der App
-hoch und runter. Unter *Freunde mit Zugang* kannst du jeden wieder entfernen. Alternativ geht es weiter mit einem Einladungs-Code.
+Dein eigener File Share direkt im Control Center – deine Freunde laden Dateien und ganze Ordner bei dir hoch und runter, ohne Browser und ohne Cloud-Abo.
 
-**Am eigenen PC:** Unter *Meine Freigabe* mit *Hochladen ▾* Dateien oder ganze Ordner hinzufügen (oder hineinziehen) und mit *Herunterladen* in deinen Download-Ordner speichern. Ordner werden als .zip geteilt. *Alles löschen* leert den File Share; Freunde können mit *Alles löschen* nur ihre eigenen Uploads löschen.
+**Einrichten (einmal):** Seite *Dateifreigabe → Meine Freigabe* → unten zwei Passwörter festlegen (eins für Freunde im Browser, eins nur für dich als Admin) → *Speichern*. Unter *Freunde mit Zugang* noch eintragen, wie du bei deinen Freunden heißt.
 
-**Freunde ohne Control Center:** Schalter *Auch im Browser erreichbar* einschalten und den Link schicken – im Browser mit Namen und Passwort anmelden.
+**So verbinden sich deine Freunde – ohne Code:**
+1. Freund öffnet in seinem Control Center *Dateifreigabe → Bei einem Freund*. Dein Download Center wird automatisch gefunden.
+2. Er klickt auf **Verbinden**.
+3. Du bekommst eine Windows-Benachrichtigung „… möchte sich verbinden“ → auf der Seite **Erlauben** (oder *Ablehnen*).
+4. Fertig – er ist dauerhaft verbunden, auch nach Neustarts. Unter *Freunde mit Zugang* kannst du jeden jederzeit wieder entfernen.
 
-Beim Start beendet das Control Center die alte eigenständige FileShareApp, nimmt sie aus dem Autostart und löscht ihre exe (sie würde denselben Port belegen).
+**Was man damit machen kann (bei dir und bei deinen Freunden):**
 
-- **Große Dateien:** bis 100 GB (einstellbar). Upload in 64-MB-Teilen direkt auf die Platte – bricht die Verbindung ab, geht es an der Stelle weiter. Downloads sind fortsetzbar.
-- **Erreichbar** übers Internet per Cloudflare-Tunnel (keine Router-Einstellung, Freunde installieren nichts; der Link ändert sich bei jedem Start), über Tailscale oder im Heimnetz.
-- **Tempo:** Freunde laden mit deinem Upload herunter (die Dateien kommen von deinem PC). Die Seite rechnet mit deinem letzten Speedtest aus, wie lange 1/10/40/100 GB dauern.
-- **Speicherort:** standardmäßig `Dokumente\Download Center Dateien` – gleiches Format wie die eigenständige FileShareApp, vorhandene Dateien werden übernommen.
+| | |
+|---|---|
+| ⬆️ **Hochladen ▾** | Dateien oder ganze Ordner (Ordner werden als `.zip` mit allen Unterordnern geteilt) – oder einfach ins Fenster ziehen. Kategorie frei eintippen oder auswählen. |
+| ⬇️ **Herunterladen** | In den eigenen Download-Ordner (einstellbar). |
+| 📊 **Live-Anzeige** | Tempo in **MB/s**, **„3,2 GB von 40,0 GB“**, Prozent und Restzeit. Fertige Übertragungen verschwinden nach ein paar Sekunden von selbst. |
+| 🔁 **Fortsetzen** | Bricht die Verbindung ab, geht es an der Stelle weiter. Pausierte Uploads: dasselbe nochmal hochladen. |
+| 🗑️ **Löschen** | Du: jede Datei einzeln oder *Alles löschen*. Freunde: nur ihre eigenen Uploads (einzeln oder *Alles löschen*). |
+
+- **Große Dateien:** bis 100 GB pro Datei (einstellbar). Übertragen wird in 64-MB-Teilen direkt auf die Platte – braucht kaum Arbeitsspeicher.
+- **Tempo:** Wenn Freunde herunterladen, schickt dein PC die Dateien – es zählt also **dein Upload** (bzw. ihr Download, falls der langsamer ist). Die Seite rechnet mit deinem letzten Speedtest aus, wie lange 1/10/40/100 GB dauern.
+- **Verbindung:** übers Internet per **Cloudflare-Tunnel** (https, keine Router-Einstellung, deine IP bleibt verborgen), über Tailscale oder im Heimnetz. Die wechselnde Internet-Adresse veröffentlicht die App in [`datei-adresse.txt`](datei-adresse.txt) – daran finden die Apps deiner Freunde dich (die Commits „Datei-Adresse aktualisiert“ macht die App selbst).
+- **Speicherort:** standardmäßig `Dokumente\Download Center Dateien` (einstellbar). Was Freunde hochladen, belegt Platz bei dir.
+- **Updates warten**, bis gerade nichts hoch- oder heruntergeladen wird – es bricht nichts mittendrin ab.
+
+<details>
+<summary><b>Alternativen: Einladungs-Code und Browser</b></summary>
+
+- **Einladungs-Code** (`CCDC-…`): unter *Meine Freigabe → Alternativ: Einladungs-Code* kopieren, der Freund fügt ihn bei *Bei einem Freund → Stattdessen einen Einladungs-Code eingeben* ein. Enthält das Passwort – nur an Freunde schicken.
+- **Freunde ohne Control Center:** Schalter *Auch im Browser erreichbar* einschalten und den Link schicken – dort mit Namen und Passwort anmelden. Hoch- und Herunterladen geht auch im Browser.
+- Die alte eigenständige *FileShareApp* wird beim Start automatisch beendet, aus dem Autostart genommen und gelöscht – sie würde sonst denselben Port belegen. Vorhandene Dateien werden übernommen.
+</details>
 
 ---
 
@@ -121,6 +138,7 @@ Manuell prüfen: *Einstellungen → App-Version & Updates → Nach Updates suche
 ## 💾 Einstellungen & Sicherungen
 
 - Alle Einstellungen liegen in `%AppData%\NickControlCenter` – **nicht** im App-Ordner. Ein Update oder Austausch der exe ändert daran nichts.
+- ⚠️ **Diesen Ordner nicht löschen** (auch nicht beim Aufräumen von AppData) – sonst sind alle Einstellungen *und* die Sicherungen weg. Aus Versehen gelöscht? Im Papierkorb nachsehen und wiederherstellen (App vorher beenden).
 - Automatische Sicherung **einmal am Tag** und **vor jedem Update** (die letzten 15 Stände).
   Zurückholen unter *Einstellungen → Einstellungen sichern*.
 
@@ -156,6 +174,24 @@ YouTube-Werbung kommt vom selben Server wie die Videos – das kann kein DNS-Fil
 <summary><b>Kann ich alles rückgängig machen?</b></summary>
 
 Ja. Boost- und Design-Änderungen werden vorher gesichert – *Alles zurücksetzen* stellt den Originalzustand her. GPU-Übertaktung setzt sich nach 20 Sekunden automatisch zurück, wenn du nicht „Behalten“ klickst.
+</details>
+
+<details>
+<summary><b>Sehen meine Freunde meine Einstellungen oder Dateien, wenn ich auf GitHub pushe?</b></summary>
+
+Nein. Auf GitHub liegt nur das Programm. Deine Einstellungen (Passwörter, Freunde mit Zugang, Lüfter, RGB …) liegen in `%AppData%\NickControlCenter`, deine geteilten Dateien in `Dokumente\Download Center Dateien` – beides ist nicht im Repo. Freunde bekommen deine Dateien nur über die Verbindung zur Dateifreigabe, und nur wenn du sie erlaubt hast.
+</details>
+
+<details>
+<summary><b>Wozu ist der Port 8080 in der Dateifreigabe?</b></summary>
+
+Darüber reden die Apps miteinander (wie bei Steam oder Discord) – du musst nichts damit machen. Nur ändern, wenn ein anderes Programm ihn schon benutzt.
+</details>
+
+<details>
+<summary><b>Eine Seite zeigt etwas Veraltetes an</b></summary>
+
+Oben rechts auf **⟳ Neu laden** klicken (oder **F5** / **Strg + R**) – die Seite wird neu aufgebaut, laufende Übertragungen laufen weiter.
 </details>
 
 <details>
