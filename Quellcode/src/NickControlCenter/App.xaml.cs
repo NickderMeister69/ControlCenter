@@ -54,6 +54,7 @@ public partial class App : Application
     private Mutex? _mutex;
     private EventWaitHandle? _showEvent;
     private System.IO.FileSystemWatcher? _updWatch;
+    private bool _updWaitLogged;
     private MainWindow? _win;
     private WF.NotifyIcon? _tray;
     private WF.ToolStripMenuItem? _trayPause, _trayRgb, _trayTiles;
@@ -162,6 +163,12 @@ public partial class App : Application
         _ = Services.Drivers.CheckAsync(silent: true);
         try { HotkeyService.Instance.Start(); } catch (Exception ex) { Log.Warn(LogModule.App, "Tastenkürzel: " + ex.Message); }
         try { AiShare.StartIfEnabled(); } catch (Exception ex) { Log.Warn(LogModule.App, "KI-Freigabe: " + ex.Message); }
+        try { ShareServer.StartIfEnabled(); } catch (Exception ex) { Log.Warn(LogModule.Share, "Dateifreigabe: " + ex.Message); }
+        ShareServer.JoinRequested += r => Dispatcher.BeginInvoke(() =>
+        {
+            Balloon("Dateifreigabe", $"{r.Name} möchte sich mit deinem Download Center verbinden – klicken zum Erlauben", () => { ShowWindow(); Ui.Go("Dateifreigabe"); });
+            Ui.Toast($"{r.Name} möchte sich verbinden – Dateifreigabe → Erlauben");
+        });
         var weekly = new DispatcherTimer { Interval = TimeSpan.FromMinutes(30) };
         weekly.Tick += (_, _) => AutoSortDownloads();
         weekly.Start();
@@ -201,6 +208,11 @@ public partial class App : Application
         void TryUpdate()
         {
             if (!SelfUpdate.Pending || _exiting) return;
+            if (ShareServer.Busy)
+            {
+                if (!_updWaitLogged) { _updWaitLogged = true; Log.Info(LogModule.App, "Neue Version liegt bereit – wartet, bis die Dateifreigabe nichts mehr überträgt"); }
+                return; // Timer läuft weiter, später nochmal
+            }
             upd.Stop();
             bool tray = _win == null || !_win.IsVisible;
             if (SelfUpdate.Apply(tray)) { _tray?.ShowBalloonTip(3000, "Control Center", "Neue Version wird gestartet …", WF.ToolTipIcon.Info); ExitApp(ask: false); }
@@ -381,6 +393,7 @@ public partial class App : Application
         Log.Info(LogModule.App, "Beenden …");
         SystemEvents.PowerModeChanged -= OnPowerModeChanged;
         try { Services.Stress?.StopAll("App beendet"); } catch { }
+        try { ShareServer.Stop(); } catch { }
         try { Services.Tiles?.Dispose(); } catch { }
         try { Services.Boost?.OnExit(); } catch { }
         try { Services.Monitor?.Dispose(); } catch { }
@@ -399,6 +412,7 @@ public partial class App : Application
             _exiting = true;
             try { Services.Fans?.Dispose(); } catch { }
             try { Services.Boost?.OnExit(); } catch { }
+            try { ShareServer.Stop(); } catch { }
             if (_tray != null) { _tray.Visible = false; _tray.Dispose(); }
         }
         try { _mutex?.ReleaseMutex(); } catch { }

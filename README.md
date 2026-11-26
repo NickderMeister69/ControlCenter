@@ -31,6 +31,7 @@
 | 🔥 | **Stresstest** | CPU, Grafikkarte und Arbeitsspeicher auf Stabilität prüfen |
 | 🧰 | **Werkzeuge** | Programme & Steam-Spiele aktualisieren, Downloads aufräumen, „Was kann weg?“ für volle Laufwerke, automatisch ausschalten, globale Tastenkürzel |
 | 🛡️ | **VPN & Werbeblocker** | Werbung und Tracker für den ganzen PC blocken, VPN (WireGuard) mit einem Klick verbinden |
+| 📤 | **Dateifreigabe** | Eigenes Download Center für Freunde: Dateien bis 100 GB direkt im Control Center (oder im Browser) hoch- und herunterladen – übers Internet (Cloudflare-Tunnel), Tailscale oder Heimnetz, fortsetzbar |
 | 🩺 | **Problemlöser** | Findet Programme, die sich in die Quere kommen (RGB-Software, Wallpaper Engine …), und behebt sie per Knopfdruck |
 | 🖥️ | **Treiber** | Grafiktreiber (NVIDIA, AMD, Intel) und alle anderen Treiber prüfen und installieren |
 | 🎨 | **Design & Kacheln** | Akzentfarbe, Hell/Dunkel, Hintergrund, Live-Widgets auf dem Desktop |
@@ -66,6 +67,27 @@ Position, Größe, Bildschirm, Durchsichtigkeit und Zoom stellst du im Tab *Kart
 - Ohne den Schlüssel aus dem Code kommt niemand rein. Freunde können nur Fragen stellen – keine Modelle löschen, nichts ausschalten. *Neuen Code erzeugen* sperrt alle alten.
 - Die KI des Control Centers läuft als **eigene Ollama-Instanz** (Port 11436) – getrennt von einem Ollama, das du für andere Projekte nutzt.
 </details>
+
+---
+
+## 📤 Dateifreigabe (Download Center)
+
+Seite *Dateifreigabe*: zwei Passwörter festlegen (eins für Freunde, eins nur für dich als Admin – darf löschen), *Speichern* – fertig.
+**Freunde mit Control Center:** Sie brauchen nichts von dir. Sie öffnen *Dateifreigabe → Bei einem Freund* – dein Download Center
+wird automatisch gefunden (die wechselnde Internet-Adresse steht in [`datei-adresse.txt`](datei-adresse.txt)). Sie klicken auf *Verbinden*,
+du bekommst eine Windows-Benachrichtigung und klickst auf *Erlauben* – ab dann sind sie dauerhaft verbunden und laden direkt in der App
+hoch und runter. Unter *Freunde mit Zugang* kannst du jeden wieder entfernen. Alternativ geht es weiter mit einem Einladungs-Code.
+
+**Am eigenen PC:** Unter *Meine Freigabe* mit *Hochladen ▾* Dateien oder ganze Ordner hinzufügen (oder hineinziehen) und mit *Herunterladen* in deinen Download-Ordner speichern. Ordner werden als .zip geteilt. *Alles löschen* leert den File Share; Freunde können mit *Alles löschen* nur ihre eigenen Uploads löschen.
+
+**Freunde ohne Control Center:** Schalter *Auch im Browser erreichbar* einschalten und den Link schicken – im Browser mit Namen und Passwort anmelden.
+
+Beim Start beendet das Control Center die alte eigenständige FileShareApp, nimmt sie aus dem Autostart und löscht ihre exe (sie würde denselben Port belegen).
+
+- **Große Dateien:** bis 100 GB (einstellbar). Upload in 64-MB-Teilen direkt auf die Platte – bricht die Verbindung ab, geht es an der Stelle weiter. Downloads sind fortsetzbar.
+- **Erreichbar** übers Internet per Cloudflare-Tunnel (keine Router-Einstellung, Freunde installieren nichts; der Link ändert sich bei jedem Start), über Tailscale oder im Heimnetz.
+- **Tempo:** Freunde laden mit deinem Upload herunter (die Dateien kommen von deinem PC). Die Seite rechnet mit deinem letzten Speedtest aus, wie lange 1/10/40/100 GB dauern.
+- **Speicherort:** standardmäßig `Dokumente\Download Center Dateien` – gleiches Format wie die eigenständige FileShareApp, vorhandene Dateien werden übernommen.
 
 ---
 

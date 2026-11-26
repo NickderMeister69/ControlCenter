@@ -32,6 +32,7 @@ public partial class MainWindow : Window
             ["Desktop-Kacheln"] = new("Desktop-Kacheln", "Live-Widgets auf dem Desktop: Uhr, Systemwerte, Netzwerk, Apps, Notizen und mehr.", () => new TilesPage()),
             ["Werkzeuge"] = new("Werkzeuge", "Programme aktualisieren, Downloads aufräumen, Speicherplatz finden, automatisch ausschalten und Tastenkürzel.", () => new ToolsPage()),
             ["VPN & Werbeblocker"] = new("VPN & Werbeblocker", "Werbung und Tracker für den ganzen PC blocken – und ein VPN mit einem Klick verbinden.", () => new PrivacyPage()),
+            ["Dateifreigabe"] = new("Dateifreigabe", "Dein eigenes Download Center: Freunde laden Dateien bis 100 GB direkt im Control Center (oder im Browser) hoch und herunter – und du nutzt das Download Center deiner Freunde.", () => new SharePage()),
             ["Autostart"] = new("Autostart", "Programme, die mit Windows starten – mit Einschätzung, was den Start bremst. Abschalten wie im Task-Manager, alles umkehrbar.", () => new StartupPage()),
             ["Problemlöser"] = new("Problemlöser", "Findet Programme und Einstellungen, die stören – und behebt sie mit einem Klick.", () => new DiagnosePage()),
             ["Treiber"] = new("Treiber", "Grafiktreiber prüfen und aktualisieren – NVIDIA (Game Ready & Studio), AMD und Intel.", () => new DriversPage()),
@@ -56,6 +57,7 @@ public partial class MainWindow : Window
         PreviewKeyDown += (_, e) =>
         {
             if (e.Key == System.Windows.Input.Key.F && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control) { SearchBox.Focus(); SearchBox.SelectAll(); e.Handled = true; }
+            if (e.Key == System.Windows.Input.Key.F5 || e.Key == System.Windows.Input.Key.R && System.Windows.Input.Keyboard.Modifiers == System.Windows.Input.ModifierKeys.Control) { ReloadPage(); e.Handled = true; }
         };
         Loaded += (_, _) => Navigate(_defs.ContainsKey(s.LastPage) ? s.LastPage : "Dashboard");
     }
@@ -134,6 +136,21 @@ public partial class MainWindow : Window
     }
 
     private void Min_Click(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+    private void Reload_Click(object sender, RoutedEventArgs e) => ReloadPage();
+
+    /// <summary>Aktuelle Seite neu aufbauen – wie „Neu laden“ im Browser. Laufende Übertragungen laufen weiter.</summary>
+    public void ReloadPage()
+    {
+        if (!_defs.TryGetValue(_current, out var def)) return;
+        if (_pages.TryGetValue(_current, out var old))
+        {
+            if (old is IPage ip) ip.OnVisibleChanged(false);
+            _pages.Remove(_current);
+        }
+        Show(_current, def);
+        Toast("Neu geladen");
+    }
     [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
     private struct POINT { public int X, Y; }
     [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
@@ -179,6 +196,7 @@ public partial class MainWindow : Window
         ["Desktop-Kacheln"] = "widgets kacheln uhr notizen desktop",
         ["Werkzeuge"] = "updates update winget programme apps aktualisieren steam spiele spieleupdates downloads download ordner aufräumen sortieren speicherplatz speicher voll platz festplatte ssd hdd laufwerk gesundheit smart verschleiß lebensdauer speedtest internet langsam schnell wlan geschwindigkeit mbit ping jitter herunterfahren ausschalten shutdown timer tastenkürzel hotkeys tastenkombination löschen temp müll papierkorb",
         ["VPN & Werbeblocker"] = "vpn werbung werbeblocker adblock adblocker ads reklame dns wireguard proton ip adresse standort datenschutz privat tracker youtube",
+        ["Dateifreigabe"] = "dateifreigabe file share fileshare filesharing download center downloadcenter freunde teilen dateien datei hochladen runterladen herunterladen upload download link cloudflare tunnel tailscale server ordner speicher passwort",
         ["Autostart"] = "autostart hochfahren windows start programme langsam",
         ["Problemlöser"] = "probleme fehler konflikt flackern gigabyte wallpaper engine dienst diagnose",
         ["Treiber"] = "treiber driver nvidia geforce amd radeon intel chipsatz audio sound ton netzwerk lan wlan bluetooth usb windows update installieren aktuell",

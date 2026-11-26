@@ -90,6 +90,7 @@
                             </Grid>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xEC7A;" Content="Werkzeuge" x:Name="NavTools" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE774;" Content="VPN &amp; Werbeblocker" x:Name="NavPrivacy" Checked="Nav_Checked"/>
+                            <RadioButton Style="{StaticResource NavItem}" Tag="&#xE72D;" Content="Dateifreigabe" x:Name="NavShare" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE7E8;" Content="Autostart" x:Name="NavStartup" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE7C3;" Content="Treiber" x:Name="NavDrivers" Checked="Nav_Checked"/>
                             <RadioButton Style="{StaticResource NavItem}" Tag="&#xE9F9;" Content="Protokoll" x:Name="NavLogs" Checked="Nav_Checked"/>
@@ -152,6 +153,7 @@
                 <Grid>
                     <TextBlock x:Name="Crumb" Margin="28,0,0,0" VerticalAlignment="Center" Style="{StaticResource Muted}" FontSize="11.5"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Style="{StaticResource TitleButton}" Content="&#xE72C;" Click="Reload_Click" ToolTip="Neu laden (F5)"/>
                         <Button Style="{StaticResource TitleButton}" Content="&#xE921;" Click="Min_Click" ToolTip="Minimieren"/>
                         <Button Style="{StaticResource TitleButton}" Content="&#xE922;" Click="Max_Click" ToolTip="Maximieren"/>
                         <Button Style="{StaticResource CloseTitleButton}" Content="&#xE8BB;" Click="Close_Click" ToolTip="Schließen – läuft im Hintergrund weiter"/>

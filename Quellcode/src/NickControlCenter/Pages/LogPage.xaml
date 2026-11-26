@@ -7,7 +7,7 @@
             <StackPanel Orientation="Horizontal">
                 <ComboBox x:Name="FileBox" Width="190" SelectionChanged="File_Changed">
                     <ComboBoxItem Content="Gesamt" IsSelected="True"/><ComboBoxItem Content="Allgemein"/><ComboBoxItem Content="Luefter"/><ComboBoxItem Content="Beleuchtung"/>
-                    <ComboBoxItem Content="Boost"/><ComboBoxItem Content="Monitor"/><ComboBoxItem Content="Stresstest"/><ComboBoxItem Content="Tweaker"/><ComboBoxItem Content="Problemloeser"/>
+                    <ComboBoxItem Content="Boost"/><ComboBoxItem Content="Monitor"/><ComboBoxItem Content="Stresstest"/><ComboBoxItem Content="Tweaker"/><ComboBoxItem Content="Problemloeser"/><ComboBoxItem Content="Dateifreigabe"/>
                 </ComboBox>
                 <ComboBox x:Name="LevelBox" Width="170" Margin="8,0,0,0" SelectionChanged="File_Changed">
                     <ComboBoxItem Content="Alle Einträge" IsSelected="True"/><ComboBoxItem Content="Nur Warnungen + Fehler"/><ComboBoxItem Content="Nur Fehler"/>

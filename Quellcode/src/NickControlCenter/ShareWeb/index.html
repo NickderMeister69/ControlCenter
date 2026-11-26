@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Download Center</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%237c5cff' d='M12 3v10.6l3.3-3.3 1.4 1.4L12 16.4l-4.7-4.7 1.4-1.4 3.3 3.3V3zM4 18h16v2H4z'/%3E%3C/svg%3E">
+</head>
+<body>
+  <!-- Login -->
+  <section id="login" class="login hidden">
+    <form id="loginForm" class="card login-card">
+      <div class="logo">⬇</div>
+      <h1 class="app-title">Download Center</h1>
+      <p class="muted">Gib deinen Namen und das Passwort ein.</p>
+      <input id="loginName" placeholder="Dein Name" maxlength="30" autocomplete="nickname" required>
+      <input id="loginPw" type="password" placeholder="Passwort" autocomplete="current-password" required>
+      <button class="btn primary" type="submit">Rein da</button>
+      <p id="loginError" class="error"></p>
+    </form>
+  </section>
+
+  <!-- App -->
+  <section id="app" class="hidden">
+    <header class="topbar">
+      <div class="brand"><span class="logo small">⬇</span><span class="app-title">Download Center</span></div>
+      <div class="user">
+        <span id="userName"></span>
+        <span id="adminBadge" class="badge hidden">Admin</span>
+        <button id="logoutBtn" class="btn ghost">Abmelden</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="stats">
+        <div class="stat"><span class="stat-num" id="statCount">0</span><span class="muted">Dateien</span></div>
+        <div class="stat"><span class="stat-num" id="statSize">0 B</span><span class="muted">insgesamt</span></div>
+        <div class="stat"><span class="stat-num" id="statFree">–</span><span class="muted">noch frei</span></div>
+      </div>
+
+      <div id="drop" class="card drop">
+        <div class="drop-inner">
+          <div class="drop-icon">⇪</div>
+          <div><strong>Dateien hierher ziehen</strong> oder <label class="link">auswählen<input id="fileInput" type="file" multiple hidden></label></div>
+          <div class="muted small" id="maxInfo"></div>
+        </div>
+        <div id="uploadForm" class="upload-form hidden">
+          <div id="pending" class="pending"></div>
+          <div class="row">
+            <input id="category" list="categoryList" placeholder="Kategorie (z. B. Spiele, Mods, Musik)" maxlength="40">
+            <datalist id="categoryList"></datalist>
+            <input id="note" placeholder="Notiz (optional)" maxlength="300">
+          </div>
+          <div class="row">
+            <button id="uploadBtn" class="btn primary">Hochladen</button>
+            <button id="cancelBtn" class="btn ghost">Abbrechen</button>
+          </div>
+          <div id="progress" class="progress hidden"><div id="progressBar"></div><span id="progressText"></span></div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Suchen …">
+        <select id="sort">
+          <option value="new">Neueste zuerst</option>
+          <option value="name">Name A–Z</option>
+          <option value="size">Größte zuerst</option>
+          <option value="popular">Meiste Downloads</option>
+        </select>
+      </div>
+      <div id="chips" class="chips"></div>
+
+      <div id="list" class="list"></div>
+      <p id="empty" class="empty muted hidden">Noch keine Dateien. Lad die erste hoch!</p>
+    </main>
+  </section>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="app.js"></script>
+</body>
+</html>

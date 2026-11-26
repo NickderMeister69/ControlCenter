@@ -16,6 +16,7 @@ public static class LogModule
     public const string Stress = "Stresstest";
     public const string Tweaker = "Tweaker";
     public const string Diagnose = "Problemloeser";
+    public const string Share = "Dateifreigabe";
 }
 
 public sealed record LogEntry(DateTime Time, LogLevel Level, string Module, string Message)
